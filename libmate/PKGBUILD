@@ -12,13 +12,7 @@ url="http://matsusoft.com.ar/projects/mate/"
 groups=('mate')
 install=libmate.install
 
-# mirrors
-# http://cptl.org/mate/${pkgname}.tar.gz
-# http://hax0r.se/mate/${pkgname}.tar.gz
-# http://matsusoft.com.ar/uploads/gnu-linux/mate/${pkgname}.tar.gz
-# http://matsusoft.com.ar/projects/mate/source/${pkgname}.tar.gz
-
-source=(./libmate-1.1.2.tar.gz)
+source=(./{$pkgname}-{$pkgver}.tar.xz)
 sha256sums=('5f7e292077959faced44603abac696860978e5b5cab4b81f2ccca2adb82246cf')
 
 build() {

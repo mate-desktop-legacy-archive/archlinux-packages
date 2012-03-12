@@ -9,7 +9,7 @@ makedepends=('intltool' 'pkgconfig' 'python')
 groups=('mate')
 options=('!emptydirs' '!libtool')
 url="http://matsusoft.com.ar/projects/mate/"
-source=(./libmatekeyring-1.1.0.tar.gz)
+source=(./{$pkgname}-{$pkgver}.tar.xz)
 sha256sums=('94dcdd4579847e4edc92696fef508424569ae508c071d4611a8de6e94aeb0b08')
 
 build() {

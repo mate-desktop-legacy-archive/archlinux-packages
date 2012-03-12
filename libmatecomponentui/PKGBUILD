@@ -9,7 +9,7 @@ makedepends=('intltool' 'pkgconfig')
 groups=('mate')
 options=('!emptydirs' '!libtool')
 url="http://matsusoft.com.ar/projects/mate/"
-source=(./libmatecomponentui-1.1.1.tar.gz)
+source=(./{$pkgname}-{$pkgver}.tar.xz)
 sha256sums=('3b4dd06ffbd006d3a431c45246ef7b4cffd256cf2c80e8f5051997c55fbc7b5b')
 
 build() {

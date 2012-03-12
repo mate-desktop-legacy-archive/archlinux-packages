@@ -9,7 +9,7 @@ makedepends=('gtk2' 'gobject-introspection')
 groups=('mate')
 options=('!emptydirs' '!libtool')
 url="http://matsusoft.com.ar/projects/mate/"
-source=(./libmatenotify-1.1.0.tar.gz)
+source=(./{$pkgname}-{$pkgver}.tar.xz)
 sha256sums=('843aa219c6899651d3ab972ff595a455bae9fe0ca05fec689a5811f5adc56b60')
 
 

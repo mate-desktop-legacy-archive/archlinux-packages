@@ -10,7 +10,7 @@ groups=('mate')
 options=('!emptydirs' '!libtool')
 backup=('etc/matecomponent-activation/matecomponent-activation-config.xml')
 url="http://matsusoft.com.ar/projects/mate/"
-source=(./libmatecomponent-1.1.0.tar.gz ./matecomponent-activation-config.xml)
+source=(./{$pkgname}-{$pkgver}.tar.xz ./matecomponent-activation-config.xml)
 install=libmatecomponent.install
 sha256sums=('c4c7b90e08622d620f38367fedd9ff1ce77e37c87b5a683871b7eddece97c94c'
             'c1fc9b102f2635b0d4be39728d19737c1013b61395d0bd0c508fc6ad6b61643e')

@@ -10,7 +10,7 @@ groups=('mate')
 url="http://matsusoft.com.ar/projects/mate/"
 options=('!emptydirs' '!libtool')
 install=libmatekbd.install
-source=(./libmatekbd-1.1.0.tar.gz)
+source=(./{$pkgname}-{$pkgver}.tar.xz)
 sha256sums=('e797fe70a2606a262e0ef41f7efdcc3b9265f11b94ea8ee6c8f305271239f15c')
 
 build() {

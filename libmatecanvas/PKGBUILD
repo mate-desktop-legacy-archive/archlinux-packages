@@ -9,7 +9,7 @@ makedepends=('pkgconfig' 'intltool')
 options=('!libtool')
 groups=('mate')
 url="http://matsusoft.com.ar/projects/mate/"
-source=(./libmatecanvas-1.1.0.tar.gz)
+source=(./{$pkgname}-{$pkgver}.tar.xz)
 sha256sums=('bf288c366fb869870dd4e6f7b4415c81f1f0962442b0633574f0f3adab0c0360')
 
 build() {
