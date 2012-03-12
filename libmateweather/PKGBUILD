@@ -10,7 +10,7 @@ groups=('mate')
 options=('!emptydirs' '!libtool')
 url="http://matsusoft.com.ar/projects/mate/"
 install=libmateweather.install
-source=(./libmateweather-1.1.0.tar.gz)
+source=(./{$pkgname}-{$pkgver}.tar.xz)
 sha256sums=('648a7c2b68feb8ad6851723963a03bdaafb1867a25581beb03deeef7d7731047')
 
 
