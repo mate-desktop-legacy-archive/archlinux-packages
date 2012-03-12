@@ -9,8 +9,8 @@ makedepends=('pkgconfig' 'intltool')
 options=('!libtool')
 groups=('mate')
 url="http://matsusoft.com.ar/projects/mate/"
-source=(./{$pkgname}-{$pkgver}.tar.xz)
-sha256sums=('bf288c366fb869870dd4e6f7b4415c81f1f0962442b0633574f0f3adab0c0360')
+source=(http://pub.mate-desktop.org/releases/1.2/{$pkgname}-{$pkgver}.tar.xz)
+sha256sums=('7d3897a692c3ab31cce24a194b921987a6c06b2bbb68c78724c9f0240e9e74a3')
 
 build() {
     cd "${srcdir}/$pkgname"
