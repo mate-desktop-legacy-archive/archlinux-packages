@@ -1,0 +1,27 @@
+pkgname=mate-sensors-applet
+pkgver=1.1.0
+pkgrel=1
+pkgdesc="An applet for the MATE Panel to display readings from hardware sensors, including CPU temperature, fan speeds and voltage readings under Linux"
+arch=('i686' 'x86_64')
+url="https://github.com/mate-desktop/mate-sensors-applet"
+license=('GPL')
+depends=('mate-panel' 'lm_sensors' 'udisks' 'xdg-utils')
+makedepends=('intltool' 'mate-doc-utils' 'git' 'autoconf' 'automake')
+options=('!libtool')
+install=$pkgname.install
+source=(./mate-sensors-applet-1.1.0.tar.gz)
+sha256sums=('43edb65fe39a13d06cf570ed3d42e28c335ff38cec187cf89a2454d4acafc5e5')
+
+build() {
+cd $srcdir/$pkgname
+ 
+  ./autogen.sh
+  ./configure LDFLAGS="-ldl" --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib/$pkgname \
+  --disable-static --disable-scrollkeeper
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname"
+  make DESTDIR="$pkgdir/" install
+}

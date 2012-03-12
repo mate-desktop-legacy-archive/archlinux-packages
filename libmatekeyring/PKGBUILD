@@ -1,0 +1,31 @@
+pkgname=libmatekeyring
+pkgver=1.1.0
+pkgrel=1
+pkgdesc="MATE keyring client library"
+arch=('i686' 'x86_64')
+license=('GPL' 'LGPL')
+depends=('libgcrypt') # 'eggdbus' 'mate-keyring'
+makedepends=('intltool' 'pkgconfig' 'python')
+groups=('mate')
+options=('!emptydirs' '!libtool')
+url="http://matsusoft.com.ar/projects/mate/"
+source=(./libmatekeyring-1.1.0.tar.gz)
+sha256sums=('94dcdd4579847e4edc92696fef508424569ae508c071d4611a8de6e94aeb0b08')
+
+build() {
+    cd "${srcdir}/$pkgname"
+    ./autogen.sh \
+        --prefix=/usr \
+        --sysconfdir=/etc \
+        --localstatedir=/var \
+        --disable-static \
+        --libexecdir=/usr/lib/mate-keyring || return 1
+
+    make || return 1
+}
+
+package() {
+    cd "${srcdir}/$pkgname"
+
+    make DESTDIR="${pkgdir}" install || return 1
+}

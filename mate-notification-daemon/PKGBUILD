@@ -1,0 +1,43 @@
+pkgname=mate-notification-daemon
+pkgver=1.1.0
+pkgrel=1
+pkgdesc="Notification daemon for MATE"
+arch=(i686 x86_64)
+license=('GPL' 'LGPL')
+depends=('libmatenotify' 'libwnck' 'gtk2')
+makedepends=('intltool')
+provides=('notification-daemon')
+url="http://matsusoft.com.ar/projects/mate/"
+groups=('mate')
+options=('!libtool' '!emptydirs')
+install=mate-notification-daemon.install
+source=(./${pkgname}-${pkgver}.tar.gz)
+sha256sums=('0379195d8170551716d2911140a25dd150c7551c721c2a3164af8347405ea340')
+
+
+build() {
+    cd "${srcdir}/$pkgname"
+
+    ./autogen.sh \
+        --prefix=/usr \
+        --sysconfdir=/etc \
+        --localstatedir=/var \
+        --disable-static \
+        --libexecdir=/usr/lib/mate-notification-daemon \
+        --disable-schemas-install || return 1
+
+    make || return 1
+}
+
+package() {
+    cd "${srcdir}/$pkgname"
+
+    make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install || return 1
+
+    # hax! still conflicts with libnotify
+    #ln -s mate-notify-send ${pkgdir}/usr/bin/notify-send
+
+    install -m755 -d "${pkgdir}/usr/share/mateconf/schemas"
+    mateconf-merge-schema "${pkgdir}/usr/share/mateconf/schemas/${pkgname}.schemas" --domain ${pkgname} ${pkgdir}/etc/mateconf/schemas/*.schemas || return 1
+    rm -f ${pkgdir}/etc/mateconf/schemas/*.schemas
+}

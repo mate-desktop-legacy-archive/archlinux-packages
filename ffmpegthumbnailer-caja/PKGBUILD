@@ -1,0 +1,19 @@
+pkgname=ffmpegthumbnailer-caja
+pkgver=1.1.0
+pkgrel=1
+pkgdesc="MateConf schemas to use ffmpegthumbnailer in MATE Caja "
+arch=('any')
+depends=('mate-conf')
+install=ffmpegthumbnailer-caja.install
+source=(./ffmpegthumbnailer-caja-1.1.0.tar.gz)
+sha256sums=('972a6c09814ba6ee42883d03ffea9482af307f58437ad4b5eb7153e2c2ad25c9')
+
+build() {
+    cd "${srcdir}/${pkgname}"
+}
+
+package() {
+    cd "${srcdir}/${pkgname}"
+    make DESTDIR="${pkgdir}" install || return 1
+}
+

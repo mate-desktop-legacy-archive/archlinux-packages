@@ -1,0 +1,38 @@
+pkgname=python-mate
+pkgver=1.1.0
+pkgrel=1
+pkgdesc="Python binding for Mate"
+arch=('i686' 'x86_64')
+url="http://matsusoft.com.ar/projects/"
+license="GPL"
+depends=('python2' 'python-corba' 'libmate' 'libmateui' 'libmatecanvas' 'libmatecomponent' 'mate-conf' 'mate-vfs' 'libmatecomponentui')
+makedepends=('pkgconfig')
+options=('!emptydirs')
+groups=('mate-extras')
+source=(./python-mate-1.1.0.tar.gz)
+sha256sums=('5ad073c5672bf8adf269413d799baf70f99b4923b77f07fd56ac30f9574bc1e3')
+
+build() {
+	export PYTHON=python2
+	cd "${srcdir}/${pkgname}"
+	./autogen.sh
+	./configure --prefix=/usr --sysconfdir=/etc \
+		--localstatedir=/var --disable-static \
+		--enable-mate \
+		--enable-mateui \
+		--enable-matecanvas \
+		--enable-matevfs \
+		--enable-matevfsmatecomponent \
+		--enable-pyvfsmodule \
+		--enable-mateconf \
+		--enable-matecomponent_activation \
+		--enable-matecomponent \
+		--enable-matecomponentui || return 1
+	make || return 1
+}
+
+package() {
+	cd "${srcdir}/${pkgname}"
+
+	make DESTDIR="$pkgdir" install || return 1
+}

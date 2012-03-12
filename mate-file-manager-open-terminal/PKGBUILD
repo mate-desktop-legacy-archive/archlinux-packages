@@ -1,0 +1,35 @@
+pkgname=mate-file-manager-open-terminal
+pkgver=1.1.0
+pkgrel=1
+pkgdesc="An extension for opening terminals in arbitrary local paths"
+arch=('i686' 'x86_64')
+url="http://manny.cluecoder.org/packages/nautilus-open-terminal"
+license=('GPL')
+depends=('mate-file-manager')
+makedepends=('pkgconfig' 'intltool')
+install=mate-file-manager-open-terminal.install
+options=('!libtool')
+group=('mate-extras')
+source=(./mate-file-manager-open-terminal-1.1.0.tar.gz)
+sha256sums=('f14bb7f9f9182cdc8e3b952861f6fa057096ffed5b1e4fcff5f7b13b159577e6')
+
+build() {
+	cd "$srcdir/$pkgname"
+	./autogen.sh
+	./configure --prefix=/usr || return 1
+
+	#fix non-standard directory
+	sed -i 's|${prefix}/etc|/etc|' Makefile
+
+	make || return 1
+}
+
+package() {
+	cd "$srcdir/$pkgname"
+	make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="$pkgdir" install || return 1
+
+	install -m755 -d ${pkgdir}/usr/share/mateconf/schemas
+
+	mateconf-merge-schema ${pkgdir}/usr/share/mateconf/schemas/${pkgname}.schemas --domain ${pkgname} ${pkgdir}/etc/mateconf/schemas/*.schemas || return 1
+	rm -f ${pkgdir}/etc/mateconf/schemas/*.schemas
+}

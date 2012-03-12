@@ -1,0 +1,26 @@
+pkgname=mate-common
+pkgver=1.1.0
+pkgrel=1
+pkgdesc="Common development macros for MATE"
+arch=('any')
+license=('GPL')
+depends=()
+makedepends=()
+options=('!libtool')
+url="http://matsusoft.com.ar/projects/mate/"
+groups=('mate')
+source=(./mate-common-1.1.0.tar.bz2)
+sha256sums=('0608dc4872ac95ac521aebf4d2a68a208f1cf6080fffe74bb3c9e699899eda74')
+
+
+build() {
+    cd "${srcdir}/$pkgname-$pkgver"
+    ./autogen.sh \
+        --prefix=/usr || return 1
+    make || return 1
+}
+
+package() {
+    cd "${srcdir}/$pkgname-$pkgver"
+    make DESTDIR="${pkgdir}" install || return 1
+}

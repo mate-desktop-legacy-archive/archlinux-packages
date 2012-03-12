@@ -1,0 +1,31 @@
+pkgname=mate-themes
+pkgver=1.1.0
+pkgrel=1
+pkgdesc="Default themes for the MATE desktop"
+arch=('i686' 'x86_64')
+license=('GPL')
+depends=('gtk2' 'gtk-engines')
+makedepends=('intltool')
+replaces=('gnome-themes')
+conflicts=('gnome-themes')
+options=('!emptydirs' '!libtool')
+url="http://matsusoft.com.ar/projects/mate/"
+groups=('mate')
+source=(./${pkgname}-${pkgver}.tar.gz)
+sha256sums=('0745de83b10a46ccd272fd24741ed39994eab4d2a2524264a315d92bba44500b')
+
+
+build() {
+    cd "${srcdir}/$pkgname"
+
+    ./autogen.sh \
+        --prefix=/usr \
+        --enable-all-themes \
+        --disable-placeholders || return 1
+    make || return 1
+}
+
+package() {
+    cd "${srcdir}/$pkgname"
+    make DESTDIR="$pkgdir" install || return 1
+}

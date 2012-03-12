@@ -1,0 +1,30 @@
+pkgname=mate-menus
+pkgver=1.1.1
+pkgrel=1
+pkgdesc="MATE menu specifications"
+arch=('i686' 'x86_64')
+license=('GPL')
+depends=('glib2' 'python2')
+makedepends=('intltool' 'gobject-introspection')
+options=('!emptydirs' '!libtool')
+source=(./${pkgname}-${pkgver}.tar.gz)
+sha256sums=('0217422d44e7e91c1651f578ade4c6fb9302b254da2e95536cab228c1f96b303')
+
+url="http://matsusoft.com.ar/projects/mate/"
+groups=('mate')
+
+build() {
+    cd "${srcdir}/$pkgname"
+    PYTHON=/usr/bin/python2 ./autogen.sh \
+        --prefix=/usr \
+        --sysconfdir=/etc \
+        --localstatedir=/var  \
+        --enable-python \
+        --disable-static || return 1
+    make || return 1
+}
+
+package() {
+    cd "${srcdir}/$pkgname"
+    make DESTDIR="${pkgdir}" install || return 1
+}

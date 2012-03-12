@@ -1,0 +1,31 @@
+pkgname=mate-terminal
+pkgver=1.1.0
+pkgrel=1
+pkgdesc="The MATE Terminal Emulator"
+arch=('i686' 'x86_64')
+license=('GPL')
+depends=('mate-conf' 'vte' 'libmate' 'libsm')
+makedepends=('pkgconfig' 'mate-doc-utils' 'intltool')
+options=('!emptydirs' '!libtool')
+install=mate-terminal.install
+url="http://matsusoft.com.ar/projects"
+groups=('mate-extras')
+source=(./mate-terminal-1.1.0.tar.gz)
+sha256sums=('46ce682f7b49fedbce7d040859d8acf99090316112d248b32d4d8949f08c31ac')
+
+build() {
+	cd "${srcdir}/${pkgname}"
+	./autogen.sh --prefix=/usr --sysconfdir=/etc --disable-static \
+		--localstatedir=/var --disable-scrollkeeper --with-gnu-ld || return 1
+	make || return 1
+}
+
+package() {
+    cd "$srcdir/$pkgname"
+
+	make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install || return 1
+
+	install -m755 -d "${pkgdir}/usr/share/mateconf/schemas"
+	mateconf-merge-schema "${pkgdir}/usr/share/mateconf/schemas/${pkgname}.schemas" --domain ${pkgname} ${pkgdir}/etc/mateconf/schemas/*.schemas || return 1
+	rm -f ${pkgdir}/etc/mateconf/schemas/*.schemas
+}

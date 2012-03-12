@@ -1,0 +1,35 @@
+pkgname=mate-file-manager-sendto
+pkgver=1.1.0
+pkgrel=1
+pkgdesc="Context menu for sending files on MATE File Manager"
+arch=('i686' 'x86_64')
+license=('GPL')
+depends=('mate-file-manager')
+makedepends=('pidgin' 'gajim' 'gettext' 'intltool')
+options=('!emptydirs')
+install=mate-file-manager-sendto.install
+url="http://matsusoft.com.ar/projects"
+groups=('mate-extras')
+source=(./mate-file-manager-sendto-1.1.0.tar.gz)
+sha256sums=('351c82a86a725f72209afba0e8805abd78c7a126315c7cb1dfa219fc44b2a319')
+
+build() {
+	cd "${srcdir}/${pkgname}"
+	./autogen.sh
+	./configure --prefix=/usr --sysconfdir=/etc \
+		--localstatedir=/var || return 1
+		#--disable-schemas-compile
+	make || return 1
+}
+
+package() {
+    cd "$srcdir/$pkgname"
+
+    # rm -f "${pkgdir}//usr/lib/nautilus-sendto/plugins/libnstbluetooth.so"
+
+	make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install || return 1
+
+	install -m755 -d "${pkgdir}/usr/share/mateconf/schemas"
+	mateconf-merge-schema "${pkgdir}/usr/share/mateconf/schemas/${pkgname}.schemas" --domain ${pkgname} ${pkgdir}/etc/mateconf/schemas/*.schemas || return 1
+	rm -f ${pkgdir}/etc/mateconf/schemas/*.schemas
+}

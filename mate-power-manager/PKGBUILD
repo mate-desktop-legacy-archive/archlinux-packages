@@ -1,0 +1,38 @@
+pkgname=mate-power-manager
+pkgver=1.1.0
+pkgrel=1
+pkgdesc="Session daemon that makes it easy to manage your laptop or desktop system for Mate Desktop"
+arch=('i686' 'x86_64')
+license=('GPL')
+depends=('libmatenotify' 'libunique' 'libcanberra' 'hicolor-icon-theme' 'upower' 'libmatekeyring')
+makedepends=('intltool' 'pkgconfig' 'mate-doc-utils' 'mate-panel' 'mate-control-center')
+options=('!emptydirs')
+install=mate-power-manager.install
+url="http://matsusoft.com.ar/projects"
+groups=('mate-extras')
+source=(./mate-power-manager-1.1.0.tar.gz)
+sha256sums=('146696501e8b97290e64ab50d098df7bfb86cd7c56d64c42b587d915e0b37dac')
+
+build() {
+	cd "${srcdir}/${pkgname}"
+	./autogen.sh
+	./configure --prefix=/usr --sysconfdir=/etc \
+		--localstatedir=/var \
+		--libexecdir=/usr/lib/${pkgname} \
+		--disable-scrollkeeper || return 1
+		#--enable-applets
+		#--with-dbus-services=/usr/share/dbus-1/services \
+		#--with-dpms-ext \
+
+	make || return 1
+}
+
+package() {
+    cd "$srcdir/$pkgname"
+
+	make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install || return 1
+
+	install -m755 -d "${pkgdir}/usr/share/mateconf/schemas"
+	mateconf-merge-schema "${pkgdir}/usr/share/mateconf/schemas/${pkgname}.schemas" --domain ${pkgname} ${pkgdir}/etc/mateconf/schemas/*.schemas || return 1
+	rm -f ${pkgdir}/etc/mateconf/schemas/*.schemas
+}

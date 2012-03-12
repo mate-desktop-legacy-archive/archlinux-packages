@@ -1,0 +1,39 @@
+pkgname=mate-system-monitor
+pkgver=1.1.0
+pkgrel=1
+pkgdesc="A system monitor for MATE"
+arch=(i686 x86_64)
+license=('GPL')
+depends=('libwnck' 'libgtop' 'gtkmm' 'librsvg' 'mate-icon-theme')
+makedepends=('mate-doc-utils' 'pkgconfig' 'intltool')
+groups=('mate-extras')
+options=(!emptydirs !libtool)
+url="http://matsusoft.com.ar/projects"
+install=mate-system-monitor.install
+source=(./mate-system-monitor-1.1.0.tar.gz)
+sha256sums=('020d05c1c393e136145192d42beb58a4dd56578fcb4079dfada06799c804938a')
+
+build() {
+	cd "${srcdir}/${pkgname}"
+	./autogen.sh
+	./configure --prefix=/usr --sysconfdir=/etc \
+		--libexecdir=/usr/lib/${pkgname} \
+		--localstatedir=/var --disable-static \
+		--disable-scrollkeeper \
+		--disable-schemas-install || return 1
+
+	# there is some pre-compiled files on the tar
+	make clean
+	make || return 1
+}
+
+package() {
+	cd "${srcdir}/${pkgname}"
+
+	make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install || return 1
+	#rm -f ${pkgdir}/usr/lib/*.la # can be used options=(!libtools)
+
+	install -m755 -d "${pkgdir}/usr/share/mateconf/schemas"
+	mateconf-merge-schema "${pkgdir}/usr/share/mateconf/schemas/${pkgname}.schemas" --domain ${pkgname} ${pkgdir}/etc/mateconf/schemas/*.schemas || return 1
+	rm -f ${pkgdir}/etc/mateconf/schemas/*.schemas
+}

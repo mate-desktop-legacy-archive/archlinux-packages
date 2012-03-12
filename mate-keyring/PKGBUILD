@@ -1,0 +1,36 @@
+pkgname=mate-keyring
+pkgver=1.1.0
+pkgrel=2
+pkgdesc="MATE Password Management daemon"
+arch=(i686 x86_64)
+license=('GPL' 'LGPL')
+depends=('dbus')
+makedepends=('intltool' 'pkgconfig' 'python2')
+url="http://matsusoft.com.ar/projects/mate/"
+groups=('mate')
+options=('!libtool' '!emptydirs')
+install=mate-keyring.install
+source=(./${pkgname}/${pkgname}-${pkgver}.tar.gz)
+sha256sums=('75bdecce3ac72c1565d6071e80c4b2f40004def15346349cc0646331a7a188f5')
+
+
+build() {
+    cd "${srcdir}/$pkgname"
+
+    ./autogen.sh --prefix=/usr --sysconfdir=/etc \
+        --localstatedir=/var --disable-static \
+        --libexecdir=/usr/lib/mate-keyring \
+        --with-pam-dir=/lib/security --with-root-certs=/etc/ssl/certs || return 1
+
+    make || return 1
+}
+
+package() {
+    cd "${srcdir}/$pkgname"
+
+    make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install || return 1
+
+    install -m755 -d "${pkgdir}/usr/share/mateconf/schemas"
+    mateconf-merge-schema "${pkgdir}/usr/share/mateconf/schemas/${pkgname}.schemas" --domain ${pkgname} ${pkgdir}/etc/mateconf/schemas/*.schemas || return 1
+    rm -f ${pkgdir}/etc/mateconf/schemas/*.schemas
+}

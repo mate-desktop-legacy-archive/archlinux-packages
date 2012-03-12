@@ -1,0 +1,34 @@
+pkgname=mate-bluetooth
+pkgver=1.1.0
+pkgrel=1
+pkgdesc="A collection of Bluetooth utilities and modules for MATE"
+arch=('i686' 'x86_64')
+license=('GPL')
+depends=('libunique' 'libmatenotify' 'hicolor-icon-theme' 'gvfs-obexftp' 'obexd-client')
+makedepends=('intltool' 'pygtk' 'mate-doc-utils' 'mate-file-manager-sendto' 'gobject-introspection')
+options=('!emptydirs')
+install=mate-bluetooth.install
+url="http://matsusoft.com.ar/projects"
+groups=('mate-extras')
+source=(./${pkgname}-$pkgver.tar.bz2)
+sha256sums=('dfbe61c0c8c613cfddad7893783811a7813f0e7202c5b9839ad5622d8ed9efaf')
+
+build() {
+	cd "${srcdir}/${pkgname}-${pkgver}"
+	./autogen.sh
+	./configure --prefix=/usr --sysconfdir=/etc \
+		--localstatedir=/var --disable-desktop-update \
+		--disable-icon-update || return 1
+		#--disable-schemas-compile
+	make || return 1
+}
+
+package() {
+    cd "$srcdir/$pkgname-$pkgver"
+
+	make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install || return 1
+
+	install -m755 -d "${pkgdir}/usr/share/mateconf/schemas"
+	mateconf-merge-schema "${pkgdir}/usr/share/mateconf/schemas/${pkgname}.schemas" --domain ${pkgname} ${pkgdir}/etc/mateconf/schemas/*.schemas || return 1
+	rm -f ${pkgdir}/etc/mateconf/schemas/*.schemas
+}
