@@ -12,8 +12,8 @@ url="http://matsusoft.com.ar/projects/mate/"
 groups=('mate')
 install=libmate.install
 
-source=(./{$pkgname}-{$pkgver}.tar.xz)
-sha256sums=('5f7e292077959faced44603abac696860978e5b5cab4b81f2ccca2adb82246cf')
+source=(http://pub.mate-desktop.org/releases/1.2/{$pkgname}-{$pkgver}.tar.xz)
+sha256sums=('729971d0d998f4705ae2ca276f1d16d1580ced9f75a17ddf3de3f6f330e2f298')
 
 build() {
     cd "${srcdir}/$pkgname"
