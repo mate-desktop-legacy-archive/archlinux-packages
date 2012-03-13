@@ -1,5 +1,5 @@
 pkgname=mate-backgrounds
-pkgver=1.1.0
+pkgver=1.2.0
 pkgrel=1
 pkgdesc="Background images and data for MATE"
 arch=('any')
@@ -7,13 +7,13 @@ license=('GPL')
 url="http://matsusoft.com.ar/projects/mate/"
 makedepends=('intltool' 'mate-common')
 groups=('mate')
-source=(./mate-backgrounds-1.1.0.tar.gz)
-sha256sums=('9f0b2573209aedeea944b3438c8c8021bf47e1c5551cfb5d399833c21c4750d3')
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
+sha256sums=('7605775808884cb8c60ed6abe2501068a4955c66839d3e8aae306cf108d20b4c')
 
 
 
 build() {
-	cd "${srcdir}/$pkgname"
+	cd "${srcdir}/$pkgname-$pkgver"
 
 	./autogen.sh \
 		--prefix=/usr \
@@ -24,7 +24,7 @@ build() {
 }
 
 package() {
-	cd "$srcdir/$pkgname"
+	cd "$srcdir/$pkgname-$pkgver"
 
 	make DESTDIR="$pkgdir" install || return 1
 }

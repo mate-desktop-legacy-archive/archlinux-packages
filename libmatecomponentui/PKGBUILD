@@ -1,5 +1,5 @@
 pkgname=libmatecomponentui
-pkgver=1.1.1
+pkgver=1.2.0
 pkgrel=1
 pkgdesc="User Interface library for MateComponent"
 arch=('i686' 'x86_64')
@@ -9,11 +9,11 @@ makedepends=('intltool' 'pkgconfig')
 groups=('mate')
 options=('!emptydirs' '!libtool')
 url="http://matsusoft.com.ar/projects/mate/"
-source=(http://pub.mate-desktop.org/releases/1.2/{$pkgname}-{$pkgver}.tar.xz)
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
 sha256sums=('55dff6c6dd8e173d24336c29a3ab30b23c8432dc96d69942126ab1c63a8ce56c')
 
 build() {
-    cd "${srcdir}/$pkgname"
+    cd "${srcdir}/$pkgname-$pkgver"
     ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
@@ -23,7 +23,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/$pkgname"
+    cd "${srcdir}/$pkgname-$pkgver"
 
     make DESTDIR="${pkgdir}" install
     rm -f "${pkgdir}/usr/share/applications/matecomponent-browser.desktop"

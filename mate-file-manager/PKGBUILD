@@ -1,5 +1,5 @@
 pkgname=mate-file-manager
-pkgver=1.1.2
+pkgver=1.2.0
 pkgrel=1
 pkgdesc="The MATE shell and file manager"
 arch=('i686' 'x86_64')
@@ -10,13 +10,13 @@ makedepends=('pkgconfig' 'intltool')
 url="http://matsusoft.com.ar/projects/mate/"
 options=('!libtool' '!emptydirs')
 install=mate-file-manager.install
-source=(./${pkgname}/${pkgname}-${pkgver}.tar.gz)
-sha256sums=('a5bb29cf4ebec69af6085e90de063d91b600a5a49b53bc790b858c953adcaa56')
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
+sha256sums=('ebda9a93ff23183fcfa8cf925eda3fa611cb17b57fc28a895639a096a1785cae')
 
 groups=('mate')
 
 build() {
-    cd "${srcdir}/$pkgname"
+    cd "${srcdir}/$pkgname-$pkgver"
 
     ./autogen.sh \
         --prefix=/usr \
@@ -31,7 +31,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/$pkgname"
+    cd "${srcdir}/$pkgname-$pkgver"
 
     make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install || return 1
 

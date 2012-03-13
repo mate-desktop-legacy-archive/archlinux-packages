@@ -1,5 +1,5 @@
 pkgname=python-mate
-pkgver=1.1.0
+pkgver=1.2.0
 pkgrel=1
 pkgdesc="Python binding for Mate"
 arch=('i686' 'x86_64')
@@ -9,12 +9,12 @@ depends=('python2' 'python-corba' 'libmate' 'libmateui' 'libmatecanvas' 'libmate
 makedepends=('pkgconfig')
 options=('!emptydirs')
 groups=('mate-extras')
-source=(./python-mate-1.1.0.tar.gz)
-sha256sums=('5ad073c5672bf8adf269413d799baf70f99b4923b77f07fd56ac30f9574bc1e3')
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
+sha256sums=('84366cb6e07b8f883dc12a0b1a173da2a010c7c7f868c2db3f02eb3aa3c53d28')
 
 build() {
 	export PYTHON=python2
-	cd "${srcdir}/${pkgname}"
+	cd "${srcdir}/${pkgname}-$pkgver"
 	./autogen.sh
 	./configure --prefix=/usr --sysconfdir=/etc \
 		--localstatedir=/var --disable-static \
@@ -32,7 +32,7 @@ build() {
 }
 
 package() {
-	cd "${srcdir}/${pkgname}"
+	cd "${srcdir}/${pkgname}-$pkgver"
 
 	make DESTDIR="$pkgdir" install || return 1
 }

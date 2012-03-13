@@ -1,5 +1,5 @@
 pkgname=libmatecomponent
-pkgver=1.1.0
+pkgver=1.2.0
 pkgrel=1
 pkgdesc="A set of language and system independant CORBA interfaces for creating reusable components"
 arch=('i686' 'x86_64')
@@ -10,13 +10,13 @@ groups=('mate')
 options=('!emptydirs' '!libtool')
 backup=('etc/matecomponent-activation/matecomponent-activation-config.xml')
 url="http://matsusoft.com.ar/projects/mate/"
-source=(http://pub.mate-desktop.org/releases/1.2/{$pkgname}-{$pkgver}.tar.xz ./matecomponent-activation-config.xml)
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz ./matecomponent-activation-config.xml)
 install=libmatecomponent.install
 sha256sums=('121bd7573186a81885942d82432bbdc2b69d37108b79e00f85994d68d770fdf3'
             'c1fc9b102f2635b0d4be39728d19737c1013b61395d0bd0c508fc6ad6b61643e')
 
 build() {
-    cd "${srcdir}/$pkgname"
+    cd "${srcdir}/$pkgname-$pkgver"
     ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
@@ -27,7 +27,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/$pkgname"
+    cd "${srcdir}/$pkgname-$pkgver"
     make DESTDIR="${pkgdir}" install
     install -m644 "${srcdir}/matecomponent-activation-config.xml" "${pkgdir}/etc/matecomponent-activation/"
 }

@@ -1,5 +1,5 @@
 pkgname=mate-mime-data
-pkgver=1.1.0
+pkgver=1.2.0
 pkgrel=1
 pkgdesc="The base MIME and Application database for MATE"
 arch=('any')
@@ -8,8 +8,8 @@ depends=('shared-mime-info')
 makedepends=('intltool')
 url="http://matsusoft.com.ar/projects/mate/"
 groups=('mate')
-source=(./${pkgname}-${pkgver}.tar.bz2)
-sha256sums=('fd180ed790ff5934be75b4acbe6cd9889d07bf63411289d0c5281f574bfbb8d2')
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
+sha256sums=('785ebb32f058fe25213d781a9f62658656c0e45cf433445e268be7346e36a5ee')
 
 
 build() {

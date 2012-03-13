@@ -1,5 +1,5 @@
 pkgname=mate-common
-pkgver=1.1.0
+pkgver=1.2.1
 pkgrel=1
 pkgdesc="Common development macros for MATE"
 arch=('any')
@@ -9,8 +9,8 @@ makedepends=()
 options=('!libtool')
 url="http://matsusoft.com.ar/projects/mate/"
 groups=('mate')
-source=(./mate-common-1.1.0.tar.bz2)
-sha256sums=('0608dc4872ac95ac521aebf4d2a68a208f1cf6080fffe74bb3c9e699899eda74')
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
+sha256sums=('3b621b86b4d18b870595c487b6edde4d9f6fcdf61db3bc1a03c869fb4034bd7b')
 
 
 build() {

@@ -1,5 +1,5 @@
 pkgname=mate-conf
-pkgver=1.1.1
+pkgver=1.2.1
 pkgrel=1
 pkgdesc="A configuration database system"
 arch=(i686 x86_64)
@@ -10,10 +10,10 @@ groups=('mate')
 options=('!libtool')
 install=mate-conf.install
 url="http://matsusoft.com.ar/projects/mate/"
-source=(mate-conf-1.1.1.tar.bz2
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz
         mateconf-merge-schema
         mateconfpkg)
-sha256sums=('ad9baa7effd561adb2d35ddb9093a5a8a07b12353f07f2dab203571df1404366'
+sha256sums=('343576f6d96fc432218cbf3ed4f009f7fa8e4ec17683c76ffe2272797d540ce0'
             '78ccdb9c963400694c944ee193b2fa135dcb39e0d9f1dc393fa659131d591076'
             '2e06a02b5312ee7853be356c1b0131ce6e85fb2949c4aef54c1e795f27fdc1dd')
 

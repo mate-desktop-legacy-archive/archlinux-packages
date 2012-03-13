@@ -1,5 +1,5 @@
 pkgname=libmateui
-pkgver=1.1.2
+pkgver=1.2.0
 pkgrel=1
 pkgdesc="User Interface library for MATE"
 arch=('i686' 'x86_64')
@@ -9,11 +9,11 @@ makedepends=('intltool' 'pkgconfig')
 groups=('mate')
 options=('!emptydirs' '!libtool')
 url="http://matsusoft.com.ar/projects/mate/"
-source=(./{$pkgname}-{$pkgver}.tar.xz)
-sha256sums=('4b1c49abdf593c7345a679a1f03eb1ffacf671e796983286b9a3eb19f0509ac0')
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
+sha256sums=('4f3c869cbf0e0b981e47b486704e556a0e5fb55b216e02f1dda7502f98f7fd87')
 
 build() {
-    cd "${srcdir}/$pkgname"
+    cd "${srcdir}/$pkgname-$pkgver"
     ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
@@ -26,7 +26,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/$pkgname"
+    cd "${srcdir}/$pkgname-$pkgver"
 
     make DESTDIR="$pkgdir" install || return 1
 }

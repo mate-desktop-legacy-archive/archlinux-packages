@@ -1,5 +1,5 @@
 pkgname=mate-corba
-pkgver=1.1.0
+pkgver=1.2.1
 pkgrel=1
 pkgdesc="Thin/fast CORBA ORB"
 arch=('i686' 'x86_64')
@@ -9,8 +9,8 @@ makedepends=('pkgconfig')
 options=('!emptydirs' '!libtool')
 groups=('mate')
 url="http://matsusoft.com.ar/projects/mate/"
-source=(./mate-corba-1.1.0.tar.bz2)
-sha256sums=('1aff4ae89a78c6a5f5134d3cce8acb0c3780bd728caf50ea32fb80373ffb6d65')
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
+sha256sums=('0b6a40718e260bc5556147866cbf6a9f988e08c635f2fc4007974af840c427bb')
 
 
 build() {

@@ -1,5 +1,5 @@
 pkgname=mate-settings-daemon
-pkgver=1.1.1
+pkgver=1.2.0
 pkgrel=1
 pkgdesc="The MATE Settings daemon"
 arch=('i686' 'x86_64')
@@ -10,8 +10,8 @@ options=('!libtool')
 url="http://matsusoft.com.ar/projects/mate/"
 install=mate-settings-daemon.install
 groups=('mate')
-source=(./${pkgname}-${pkgver}.tar.xz)
-sha256sums=('e4d8766502c01e7b6457adcd85f70b5bd7c07f244d75f867a32984bbf8d6dea0')
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
+sha256sums=('9db26630a0e823773bab4a9f99cc0a516c2a1ba4c570ba593c8539ac6207eb33')
 
 
 build() {

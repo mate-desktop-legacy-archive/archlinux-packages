@@ -1,5 +1,5 @@
 pkgname=libmate
-pkgver=1.1.2
+pkgver=1.2.0
 pkgrel=1
 pkgdesc="Common libraries for MATE"
 arch=('i686' 'x86_64')
@@ -12,11 +12,11 @@ url="http://matsusoft.com.ar/projects/mate/"
 groups=('mate')
 install=libmate.install
 
-source=(http://pub.mate-desktop.org/releases/1.2/{$pkgname}-{$pkgver}.tar.xz)
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
 sha256sums=('729971d0d998f4705ae2ca276f1d16d1580ced9f75a17ddf3de3f6f330e2f298')
 
 build() {
-    cd "${srcdir}/$pkgname"
+    cd "${srcdir}/$pkgname-$pkgver"
 
     # Optional Features:
     #    --enable-esd            Enable ESounD (default=no)
@@ -34,7 +34,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/$pkgname"
+    cd "${srcdir}/$pkgname-$pkgver"
 
     make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1  DESTDIR="${pkgdir}" install || return 1
 

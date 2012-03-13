@@ -1,5 +1,5 @@
 pkgname=mate-polkit
-pkgver=1.1.0
+pkgver=1.2.0
 pkgrel=1
 pkgdesc="PolicyKit integration for the MATE desktop"
 arch=('i686' 'x86_64')
@@ -8,14 +8,14 @@ license=('LGPL')
 depends=('polkit>=0.101' 'gtk2')
 makedepends=('intltool' 'gobject-introspection')
 options=('!emptydirs' '!libtool')
-source=(./${pkgname}-${pkgver}.tar.gz)
-sha256sums=('72143f4846fd6668fbd346cc57de176ccf7733d648148112a1dd4eb7f29e2499')
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
+sha256sums=('a0c2e283bd54b7199975ff51a254e0c002d82dea4d94e08e01c9189d620e839a')
 
 url="http://matsusoft.com.ar/projects/mate/"
 groups=('mate')
 
 build() {
-    cd "${srcdir}/$pkgname"
+    cd "${srcdir}/$pkgname-$pkgver"
     ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
@@ -26,6 +26,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/$pkgname"
+    cd "${srcdir}/$pkgname-$pkgver"
     make DESTDIR="${pkgdir}" install || return 1
 }

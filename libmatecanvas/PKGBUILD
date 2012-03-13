@@ -1,5 +1,5 @@
 pkgname=libmatecanvas
-pkgver=1.1.0
+pkgver=1.2.0
 pkgrel=1
 pkgdesc="The MATE Canvas library"
 arch=('i686' 'x86_64')
@@ -9,11 +9,11 @@ makedepends=('pkgconfig' 'intltool')
 options=('!libtool')
 groups=('mate')
 url="http://matsusoft.com.ar/projects/mate/"
-source=(http://pub.mate-desktop.org/releases/1.2/{$pkgname}-{$pkgver}.tar.xz)
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
 sha256sums=('7d3897a692c3ab31cce24a194b921987a6c06b2bbb68c78724c9f0240e9e74a3')
 
 build() {
-    cd "${srcdir}/$pkgname"
+    cd "${srcdir}/$pkgname-$pkgver"
     ./autogen.sh \
         --prefix=/usr --disable-static \
 	    --enable-glade || return 1
@@ -22,7 +22,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/$pkgname"
+    cd "${srcdir}/$pkgname-$pkgver"
 
     make DESTDIR="${pkgdir}" install
 }

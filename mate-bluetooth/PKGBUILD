@@ -10,7 +10,7 @@ options=('!emptydirs')
 install=mate-bluetooth.install
 url="http://matsusoft.com.ar/projects"
 groups=('mate-extras')
-source=(./${pkgname}-$pkgver.tar.bz2)
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
 sha256sums=('dfbe61c0c8c613cfddad7893783811a7813f0e7202c5b9839ad5622d8ed9efaf')
 
 build() {

@@ -5,15 +5,15 @@ pkgdesc="MateConf schemas to use ffmpegthumbnailer in MATE Caja "
 arch=('any')
 depends=('mate-conf')
 install=ffmpegthumbnailer-caja.install
-source=(http://pub.mate-desktop.org/releases/1.2/{$pkgname}-{$pkgver}.tar.xz)
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
 sha256sums=('972a6c09814ba6ee42883d03ffea9482af307f58437ad4b5eb7153e2c2ad25c9')
 
 build() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgname}-$pkgver"
 }
 
 package() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgname}-$pkgver"
     make DESTDIR="${pkgdir}" install || return 1
 }
 

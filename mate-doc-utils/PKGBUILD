@@ -1,5 +1,5 @@
 pkgname=mate-doc-utils
-pkgver=1.1.0
+pkgver=1.2.1
 pkgrel=1
 pkgdesc="Documentation utilities for MATE"
 arch=('any')
@@ -9,8 +9,8 @@ makedepends=('pkgconfig' 'intltool' 'mate-common')
 #conflicts=('gnome-doc-utils')
 options=('!emptydirs' '!libtool')
 url="http://matsusoft.com.ar/projects/mate/"
-source=(./${pkgname}/${pkgname}-${pkgver}.tar.bz2)
-sha256sums=('d865e44acfb29a3a6c1bb294d449b749bf8f45a42011543c549cff8ea15fd0e5')
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
+sha256sums=('b537901a876db92805e4347590df2fb2ec5c913a69c12b52df5b20108a0beb10')
 
 groups=('mate')
 

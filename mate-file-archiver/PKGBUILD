@@ -1,7 +1,7 @@
 # Maintainer: Spyros Stathopoulos <foucault.online@gmail.com>
 # Contributor: Alessio Sergi <asergi at archlinux dot us>
 pkgname=mate-file-archiver
-pkgver=1.1.0
+pkgver=1.2.0
 pkgrel=1
 pkgdesc="Archive manipulator for MATE"
 arch=('i686' 'x86_64')
@@ -17,11 +17,11 @@ options=('!libtool' '!emptydirs')
 install=mate-file-archiver.install
 url="http://matsusoft.com.ar/projects"
 groups=('mate-extras')
-source=(./mate-file-archiver-1.1.0.tar.gz)
-md5sums=('49468d23f7ac00a76bce005877b32998')
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
+sha256sums=('f6aa182085e063469ab2058585ce1dd2eedce97a925c1f720768d549a8848416')
 
 build() {
-	cd "$srcdir/$pkgname"
+	cd "$srcdir/$pkgname-$pkgver"
   ./autogen.sh
 	mate-doc-prepare --force
 	autoreconf -i
@@ -39,7 +39,7 @@ build() {
 }
 
 package() {
-	cd "$srcdir/$pkgname"
+	cd "$srcdir/$pkgname-$pkgver"
 	make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="$pkgdir/" install
 	install -d -m755 "${pkgdir}/usr/share/mateconf/schemas"
 	mateconf-merge-schema "${pkgdir}/usr/share/mateconf/schemas/${pkgname}.schemas" --domain ${pkgname} "${pkgdir}/etc/mateconf/schemas/*.schemas"

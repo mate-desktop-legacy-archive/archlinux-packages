@@ -1,5 +1,5 @@
 pkgname=mate-vfs
-pkgver=1.1.0
+pkgver=1.2.0
 pkgrel=1
 pkgdesc="The MATE Virtual File System"
 arch=(i686 x86_64)
@@ -10,8 +10,8 @@ options=('!emptydirs' '!libtool')
 url="http://matsusoft.com.ar/projects/mate/"
 groups=('mate')
 install=mate-vfs.install
-source=(./${pkgname}-${pkgver}.tar.bz2)
-sha256sums=('0eba74f30fcc3b79dccf34e5ba28499f2cc7401a138b87f94585516c7a7b5094')
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
+sha256sums=('f4e41cef180f57e18e300068515aa7a6bc942944dfac7d5a424fcaa376206e36')
 
 
 build() {

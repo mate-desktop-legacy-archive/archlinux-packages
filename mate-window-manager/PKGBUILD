@@ -1,5 +1,5 @@
 pkgname=mate-window-manager
-pkgver=1.1.0
+pkgver=1.2.0
 pkgrel=1
 pkgdesc="A window manager for MATE"
 arch=(i686 x86_64)
@@ -10,13 +10,13 @@ options=('!emptydirs' '!libtool')
 install=mate-window-manager.install
 url="http://matsusoft.com.ar/projects/mate/"
 groups=('mate')
-source=(./${pkgname}-${pkgver}.tar.gz
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz
         metacity-restartstyle.patch)
-sha256sums=('15a7a030102e212ad44719d4e2457368da8b9e8aecc453498539c6dc6780ff2a'
+sha256sums=('0f6ad435a222b9ca9a5fc79ac8ce091a25b917695bff01bea23ad9e1570c1531'
             'ea2450ca3e4fb59166ec18ff4844cc61cb16865880dc6b125078a3ab47bf2caf')
 
 build() {
-    cd "${srcdir}/$pkgname"
+    cd "${srcdir}/$pkgname-$pkgver"
     patch -Np1 -i "${srcdir}/metacity-restartstyle.patch" || return 1
     ./autogen.sh \
         --prefix=/usr \
@@ -30,7 +30,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/$pkgname"
+    cd "${srcdir}/$pkgname-$pkgver"
 
     make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install || return 1
 

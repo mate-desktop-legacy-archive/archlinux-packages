@@ -1,5 +1,5 @@
 pkgname=mate-terminal
-pkgver=1.1.0
+pkgver=1.2.0
 pkgrel=1
 pkgdesc="The MATE Terminal Emulator"
 arch=('i686' 'x86_64')
@@ -10,18 +10,18 @@ options=('!emptydirs' '!libtool')
 install=mate-terminal.install
 url="http://matsusoft.com.ar/projects"
 groups=('mate-extras')
-source=(./mate-terminal-1.1.0.tar.gz)
-sha256sums=('46ce682f7b49fedbce7d040859d8acf99090316112d248b32d4d8949f08c31ac')
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
+sha256sums=('0925c349481c2faa488a09539e1d22cb75294f6371ed6646e2e700513aaaa947')
 
 build() {
-	cd "${srcdir}/${pkgname}"
+	cd "${srcdir}/${pkgname}-$pkgver"
 	./autogen.sh --prefix=/usr --sysconfdir=/etc --disable-static \
 		--localstatedir=/var --disable-scrollkeeper --with-gnu-ld || return 1
 	make || return 1
 }
 
 package() {
-    cd "$srcdir/$pkgname"
+    cd "$srcdir/$pkgname-$pkgver"
 
 	make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install || return 1
 

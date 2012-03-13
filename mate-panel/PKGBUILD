@@ -1,5 +1,5 @@
 pkgname=mate-panel
-pkgver=1.1.1
+pkgver=1.2.0
 pkgrel=1
 pkgdesc="The MATE Panel"
 arch=('i686' 'x86_64')
@@ -8,14 +8,14 @@ depends=('libwnck' 'mate-conf' 'mate-menus' 'mate-desktop' 'librsvg' 'hicolor-ic
 makedepends=('mate-doc-utils' 'pkgconfig' 'intltool' 'networkmanager')
 options=('!emptydirs' '!libtool')
 install=mate-panel.install
-source=(./${pkgname}-${pkgver}.tar.gz)
-sha256sums=('9428338fe755ba37d3eca3f1dd1dc6ece822b8e45e6f886432c220477668bbd5')
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
+sha256sums=('67a34e087c2af28b3e626a3389996007f2d62a920f19c6bf6dc737fcf3d5f35b')
 
 url="http://matsusoft.com.ar/projects/mate/"
 groups=('mate')
 
 build() {
-    cd "${srcdir}/$pkgname"
+    cd "${srcdir}/$pkgname-$pkgver"
 
     PYTHON=/usr/bin/python2 ./autogen.sh \
         --prefix=/usr \
@@ -30,7 +30,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/$pkgname"
+    cd "${srcdir}/$pkgname-$pkgver"
 
     make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install || return 1
 

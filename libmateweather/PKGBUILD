@@ -1,5 +1,5 @@
 pkgname=libmateweather
-pkgver=1.1.0
+pkgver=1.2.0
 pkgrel=1
 pkgdesc="Provides access to weather information from the net"
 arch=('i686' 'x86_64')
@@ -10,12 +10,12 @@ groups=('mate')
 options=('!emptydirs' '!libtool')
 url="http://matsusoft.com.ar/projects/mate/"
 install=libmateweather.install
-source=(./{$pkgname}-{$pkgver}.tar.xz)
-sha256sums=('648a7c2b68feb8ad6851723963a03bdaafb1867a25581beb03deeef7d7731047')
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
+sha256sums=('440bca0ffaf762b235c82a3beec5c80579e6239cbd4addda0c5ec3c3858c66c6')
 
 
 build() {
-    cd "${srcdir}/$pkgname"
+    cd "${srcdir}/$pkgname-$pkgver"
     ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
@@ -26,7 +26,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/$pkgname"
+    cd "${srcdir}/$pkgname-$pkgver"
 
     make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install || return 1
 

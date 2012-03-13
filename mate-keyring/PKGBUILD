@@ -1,6 +1,6 @@
 pkgname=mate-keyring
-pkgver=1.1.0
-pkgrel=2
+pkgver=1.2.0
+pkgrel=1
 pkgdesc="MATE Password Management daemon"
 arch=(i686 x86_64)
 license=('GPL' 'LGPL')
@@ -10,12 +10,12 @@ url="http://matsusoft.com.ar/projects/mate/"
 groups=('mate')
 options=('!libtool' '!emptydirs')
 install=mate-keyring.install
-source=(./${pkgname}/${pkgname}-${pkgver}.tar.gz)
-sha256sums=('75bdecce3ac72c1565d6071e80c4b2f40004def15346349cc0646331a7a188f5')
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
+sha256sums=('4275cf7e0021581458e4e41dcf6c7c2fd41d0828dbd818e624d79f33c202f4a5')
 
 
 build() {
-    cd "${srcdir}/$pkgname"
+    cd "${srcdir}/$pkgname-$pkgver"
 
     ./autogen.sh --prefix=/usr --sysconfdir=/etc \
         --localstatedir=/var --disable-static \
@@ -26,7 +26,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/$pkgname"
+    cd "${srcdir}/$pkgname-$pkgver"
 
     make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install || return 1
 

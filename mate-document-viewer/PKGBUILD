@@ -1,5 +1,5 @@
 pkgname=mate-document-viewer
-pkgver=1.1.1
+pkgver=1.2.0
 pkgrel=2
 pkgdesc="Simply a document viewer"
 url="http://matsusoft.com.ar/projects/mate/"
@@ -13,11 +13,11 @@ optdepends=('texlive-bin: DVI support')
 groups=('mate-extra')
 install=mate-document-viewer.install
 options=('!libtool' '!emptydirs')
-source=(./${pkgname}/${pkgname}-${pkgver}.tar.gz)
-sha256sums=('74e33b9eb2c6d2eaf9908da6b4ade8cbf03c4e920d03f6c584dd3fdd604ca853')
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
+sha256sums=('3dfbf243d86faab5f354c00b2b6a1fa76b30df7d5e406147b4076acc22e11e93')
 
 build() {
-    cd "${srcdir}/$pkgname"
+    cd "${srcdir}/$pkgname-$pkgver"
 
     ./autogen.sh \
         --prefix=/usr \
@@ -43,7 +43,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/$pkgname"
+    cd "${srcdir}/$pkgname-$pkgver"
     make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install || return 1
 
     ln -s atril ${pkgdir}/usr/bin/mate-document-viewer

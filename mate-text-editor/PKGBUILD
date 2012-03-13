@@ -1,6 +1,6 @@
 # Maintainer: neocrust
 pkgname=mate-text-editor
-pkgver=1.1.0
+pkgver=1.2.0
 pkgrel=1
 pkgdesc="An powerfull text editor for MATE"
 arch=('i686' 'x86_64')
@@ -12,11 +12,11 @@ conflicts=('pluma')
 url="http://matsusoft.com.ar/projects"
 groups=('mate-extras')
 install=mate-text-editor.install
-source=(./mate-text-editor-1.1.0.tar.gz)
-sha256sums=('a06bd66d398be030f4eb8e7ee9130c51749a5488d83ed993720f1ce251748de5')
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
+sha256sums=('09ea9afc17b1ceb677489d8ac684113910f9075f0f0be7d52c2b1257a2cd25d1')
 
 build() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgname}-$pkgver"
 
     PYTHON=/usr/bin/python2 ./autogen.sh --prefix=/usr --sysconfdir=/etc \
         --localstatedir=/var --libexecdir=/usr/lib/ \
@@ -26,7 +26,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgname}-$pkgver"
 
     make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install || return 1
 

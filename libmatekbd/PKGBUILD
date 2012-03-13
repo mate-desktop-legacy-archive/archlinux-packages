@@ -1,5 +1,5 @@
 pkgname=libmatekbd
-pkgver=1.1.0
+pkgver=1.2.0
 pkgrel=1
 pkgdesc="MATE keyboard library"
 arch=('i686' 'x86_64')
@@ -10,11 +10,11 @@ groups=('mate')
 url="http://matsusoft.com.ar/projects/mate/"
 options=('!emptydirs' '!libtool')
 install=libmatekbd.install
-source=(./{$pkgname}-{$pkgver}.tar.xz)
-sha256sums=('e797fe70a2606a262e0ef41f7efdcc3b9265f11b94ea8ee6c8f305271239f15c')
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
+sha256sums=('72d70df0642377988148d6b73dff5d0f42c3a5dcc79c36864489ec904df99486')
 
 build() {
-    cd "${srcdir}/$pkgname"
+    cd "${srcdir}/$pkgname-$pkgver"
     ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
@@ -23,7 +23,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/$pkgname"
+    cd "${srcdir}/$pkgname-$pkgver"
     make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install
 
     install -m755 -d "${pkgdir}/usr/share/mateconf/schemas"
