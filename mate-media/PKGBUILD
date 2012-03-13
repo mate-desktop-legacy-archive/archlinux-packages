@@ -10,7 +10,7 @@ groups=('mate-extras')
 options=(!emptydirs !libtool)
 url="http://matsusoft.com.ar/projects"
 install=mate-media.install
-source=(./mate-media-1.1.0.tar.gz)
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
 sha256sums=('7a3aea6eb92826c09c35e8783d25450b298be13b5a4b68957f65251cd1c2cd09')
 
 build() {
