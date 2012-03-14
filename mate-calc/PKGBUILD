@@ -4,7 +4,8 @@ pkgrel=1
 pkgdesc="Calculator for the Mate desktop environment"
 arch=('i686' 'x86_64')
 license=('LGPL' 'GPL')
-depends=('gtk2' 'libxml2' 'libpng' 'freetype2' 'flex' 'bison' 'pixman' 'glib2' 'pango' 'gdk-pixbuf2' 'cairo' 'atk')
+depends=('gtk2' 'libxml2' 'libpng' 'freetype2' 'flex' 'bison' 'pixman' 'glib2' 'pango' 'gdk-pixbuf2' 
+'cairo' 'atk')
 makedepends=('pkgconfig')
 groups=('mate-extra')
 url="http://matsusoft.com.ar/projects"
@@ -26,5 +27,3 @@ package()
 cd "${srcdir}/${pkgname}-$pkgver"
 make DESTDIR="${pkgdir}" install || return 1
 }
-
-
