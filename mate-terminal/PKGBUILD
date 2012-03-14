@@ -1,5 +1,5 @@
 pkgname=mate-terminal
-pkgver=1.2.0
+pkgver=1.2.1
 pkgrel=1
 pkgdesc="The MATE Terminal Emulator"
 arch=('i686' 'x86_64')
