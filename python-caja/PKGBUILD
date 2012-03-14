@@ -10,7 +10,7 @@ makedepends=('pkgconfig' 'python-mate' )
 depends=('mate-file-manager' 'pygtk')
 options=('!libtool' '!emptydirs')
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('4cca9c6a47f610bb504b157d3fd6f92bb8b6e11ad78b977ca70109c71374dc88')
+sha256sums=('befa849b10303d62f09ad593ac202767c4f4b5aa562c39ab999b5dbe27559c25')
 
 build() {
 	export PYTHON=python2
