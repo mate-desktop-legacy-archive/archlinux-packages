@@ -10,7 +10,7 @@ makedepends=('pkgconfig')
 groups=('mate-extra')
 url="http://matsusoft.com.ar/projects"
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('eaad77bed20a3cfbb71d2a77d3b58f6d1c650b68e95fb3fe50f613ddf18bcc00')
+sha256sums=('831b241127694ae0610db6f230ab761a903cefd059b16fe2e2dd9533cb252501')
 
 build()
 {
