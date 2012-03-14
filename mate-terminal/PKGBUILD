@@ -11,7 +11,7 @@ install=mate-terminal.install
 url="http://matsusoft.com.ar/projects"
 groups=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('0925c349481c2faa488a09539e1d22cb75294f6371ed6646e2e700513aaaa947')
+sha256sums=('290913514e2468c65025ae764db5b305eba8b93b9cd45bf01c80b3301b0b8062')
 
 build() {
 	cd "${srcdir}/${pkgname}-$pkgver"
