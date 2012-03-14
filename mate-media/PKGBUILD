@@ -1,5 +1,5 @@
 pkgname=mate-media
-pkgver=1.1.0
+pkgver=1.2.0
 pkgrel=1
 pkgdesc="MATE Media Tools"
 arch=(i686 x86_64)
@@ -10,11 +10,11 @@ groups=('mate-extras')
 options=(!emptydirs !libtool)
 url="http://matsusoft.com.ar/projects"
 install=mate-media.install
-source=(./mate-media-1.1.0.tar.gz)
-sha256sums=('7a3aea6eb92826c09c35e8783d25450b298be13b5a4b68957f65251cd1c2cd09')
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
+sha256sums=('96f8ec09b5716ad024268ca82bbc2b304607b5c86926e4c39779caa3ea14f871')
 
 build() {
-	cd "${srcdir}/${pkgname}"
+	cd "${srcdir}/${pkgname}-$pkgver"
 	./autogen.sh
 	# brute force
 	mate-doc-prepare --force --copy
@@ -44,7 +44,7 @@ build() {
 }
 
 package() {
-	cd "${srcdir}/${pkgname}"
+	cd "${srcdir}/${pkgname}-$pkgver"
 
 	make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install || return 1
 	#rm -f ${pkgdir}/usr/lib/*.la # can be used options=(!libtools)

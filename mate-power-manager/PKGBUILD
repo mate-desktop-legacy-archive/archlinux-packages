@@ -1,5 +1,5 @@
 pkgname=mate-power-manager
-pkgver=1.1.0
+pkgver=1.2.0
 pkgrel=1
 pkgdesc="Session daemon that makes it easy to manage your laptop or desktop system for Mate Desktop"
 arch=('i686' 'x86_64')
@@ -10,11 +10,11 @@ options=('!emptydirs')
 install=mate-power-manager.install
 url="http://matsusoft.com.ar/projects"
 groups=('mate-extras')
-source=(./mate-power-manager-1.1.0.tar.gz)
-sha256sums=('146696501e8b97290e64ab50d098df7bfb86cd7c56d64c42b587d915e0b37dac')
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
+sha256sums=('dc07a792aad0f1e1db8b1b2f3dade3a4bb7cdd3edfb2803bef3dfcf89c38e071')
 
 build() {
-	cd "${srcdir}/${pkgname}"
+	cd "${srcdir}/${pkgname}-$pkgver"
 	./autogen.sh
 	./configure --prefix=/usr --sysconfdir=/etc \
 		--localstatedir=/var \
@@ -28,7 +28,7 @@ build() {
 }
 
 package() {
-    cd "$srcdir/$pkgname"
+    cd "$srcdir/$pkgname-$pkgver"
 
 	make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install || return 1
 

@@ -6,7 +6,7 @@ arch=('any')
 depends=('mate-conf')
 install=ffmpegthumbnailer-caja.install
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('972a6c09814ba6ee42883d03ffea9482af307f58437ad4b5eb7153e2c2ad25c9')
+sha256sums=('c2e089a5af97006e822d6efbd534740a42473f6cbeed2b172e02a61772e61395')
 
 build() {
     cd "${srcdir}/${pkgname}-$pkgver"
