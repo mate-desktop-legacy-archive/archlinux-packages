@@ -1,5 +1,5 @@
 # Maintainer: bickman2k
-pkgname=mate-text-editor
+pkgname=mate-menu-editor
 pkgver=1.2.0
 pkgrel=1
 pkgdesc="An powerfull text editor for MATE"
@@ -8,12 +8,10 @@ license=('GPL')
 depends=('mate-conf' 'gtk2' 'gtksourceview2' 'libxml2' 'pygtksourceview2')
 makedepends=('pkgconfig' 'mate-doc-utils' 'intltool')
 options=('!emptydirs' '!libtool')
-conflicts=('pluma')
 url="http://matsusoft.com.ar/projects"
 groups=('mate-extras')
-install=mate-text-editor.install
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('09ea9afc17b1ceb677489d8ac684113910f9075f0f0be7d52c2b1257a2cd25d1')
+sha256sums=('4425970923c7fc64542b54532804a196105a4ee719596564724aa60b5dab5c77')
 
 build() {
     cd "${srcdir}/${pkgname}-$pkgver"
@@ -29,10 +27,6 @@ package() {
     cd "${srcdir}/${pkgname}-$pkgver"
 
     make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install || return 1
-
-    install -m755 -d "${pkgdir}/usr/share/mateconf/schemas"
-    mateconf-merge-schema "${pkgdir}/usr/share/mateconf/schemas/${pkgname}.schemas" --domain ${pkgname} ${pkgdir}/etc/mateconf/schemas/*.schemas || return 1
-    rm -f ${pkgdir}/etc/mateconf/schemas/*.schemas
 }
 
 
