@@ -11,7 +11,7 @@ install=mate-file-manager-open-terminal.install
 options=('!libtool')
 group=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('f14bb7f9f9182cdc8e3b952861f6fa057096ffed5b1e4fcff5f7b13b159577e6')
+sha256sums=('0d2e252c292f75eb07b6ca39c171ee984b0c2b51af2b2bd17772137cb0dbeeca')
 
 build() {
 	cd "$srcdir/$pkgname-$pkgver"
