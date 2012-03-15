@@ -10,7 +10,7 @@ options=('!emptydirs' '!libtool')
 url="http://matsusoft.com.ar/projects/mate/"
 groups=('mate')
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('648f8e1545d76f33f095af03be12e62a6f45bf374f7d8d48650c90e32c617bfb')
+sha256sums=('4d37afe60ab9e5ce3797848a395f1292ca390a9844dab6d6871eff7e09ef9da2')
 
 
 build() {
