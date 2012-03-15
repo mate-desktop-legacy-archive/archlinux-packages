@@ -11,7 +11,7 @@ install=mate-file-manager-sendto.install
 url="http://matsusoft.com.ar/projects"
 groups=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('351c82a86a725f72209afba0e8805abd78c7a126315c7cb1dfa219fc44b2a319')
+sha256sums=('64500e3e33b36243f9d1b1c263107fade8ee7474fbd5c21cb8e92ca3f53b1ca3')
 
 build() {
 	cd "${srcdir}/${pkgname}-$pkgver"
