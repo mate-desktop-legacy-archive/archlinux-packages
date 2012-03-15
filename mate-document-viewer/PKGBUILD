@@ -13,8 +13,8 @@ optdepends=('texlive-bin: DVI support')
 groups=('mate-extra')
 install=mate-document-viewer.install
 options=('!libtool' '!emptydirs')
-#source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('3dfbf243d86faab5f354c00b2b6a1fa76b30df7d5e406147b4076acc22e11e93')
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
+sha256sums=('c09b71b10c7388c1fca99008a6bfbf5d94dee54f84efc641914f3c0a4a085130')
 
 build() {
     cd "${srcdir}/$pkgname-$pkgver"
