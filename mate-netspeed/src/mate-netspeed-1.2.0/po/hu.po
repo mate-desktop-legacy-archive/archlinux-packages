@@ -1,0 +1,271 @@
+# Netspeed Applet Hungarian translation.
+# Andras Timar <timar@gnome.hu>, 2002.
+# Gabor Kelemen <kelemeng@gnome.hu>, 2006, 2008.
+# Copyright (C) 2002, Free Software Foundation
+# This file is distributed under the same license as the Netspeed Applet package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Netspeed Applet\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-02-21 08:21+0000\n"
+"PO-Revision-Date: 2008-04-27 15:38+0200\n"
+"Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
+"Language-Team: Hungarian <gnome@fsf.hu>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+
+#: ../GNOME_NetspeedApplet.server.in.in.h:1
+msgid "Internet"
+msgstr "Internet"
+
+#: ../GNOME_NetspeedApplet.server.in.in.h:2
+msgid "Netspeed Applet"
+msgstr "Hálózatsebesség kisalkalmazás"
+
+#: ../GNOME_NetspeedApplet.server.in.in.h:3
+msgid "Netspeed Applet Factory"
+msgstr "Hálózatsebesség kisalkalmazás factory"
+
+#: ../GNOME_NetspeedApplet.server.in.in.h:4
+msgid "Network Monitor"
+msgstr "Hálózatfigyelő"
+
+#: ../src/netspeed.c:400
+msgid "b/s"
+msgstr "b/mp"
+
+#: ../src/netspeed.c:400
+msgid "B/s"
+msgstr "B/mp"
+
+#: ../src/netspeed.c:402
+msgid "bits"
+msgstr "bit"
+
+#: ../src/netspeed.c:402
+msgid "bytes"
+msgstr "bájt"
+
+#: ../src/netspeed.c:409
+msgid "kb/s"
+msgstr "kb/mp"
+
+#: ../src/netspeed.c:409
+msgid "KiB/s"
+msgstr "KiB/s"
+
+#: ../src/netspeed.c:411
+msgid "kb"
+msgstr "kb"
+
+#: ../src/netspeed.c:411
+msgid "KiB"
+msgstr "KiB"
+
+#: ../src/netspeed.c:420
+msgid "Mb/s"
+msgstr "Mb/mp"
+
+#: ../src/netspeed.c:420
+msgid "MiB/s"
+msgstr "MiB/s"
+
+#: ../src/netspeed.c:422
+msgid "Mb"
+msgstr "Mb"
+
+#: ../src/netspeed.c:422
+msgid "MiB"
+msgstr "MiB"
+
+#: ../src/netspeed.c:628
+#, c-format
+msgid ""
+"%s: %s\n"
+"in: %s out: %s"
+msgstr ""
+"%s: %s\n"
+"be: %s ki: %s"
+
+#: ../src/netspeed.c:630 ../src/netspeed.c:636
+msgid "has no ip"
+msgstr "nincs IP-je"
+
+#: ../src/netspeed.c:634
+#, c-format
+msgid ""
+"%s: %s\n"
+"sum: %s"
+msgstr ""
+"%s: %s\n"
+"össz: %s"
+
+#: ../src/netspeed.c:647
+#, c-format
+msgid "%s is down"
+msgstr "%s nem működik"
+
+#: ../src/netspeed.c:657
+#, c-format
+msgid ""
+"%s\n"
+"ESSID: %s\n"
+"Strength: %d %%"
+msgstr ""
+"%s\n"
+"ESSID: %s\n"
+"Erősség: %d %%"
+
+#: ../src/netspeed.c:658
+msgid "unknown"
+msgstr "ismeretlen"
+
+#: ../src/netspeed.c:769
+#, c-format
+msgid ""
+"There was an error displaying help:\n"
+"%s"
+msgstr ""
+"Hiba történt a súgó megjelenítése közben:\n"
+"%s"
+
+#: ../src/netspeed.c:820
+#, c-format
+msgid ""
+"Failed to show:\n"
+"%s"
+msgstr ""
+"Nem sikerült megjeleníteni:\n"
+"%s"
+
+#: ../src/netspeed.c:851
+msgid ""
+"A little applet that displays some information on the traffic on the "
+"specified network device"
+msgstr "Egy meghatározott hálózati eszközön áthaladó forgalommal kapcsolatos információkat megjelenítő kisalkalmazás"
+
+#: ../src/netspeed.c:854
+msgid "translator-credits"
+msgstr ""
+"Kelemen Gábor <kelemeng@gnome.hu>\n"
+"Tímár András <timar@fsf.hu>"
+
+#: ../src/netspeed.c:856
+msgid "Netspeed Website"
+msgstr "A Hálózatsebesség kisalkalmazás webhelye"
+
+#: ../src/netspeed.c:987
+msgid "Netspeed Preferences"
+msgstr "Hálózatsebesség kisalkalmazás beállításai"
+
+#: ../src/netspeed.c:1010
+msgid "General Settings"
+msgstr "Általános beállítások"
+
+#: ../src/netspeed.c:1031
+msgid "Network _device:"
+msgstr "Hálózati _eszköz:"
+
+#: ../src/netspeed.c:1052
+msgid "Show _sum instead of in & out"
+msgstr "Ö_sszeg megjelenítése a ki- és bemenő forgalom helyett"
+
+#: ../src/netspeed.c:1056
+msgid "Show _bits instead of bytes"
+msgstr "_Bitek megjelenítése bájtok helyett"
+
+#: ../src/netspeed.c:1060
+msgid "Change _icon according to the selected device"
+msgstr "_Ikon változtatása a kijelölt eszköznek megfelelően"
+
+#: ../src/netspeed.c:1065
+msgid "_Always monitor a connected device, if possible"
+msgstr "_Mindig figyelje a kapcsolatot, ha lehetséges"
+
+#: ../src/netspeed.c:1179
+#, c-format
+msgid "Device Details for %s"
+msgstr "%s eszköz adatai"
+
+#: ../src/netspeed.c:1205
+msgid "_In graph color"
+msgstr "_Bejövő grafikon színe"
+
+#: ../src/netspeed.c:1206
+msgid "_Out graph color"
+msgstr "_Kimenő grafikon színe"
+
+#: ../src/netspeed.c:1222
+msgid "Internet Address:"
+msgstr "Internetcím:"
+
+#: ../src/netspeed.c:1223
+msgid "Netmask:"
+msgstr "Hálózati maszk:"
+
+#: ../src/netspeed.c:1224
+msgid "Hardware Address:"
+msgstr "Hardvercím:"
+
+#: ../src/netspeed.c:1225
+msgid "P-t-P Address:"
+msgstr "P-t-P cím:"
+
+#: ../src/netspeed.c:1226
+msgid "Bytes in:"
+msgstr "Bejövő bájtok:"
+
+#: ../src/netspeed.c:1227
+msgid "Bytes out:"
+msgstr "Kimenő bájtok:"
+
+#: ../src/netspeed.c:1229 ../src/netspeed.c:1230 ../src/netspeed.c:1231
+#: ../src/netspeed.c:1232
+msgid "none"
+msgstr "nincs"
+
+#: ../src/netspeed.c:1271
+msgid "IPV6 Address:"
+msgstr "IPV6 cím:"
+
+#: ../src/netspeed.c:1303
+msgid "Signal Strength:"
+msgstr "Jelerősség:"
+
+#: ../src/netspeed.c:1304
+msgid "ESSID:"
+msgstr "ESSID:"
+
+#: ../src/netspeed.c:1390
+#, c-format
+msgid "Do you want to disconnect %s now?"
+msgstr "Le akarja most választani ezt: %s?"
+
+#: ../src/netspeed.c:1394
+#, c-format
+msgid "Do you want to connect %s now?"
+msgstr "Akarja most csatlakoztatni ezt: %s?"
+
+#: ../src/netspeed.c:1490
+msgid "Netspeed"
+msgstr "Hálózatsebesség kisalkalmazás"
+
+#: ../src/netspeed.c:1661
+msgid "Device _Details"
+msgstr "Eszköz _adatai..."
+
+#: ../src/netspeed.c:1661
+msgid "_Preferences..."
+msgstr "_Tulajdonságok..."
+
+#: ../src/netspeed.c:1661
+msgid "_Help"
+msgstr "_Súgó"
+
+#: ../src/netspeed.c:1661
+msgid "_About..."
+msgstr "_Névjegy..."
+

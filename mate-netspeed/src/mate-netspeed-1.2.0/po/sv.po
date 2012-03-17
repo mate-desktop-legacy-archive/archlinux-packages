@@ -1,0 +1,287 @@
+# Swedish translation of Netspeed Applet.
+# Copyright (C) 2004, 2006, 2008 Jörgen Scheibengruber <mfcn@gmx.de>
+# This file is distributed under the same license as the Netspeed package.
+# Daniel Nylander <po@danielnylander.se>, 2006, 2008.
+# Joakim Lundborg <jl@kth.se>, 2004.
+#
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Netspeed applet\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-09-12 08:26+0200\n"
+"PO-Revision-Date: 2008-09-12 08:26+0100\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
+"Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../GNOME_NetspeedApplet.server.in.in.h:1
+msgid "Internet"
+msgstr "Internet"
+
+#: ../GNOME_NetspeedApplet.server.in.in.h:2
+msgid "Netspeed Applet"
+msgstr "Panelprogrammet Näthastighet"
+
+#: ../GNOME_NetspeedApplet.server.in.in.h:3
+msgid "Netspeed Applet Factory"
+msgstr "Panelprogramsfabrik för Näthastighet"
+
+#: ../GNOME_NetspeedApplet.server.in.in.h:4
+msgid "Network Monitor"
+msgstr "Nätverksövervakare"
+
+#: ../src/netspeed.c:407
+msgid "b/s"
+msgstr "b/s"
+
+#: ../src/netspeed.c:407
+msgid "B/s"
+msgstr "B/s"
+
+#: ../src/netspeed.c:409
+msgid "bits"
+msgstr "bitar"
+
+#: ../src/netspeed.c:409
+msgid "bytes"
+msgstr "byte"
+
+#: ../src/netspeed.c:416
+msgid "kb/s"
+msgstr "kb/s"
+
+#: ../src/netspeed.c:416
+msgid "KiB/s"
+msgstr "KiB/s"
+
+#: ../src/netspeed.c:418
+msgid "kb"
+msgstr "kb"
+
+#: ../src/netspeed.c:418
+msgid "KiB"
+msgstr "KiB"
+
+#: ../src/netspeed.c:427
+msgid "Mb/s"
+msgstr "Mb/s"
+
+#: ../src/netspeed.c:427
+msgid "MiB/s"
+msgstr "MiB/s"
+
+#: ../src/netspeed.c:429
+msgid "Mb"
+msgstr "Mb"
+
+#: ../src/netspeed.c:429
+msgid "MiB"
+msgstr "MiB"
+
+#: ../src/netspeed.c:755
+#, c-format
+msgid ""
+"There was an error displaying help:\n"
+"%s"
+msgstr ""
+"Det inträffade ett fel vid visning av hjälp:\n"
+"%s"
+
+#: ../src/netspeed.c:806
+#, c-format
+msgid ""
+"Failed to show:\n"
+"%s"
+msgstr ""
+"Misslyckades med att visa:\n"
+"%s"
+
+#: ../src/netspeed.c:837
+msgid "A little applet that displays some information on the traffic on the specified network device"
+msgstr "Ett litet panelprogram som visar trafikinformation på en angiven nätverksenhet"
+
+#: ../src/netspeed.c:840
+msgid "translator-credits"
+msgstr ""
+"Daniel Nylander <po@danielnylander.se>\n"
+"Joakim Lundborg <jl@kth.se>\n"
+"\n"
+"Skicka synpunkter på översättningen till\n"
+"tp-sv@listor.tp-sv.se"
+
+#: ../src/netspeed.c:842
+msgid "Netspeed Website"
+msgstr "Näthastighets webbplats"
+
+#: ../src/netspeed.c:968
+msgid "Netspeed Preferences"
+msgstr "Inställningar för Näthastighet"
+
+#: ../src/netspeed.c:991
+msgid "General Settings"
+msgstr "Allmänna inställningar"
+
+#: ../src/netspeed.c:1012
+msgid "Network _device:"
+msgstr "Nätverks_enhet:"
+
+#. Default means device with default route set
+#: ../src/netspeed.c:1023
+msgid "Default"
+msgstr "Standard"
+
+#: ../src/netspeed.c:1036
+msgid "Show _sum instead of in & out"
+msgstr "Visa _summa istället för in och ut"
+
+#: ../src/netspeed.c:1040
+msgid "Show _bits instead of bytes"
+msgstr "Visa _bitar istället för byte"
+
+#: ../src/netspeed.c:1044
+msgid "Change _icon according to the selected device"
+msgstr "Ändra _ikon efter den valda enheten"
+
+#: ../src/netspeed.c:1155
+#, c-format
+msgid "Device Details for %s"
+msgstr "Enhetsdetaljer för %s"
+
+#: ../src/netspeed.c:1181
+msgid "_In graph color"
+msgstr "_Indiagramfärg"
+
+#: ../src/netspeed.c:1182
+msgid "_Out graph color"
+msgstr "_Utdiagramfärg"
+
+#: ../src/netspeed.c:1198
+msgid "Internet Address:"
+msgstr "Internetadress:"
+
+#: ../src/netspeed.c:1199
+msgid "Netmask:"
+msgstr "Nätmask:"
+
+#: ../src/netspeed.c:1200
+msgid "Hardware Address:"
+msgstr "Hårdvaruadress:"
+
+#: ../src/netspeed.c:1201
+msgid "P-t-P Address:"
+msgstr "P-t-P-adress:"
+
+#: ../src/netspeed.c:1202
+msgid "Bytes in:"
+msgstr "Byte in:"
+
+#: ../src/netspeed.c:1203
+msgid "Bytes out:"
+msgstr "Byte ut:"
+
+#: ../src/netspeed.c:1205
+#: ../src/netspeed.c:1206
+#: ../src/netspeed.c:1207
+#: ../src/netspeed.c:1208
+msgid "none"
+msgstr "ingen"
+
+#: ../src/netspeed.c:1247
+msgid "IPV6 Address:"
+msgstr "IPv6-adress:"
+
+#: ../src/netspeed.c:1279
+msgid "Signal Strength:"
+msgstr "Signalstyrka:"
+
+#: ../src/netspeed.c:1280
+msgid "ESSID:"
+msgstr "ESSID:"
+
+#: ../src/netspeed.c:1366
+#, c-format
+msgid "Do you want to disconnect %s now?"
+msgstr "Vill du koppla från %s nu?"
+
+#: ../src/netspeed.c:1370
+#, c-format
+msgid "Do you want to connect %s now?"
+msgstr "Vill du ansluta till %s nu?"
+
+#: ../src/netspeed.c:1444
+#, c-format
+msgid "%s is down"
+msgstr "%s är nere"
+
+#: ../src/netspeed.c:1449
+#, c-format
+msgid ""
+"%s: %s\n"
+"in: %s out: %s"
+msgstr ""
+"%s: %s\n"
+"in: %s ut: %s"
+
+#: ../src/netspeed.c:1451
+#: ../src/netspeed.c:1460
+msgid "has no ip"
+msgstr "har ingen ip-adress"
+
+#: ../src/netspeed.c:1458
+#, c-format
+msgid ""
+"%s: %s\n"
+"sum: %s"
+msgstr ""
+"%s:·%s\n"
+"summa:·%s"
+
+#: ../src/netspeed.c:1467
+#, c-format
+msgid ""
+"\n"
+"ESSID: %s\n"
+"Strength: %d %%"
+msgstr ""
+"\n"
+"ESSID: %s\n"
+"Styrka: %d %%"
+
+#: ../src/netspeed.c:1468
+msgid "unknown"
+msgstr "okänt"
+
+#: ../src/netspeed.c:1515
+msgid "Netspeed"
+msgstr "Näthastighet"
+
+#: ../src/netspeed.c:1683
+msgid "Device _Details"
+msgstr "Enhets_detaljer"
+
+#: ../src/netspeed.c:1683
+msgid "_Preferences..."
+msgstr "_Inställningar..."
+
+#: ../src/netspeed.c:1683
+msgid "_Help"
+msgstr "_Hjälp"
+
+#: ../src/netspeed.c:1683
+msgid "_About..."
+msgstr "_Om..."
+
+#~ msgid "_Always monitor a connected device, if possible"
+#~ msgstr "Övervaka _alltid en ansluten enhet, om möjligt"
+#~ msgid "_Update interval:"
+#~ msgstr "_Uppdateringsintervall:"
+#~ msgid "millisecond"
+#~ msgstr "millisekund"
+#~ msgid "Label _font size:"
+#~ msgstr "_Typsnittsstorlek:"
+#~ msgid "points"
+#~ msgstr "punkter"
+

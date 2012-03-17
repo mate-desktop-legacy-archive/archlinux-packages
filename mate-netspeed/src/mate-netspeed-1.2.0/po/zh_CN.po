@@ -1,0 +1,251 @@
+# Netspeed applet zh_CN.po
+# Copyright (C) 2002 Zhengang Li
+# This file is distributed under the same license as the Netspeed package.
+# Zhengang Li  <iamme@etang.com>, 2002.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Netspeed Applet 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-09-29 23:49+0800\n"
+"PO-Revision-Date: 2005-09-30 00:03+0800\n"
+"Last-Translator: Zhengang Li <iamme@etang.com>\n"
+"Language-Team: Simplified Chinese <i18n@linux.net.cn>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit"
+
+#: ../GNOME_NetspeedApplet.server.in.h:1
+msgid "Internet"
+msgstr "互联网"
+
+#: ../GNOME_NetspeedApplet.server.in.h:2
+msgid "Netspeed Applet"
+msgstr "Netspeed"
+
+#: ../GNOME_NetspeedApplet.server.in.h:3
+msgid "Netspeed Applet Factory"
+msgstr "Netspeed 小程序组件"
+
+#: ../GNOME_NetspeedApplet.server.in.h:4
+msgid "Network Monitor"
+msgstr "网络监视器"
+
+#: ../src/netspeed.c:269
+msgid "b/s"
+msgstr "b/s"
+
+#: ../src/netspeed.c:269
+msgid "B/s"
+msgstr "B/s"
+
+#: ../src/netspeed.c:269
+msgid "byte"
+msgstr "字节"
+
+#: ../src/netspeed.c:272 ../src/netspeed.c:275
+msgid "kb/s"
+msgstr "kb/s"
+
+#: ../src/netspeed.c:272 ../src/netspeed.c:275
+msgid "kB/s"
+msgstr "kB/s"
+
+#: ../src/netspeed.c:272 ../src/netspeed.c:275
+msgid "kbyte"
+msgstr "千字节"
+
+#: ../src/netspeed.c:277
+msgid "Mb/s"
+msgstr "Mb/s"
+
+#: ../src/netspeed.c:277
+msgid "MB/s"
+msgstr "MB/s"
+
+#: ../src/netspeed.c:277
+msgid "Mbyte"
+msgstr "兆字节"
+
+#: ../src/netspeed.c:473
+#, c-format
+msgid ""
+"%s :%s\n"
+"in: %s out: %s"
+msgstr ""
+"%s :%s\n"
+"接收: %s 发送: %s"
+
+#: ../src/netspeed.c:475 ../src/netspeed.c:480
+msgid "has no ip"
+msgstr "没有 IP"
+
+#: ../src/netspeed.c:478
+#, c-format
+msgid ""
+"%s: %s\n"
+"sum: %s"
+msgstr ""
+"%s: %s\n"
+"共: %s"
+
+#: ../src/netspeed.c:489
+#, c-format
+msgid "%s is down"
+msgstr "%s 已经断开"
+
+#: ../src/netspeed.c:609
+msgid "Netspeed Website"
+msgstr "Netspeed 网站"
+
+#. Feel free to put your names here translators :-)
+#: ../src/netspeed.c:613
+msgid "TRANSLATORS"
+msgstr "李振刚 <iamme@etang.com>\n"
+"杨红 <gnomecn@gmail.com>"
+
+#: ../src/netspeed.c:622
+msgid "Netspeed"
+msgstr "Netspeed"
+
+#: ../src/netspeed.c:625
+msgid ""
+"A little applet that displays some information on the traffic on the "
+"specified network device"
+msgstr "Netspeed显示指定网络设备上的流量信息."
+
+#: ../src/netspeed.c:681
+#, c-format
+msgid ""
+"There was an error displaying help:\n"
+"%s"
+msgstr "显示帮助时出错了：\n"
+"%s"
+
+#: ../src/netspeed.c:823
+msgid "Netspeed Preferences"
+msgstr "Netspeed 首选项"
+
+#: ../src/netspeed.c:846
+msgid "General Settings"
+msgstr "普通设置："
+
+#: ../src/netspeed.c:867
+msgid "Network _device:"
+msgstr "网络设备(_D)："
+
+#: ../src/netspeed.c:891
+msgid "_Update interval:"
+msgstr "刷新间隔(_U)："
+
+#: ../src/netspeed.c:907
+msgid "millisecond"
+msgstr "毫秒"
+
+#: ../src/netspeed.c:916
+msgid "Label _font size:"
+msgstr "标签字体大小(_F)："
+
+#: ../src/netspeed.c:932
+msgid "points"
+msgstr "象素"
+
+#: ../src/netspeed.c:938
+msgid "Show _sum instead of in & out"
+msgstr "只显示接受发送流量总和(_S)"
+
+#: ../src/netspeed.c:942
+msgid "Show _bits/s (b/s) instead of bytes/s (B/s)"
+msgstr "以位每秒(b/s)作单位，不使用字节每秒(B/s)(_B)"
+
+#: ../src/netspeed.c:946
+msgid "Change _icon according to the selected device"
+msgstr "根据指定的设备改变图标"
+
+#: ../src/netspeed.c:951
+msgid "_Always monitor a connected device, if possible"
+msgstr "一直监视已经连接的设备(_A)。"
+
+#: ../src/netspeed.c:1070
+#, c-format
+msgid "Device Details for %s"
+msgstr "设备 %s 的详细信息"
+
+#: ../src/netspeed.c:1096
+msgid "_In graph color"
+msgstr "接收图像颜色(_I)"
+
+#: ../src/netspeed.c:1097
+msgid "_Out graph color"
+msgstr "发送图像颜色(_O)"
+
+#: ../src/netspeed.c:1113
+msgid "Internet Address:"
+msgstr "IP 地址："
+
+#: ../src/netspeed.c:1114
+msgid "Netmask:"
+msgstr "网络掩码："
+
+#: ../src/netspeed.c:1115
+msgid "Hardware Address:"
+msgstr "硬件地址："
+
+#: ../src/netspeed.c:1116
+msgid "P-t-P Address:"
+msgstr "P-t-P 地址："
+
+#: ../src/netspeed.c:1117
+msgid "Bytes in:"
+msgstr "接受字节："
+
+#: ../src/netspeed.c:1118
+msgid "Bytes out:"
+msgstr "发送字节："
+
+#: ../src/netspeed.c:1120 ../src/netspeed.c:1121 ../src/netspeed.c:1122
+#: ../src/netspeed.c:1123
+msgid "none"
+msgstr "无"
+
+#: ../src/netspeed.c:1162
+msgid "IPV6 Address:"
+msgstr "IPV6 地址："
+
+#: ../src/netspeed.c:1269
+#, c-format
+msgid "Do you want to disconnect %s now?"
+msgstr "你要断开 %s 的连接吗？"
+
+#: ../src/netspeed.c:1273
+#, c-format
+msgid "Do you want to connect %s now?"
+msgstr "你要现在就连接到 %s 吗？"
+
+#: ../src/netspeed.c:1500
+msgid "Device _Details"
+msgstr "设备详细信息(_D)"
+
+#: ../src/netspeed.c:1500
+msgid "_Preferences..."
+msgstr "首选项(P)"
+
+#: ../src/netspeed.c:1500
+msgid "_Help"
+msgstr "帮助(_H)"
+
+#: ../src/netspeed.c:1500
+msgid "_About..."
+msgstr "关于(A)"
+
+#~ msgid "Netspeed Applet Settings"
+#~ msgstr "Netspeed小程序设置"
+
+#~ msgid "Device %s"
+#~ msgstr "设备 %s"
+
+#~ msgid "Refreshes per second:"
+#~ msgstr "每秒刷新次数:"
+
+#~ msgid "0 b/s"
+#~ msgstr "0 b/s"

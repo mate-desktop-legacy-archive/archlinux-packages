@@ -1,0 +1,272 @@
+# Occitan translation of netspeed_applet
+# Copyright (C) 2002-2006 THE NetSpeed_applet'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the NetSpeed_applet package.
+#
+# Yannig MARCHEGAY (yannig@marchegay.org) - 2006-2007
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: netspeed_applet 0.14\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-09-28 11:30+0200\n"
+"PO-Revision-Date: 2007-08-20 19:27+0200\n"
+"Last-Translator: Yannig MARCHEGAY (Kokoyaya) <yannig@marchegay.org>\n"
+"Language-Team: Occitan (post 1500) <ubuntu-l10n-oci@lists.ubuntu.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);"
+
+#: ../GNOME_NetspeedApplet.server.in.in.h:1
+msgid "Internet"
+msgstr "Internet"
+
+#: ../GNOME_NetspeedApplet.server.in.in.h:2
+msgid "Netspeed Applet"
+msgstr ""
+
+#: ../GNOME_NetspeedApplet.server.in.in.h:3
+msgid "Netspeed Applet Factory"
+msgstr ""
+
+#: ../GNOME_NetspeedApplet.server.in.in.h:4
+msgid "Network Monitor"
+msgstr ""
+
+#: ../src/netspeed.c:279
+msgid "b/s"
+msgstr "b/s"
+
+#: ../src/netspeed.c:279
+msgid "B/s"
+msgstr "o/s"
+
+#: ../src/netspeed.c:281
+msgid "bits"
+msgstr "bits"
+
+#: ../src/netspeed.c:281
+msgid "bytes"
+msgstr "octets"
+
+#: ../src/netspeed.c:288
+msgid "kb/s"
+msgstr "ko/s"
+
+#: ../src/netspeed.c:288
+msgid "KiB/s"
+msgstr "ko/s"
+
+#: ../src/netspeed.c:290
+msgid "kb"
+msgstr "ko"
+
+#: ../src/netspeed.c:290
+msgid "KiB"
+msgstr "ko"
+
+#: ../src/netspeed.c:299
+msgid "Mb/s"
+msgstr "Mo/s"
+
+#: ../src/netspeed.c:299
+msgid "MiB/s"
+msgstr "Mo/s"
+
+#: ../src/netspeed.c:301
+msgid "Mb"
+msgstr "Mo"
+
+#: ../src/netspeed.c:301
+msgid "MiB"
+msgstr "Mo"
+
+#: ../src/netspeed.c:502
+#, c-format
+msgid ""
+"%s: %s\n"
+"in: %s out: %s"
+msgstr ""
+
+#: ../src/netspeed.c:504 ../src/netspeed.c:510
+msgid "has no ip"
+msgstr ""
+
+#: ../src/netspeed.c:508
+#, c-format
+msgid ""
+"%s: %s\n"
+"sum: %s"
+msgstr ""
+
+#: ../src/netspeed.c:521
+#, c-format
+msgid "%s is down"
+msgstr ""
+
+#: ../src/netspeed.c:645
+msgid "Netspeed Website"
+msgstr ""
+
+#: ../src/netspeed.c:654
+msgid "Netspeed"
+msgstr "Netspeed"
+
+#: ../src/netspeed.c:657
+msgid ""
+"A little applet that displays some information on the traffic on the "
+"specified network device"
+msgstr ""
+
+#: ../src/netspeed.c:660
+msgid "translator-credits"
+msgstr ""
+"La còla occitana de revirada d'Ubuntu, 2007 - ubuntu-l10n-oci@lists.ubuntu.com"
+
+#: ../src/netspeed.c:713
+#, c-format
+msgid ""
+"There was an error displaying help:\n"
+"%s"
+msgstr ""
+"I a agut una error al moment de mostrar l'ajuda :\n"
+"%s"
+
+#: ../src/netspeed.c:855
+msgid "Netspeed Preferences"
+msgstr ""
+
+#: ../src/netspeed.c:878
+msgid "General Settings"
+msgstr "Paramètres generals"
+
+#: ../src/netspeed.c:899
+msgid "Network _device:"
+msgstr ""
+
+#: ../src/netspeed.c:923
+msgid "_Update interval:"
+msgstr ""
+
+#: ../src/netspeed.c:939
+msgid "millisecond"
+msgstr ""
+
+#: ../src/netspeed.c:948
+msgid "Label _font size:"
+msgstr ""
+
+#: ../src/netspeed.c:964
+msgid "points"
+msgstr "punts"
+
+#: ../src/netspeed.c:970
+msgid "Show _sum instead of in & out"
+msgstr ""
+
+#: ../src/netspeed.c:974
+msgid "Show _bits instead of bytes"
+msgstr ""
+
+#: ../src/netspeed.c:978
+msgid "Change _icon according to the selected device"
+msgstr ""
+
+#: ../src/netspeed.c:983
+msgid "_Always monitor a connected device, if possible"
+msgstr ""
+
+#: ../src/netspeed.c:1102
+msgid "Device Details for %s"
+msgstr ""
+
+#: ../src/netspeed.c:1128
+msgid "_In graph color"
+msgstr ""
+
+#: ../src/netspeed.c:1129
+msgid "_Out graph color"
+msgstr ""
+
+#: ../src/netspeed.c:1145
+msgid "Internet Address:"
+msgstr ""
+
+#: ../src/netspeed.c:1146
+msgid "Netmask:"
+msgstr "Masqueta ret :"
+
+#: ../src/netspeed.c:1147
+msgid "Hardware Address:"
+msgstr ""
+
+#: ../src/netspeed.c:1148
+msgid "P-t-P Address:"
+msgstr ""
+
+#: ../src/netspeed.c:1149
+msgid "Bytes in:"
+msgstr ""
+
+#: ../src/netspeed.c:1150
+msgid "Bytes out:"
+msgstr ""
+
+#: ../src/netspeed.c:1152 ../src/netspeed.c:1153 ../src/netspeed.c:1154
+#: ../src/netspeed.c:1155
+msgid "none"
+msgstr "pas cap"
+
+#: ../src/netspeed.c:1194
+msgid "IPV6 Address:"
+msgstr ""
+
+#: ../src/netspeed.c:1301
+#, c-format
+msgid "Do you want to disconnect %s now?"
+msgstr ""
+
+#: ../src/netspeed.c:1305
+#, c-format
+msgid "Do you want to connect %s now?"
+msgstr ""
+
+#: ../src/netspeed.c:1573
+msgid "Device _Details"
+msgstr ""
+
+#: ../src/netspeed.c:1573
+msgid "_Preferences..."
+msgstr "_Preferéncias..."
+
+#: ../src/netspeed.c:1573
+msgid "_Help"
+msgstr "_Ajuda"
+
+#: ../src/netspeed.c:1573
+msgid "_About..."
+msgstr "_A prepaus..."
+
+#~ msgid "kB/s"
+#~ msgstr "Ko/s"
+
+#~ msgid "kbyte"
+#~ msgstr "Koctets"
+
+#~ msgid "Mbyte"
+#~ msgstr "Moctets"
+
+#~ msgid "TRANSLATORS"
+#~ msgstr "Mille-Mathias Baptiste <bmm80@ifrance.com>"
+
+#~ msgid "Netspeed Applet Settings"
+#~ msgstr "Paramétres de l'Applet Netspeed"
+
+#~ msgid "Device %s"
+#~ msgstr "Périphérique %s"
+
+#~ msgid "Refreshes per second:"
+#~ msgstr "Rafraichit par seconde:"
+
+#~ msgid "0 b/s"
+#~ msgstr "0 b/s"

@@ -1,0 +1,279 @@
+# translation of netspeed.HEAD.po to Español
+# Héctor Enríquez Díaz <henrique@alumnos.ubiobio.cl> 2005.
+#
+# Ramón Rey Vicente <ramon.rey@hispalinux.es>, 2003.
+# Daniel Mustieles <daniel.mustieles@ie.edu>, 2008.
+# Jorge González <jorgegonz@svn.gnome.org>, 2008.
+msgid ""
+msgstr ""
+"Project-Id-Version: netspeed.HEAD\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-09-07 17:00+0000\n"
+"PO-Revision-Date: 2008-09-13 13:23+0200\n"
+"Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
+"Language-Team: Español <gnome-es-list@gnome.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);"
+
+#: ../GNOME_NetspeedApplet.server.in.in.h:1
+msgid "Internet"
+msgstr "Internet"
+
+#: ../GNOME_NetspeedApplet.server.in.in.h:2
+msgid "Netspeed Applet"
+msgstr "Miniaplicación Netspeed"
+
+#: ../GNOME_NetspeedApplet.server.in.in.h:3
+msgid "Netspeed Applet Factory"
+msgstr "Fábrica de miniaplicaciones Netspeed"
+
+#: ../GNOME_NetspeedApplet.server.in.in.h:4
+msgid "Network Monitor"
+msgstr "Monitor de la red"
+
+#: ../src/netspeed.c:407
+msgid "b/s"
+msgstr "b/s"
+
+#: ../src/netspeed.c:407
+msgid "B/s"
+msgstr "B/s"
+
+#: ../src/netspeed.c:409
+msgid "bits"
+msgstr "bits"
+
+#: ../src/netspeed.c:409
+msgid "bytes"
+msgstr "bytes"
+
+#: ../src/netspeed.c:416
+msgid "kb/s"
+msgstr "kb/s"
+
+#: ../src/netspeed.c:416
+msgid "KiB/s"
+msgstr "KiB/s"
+
+#: ../src/netspeed.c:418
+msgid "kb"
+msgstr "kb"
+
+#: ../src/netspeed.c:418
+msgid "KiB"
+msgstr "KiB"
+
+#: ../src/netspeed.c:427
+msgid "Mb/s"
+msgstr "Mb/s"
+
+#: ../src/netspeed.c:427
+msgid "MiB/s"
+msgstr "MiB/s"
+
+#: ../src/netspeed.c:429
+msgid "Mb"
+msgstr "Mb"
+
+#: ../src/netspeed.c:429
+msgid "MiB"
+msgstr "MiB"
+
+#: ../src/netspeed.c:755
+#, c-format
+msgid ""
+"There was an error displaying help:\n"
+"%s"
+msgstr ""
+"Hubo un error al mostrar la ayuda:\n"
+"%s"
+
+#: ../src/netspeed.c:806
+#, c-format
+msgid ""
+"Failed to show:\n"
+"%s"
+msgstr ""
+"Falló al mostrar:\n"
+"%s"
+
+#: ../src/netspeed.c:837
+msgid ""
+"A little applet that displays some information on the traffic on the "
+"specified network device"
+msgstr ""
+"Una mini aplicación que muestra alguna información del tráfico en el "
+"dispositivo de red especificado"
+
+#: ../src/netspeed.c:840
+msgid "translator-credits"
+msgstr ""
+"Daniel Mustieles <daniel.mustieles@ie.edu>, 2008\n"
+"Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2006\n"
+"Héctor Enríquez Díaz <henrique@alumnos.ubiobio.cl>, 2005\n"
+"Ramón Rey Vicente <ramon.rey@hispalinux.es>, 2003\n"
+"QA: Jorge González <jorgegonz@svn.gnome.org>, 2008"
+
+#: ../src/netspeed.c:842
+msgid "Netspeed Website"
+msgstr "Sitio de web de Netspeed"
+
+#: ../src/netspeed.c:968
+msgid "Netspeed Preferences"
+msgstr "Preferencias de Netspeed"
+
+#: ../src/netspeed.c:991
+msgid "General Settings"
+msgstr "Configuración general"
+
+#: ../src/netspeed.c:1012
+msgid "Network _device:"
+msgstr "Dispositivo de _red:"
+
+#. Default means device with default route set
+#: ../src/netspeed.c:1023
+msgid "Default"
+msgstr "Predeterminado"
+
+#: ../src/netspeed.c:1036
+msgid "Show _sum instead of in & out"
+msgstr "Mostrar el _total en lugar de bajada y subida"
+
+#: ../src/netspeed.c:1040
+msgid "Show _bits instead of bytes"
+msgstr "Mostrar _bits en lugar de bytes"
+
+#: ../src/netspeed.c:1044
+msgid "Change _icon according to the selected device"
+msgstr "Cambiar _icono según el dispositivo seleccionado"
+
+#: ../src/netspeed.c:1155
+#, c-format
+msgid "Device Details for %s"
+msgstr "Detalles del dispositivo %s"
+
+#: ../src/netspeed.c:1181
+msgid "_In graph color"
+msgstr "Color del gráfico de _bajada"
+
+#: ../src/netspeed.c:1182
+msgid "_Out graph color"
+msgstr "Color del gráfico de _subida"
+
+#: ../src/netspeed.c:1198
+msgid "Internet Address:"
+msgstr "Dirección de internet:"
+
+#: ../src/netspeed.c:1199
+msgid "Netmask:"
+msgstr "Máscara de red:"
+
+#: ../src/netspeed.c:1200
+msgid "Hardware Address:"
+msgstr "Dirección del hardware:"
+
+#: ../src/netspeed.c:1201
+msgid "P-t-P Address:"
+msgstr "Dirección P-a-P:"
+
+#: ../src/netspeed.c:1202
+msgid "Bytes in:"
+msgstr "Bytes de bajada:"
+
+#: ../src/netspeed.c:1203
+msgid "Bytes out:"
+msgstr "Bytes de subida:"
+
+#: ../src/netspeed.c:1205 ../src/netspeed.c:1206 ../src/netspeed.c:1207
+#: ../src/netspeed.c:1208
+msgid "none"
+msgstr "ninguno"
+
+#: ../src/netspeed.c:1247
+msgid "IPV6 Address:"
+msgstr "Dirección IPv6:"
+
+#: ../src/netspeed.c:1279
+msgid "Signal Strength:"
+msgstr "Potencia de la señal:"
+
+#: ../src/netspeed.c:1280
+msgid "ESSID:"
+msgstr "ESSID:"
+
+#: ../src/netspeed.c:1366
+#, c-format
+msgid "Do you want to disconnect %s now?"
+msgstr "¿Quiere desconectar %s ahora?"
+
+#: ../src/netspeed.c:1370
+#, c-format
+msgid "Do you want to connect %s now?"
+msgstr "¿Quiere conectar %s ahora?"
+
+#: ../src/netspeed.c:1444
+#, c-format
+msgid "%s is down"
+msgstr "%s está desconfigurado"
+
+#: ../src/netspeed.c:1449
+#, c-format
+msgid ""
+"%s: %s\n"
+"in: %s out: %s"
+msgstr ""
+"%s :%s\n"
+"bajada: %s subida: %s"
+
+#: ../src/netspeed.c:1451 ../src/netspeed.c:1460
+msgid "has no ip"
+msgstr "no tiene IP"
+
+#: ../src/netspeed.c:1458
+#, c-format
+msgid ""
+"%s: %s\n"
+"sum: %s"
+msgstr ""
+"%s: %s\n"
+"total: %s"
+
+#: ../src/netspeed.c:1467
+#, c-format
+msgid ""
+"\n"
+"ESSID: %s\n"
+"Strength: %d %%"
+msgstr ""
+"\n"
+"ESSID: %s\n"
+"Potencia: %d %%"
+
+#: ../src/netspeed.c:1468
+msgid "unknown"
+msgstr "desconocido"
+
+#: ../src/netspeed.c:1515
+msgid "Netspeed"
+msgstr "Velocidad de la red"
+
+#: ../src/netspeed.c:1683
+msgid "Device _Details"
+msgstr "_Detalles del dispositivo"
+
+#: ../src/netspeed.c:1683
+msgid "_Preferences..."
+msgstr "Prefere_ncias…"
+
+#: ../src/netspeed.c:1683
+msgid "_Help"
+msgstr "Ay_uda"
+
+#: ../src/netspeed.c:1683
+msgid "_About..."
+msgstr "Acerca _de…"
+
+#~ msgid "_Always monitor a connected device, if possible"
+#~ msgstr "Monitorizar _siempre un dispositivo conectado si es posible"

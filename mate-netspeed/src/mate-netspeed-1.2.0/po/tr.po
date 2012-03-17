@@ -1,0 +1,233 @@
+# translation of neetspeed.tr.po.
+# Copyright (C) 2002,2003 Free Software Foundation, Inc.
+# Arman Aksoy <armish@linux-sevenler.de>, 2003.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: neetspeed\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-04-11 03:07+0200\n"
+"PO-Revision-Date: 2003-02-17 18:59+0200\n"
+"Last-Translator: Arman Aksoy <armish@linux-sevenler.de>\n"
+"Language-Team: Turkish <gnome-turk@gnome.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../GNOME_NetspeedApplet.server.in.h:1
+msgid "Internet"
+msgstr "İnternet"
+
+#: ../GNOME_NetspeedApplet.server.in.h:2
+msgid "Netspeed Applet"
+msgstr "Nethızı Apleti"
+
+#: ../GNOME_NetspeedApplet.server.in.h:3
+msgid "Netspeed Applet Factory"
+msgstr "Nethızı Apleti Üreticisi"
+
+#: ../GNOME_NetspeedApplet.server.in.h:4
+msgid "Network Monitor"
+msgstr ""
+
+#: ../src/netspeed.c:276
+msgid "b/s"
+msgstr "b/s"
+
+#: ../src/netspeed.c:276
+msgid "B/s"
+msgstr "B/s"
+
+#: ../src/netspeed.c:276
+msgid "byte"
+msgstr "bayt"
+
+#: ../src/netspeed.c:279 ../src/netspeed.c:282
+msgid "kb/s"
+msgstr "kb/s"
+
+#: ../src/netspeed.c:279 ../src/netspeed.c:282
+msgid "kB/s"
+msgstr "kB/s"
+
+#: ../src/netspeed.c:279 ../src/netspeed.c:282
+msgid "kbyte"
+msgstr "kbayt"
+
+#: ../src/netspeed.c:284
+msgid "Mb/s"
+msgstr "Mb/s"
+
+#: ../src/netspeed.c:284
+msgid "MB/s"
+msgstr "MB/s"
+
+#: ../src/netspeed.c:284
+msgid "Mbyte"
+msgstr "MBayt"
+
+#: ../src/netspeed.c:468
+#, c-format
+msgid ""
+"%s :%s\n"
+"in: %s out: %s"
+msgstr ""
+"%s :%s\n"
+"gelen: %s giden: %s"
+
+#: ../src/netspeed.c:469 ../src/netspeed.c:472
+msgid "has no ip"
+msgstr "ip yok"
+
+#: ../src/netspeed.c:471
+#, c-format
+msgid ""
+"%s: %s\n"
+"sum: %s"
+msgstr ""
+"%s: %s\n"
+"toplam: %s"
+
+#: ../src/netspeed.c:479
+#, c-format
+msgid "%s is down"
+msgstr "%s kapalı"
+
+#. Feel free to put your names here translators :-)
+#: ../src/netspeed.c:590
+msgid "TRANSLATORS"
+msgstr "Arman Aksoy (Armish) <armish@linux-sevenler.de>"
+
+#: ../src/netspeed.c:595
+#, fuzzy
+msgid "Netspeed"
+msgstr "Nethızı Apleti"
+
+#: ../src/netspeed.c:598
+msgid ""
+"A little applet that displays some information on the traffic on the "
+"specified network device"
+msgstr ""
+"Belirten ağ aygıtındaki veri trafiği hakkında bilgi veren küçük bit aplet"
+
+#: ../src/netspeed.c:791
+msgid "Netspeed Preferences"
+msgstr ""
+
+#: ../src/netspeed.c:814
+#, fuzzy
+msgid "General Settings"
+msgstr "Tercihler:"
+
+#: ../src/netspeed.c:835
+msgid "Network _device:"
+msgstr "Ağ _aygıtı:"
+
+#: ../src/netspeed.c:859
+msgid "_Update interval:"
+msgstr "_Yenileme aralığı:"
+
+#: ../src/netspeed.c:875
+#, fuzzy
+msgid "millisecond"
+msgstr "milisaniye"
+
+#: ../src/netspeed.c:884
+msgid "Label _font size:"
+msgstr "Etiket yazı _tipi boyutu:"
+
+#: ../src/netspeed.c:900
+msgid "points"
+msgstr "noktalar"
+
+#: ../src/netspeed.c:906
+msgid "Show _sum instead of in & out"
+msgstr "Giden & gelen yerine _toplam kullan"
+
+#: ../src/netspeed.c:910
+msgid "Show _bits/s (b/s) instead of bytes/s (B/s)"
+msgstr "bayt/s (B/s) yerine bit/s (b/s) kullan"
+
+#: ../src/netspeed.c:914
+msgid "Change _icon according to the selected device"
+msgstr "Seçilen aygıta göre _simgeyi değiştir"
+
+#: ../src/netspeed.c:919
+msgid "_Always monitor a connected device, if possible"
+msgstr ""
+
+#: ../src/netspeed.c:1041
+#, c-format
+msgid "Device Details for %s"
+msgstr "%s için Aygıt Detayları"
+
+#: ../src/netspeed.c:1067
+msgid "_In graph color"
+msgstr "Grafiksel _renklerde"
+
+#: ../src/netspeed.c:1068
+msgid "_Out graph color"
+msgstr "G_iden grafik rengi"
+
+#: ../src/netspeed.c:1087
+msgid "Internet Address:"
+msgstr "İnternet Adresi:"
+
+#: ../src/netspeed.c:1088
+msgid "Netmask:"
+msgstr "Ağ maskesi:"
+
+#: ../src/netspeed.c:1089
+msgid "Hardware Address:"
+msgstr "Donanım Adresi:"
+
+#: ../src/netspeed.c:1090
+msgid "P-t-P Address:"
+msgstr "P-t-P Adresi:"
+
+#: ../src/netspeed.c:1091
+msgid "Bytes in:"
+msgstr "Gelen bayt:"
+
+#: ../src/netspeed.c:1092
+msgid "Bytes out:"
+msgstr "Giden bayt:"
+
+#: ../src/netspeed.c:1094 ../src/netspeed.c:1095 ../src/netspeed.c:1096
+#: ../src/netspeed.c:1097
+msgid "none"
+msgstr "yok"
+
+#: ../src/netspeed.c:1226
+#, c-format
+msgid "Do you want to disconnect %s now?"
+msgstr ""
+
+#: ../src/netspeed.c:1230
+#, c-format
+msgid "Do you want to connect %s now?"
+msgstr ""
+
+#: ../src/netspeed.c:1455
+#, fuzzy
+msgid "Device _Details"
+msgstr "Aygıt _Detayları..."
+
+#: ../src/netspeed.c:1455
+#, fuzzy
+msgid "_Preferences..."
+msgstr "_Seçenekler..."
+
+#: ../src/netspeed.c:1455
+msgid "_Help"
+msgstr "_Yardım"
+
+#: ../src/netspeed.c:1455
+msgid "_About..."
+msgstr "_Hakkında..."
+
+#~ msgid "Netspeed Applet Settings"
+#~ msgstr "Net hızı Apleti Tercihleri"
+
+#~ msgid "Device %s"
+#~ msgstr "%s Aygıtı"

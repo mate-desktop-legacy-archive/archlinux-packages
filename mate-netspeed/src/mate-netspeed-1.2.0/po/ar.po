@@ -1,0 +1,283 @@
+# Arabic translations for PACKAGE package.
+# Copyright (C) 2008 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Automatically generated, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: netspeed\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-07-31 11:08+0100\n"
+"PO-Revision-Date: 2008-08-02 10:23+0100\n"
+"Last-Translator: Djihed Afifi <djihed@gmail.com>\n"
+"Language-Team: Arabeyes <doc@arabeyes.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Arabic\n"
+
+#: ../GNOME_NetspeedApplet.server.in.in.h:1
+msgid "Internet"
+msgstr "إنترنت"
+
+#: ../GNOME_NetspeedApplet.server.in.in.h:2
+#, fuzzy
+msgid "Netspeed Applet"
+msgstr "بريمج جافا"
+
+#: ../GNOME_NetspeedApplet.server.in.in.h:3
+#, fuzzy
+msgid "Netspeed Applet Factory"
+msgstr "مصنع بريمج منتقي الرموز"
+
+#: ../GNOME_NetspeedApplet.server.in.in.h:4
+msgid "Network Monitor"
+msgstr "مراقب الشبكة"
+
+#: ../src/netspeed.c:402
+msgid "b/s"
+msgstr "بت/ثا"
+
+#: ../src/netspeed.c:402
+msgid "B/s"
+msgstr "بايت/ثا"
+
+#: ../src/netspeed.c:404
+msgid "bits"
+msgstr "بت"
+
+#: ../src/netspeed.c:404
+msgid "bytes"
+msgstr "بايت"
+
+#: ../src/netspeed.c:411
+msgid "kb/s"
+msgstr "ك.بت/ثا"
+
+#: ../src/netspeed.c:411
+msgid "KiB/s"
+msgstr "ك.بايت/ثا"
+
+#: ../src/netspeed.c:413
+msgid "kb"
+msgstr "ك.بت"
+
+#: ../src/netspeed.c:413
+msgid "KiB"
+msgstr "ك.بايت"
+
+#: ../src/netspeed.c:422
+msgid "Mb/s"
+msgstr "م.بت/ثا"
+
+#: ../src/netspeed.c:422
+msgid "MiB/s"
+msgstr "م.بايت/ثا"
+
+#: ../src/netspeed.c:424
+msgid "Mb"
+msgstr "م.بت"
+
+#: ../src/netspeed.c:424
+msgid "MiB"
+msgstr "م.بايت"
+
+#: ../src/netspeed.c:739
+#, c-format
+msgid ""
+"There was an error displaying help:\n"
+"%s"
+msgstr ""
+"حدث خطأ عند عرض المساعدة:\n"
+"%s"
+
+#: ../src/netspeed.c:790
+#, fuzzy, c-format
+msgid ""
+"Failed to show:\n"
+"%s"
+msgstr "فشل تسجيل %s إلى %s"
+
+#: ../src/netspeed.c:821
+msgid "A little applet that displays some information on the traffic on the specified network device"
+msgstr ""
+
+#: ../src/netspeed.c:824
+msgid "translator-credits"
+msgstr ""
+"فريق عربآيز للترجمة http://www.arabeyes.org :\n"
+"جهاد عفيفي\t<djihed@gmail.com>"
+
+#: ../src/netspeed.c:826
+#, fuzzy
+msgid "Netspeed Website"
+msgstr "موقع شريط المكتب (Deskbar)"
+
+#: ../src/netspeed.c:957
+#, fuzzy
+msgid "Netspeed Preferences"
+msgstr "تفضيلات داشر"
+
+#: ../src/netspeed.c:980
+msgid "General Settings"
+msgstr "الإعدادات العامّة"
+
+#: ../src/netspeed.c:1001
+#, fuzzy
+msgid "Network _device:"
+msgstr "<b>جهاز الشبكة</b>"
+
+#: ../src/netspeed.c:1022
+msgid "Show _sum instead of in & out"
+msgstr ""
+
+#: ../src/netspeed.c:1026
+#, fuzzy
+msgid "Show _bits instead of bytes"
+msgstr "أظهر زر 'إنهاء' بدل زر 'التالي'"
+
+#: ../src/netspeed.c:1030
+msgid "Change _icon according to the selected device"
+msgstr ""
+
+#: ../src/netspeed.c:1035
+msgid "_Always monitor a connected device, if possible"
+msgstr ""
+
+#: ../src/netspeed.c:1149
+#, fuzzy, c-format
+msgid "Device Details for %s"
+msgstr "جاري فتح الجهاز للعرض"
+
+#: ../src/netspeed.c:1175
+#, fuzzy
+msgid "_In graph color"
+msgstr "اللون الإفتراضي للرسم البياني للشبكة الداخل"
+
+#: ../src/netspeed.c:1176
+#, fuzzy
+msgid "_Out graph color"
+msgstr "اللون الإفتراضي للرسم البياني للشبكة الخارج"
+
+#: ../src/netspeed.c:1192
+msgid "Internet Address:"
+msgstr "عنوان الإنترنت:"
+
+#: ../src/netspeed.c:1193
+msgid "Netmask:"
+msgstr "قناع الشّبكة:"
+
+#: ../src/netspeed.c:1194
+#, fuzzy
+msgid "Hardware Address:"
+msgstr "عنوان العتاد:"
+
+#: ../src/netspeed.c:1195
+#, fuzzy
+msgid "P-t-P Address:"
+msgstr "ال_عنوان:"
+
+#: ../src/netspeed.c:1196
+#, fuzzy
+msgid "Bytes in:"
+msgstr "تكبير"
+
+#: ../src/netspeed.c:1197
+#, fuzzy
+msgid "Bytes out:"
+msgstr "اخرج"
+
+#: ../src/netspeed.c:1199
+#: ../src/netspeed.c:1200
+#: ../src/netspeed.c:1201
+#: ../src/netspeed.c:1202
+msgid "none"
+msgstr "لا يوجد"
+
+#: ../src/netspeed.c:1241
+#, fuzzy
+msgid "IPV6 Address:"
+msgstr "عنوان البريد الإلكتروني"
+
+#: ../src/netspeed.c:1273
+#, fuzzy
+msgid "Signal Strength:"
+msgstr "<b>قوّة الإشارة</b>"
+
+#: ../src/netspeed.c:1274
+#, fuzzy
+msgid "ESSID:"
+msgstr "ESSID"
+
+#: ../src/netspeed.c:1360
+#, fuzzy, c-format
+msgid "Do you want to disconnect %s now?"
+msgstr "ما الذي تريد فعله الآن؟"
+
+#: ../src/netspeed.c:1364
+#, fuzzy, c-format
+msgid "Do you want to connect %s now?"
+msgstr "ما الذي تريد فعله الآن؟"
+
+#: ../src/netspeed.c:1438
+#, fuzzy, c-format
+msgid "%s is down"
+msgstr "$0: الرّابط متوقّف"
+
+#: ../src/netspeed.c:1443
+#, fuzzy, c-format
+msgid ""
+"%s: %s\n"
+"in: %s out: %s"
+msgstr "اخرج"
+
+#: ../src/netspeed.c:1445
+#: ../src/netspeed.c:1454
+#, fuzzy
+msgid "has no ip"
+msgstr "ليس له أحداث."
+
+#: ../src/netspeed.c:1452
+#, c-format
+msgid ""
+"%s: %s\n"
+"sum: %s"
+msgstr ""
+"%s: %s\n"
+"مجموع: %s"
+
+#: ../src/netspeed.c:1461
+#, c-format
+msgid ""
+"\n"
+"ESSID: %s\n"
+"Strength: %d %%"
+msgstr ""
+"\n"
+"قيمة ESSID: %s\n"
+"القوة: %d %%"
+
+#: ../src/netspeed.c:1462
+msgid "unknown"
+msgstr "مجهول"
+
+#: ../src/netspeed.c:1509
+msgid "Netspeed"
+msgstr ""
+
+#: ../src/netspeed.c:1677
+msgid "Device _Details"
+msgstr "ت_فاصيل الجهاز"
+
+#: ../src/netspeed.c:1677
+msgid "_Preferences..."
+msgstr "ت_فضيلات"
+
+#: ../src/netspeed.c:1677
+msgid "_Help"
+msgstr "م_ساعدة"
+
+#: ../src/netspeed.c:1677
+msgid "_About..."
+msgstr "_حول..."
+

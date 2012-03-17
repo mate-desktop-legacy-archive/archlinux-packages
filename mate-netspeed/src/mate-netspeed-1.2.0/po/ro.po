@@ -1,0 +1,226 @@
+# Romanian translation of netspeed_applet.
+# Copyright (C) 2003 THE netspeed_applet'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the netspeed_applet package.
+# Mugurel Tudor <mugurelu@go.ro>, 2003.
+# , fuzzy
+# 
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: netspeed_applet 0.9\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-04-11 03:07+0200\n"
+"PO-Revision-Date: 2003-10-04 21:17+0300\n"
+"Last-Translator: Mugurel Tudor <mugurelu@go.ro>\n"
+"Language-Team: Romanian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../GNOME_NetspeedApplet.server.in.h:1
+msgid "Internet"
+msgstr "Internet"
+
+#: ../GNOME_NetspeedApplet.server.in.h:2
+msgid "Netspeed Applet"
+msgstr "Aplet Viteză Reţea"
+
+#: ../GNOME_NetspeedApplet.server.in.h:3
+msgid "Netspeed Applet Factory"
+msgstr "Uzina aplet viteză de reţea"
+
+#: ../GNOME_NetspeedApplet.server.in.h:4
+msgid "Network Monitor"
+msgstr "Monitorizare reţea"
+
+#: ../src/netspeed.c:276
+msgid "b/s"
+msgstr "b/s"
+
+#: ../src/netspeed.c:276
+msgid "B/s"
+msgstr "B/s"
+
+#: ../src/netspeed.c:276
+msgid "byte"
+msgstr "byte"
+
+#: ../src/netspeed.c:279 ../src/netspeed.c:282
+msgid "kb/s"
+msgstr "kb/s"
+
+#: ../src/netspeed.c:279 ../src/netspeed.c:282
+msgid "kB/s"
+msgstr "kB/s"
+
+#: ../src/netspeed.c:279 ../src/netspeed.c:282
+msgid "kbyte"
+msgstr "kbyte"
+
+#: ../src/netspeed.c:284
+msgid "Mb/s"
+msgstr "Mb/s"
+
+#: ../src/netspeed.c:284
+msgid "MB/s"
+msgstr "MB/s"
+
+#: ../src/netspeed.c:284
+msgid "Mbyte"
+msgstr "Mbyte"
+
+#: ../src/netspeed.c:468
+#, c-format
+msgid ""
+"%s :%s\n"
+"in: %s out: %s"
+msgstr ""
+"%s :%s\n"
+"recepţie: %s transmisie: %s"
+
+#: ../src/netspeed.c:469 ../src/netspeed.c:472
+msgid "has no ip"
+msgstr "nu are ip"
+
+#: ../src/netspeed.c:471
+#, c-format
+msgid ""
+"%s: %s\n"
+"sum: %s"
+msgstr ""
+"%s: %s\n"
+"total: %s"
+
+#: ../src/netspeed.c:479
+#, c-format
+msgid "%s is down"
+msgstr "%s nu este activ"
+
+#. Feel free to put your names here translators :-)
+#: ../src/netspeed.c:590
+msgid "TRANSLATORS"
+msgstr "Mugurel Tudor <mugurelu@go.ro>"
+
+#: ../src/netspeed.c:595
+msgid "Netspeed"
+msgstr "Viteză reţea"
+
+#: ../src/netspeed.c:598
+msgid ""
+"A little applet that displays some information on the traffic on the "
+"specified network device"
+msgstr ""
+"Un mic aplet ce afişează informaţii despre traficul dispozitivului de reţea "
+"specificat"
+
+#: ../src/netspeed.c:791
+msgid "Netspeed Preferences"
+msgstr "Preferinţe viteză reţea"
+
+#: ../src/netspeed.c:814
+msgid "General Settings"
+msgstr "Setări generale"
+
+#: ../src/netspeed.c:835
+msgid "Network _device:"
+msgstr "_Dispozitiv reţea:"
+
+#: ../src/netspeed.c:859
+msgid "_Update interval:"
+msgstr "Interval _actualizare:"
+
+#: ../src/netspeed.c:875
+msgid "millisecond"
+msgstr "milisecunde"
+
+#: ../src/netspeed.c:884
+msgid "Label _font size:"
+msgstr "Mărime _font etichetă:"
+
+#: ../src/netspeed.c:900
+msgid "points"
+msgstr "puncte"
+
+#: ../src/netspeed.c:906
+msgid "Show _sum instead of in & out"
+msgstr "Afişează _totalul în loc de recepţie & transmisie"
+
+#: ../src/netspeed.c:910
+msgid "Show _bits/s (b/s) instead of bytes/s (B/s)"
+msgstr "Afişează _biţi/s (b/s) în loc de bytes/s (B/s)"
+
+#: ../src/netspeed.c:914
+msgid "Change _icon according to the selected device"
+msgstr "Schimbă _iconiţa funcţie de dispozitivul selectat"
+
+#: ../src/netspeed.c:919
+msgid "_Always monitor a connected device, if possible"
+msgstr ""
+
+#: ../src/netspeed.c:1041
+#, c-format
+msgid "Device Details for %s"
+msgstr "Detalii dispozitiv pentru %s"
+
+#: ../src/netspeed.c:1067
+msgid "_In graph color"
+msgstr "Culoare grafic _recepţie"
+
+#: ../src/netspeed.c:1068
+msgid "_Out graph color"
+msgstr "Culoare grafic _transmisie"
+
+#: ../src/netspeed.c:1087
+msgid "Internet Address:"
+msgstr "Adresa internet:"
+
+#: ../src/netspeed.c:1088
+msgid "Netmask:"
+msgstr "Masca de reţea:"
+
+#: ../src/netspeed.c:1089
+msgid "Hardware Address:"
+msgstr "Adresa fizică:"
+
+#: ../src/netspeed.c:1090
+msgid "P-t-P Address:"
+msgstr "Adresa P-t-P:"
+
+#: ../src/netspeed.c:1091
+msgid "Bytes in:"
+msgstr "Bytes recepţionaţi:"
+
+#: ../src/netspeed.c:1092
+msgid "Bytes out:"
+msgstr "Bytes transmişi:"
+
+#: ../src/netspeed.c:1094 ../src/netspeed.c:1095 ../src/netspeed.c:1096
+#: ../src/netspeed.c:1097
+msgid "none"
+msgstr "nici una"
+
+#: ../src/netspeed.c:1226
+#, c-format
+msgid "Do you want to disconnect %s now?"
+msgstr ""
+
+#: ../src/netspeed.c:1230
+#, c-format
+msgid "Do you want to connect %s now?"
+msgstr ""
+
+#: ../src/netspeed.c:1455
+msgid "Device _Details"
+msgstr "_Detalii Dispozitiv"
+
+#: ../src/netspeed.c:1455
+msgid "_Preferences..."
+msgstr "_Preferinţe..."
+
+#: ../src/netspeed.c:1455
+msgid "_Help"
+msgstr "_Ajutor"
+
+#: ../src/netspeed.c:1455
+msgid "_About..."
+msgstr "_Despre..."

@@ -1,0 +1,287 @@
+# Finnish messages for netspeed_applet
+# Copyright (C) 2006-2008 Free Software Foundation, Inc.
+# This file is distributed under the same license as the netspeed package.
+# Ilkka Tuohela <hile@iki.fi>, 2006-2008
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: netspeed_applet\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-09-14 15:17+0300\n"
+"PO-Revision-Date: 2008-09-14 15:10+0300\n"
+"Last-Translator: Ilkka Tuohela <hile@iki.fi>\n"
+"Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../GNOME_NetspeedApplet.server.in.in.h:1
+msgid "Internet"
+msgstr "Internet"
+
+#: ../GNOME_NetspeedApplet.server.in.in.h:2
+msgid "Netspeed Applet"
+msgstr "Verkkonopeussovelma"
+
+#: ../GNOME_NetspeedApplet.server.in.in.h:3
+msgid "Netspeed Applet Factory"
+msgstr "Verkkonopeussovelman tehdas"
+
+#: ../GNOME_NetspeedApplet.server.in.in.h:4
+msgid "Network Monitor"
+msgstr "Verkon tarkkailija"
+
+#: ../src/netspeed.c:407
+msgid "b/s"
+msgstr "b/s"
+
+#: ../src/netspeed.c:407
+msgid "B/s"
+msgstr "t/s"
+
+#: ../src/netspeed.c:409
+msgid "bits"
+msgstr "bittiä"
+
+#: ../src/netspeed.c:409
+msgid "bytes"
+msgstr "tavua"
+
+#: ../src/netspeed.c:416
+msgid "kb/s"
+msgstr "kt/s"
+
+#: ../src/netspeed.c:416
+msgid "KiB/s"
+msgstr "KiB/s"
+
+#: ../src/netspeed.c:418
+msgid "kb"
+msgstr "kt"
+
+#: ../src/netspeed.c:418
+msgid "KiB"
+msgstr "KiB"
+
+#: ../src/netspeed.c:427
+msgid "Mb/s"
+msgstr "Mt/s"
+
+#: ../src/netspeed.c:427
+msgid "MiB/s"
+msgstr "MiB/s"
+
+#: ../src/netspeed.c:429
+msgid "Mb"
+msgstr "Mt"
+
+#: ../src/netspeed.c:429
+msgid "MiB"
+msgstr "MiB"
+
+#: ../src/netspeed.c:755
+#, c-format
+msgid ""
+"There was an error displaying help:\n"
+"%s"
+msgstr ""
+"Virhe näytettäessä ohjetta:\n"
+"%s"
+
+#: ../src/netspeed.c:806
+#, c-format
+msgid ""
+"Failed to show:\n"
+"%s"
+msgstr ""
+"Ei voitu näyttää:\n"
+"%s"
+
+#: ../src/netspeed.c:837
+msgid ""
+"A little applet that displays some information on the traffic on the "
+"specified network device"
+msgstr ""
+"Pieni sovelma, joka näyttää tietoja halutun verkkolaitteen liikenteestä"
+
+#: ../src/netspeed.c:840
+msgid "translator-credits"
+msgstr ""
+"Ilkka Tuohela, 2006\n"
+"\n"
+"http://www.gnome.fi/"
+
+#: ../src/netspeed.c:842
+msgid "Netspeed Website"
+msgstr "Verkkonopeussovelman WWW-sivut"
+
+#: ../src/netspeed.c:968
+msgid "Netspeed Preferences"
+msgstr "Verkkonopeuden asetukset"
+
+#: ../src/netspeed.c:991
+msgid "General Settings"
+msgstr "Yleiset asetukset"
+
+#: ../src/netspeed.c:1012
+msgid "Network _device:"
+msgstr "Verkko_laite:"
+
+#. Default means device with default route set
+#: ../src/netspeed.c:1023
+msgid "Default"
+msgstr "Oletus"
+
+#: ../src/netspeed.c:1036
+msgid "Show _sum instead of in & out"
+msgstr "Näytä _summa saapuvan ja lähtevän sijasta"
+
+#: ../src/netspeed.c:1040
+msgid "Show _bits instead of bytes"
+msgstr "Näytä _bitteinä tavujen sijasta"
+
+#: ../src/netspeed.c:1044
+msgid "Change _icon according to the selected device"
+msgstr "Vaihda _kuvaketta valitun laitteen mukaan"
+
+#: ../src/netspeed.c:1155
+#, c-format
+msgid "Device Details for %s"
+msgstr "Laitteen %s yksityiskohdat"
+
+#: ../src/netspeed.c:1181
+msgid "_In graph color"
+msgstr "_Saapuvan käyrän väri"
+
+#: ../src/netspeed.c:1182
+msgid "_Out graph color"
+msgstr "_Lähtevän käyrän väri"
+
+#: ../src/netspeed.c:1198
+msgid "Internet Address:"
+msgstr "IP-osoite:"
+
+#: ../src/netspeed.c:1199
+msgid "Netmask:"
+msgstr "Verkkopeite:"
+
+#: ../src/netspeed.c:1200
+msgid "Hardware Address:"
+msgstr "Laiteosoite:"
+
+#: ../src/netspeed.c:1201
+msgid "P-t-P Address:"
+msgstr "PtP-osoite:"
+
+#: ../src/netspeed.c:1202
+msgid "Bytes in:"
+msgstr "Saapunut (tavuja):"
+
+#: ../src/netspeed.c:1203
+msgid "Bytes out:"
+msgstr "Lähtenyt (tavuja):"
+
+#: ../src/netspeed.c:1205 ../src/netspeed.c:1206 ../src/netspeed.c:1207
+#: ../src/netspeed.c:1208
+msgid "none"
+msgstr "ei mitään"
+
+#: ../src/netspeed.c:1247
+msgid "IPV6 Address:"
+msgstr "IPv6-osoite:"
+
+#: ../src/netspeed.c:1279
+msgid "Signal Strength:"
+msgstr "Signaalivoimakkuus:"
+
+#: ../src/netspeed.c:1280
+msgid "ESSID:"
+msgstr "ESSID:"
+
+#: ../src/netspeed.c:1366
+#, c-format
+msgid "Do you want to disconnect %s now?"
+msgstr "Haluatko katkaista laitteen %s?"
+
+#: ../src/netspeed.c:1370
+#, c-format
+msgid "Do you want to connect %s now?"
+msgstr "Haluatko yhdistää laitteen %s?"
+
+#: ../src/netspeed.c:1444
+#, c-format
+msgid "%s is down"
+msgstr "%s ei ole käytössä"
+
+#: ../src/netspeed.c:1449
+#, c-format
+msgid ""
+"%s: %s\n"
+"in: %s out: %s"
+msgstr ""
+"%s: %s\n"
+"saapuva: %s lähtevä: %s"
+
+#: ../src/netspeed.c:1451 ../src/netspeed.c:1460
+msgid "has no ip"
+msgstr "ei IP-osoitetta"
+
+#: ../src/netspeed.c:1458
+#, c-format
+msgid ""
+"%s: %s\n"
+"sum: %s"
+msgstr ""
+"%s: %s\n"
+"yhteensä: %s"
+
+#: ../src/netspeed.c:1467
+#, c-format
+msgid ""
+"\n"
+"ESSID: %s\n"
+"Strength: %d %%"
+msgstr ""
+"\n"
+"ESSID: %s\n"
+"Voimakkuus: %d %%"
+
+#: ../src/netspeed.c:1468
+msgid "unknown"
+msgstr "tuntematon"
+
+#: ../src/netspeed.c:1515
+msgid "Netspeed"
+msgstr "Verkkonopeus"
+
+#: ../src/netspeed.c:1683
+msgid "Device _Details"
+msgstr "Laitteen _yksityiskohdat"
+
+#: ../src/netspeed.c:1683
+msgid "_Preferences..."
+msgstr "_Asetukset..."
+
+#: ../src/netspeed.c:1683
+msgid "_Help"
+msgstr "O_hje"
+
+#: ../src/netspeed.c:1683
+msgid "_About..."
+msgstr "_Tietoja..."
+
+#~ msgid "_Always monitor a connected device, if possible"
+#~ msgstr "Tarkkaile _aina yhdistettyä laitetta, jos mahdollista"
+
+#~ msgid "_Update interval:"
+#~ msgstr "_Päivitysväli:"
+
+#~ msgid "millisecond"
+#~ msgstr "millisekuntia"
+
+#~ msgid "Label _font size:"
+#~ msgstr "Tekstin _kirjasinkoko:"
+
+#~ msgid "points"
+#~ msgstr "pistettä"

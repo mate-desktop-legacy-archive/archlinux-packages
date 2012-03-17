@@ -1,0 +1,13 @@
+* the icons are not perfectly clear (difference in/out) [done]
+* option to show frame/don't show frame around applet [done]
+* option to show sum instead of in/out [done]
+* plipX device support ? [done]
+* themeable icons ?
+* set size of labels according to the maximum possible size [done]
+* add a load-graph to the details-dialog ? [done]
+* if showsum is on the label should be center-justified in
+  a >= 48 panel [done]
+* let the user chose between bit and bytes [done]
+* let the user chose the icon themselves (instead of setting it
+  according to the device) [done - but in another way]
+* ...

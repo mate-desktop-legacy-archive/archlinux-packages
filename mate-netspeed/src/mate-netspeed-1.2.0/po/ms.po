@@ -1,0 +1,244 @@
+# Malay translation of netspeed.
+# Copyright (C) 2002 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Hasbullah Bin Pit (sebol) <sebol@ikhlas.com>, 2002.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: netspeed\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-04-11 03:07+0200\n"
+"PO-Revision-Date: 2002-08-23 15:20+0200\n"
+"Last-Translator: Hasbullah Bin Pit (sebol) <sebol@ikhlas.com>\n"
+"Language-Team: Malay <gabai-penyumbang@lists.sf.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../GNOME_NetspeedApplet.server.in.h:1
+msgid "Internet"
+msgstr "Internet"
+
+#: ../GNOME_NetspeedApplet.server.in.h:2
+msgid "Netspeed Applet"
+msgstr "Aplet Netspeed"
+
+#: ../GNOME_NetspeedApplet.server.in.h:3
+msgid "Netspeed Applet Factory"
+msgstr "Kilang Aplet Netspeed"
+
+#: ../GNOME_NetspeedApplet.server.in.h:4
+msgid "Network Monitor"
+msgstr ""
+
+#: ../src/netspeed.c:276
+msgid "b/s"
+msgstr "b/s"
+
+#: ../src/netspeed.c:276
+msgid "B/s"
+msgstr "B/s"
+
+#: ../src/netspeed.c:276
+msgid "byte"
+msgstr "byte"
+
+#: ../src/netspeed.c:279 ../src/netspeed.c:282
+msgid "kb/s"
+msgstr "kb/s"
+
+#: ../src/netspeed.c:279 ../src/netspeed.c:282
+msgid "kB/s"
+msgstr "kB/s"
+
+#: ../src/netspeed.c:279 ../src/netspeed.c:282
+msgid "kbyte"
+msgstr "kbyte"
+
+#: ../src/netspeed.c:284
+msgid "Mb/s"
+msgstr "Mb/s"
+
+#: ../src/netspeed.c:284
+msgid "MB/s"
+msgstr "MB/s"
+
+#: ../src/netspeed.c:284
+msgid "Mbyte"
+msgstr "Mbyte"
+
+#: ../src/netspeed.c:468
+#, c-format
+msgid ""
+"%s :%s\n"
+"in: %s out: %s"
+msgstr ""
+"%s :%s\n"
+"masuk: %s keluart: %s"
+
+#: ../src/netspeed.c:469 ../src/netspeed.c:472
+msgid "has no ip"
+msgstr "tidak mempunyai IP"
+
+#: ../src/netspeed.c:471
+#, c-format
+msgid ""
+"%s: %s\n"
+"sum: %s"
+msgstr ""
+"%s: %s\n"
+"jumlah: %s"
+
+#: ../src/netspeed.c:479
+#, c-format
+msgid "%s is down"
+msgstr ""
+
+#. Feel free to put your names here translators :-)
+#: ../src/netspeed.c:590
+msgid "TRANSLATORS"
+msgstr "Hasbullah Bin Pit <sebol@ikhlas.com>, Merlimau."
+
+#: ../src/netspeed.c:595
+#, fuzzy
+msgid "Netspeed"
+msgstr "Aplet Netspeed"
+
+#: ../src/netspeed.c:598
+msgid ""
+"A little applet that displays some information on the traffic on the "
+"specified network device"
+msgstr ""
+"Aplet kecil yang memaparkan maklumat trafik pada peranti rangkaian tertentu"
+
+#: ../src/netspeed.c:791
+msgid "Netspeed Preferences"
+msgstr ""
+
+#: ../src/netspeed.c:814
+#, fuzzy
+msgid "General Settings"
+msgstr "Tetapan:"
+
+#: ../src/netspeed.c:835
+#, fuzzy
+msgid "Network _device:"
+msgstr "Peranti rangkaian:"
+
+#: ../src/netspeed.c:859
+msgid "_Update interval:"
+msgstr ""
+
+#: ../src/netspeed.c:875
+msgid "millisecond"
+msgstr ""
+
+#: ../src/netspeed.c:884
+msgid "Label _font size:"
+msgstr ""
+
+#: ../src/netspeed.c:900
+msgid "points"
+msgstr ""
+
+#: ../src/netspeed.c:906
+#, fuzzy
+msgid "Show _sum instead of in & out"
+msgstr "Papar jumlah selain dari masuk & keluar"
+
+#: ../src/netspeed.c:910
+#, fuzzy
+msgid "Show _bits/s (b/s) instead of bytes/s (B/s)"
+msgstr "Papar bin/s (b/s) selain byte/s (B/s)"
+
+#: ../src/netspeed.c:914
+#, fuzzy
+msgid "Change _icon according to the selected device"
+msgstr "Tukar ikon mengikut peranti dipilih"
+
+#: ../src/netspeed.c:919
+msgid "_Always monitor a connected device, if possible"
+msgstr ""
+
+#: ../src/netspeed.c:1041
+#, c-format
+msgid "Device Details for %s"
+msgstr "Perincian Peranti bagi %s"
+
+#: ../src/netspeed.c:1067
+msgid "_In graph color"
+msgstr ""
+
+#: ../src/netspeed.c:1068
+msgid "_Out graph color"
+msgstr ""
+
+#: ../src/netspeed.c:1087
+msgid "Internet Address:"
+msgstr "Alamat Internet:"
+
+#: ../src/netspeed.c:1088
+msgid "Netmask:"
+msgstr "Netmask:"
+
+#: ../src/netspeed.c:1089
+msgid "Hardware Address:"
+msgstr "Alamat Perkakasan:"
+
+#: ../src/netspeed.c:1090
+msgid "P-t-P Address:"
+msgstr "Alamat P-t-P:"
+
+#: ../src/netspeed.c:1091
+msgid "Bytes in:"
+msgstr "Byte masuk:"
+
+#: ../src/netspeed.c:1092
+msgid "Bytes out:"
+msgstr "Byte keluar:"
+
+#: ../src/netspeed.c:1094 ../src/netspeed.c:1095 ../src/netspeed.c:1096
+#: ../src/netspeed.c:1097
+msgid "none"
+msgstr "tiada"
+
+#: ../src/netspeed.c:1226
+#, c-format
+msgid "Do you want to disconnect %s now?"
+msgstr ""
+
+#: ../src/netspeed.c:1230
+#, c-format
+msgid "Do you want to connect %s now?"
+msgstr ""
+
+#: ../src/netspeed.c:1455
+#, fuzzy
+msgid "Device _Details"
+msgstr "Perincian Peranti..."
+
+#: ../src/netspeed.c:1455
+#, fuzzy
+msgid "_Preferences..."
+msgstr "Ciri-ciri..."
+
+#: ../src/netspeed.c:1455
+msgid "_Help"
+msgstr ""
+
+#: ../src/netspeed.c:1455
+#, fuzzy
+msgid "_About..."
+msgstr "Perihal..."
+
+#~ msgid "Netspeed Applet Settings"
+#~ msgstr "Tetapan Aplet NetSpeed"
+
+#~ msgid "Device %s"
+#~ msgstr "Peranti %s"
+
+#~ msgid "Refreshes per second:"
+#~ msgstr "Segar per saat:"
+
+#~ msgid "0 b/s"
+#~ msgstr "0 b/s"

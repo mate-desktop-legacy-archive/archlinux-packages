@@ -1,0 +1,49 @@
+2008-08-24  Jörgen Scheibengruber  <mfcn@gmx.de>
+
+	* Makefile.am:
+	Remove es for now, it breaks the build
+
+2008-05-27  Jonh Wendell  <jwendell@gnome.org>
+
+	* Makefile.am: Added pt_BR to DOC_LINGUAS.
+	* pt_BR/figures/*.png:
+	* pt_BR/pt_BR.po: Added Brazilian Portuguese translation by Leonardo Gregianin.
+
+2008-04-13  Claude Paroz  <claude@2xlibre.net>
+
+	* Makefile.am: Added fr to DOC_LINGUAS.
+	* fr/figures/*.png:
+	* fr/fr.po: Added French translation.
+
+2008-03-18  Simos Xenitellis  <simos@gnome.org>
+
+	* el/el.po: Added Greek translation by Giannis Katsampiris,
+	reviewed translation.
+	* Makefile.am: Added el to DOC_LINGUAS.
+
+2008-03-05  Jorge Gonzalez  <jorgegonz@svn.gnome.org>
+
+	* es/es.po: Added Spanish translation by Daniel Mustieles
+
+2008-02-16  Jaap Haitsma,,,  <jaap@haitsma.org>
+
+	reviewed by: <delete if not using a buddy>
+
+	* .cvsignore:
+	* C/.cvsignore:
+	* cs/.cvsignore:
+	* de/.cvsignore:
+	* es/.cvsignore:
+	* ru/.cvsignore:
+
+2006-09-25  Daniel Nylander <po@danielnylander.se>
+
+	* sv/sv.po: Added Swedish translation.
+	* sv/figures/*png: Added screenshots.
+	* Makefile.am: Added sv to DOC_LINGUAS.
+
+2006-09-24  Joergen Scheibengruber <mfcn@gmx.de>
+
+	* Migration to gnome-doc-utils: Translations have to be adapted!
+	(see INSTRUCTIONS)
+	* de/de.po: Initial not completed migration
