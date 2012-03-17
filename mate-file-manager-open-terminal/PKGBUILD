@@ -1,3 +1,5 @@
+#Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+
 pkgname=mate-file-manager-open-terminal
 pkgver=1.2.0
 pkgrel=1

@@ -1,4 +1,5 @@
-# Maintainer: bickman2k
+#Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+
 pkgname=mate-menu-editor
 pkgver=1.2.0
 pkgrel=1
