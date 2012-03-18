@@ -1,4 +1,4 @@
-#Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-file-manager-sendto
 pkgver=1.2.0
@@ -10,7 +10,7 @@ depends=('mate-file-manager')
 makedepends=('pidgin' 'gajim' 'gettext' 'intltool')
 options=('!emptydirs')
 install=mate-file-manager-sendto.install
-url="http://matsusoft.com.ar/projects"
+url="http://mate-desktop.org"
 groups=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
 sha256sums=('64500e3e33b36243f9d1b1c263107fade8ee7474fbd5c21cb8e92ca3f53b1ca3')

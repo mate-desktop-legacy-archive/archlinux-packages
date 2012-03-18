@@ -1,4 +1,4 @@
-#Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-image-viewer
 pkgver=1.2.0
@@ -10,7 +10,7 @@ depends=('mate-desktop' 'libexif' 'lcms' 'desktop-file-utils' 'mate-icon-theme' 
 makedepends=('pkgconfig' 'mate-doc-utils' 'intltool')
 options=('!emptydirs' '!libtool')
 conflicts=('eog')
-url="http://matsusoft.com.ar/projects"
+url="http://mate-desktop.org"
 groups=('mate-extras')
 install=mate-image-viewer.install
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)

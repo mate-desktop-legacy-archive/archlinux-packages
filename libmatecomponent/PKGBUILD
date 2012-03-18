@@ -1,3 +1,4 @@
+#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 pkgname=libmatecomponent
 pkgver=1.2.0
 pkgrel=1
@@ -9,7 +10,7 @@ makedepends=('intltool' 'pkgconfig' 'flex')
 groups=('mate')
 options=('!emptydirs' '!libtool')
 backup=('etc/matecomponent-activation/matecomponent-activation-config.xml')
-url="http://matsusoft.com.ar/projects/mate/"
+url="http://mate-desktop.org"
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz ./matecomponent-activation-config.xml)
 install=libmatecomponent.install
 sha256sums=('121bd7573186a81885942d82432bbdc2b69d37108b79e00f85994d68d770fdf3'

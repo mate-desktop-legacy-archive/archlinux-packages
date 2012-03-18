@@ -1,4 +1,4 @@
-#Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 pkgname=mate-desktop
 pkgver=1.2.0
 pkgrel=1
@@ -8,7 +8,7 @@ license=(GPL LGPL)
 depends=('libunique' 'libmatenotify' 'hicolor-icon-theme' 'gvfs-obexftp' 'obexd-client' 'mate-conf')
 makedepends=('mate-doc-utils' 'intltool')
 options=('!emptydirs' '!libtool')
-url="http://matsusoft.com.ar/projects/mate/"
+url="http://mate-desktop.org"
 groups=('mate')
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
 sha256sums=('4d37afe60ab9e5ce3797848a395f1292ca390a9844dab6d6871eff7e09ef9da2')

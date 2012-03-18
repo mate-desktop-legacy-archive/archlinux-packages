@@ -1,4 +1,4 @@
-#Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-applets
 pkgver=1.2.0
@@ -14,7 +14,7 @@ groups=('mate-extras')
 options=(!emptydirs)
 replace=('gnome-applets')
 conflicts=('gnome-applets')
-url="http://matsusoft.com.ar/projects/mate/"
+url="http://mate-desktop.org"
 install=mate-applets.install
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
 sha256sums=('23dd41dd616f3871ea75c93c2484ae7f89a00ee67960c77c8ceaa5e58462f81f')

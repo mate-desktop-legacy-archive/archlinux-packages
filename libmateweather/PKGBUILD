@@ -1,4 +1,4 @@
-#Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=libmateweather
 pkgver=1.2.0
@@ -10,7 +10,7 @@ depends=('mate-conf') #  'libsoup-mate'  'mate-icon-theme'
 makedepends=('pkgconfig' 'intltool' 'gtk-doc')
 groups=('mate')
 options=('!emptydirs' '!libtool')
-url="http://matsusoft.com.ar/projects/mate/"
+url="http://mate-desktop.org"
 install=libmateweather.install
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
 sha256sums=('440bca0ffaf762b235c82a3beec5c80579e6239cbd4addda0c5ec3c3858c66c6')

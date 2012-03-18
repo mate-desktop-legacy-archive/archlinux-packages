@@ -1,10 +1,11 @@
 #Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-document-viewer
 pkgver=1.2.1
 pkgrel=2
 pkgdesc="Simply a document viewer"
-url="http://matsusoft.com.ar/projects/mate/"
+url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
 depends=('gtk2' 'libspectre' 'gsfonts' 'poppler-glib' 'djvulibre' 'mate-icon-theme'

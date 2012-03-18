@@ -1,4 +1,4 @@
-#Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-keyring
 pkgver=1.2.0
@@ -8,7 +8,7 @@ arch=(i686 x86_64)
 license=('GPL' 'LGPL')
 depends=('dbus')
 makedepends=('intltool' 'pkgconfig' 'python2')
-url="http://matsusoft.com.ar/projects/mate/"
+url="http://mate-desktop.org"
 groups=('mate')
 options=('!libtool' '!emptydirs')
 install=mate-keyring.install

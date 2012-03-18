@@ -1,4 +1,4 @@
-#Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-media
 pkgver=1.2.0
@@ -10,7 +10,7 @@ depends=('gstreamer0.10-base-plugins' 'mate-panel' 'libmatenotify' 'pulseaudio')
 makedepends=('mate-doc-utils' 'pkgconfig' 'mate-settings-daemon' 'intltool' 'mate-icon-theme' 'libpulse')
 groups=('mate-extras')
 options=(!emptydirs !libtool)
-url="http://matsusoft.com.ar/projects"
+url="http://mate-desktop.org"
 install=mate-media.install
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
 sha256sums=('96f8ec09b5716ad024268ca82bbc2b304607b5c86926e4c39779caa3ea14f871')

@@ -1,4 +1,4 @@
-#Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-conf
 pkgver=1.2.1
@@ -11,7 +11,7 @@ makedepends=('pkgconfig' 'intltool' 'gtk-doc' 'gobject-introspection')
 groups=('mate')
 options=('!libtool')
 install=mate-conf.install
-url="http://matsusoft.com.ar/projects/mate/"
+url="http://mate-desktop.org"
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz
         mateconf-merge-schema
         mateconfpkg)

@@ -1,4 +1,4 @@
-#Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=libmatekeyring
 pkgver=1.2.0
@@ -10,7 +10,7 @@ depends=('libgcrypt') # 'eggdbus' 'mate-keyring'
 makedepends=('intltool' 'pkgconfig' 'python')
 groups=('mate')
 options=('!emptydirs' '!libtool')
-url="http://matsusoft.com.ar/projects/mate/"
+url="http://mate-desktop.org"
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
 sha256sums=('b0a7f4be2cad79b08852b77967e5acab41be70aebdf5bde0ce51ac16f40b2b2a')
 

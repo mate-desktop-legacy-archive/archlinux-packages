@@ -1,4 +1,4 @@
-#Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-display-manager
 pkgver=1.2.0
@@ -11,7 +11,7 @@ makedepends=('pkgconfig' 'intltool' 'mate-doc-utils' 'xtrans' 'xorg-server')
 # do not add !emptydirs
 options=('!libtool')
 install=mate-display-manager.install
-url="http://matsusoft.com.ar/projects/mate/"
+url="http://mate-desktop.org"
 groups=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz
         mdm

@@ -13,7 +13,7 @@ install=mate-panel.install
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
 sha256sums=('67a34e087c2af28b3e626a3389996007f2d62a920f19c6bf6dc737fcf3d5f35b')
 
-url="http://matsusoft.com.ar/projects/mate/"
+url="http://mate-desktop.org"
 groups=('mate')
 
 build() {

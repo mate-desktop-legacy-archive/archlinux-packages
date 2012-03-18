@@ -1,4 +1,4 @@
-#Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-icon-theme
 pkgver=1.2.0
@@ -8,7 +8,7 @@ arch=('any')
 license=('GPL')
 depends=('hicolor-icon-theme' 'icon-naming-utils' 'gtk-update-icon-cache')
 makedepends=('intltool')
-url="http://matsusoft.com.ar/projects/mate/"
+url="http://mate-desktop.org"
 groups=('mate')
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
 sha256sums=('7693593bd872e4a6daf70f0b50cb7e1ac162a26b065f2d92fc139cbbdf3043bb')

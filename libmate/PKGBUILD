@@ -1,4 +1,4 @@
-#Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=libmate
 pkgver=1.2.0
@@ -10,7 +10,7 @@ depends=('ttf-freefont' 'mate-conf')
 makedepends=('mate-doc-utils' 'mate-common' 'mate-corba' 'mate-conf'
              'libmatecomponent' 'mate-mime-data' 'gvfs' 'mate-vfs') #  'libcanberra'
 options=('!emptydirs' '!libtool')
-url="http://matsusoft.com.ar/projects/mate/"
+url="http://mate-desktop.org"
 groups=('mate')
 install=libmate.install
 

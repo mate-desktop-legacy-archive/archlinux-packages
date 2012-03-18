@@ -1,5 +1,7 @@
 # Maintainer: Spyros Stathopoulos <foucault.online@gmail.com>
 # Contributor: Alessio Sergi <asergi at archlinux dot us>
+# Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+
 pkgname=mate-file-archiver
 pkgver=1.2.0
 pkgrel=1
@@ -15,7 +17,7 @@ optdepends=('unrar: for RAR uncompression'
 'unace: extraction tool for the proprietary ace archive format')
 options=('!libtool' '!emptydirs')
 install=mate-file-archiver.install
-url="http://matsusoft.com.ar/projects"
+url="http://mate-desktop.org"
 groups=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
 sha256sums=('f6aa182085e063469ab2058585ce1dd2eedce97a925c1f720768d549a8848416')

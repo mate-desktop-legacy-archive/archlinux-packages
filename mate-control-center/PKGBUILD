@@ -1,4 +1,4 @@
-#Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-control-center
 pkgver=1.2.0
@@ -12,7 +12,7 @@ depends=('mate-window-manager' 'libxss' 'desktop-file-utils'
          'librsvg') #  'evolution-data-server>=2.29.92'
 makedepends=('mate-doc-utils' 'pkgconfig' 'intltool')
 options=('!emptydirs' '!libtool')
-url="http://matsusoft.com.ar/projects/mate/"
+url="http://mate-desktop.org"
 groups=('mate')
 install=mate-control-center.install
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)

@@ -10,7 +10,7 @@ depends=('mate-conf' 'mate-dialogs' 'libgtop' 'libwnck') #  'libcanberra' 'start
 makedepends=('intltool' 'pkgconfig' 'mate-doc-utils')
 options=('!emptydirs' '!libtool')
 install=mate-window-manager.install
-url="http://matsusoft.com.ar/projects/mate/"
+url="http://mate-desktop.org"
 groups=('mate')
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz
         metacity-restartstyle.patch)

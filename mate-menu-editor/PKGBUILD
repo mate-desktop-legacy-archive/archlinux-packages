@@ -1,4 +1,4 @@
-#Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-menu-editor
 pkgver=1.2.0
@@ -9,7 +9,7 @@ license=('GPL')
 depends=('mate-conf' 'gtk2' 'gtksourceview2' 'libxml2' 'pygtksourceview2')
 makedepends=('pkgconfig' 'mate-doc-utils' 'intltool')
 options=('!emptydirs' '!libtool')
-url="http://matsusoft.com.ar/projects"
+url="http://mate-desktop.org"
 groups=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
 sha256sums=('4425970923c7fc64542b54532804a196105a4ee719596564724aa60b5dab5c77')

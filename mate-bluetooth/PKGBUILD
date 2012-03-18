@@ -1,4 +1,4 @@
-#Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-bluetooth
 pkgver=1.2.0
@@ -10,7 +10,7 @@ depends=('libunique' 'libmatenotify' 'hicolor-icon-theme' 'gvfs-obexftp' 'obexd-
 makedepends=('intltool' 'pygtk' 'mate-doc-utils' 'mate-file-manager-sendto' 'gobject-introspection')
 options=('!emptydirs')
 install=mate-bluetooth.install
-url="http://matsusoft.com.ar/projects"
+url="http://mate-desktop.org"
 groups=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
 sha256sums=('d12e5ccb7985e81eaeb91b89237f55be8963b1d621b53ce5604e2aac4f298beb')

@@ -1,4 +1,4 @@
-#Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-conf-editor
 pkgver=1.2.0
@@ -10,7 +10,7 @@ depends=('mate-corba' 'libxml2' 'polkit' 'libldap' 'dbus-glib' 'gtk2' 'mate-conf
 makedepends=('pkgconfig' 'intltool' 'gtk-doc' 'gobject-introspection')
 groups=('mate-extras')
 install=mate-conf.install
-url="http://matsusoft.com.ar/projects"
+url="http://mate-desktop.org"
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
 sha256sums=('15033a678a52589e913f23fe8071611066dda39711ee26da458aa834af649f30')
 

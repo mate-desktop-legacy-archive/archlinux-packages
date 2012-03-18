@@ -1,4 +1,4 @@
-#Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-doc-utils
 pkgver=1.2.1
@@ -10,7 +10,7 @@ depends=('libxslt' 'python2' 'docbook-xml' 'rarian' 'gnome-doc-utils')
 makedepends=('pkgconfig' 'intltool' 'mate-common')
 #conflicts=('gnome-doc-utils')
 options=('!emptydirs' '!libtool')
-url="http://matsusoft.com.ar/projects/mate/"
+url="http://mate-desktop.org"
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
 sha256sums=('b537901a876db92805e4347590df2fb2ec5c913a69c12b52df5b20108a0beb10')
 
