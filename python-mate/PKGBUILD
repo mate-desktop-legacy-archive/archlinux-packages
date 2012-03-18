@@ -17,10 +17,7 @@ sha256sums=('84366cb6e07b8f883dc12a0b1a173da2a010c7c7f868c2db3f02eb3aa3c53d28')
 build() {
 	export PYTHON=python2
 	cd "${srcdir}/${pkgname}-$pkgver"
-	./autogen.sh
-	./configure --prefix=/usr --sysconfdir=/etc \
-		--localstatedir=/var --disable-static \
-		--enable-mate \
+	./autogen.sh --enable-mate \
 		--enable-mateui \
 		--enable-matecanvas \
 		--enable-matevfs \
@@ -29,7 +26,9 @@ build() {
 		--enable-mateconf \
 		--enable-matecomponent_activation \
 		--enable-matecomponent \
-		--enable-matecomponentui || return 1
+		--enable-matecomponentui
+	./configure --prefix=/usr --sysconfdir=/etc \
+		--localstatedir=/var --disable-static || return 1
 	make || return 1
 }
 
