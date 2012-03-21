@@ -1,0 +1,382 @@
+<section id="db2html-division"><metas><meta><name>calls-names</name><desc>db.chunk.depth-of-chunk</desc><desc>db.chunk.chunk-id.axis</desc><desc>db.title</desc><desc>db.xref.target</desc><desc>db2html.css</desc><desc>db2html.division.head.extra</desc><desc>db2html.division.top</desc><desc>db2html.division.sidebar</desc><desc>db2html.info.div</desc><desc>db2html.division.bottom</desc><desc>db.chunk.depth-in-chunk</desc><desc>l10n.direction</desc><desc>db2html.anchor</desc><desc>db2html.header</desc><desc>db2html.linktrail</desc><desc>db2html.autotoc</desc><desc>db2html.footnote.footer</desc><desc>db.label</desc><desc>db.xref.tooltip</desc><desc>db.titleabbrev</desc><desc>l10n.gettext</desc><desc>db2html.navbar</desc><desc>db2html.sidenav</desc><desc>db2html.division.html</desc><desc>db2html.division.div</desc></meta><meta><name>calls-modes</name><desc>db2html.division.div.content.mode</desc></meta><meta><name>uses-modes</name><desc>db2html.division.div.content.mode</desc><desc>db.chunk.content.mode</desc></meta><meta><name>uses-params</name><desc>db.chunk.info_basename</desc></meta><meta><name>Requires</name><desc>db-chunk</desc><desc>db-label</desc><desc>db-title</desc><desc>db-xref</desc><desc>db2html-autotoc</desc><desc>db2html-css</desc><desc>db2html-footnote</desc><desc>db2html-info</desc><desc>db2html-xref</desc><desc>gettext</desc></meta></metas>
+  <name>DocBook to HTML - Division Elements</name>
+  
+  <body>
+  <remark>Describe this module</remark>
+  </body>
+<param>
+  <name>db2html.linktrail</name>
+  <desc>Whether to place a link trail under the header</desc>
+
+  <body>
+  <para>This boolean parameter specifies whether a block containing links to
+  ancestor elements should be included under the header.</para>
+  </body>
+</param>
+
+<param>
+  <name>db2html.navbar.top</name>
+  <desc>Whether to place a navigation bar at the top of the page</desc>
+
+  <body>
+  <para>This boolean parameter specifies whether a block containing navigation
+  links should be placed at the top of the page.  The top navigation bar
+  is inserted by <function><link linkend="T__db2html_division_top">db2html.division.top</link></function>, so this parameter may have no
+  effect if that template has been overridden.</para>
+  </body>
+</param>
+
+<param>
+  <name>db2html.navbar.bottom</name>
+  <desc>Whether to place a navigation bar at the bottom of the page</desc>
+
+  <body>
+  <para>This boolean parameter specifies whether a block containing navigation
+  links should be placed at the bottom of the page.  The bottom navigation
+  bar is inserted by <function><link linkend="T__db2html_division_bottom">db2html.division.bottom</link></function>, so this parameter may have
+  no effect if that template has been overridden.</para>
+  </body>
+</param>
+
+<param>
+  <name>db2html.sidenav</name>
+  <desc>Whether to create a navigation sidebar</desc>
+
+  <body>
+  <para>This boolean parameter specifies whether a full navigation tree in a sidebar.
+  The navigation sidebar is inserted by <function><link linkend="T__db2html_division_sidebar">db2html.division.sidebar</link></function>, so this
+  parameter may have no effect if that template has been overridden.</para>
+  </body>
+</param>
+
+<template>
+  <name>db2html.division.html</name>
+  <desc>Renders a complete HTML page for a division element</desc>
+
+  <params>
+    <param><name>node</name>
+      <desc>The element to create an HTML page for</desc>
+    </param>
+    <param><name>info</name>
+      <desc>The info child element of <parameter>node</parameter></desc>
+    </param>
+    <param><name>template</name>
+      <desc>The named template to call to create the page</desc>
+    </param>
+    <param><name>depth_of_chunk</name>
+      <desc>The depth of the containing chunk in the document</desc>
+    </param>
+    <param><name>prev_id</name>
+      <desc>The id of the previous page</desc>
+    </param>
+    <param><name>next_id</name>
+      <desc>The id of the next page</desc>
+    </param>
+  </params>
+
+  <body>
+  <remark>Put in a word about the chunk flow; talk about what templates get called</remark>
+  </body>
+</template>
+
+<template>
+  <name>db2html.division.div</name>
+  <desc>Renders the content of a division element, chunking children if necessary</desc>
+
+  <params>
+    <param><name>node</name>
+      <desc>The element to render the content of</desc>
+    </param>
+    <param><name>info</name>
+      <desc>The info child element of <parameter>node</parameter></desc>
+    </param>
+    <param><name>title_node</name>
+      <desc>The element containing the title of <parameter>node</parameter></desc>
+    </param>
+    <param><name>subtitle_node</name>
+      <desc>The element containing the subtitle of <parameter>node</parameter></desc>
+    </param>
+    <param><name>title_content</name>
+      <desc>The title for divisions lacking a <literal>title</literal> tag</desc>
+    </param>
+    <param><name>subtitle_content</name>
+      <desc>The subtitle for divisions lacking a <literal>subtitle</literal> tag</desc>
+    </param>
+    <param><name>entries</name>
+      <desc>The entry-style child elements</desc>
+    </param>
+    <param><name>divisions</name>
+      <desc>The division-level child elements</desc>
+    </param>
+    <param><name>callback</name>
+      <desc>Whether to process <parameter>node</parameter> in <function><link linkend="M__db2html_division_div_content_mode">db2html.division.div.content.mode</link></function></desc>
+    </param>
+    <param><name>depth_in_chunk</name>
+      <desc>The depth of <parameter>node</parameter> in the containing chunk</desc>
+    </param>
+    <param><name>depth_of_chunk</name>
+      <desc>The depth of the containing chunk in the document</desc>
+    </param>
+    <param><name>chunk_divisions</name>
+      <desc>Whether to create new documents for <parameter>divisions</parameter></desc>
+    </param>
+    <param><name>chunk_info</name>
+      <desc>Whether to create a new document for a title page</desc>
+    </param>
+    <param><name>autotoc_depth</name>
+      <desc>How deep to create contents listings of <parameter>divisions</parameter></desc>
+    </param>
+    <param><name>lang</name>
+      <desc>The locale of the text in <parameter>node</parameter></desc>
+    </param>
+    <param><name>dir</name>
+      <desc>The text direction, either <literal>ltr</literal> or <literal>rtl</literal></desc>
+    </param>
+  </params>
+
+  <body>
+  <remark>Talk about some of the parameters</remark>
+  </body>
+</template>
+
+<mode>
+  <name>db2html.division.div.content.mode</name>
+  <desc>Renders the block-level content of a division element</desc>
+
+  <params>
+    <param><name>depth_in_chunk</name>
+      <desc>The depth of the context element in the containing chunk</desc>
+    </param>
+    <param><name>depth_of_chunk</name>
+      <desc>The depth of the containing chunk in the document</desc>
+    </param>
+  </params>
+
+  <body>
+  <remark>Talk about how this works with <literal>callback</literal></remark>
+  </body>
+</mode>
+
+<template>
+  <name>db2html.header</name>
+  <desc>Generates a header with a title and optional subtitle</desc>
+
+  <params>
+    <param><name>node</name>
+      <desc>The element containing the title</desc>
+    </param>
+    <param><name>title_node</name>
+      <desc>The <literal>title</literal> element to render</desc>
+    </param>
+    <param><name>subtitle_node</name>
+      <desc>The <literal>subtitle</literal> element to render</desc>
+    </param>
+    <param><name>depth_in_chunk</name>
+      <desc>The depth of <parameter>node</parameter> in the containing chunk</desc>
+    </param>
+    <param><name>depth_of_chunk</name>
+      <desc>The depth of the containing chunk in the document</desc>
+    </param>
+    <param><name>generate_label</name>
+      <desc>Whether to generate a label in the title</desc>
+    </param>
+    <param><name>title_content</name>
+      <desc>An optional string containing the title</desc>
+    </param>
+    <param><name>subtitle_content</name>
+      <desc>An optional string containing the subtitle</desc>
+    </param>
+  </params>
+
+  <body>
+  <remark>Talk about the different kinds of title blocks</remark>
+  </body>
+</template>
+
+<template>
+  <name>db2html.linktrail</name>
+  <desc>Generates links to pages from ancestor elements</desc>
+
+  <params>
+    <param><name>node</name>
+      <desc>The element to generate links for</desc>
+    </param>
+  </params>
+
+  <body>
+  <remark>Describe this</remark>
+  </body>
+</template>
+
+<template>
+  <name>db2html.navbar</name>
+  <desc>Generates navigation links for a page</desc>
+
+  <params>
+    <param><name>node</name>
+      <desc>The element to generate links for</desc>
+    </param>
+    <param><name>prev_id</name>
+      <desc>The id of the previous page</desc>
+    </param>
+    <param><name>next_id</name>
+      <desc>The id of the next page</desc>
+    </param>
+    <param><name>prev_node</name>
+      <desc>The element of the previous page</desc>
+    </param>
+    <param><name>next_node</name>
+      <desc>The element of the next page</desc>
+    </param>
+    <param><name>position</name>
+      <desc>Where the block is positioned on the pages, either 'top' or 'bottom'</desc>
+    </param>
+  </params>
+
+  <body>
+  <remark>Document this template</remark>
+  </body>
+</template>
+
+<template>
+  <name>db2html.sidenav</name>
+  <desc>Generates a navigation sidebar</desc>
+
+  <params>
+    <param><name>node</name>
+      <desc>The currently-selected division element</desc>
+    </param>
+    <param><name>template</name>
+      <desc>The named template to call to create the page</desc>
+    </param>
+  </params>
+
+  <body>
+  <remark>Document this template</remark>
+  </body>
+</template>
+
+<template>
+  <name>db2html.division.head.extra</name>
+  <desc>FIXME</desc>
+
+  <metas>
+    <meta><name>Stub</name>
+      <desc>true</desc>
+    </meta>
+  </metas>
+  <body>
+  <remark>Describe this stub template.</remark>
+  </body>
+</template>
+
+<template>
+  <name>db2html.division.top</name>
+  <desc>FIXME</desc>
+
+  <params>
+    <param><name>node</name>
+      <desc>The division element being rendered</desc>
+    </param>
+    <param><name>info</name>
+      <desc>The info child element of <parameter>node</parameter></desc>
+    </param>
+    <param><name>template</name>
+      <desc>The named template to call to create the page</desc>
+    </param>
+    <param><name>depth_of_chunk</name>
+      <desc>The depth of the containing chunk in the document</desc>
+    </param>
+    <param><name>prev_id</name>
+      <desc>The id of the previous page</desc>
+    </param>
+    <param><name>next_id</name>
+      <desc>The id of the next page</desc>
+    </param>
+    <param><name>prev_node</name>
+      <desc>The element of the previous page</desc>
+    </param>
+    <param><name>next_node</name>
+      <desc>The element of the next page</desc>
+    </param>
+  </params>
+
+  <body>
+  <remark>Describe this template</remark>
+  </body>
+</template>
+
+<template>
+  <name>db2html.division.sidebar</name>
+  <desc>FIXME</desc>
+
+  <params>
+    <param><name>node</name>
+      <desc>The division element being rendered</desc>
+    </param>
+    <param><name>info</name>
+      <desc>The info child element of <parameter>node</parameter></desc>
+    </param>
+    <param><name>template</name>
+      <desc>The named template to call to create the page</desc>
+    </param>
+    <param><name>depth_of_chunk</name>
+      <desc>The depth of the containing chunk in the document</desc>
+    </param>
+    <param><name>prev_id</name>
+      <desc>The id of the previous page</desc>
+    </param>
+    <param><name>next_id</name>
+      <desc>The id of the next page</desc>
+    </param>
+    <param><name>prev_node</name>
+      <desc>The element of the previous page</desc>
+    </param>
+    <param><name>next_node</name>
+      <desc>The element of the next page</desc>
+    </param>
+  </params>
+
+  <body>
+  <remark>Describe this template</remark>
+  </body>
+</template>
+
+<template>
+  <name>db2html.division.bottom</name>
+  <desc>FIXME</desc>
+
+  <params>
+    <param><name>node</name>
+      <desc>The division element being rendered</desc>
+    </param>
+    <param><name>info</name>
+      <desc>The info child element of <parameter>node</parameter></desc>
+    </param>
+    <param><name>template</name>
+      <desc>The named template to call to create the page</desc>
+    </param>
+    <param><name>depth_of_chunk</name>
+      <desc>The depth of the containing chunk in the document</desc>
+    </param>
+    <param><name>prev_id</name>
+      <desc>The id of the previous page</desc>
+    </param>
+    <param><name>next_id</name>
+      <desc>The id of the next page</desc>
+    </param>
+    <param><name>prev_node</name>
+      <desc>The element of the previous page</desc>
+    </param>
+    <param><name>next_node</name>
+      <desc>The element of the next page</desc>
+    </param>
+  </params>
+
+  <body>
+  <remark>Describe this template</remark>
+  </body>
+</template>
+
+<mode private="true"><name>db.chunk.content.mode</name></mode>
+</section>

@@ -17,14 +17,14 @@ sha256sums=('2e9fd84b3d05ded4c1b64023fbd034400de73e4bddbaf97f368ba756d7a18212')
 
 build() {
 	cd "${srcdir}/${pkgname}-$pkgver"
-	./autogen.sh
-	gtkdocize --copy
-	mate-doc-prepare --copy --force
-	./configure --prefix=/usr --sysconfdir=/etc --disable-static \
+	./autogen.sh --prefix=/usr --sysconfdir=/etc --disable-static \
 		--libexecdir=/usr/lib/mate-utils \
 		--localstatedir=/var \
 		--disable-scrollkeeper \
-		--disable-schemas-install || return 1
+		--disable-schemas-install 
+	gtkdocize --copy
+	mate-doc-prepare --copy --force
+	./configure || return 1
 	make || return 1
 }
 

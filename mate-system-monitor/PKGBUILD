@@ -17,12 +17,11 @@ sha256sums=('6946c0e676a13a558725e30fe89b5293ab985126c754b08dc3579ad54a67e61a')
 
 build() {
 	cd "${srcdir}/${pkgname}-$pkgver"
-	./autogen.sh
-	./configure --prefix=/usr --sysconfdir=/etc \
+	./autogen.sh --prefix=/usr --sysconfdir=/etc \
 		--libexecdir=/usr/lib/${pkgname} \
 		--localstatedir=/var --disable-static \
 		--disable-scrollkeeper \
-		--disable-schemas-install || return 1
+		--disable-schemas-install
 
 	# there is some pre-compiled files on the tar
 	make clean

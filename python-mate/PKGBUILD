@@ -27,8 +27,11 @@ build() {
 		--enable-matecomponent_activation \
 		--enable-matecomponent \
 		--enable-matecomponentui
-	./configure --prefix=/usr --sysconfdir=/etc \
-		--localstatedir=/var --disable-static || return 1
+		--prefix=/usr \
+		--sysconfdir=/etc \
+		--localstatedir=/var \
+		--disable-static
+
 	make || return 1
 }
 

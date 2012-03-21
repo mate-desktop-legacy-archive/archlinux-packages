@@ -17,7 +17,14 @@ sha256sums=('96f8ec09b5716ad024268ca82bbc2b304607b5c86926e4c39779caa3ea14f871')
 
 build() {
 	cd "${srcdir}/${pkgname}-$pkgver"
-	./autogen.sh
+	./autogen.sh --prefix=/usr --sysconfdir=/etc \
+		--libexecdir=/usr/lib/${pkgname} \
+		--localstatedir=/var --disable-static \
+		--disable-schemas-install \
+		--disable-scrollkeeper \
+		--enable-pulseaudio \
+		--enable-profiles --enable-grecord \
+		--enable-gstprops --enable-gstmix 
 	# brute force
 	mate-doc-prepare --force --copy
 	automake
@@ -33,14 +40,6 @@ build() {
 	#    --enable-grecord        enable mate sound recorder
 	#    --enable-gstprops       enable gstreamer properties
 	#    --enable-gstmix         enable gstreamer mixer
-	./configure --prefix=/usr --sysconfdir=/etc \
-		--libexecdir=/usr/lib/${pkgname} \
-		--localstatedir=/var --disable-static \
-		--disable-schemas-install \
-		--disable-scrollkeeper \
-		--enable-pulseaudio \
-		--enable-profiles --enable-grecord \
-		--enable-gstprops --enable-gstmix || return 1
 
 	make || return 1
 }

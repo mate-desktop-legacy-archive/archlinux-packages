@@ -18,11 +18,10 @@ sha256sums=('dc07a792aad0f1e1db8b1b2f3dade3a4bb7cdd3edfb2803bef3dfcf89c38e071')
 build() {
 
 	cd "${srcdir}/${pkgname}-${pkgver}"
-	./autogen.sh
-	./configure --prefix=/usr --sysconfdir=/etc \
+	./autogen.sh --prefix=/usr --sysconfdir=/etc \
 		--localstatedir=/var \
 		--libexecdir=/usr/lib/${pkgname} \
-		--disable-scrollkeeper || return 1
+		--disable-scrollkeeper 
 		#--enable-applets
 		#--with-dbus-services=/usr/share/dbus-1/services \
 		#--with-dpms-ext \

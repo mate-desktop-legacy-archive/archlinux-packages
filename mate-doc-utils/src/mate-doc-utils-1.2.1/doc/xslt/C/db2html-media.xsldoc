@@ -1,0 +1,63 @@
+<section id="db2html-media"><metas><meta><name>calls-names</name><desc>db2html.imagedata.src</desc><desc>db2html.anchor</desc><desc>db2html.imagedata</desc><desc>db2html.mediaobject</desc><desc>db2html.block</desc></meta><meta><name>calls-modes</name></meta><meta><name>uses-modes</name></meta><meta><name>uses-params</name></meta><meta><name>Requires</name><desc>db2html-block</desc><desc>db2html-xref</desc></meta></metas>
+  <name>DocBook to HTML - Images and Media</name>
+  
+  <body>
+  <remark>Describe this module</remark>
+  </body>
+<template>
+  <name>db2html.imagedata</name>
+  <desc>Renders an <literal>imagedata</literal> element into an <literal>img</literal> element</desc>
+
+  <params>
+    <param><name>node</name>
+      <desc>The element to render</desc>
+    </param>
+  </params>
+
+  <body>
+  <para>This template creates an <literal>img</literal> element in the HTML output.  This named template
+  is called not only for <literal>imagedata</literal> elements, but also for <literal>graphic</literal> and
+  <literal>inlinegraphic</literal> elements.  Note that <literal>graphic</literal> and <literal>inlinegraphic</literal> are
+  deprecated and should not be used in any newly-written DocBook files.  Use
+  <literal>mediaobject</literal> instead.</para>
+  <remark>calls db2html.imagedata.src, how other attrs are gotten</remark>
+  </body>
+</template>
+
+<template>
+  <name>db2html.imagedata.src</name>
+  <desc>Outputs the content of the <literal>src</literal> attribute for an <literal>img</literal> element</desc>
+
+  <params>
+    <param><name>node</name>
+      <desc>The element to render</desc>
+    </param>
+  </params>
+
+  <body>
+  <para>This template is called by <function><link linkend="T__db2html_imagedata_src">db2html.imagedata.src</link></function> for the content of the
+  <literal>src</literal> attribute of an <literal>img</literal> element.</para>
+  </body>
+</template>
+
+<template>
+  <name>db2html.mediaobject</name>
+  <desc>Outputs HTML for a <literal>mediaobject</literal> element</desc>
+
+  <params>
+    <param><name>node</name>
+      <desc>The element to render</desc>
+    </param>
+  </params>
+
+  <body>
+  <para>This template processes a <literal>mediaobject</literal> element and outputs the appropriate
+  HTML.  DocBook allows multiple objects to be listed in a <literal>mediaobject</literal> element.
+  Processing tools are expected to choose the earliest suitable object.  Currently,
+  this template only chooses the first suitable <literal>imageobject</literal> element.  Support
+  for <literal>videobject</literal> and <literal>audioobject</literal> should be added in future versions, as well
+  as a text-only mode.</para>
+  </body>
+</template>
+
+</section>

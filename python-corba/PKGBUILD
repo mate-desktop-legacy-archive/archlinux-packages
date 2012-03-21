@@ -17,9 +17,9 @@ sha256sums=('4daec3479cf78e70f7fe65c46e91a80a3be9255ca09b4eb1d9df4be2bdcbe05a')
 build() {
 	export PYTHON=python2
 	cd "${srcdir}/${pkgname}-$pkgver"
-	./autogen.sh
-	./configure --prefix=/usr --sysconfdir=/etc \
-		--localstatedir=/var --disable-static || return 1
+	./autogen.sh --prefix=/usr --sysconfdir=/etc \
+		--localstatedir=/var --disable-static
+
 	make || return 1
 }
 

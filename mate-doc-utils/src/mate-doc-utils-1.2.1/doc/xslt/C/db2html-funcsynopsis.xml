@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<section id="S__db2html-funcsynopsis"><title>DocBook to HTML - Function Synopses</title>
+  <remark>Describe this module</remark>
+  <variablelist><title>Parameters</title><varlistentry><term><link linkend="P__db2html_funcsynopsis_style"><parameter>db2html.funcsynopsis.style</parameter></link></term><listitem><para>How to render <literal>funcsynopsis</literal> elements</para></listitem></varlistentry></variablelist><refentry id="P__db2html_funcsynopsis_style"><indexterm><primary>db2html.funcsynopsis.style</primary></indexterm><refnamediv><refname><parameter>db2html.funcsynopsis.style</parameter></refname><refpurpose>How to render <literal>funcsynopsis</literal> elements</refpurpose></refnamediv><refsection><title>Description</title>
+  <para>This parameter controls the indentation style used to render <literal>funcsynopsis</literal>
+  elements.  Supported values are <literal>'KR'</literal> and <literal>'ANSI'</literal>.  This value can also
+  be set with the <literal>db2html.funcsynopsis.style</literal> processing instruction at the
+  top of the XML document.  The same processing instruction or inside a
+  <literal>funcsynopsis</literal> element will override this setting for that synopsis.</para>
+  </refsection></refentry></section>

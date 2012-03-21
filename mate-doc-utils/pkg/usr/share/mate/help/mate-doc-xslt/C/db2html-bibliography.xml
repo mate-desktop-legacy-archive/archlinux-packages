@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<section id="S__db2html-bibliography"><title>DocBook to HTML - Bibliographies</title>
+  <para>This module provides templates to process DocBook bibliograpies.</para>
+  <variablelist><title>Modes</title><varlistentry><term><link linkend="M__db2html_biblioentry_mode"><function>db2html.biblioentry.mode</function></link></term><listitem><para>Formats elements inside a <literal>biblioentry</literal> element</para></listitem></varlistentry><varlistentry><term><link linkend="M__db2html_bibliomixed_mode"><function>db2html.bibliomixed.mode</function></link></term><listitem><para>Formats elements inside a <literal>bibliomixed</literal> element</para></listitem></varlistentry></variablelist><variablelist><title>Templates</title><varlistentry><term><link linkend="T__db2html_biblioentry_label"><function>db2html.biblioentry.label</function></link></term><listitem><para>Outputs the label for a bibliography entry</para></listitem></varlistentry></variablelist><refentry id="M__db2html_biblioentry_mode"><indexterm><primary>db2html.biblioentry.mode</primary></indexterm><refnamediv><refname><function>db2html.biblioentry.mode</function></refname><refpurpose>Formats elements inside a <literal>biblioentry</literal> element</refpurpose></refnamediv><refsection><title>Description</title>
+  <para>This mode is used when processing the child elements of a <literal>biblioentry</literal>
+  element.  Many elements are treated differently when they appear inside
+  a bibliography entry.</para>
+  </refsection></refentry><refentry id="M__db2html_bibliomixed_mode"><indexterm><primary>db2html.bibliomixed.mode</primary></indexterm><refnamediv><refname><function>db2html.bibliomixed.mode</function></refname><refpurpose>Formats elements inside a <literal>bibliomixed</literal> element</refpurpose></refnamediv><refsection><title>Description</title>
+  <para>This mode is used when processing the child elements of a <literal>bibliomixed</literal>
+  element.  Many elements are treated differently when they appear inside
+  a bibliography entry.</para>
+  </refsection></refentry><refentry id="T__db2html_biblioentry_label"><indexterm><primary>db2html.biblioentry.label</primary></indexterm><refnamediv><refname><function>db2html.biblioentry.label</function></refname><refpurpose>Outputs the label for a bibliography entry</refpurpose></refnamediv><refsection><title>Parameters</title><variablelist><varlistentry><term><parameter>node</parameter></term><listitem><para>The <literal>biblioentry</literal> or <literal>bibliomixed</literal> element to generate a label for</para></listitem></varlistentry></variablelist></refsection><refsection><title>Description</title>
+  <para>This outputs a label to be placed inline at the beginning of a bibliography
+  entry.  Labels are created for both <literal>biblioentry</literal> and <literal>bibliomixed</literal> elements.
+  The label is typically an abbreviation of the authors' names an the year of
+  publication.  In DocBook, it is usually provides with a leading <literal>abbrev</literal>
+  element.  Without a leading <literal>abbrev</literal> element, this template will instead
+  use the <literal>xreflabel</literal> or <literal>id</literal> attribute.</para>
+  </refsection></refentry></section>

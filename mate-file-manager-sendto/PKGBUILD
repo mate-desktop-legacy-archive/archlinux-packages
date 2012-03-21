@@ -17,9 +17,8 @@ sha256sums=('64500e3e33b36243f9d1b1c263107fade8ee7474fbd5c21cb8e92ca3f53b1ca3')
 
 build() {
 	cd "${srcdir}/${pkgname}-$pkgver"
-	./autogen.sh
-	./configure --prefix=/usr --sysconfdir=/etc \
-		--localstatedir=/var || return 1
+	./autogen.sh --prefix=/usr --sysconfdir=/etc \
+		--localstatedir=/var
 		#--disable-schemas-compile
 	make || return 1
 }

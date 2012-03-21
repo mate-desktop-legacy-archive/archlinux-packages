@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<section id="S__db2html-qanda"><title>DocBook to HTML - Question and Answer Sets</title>
+  <remark>Describe this module</remark>
+  <variablelist><title>Templates</title><varlistentry><term><link linkend="T__db2html_qanda_css"><function>db2html.qanda.css</function></link></term><listitem><para>Outputs CSS that controls the appearance of question and answer elements</para></listitem></varlistentry></variablelist><refentry id="T__db2html_qanda_css"><indexterm><primary>db2html.qanda.css</primary></indexterm><refnamediv><refname><function>db2html.qanda.css</function></refname><refpurpose>Outputs CSS that controls the appearance of question and answer elements</refpurpose></refnamediv><refsection><title>Description</title>
+  <remark>Describe this template</remark>
+  </refsection></refentry></section>

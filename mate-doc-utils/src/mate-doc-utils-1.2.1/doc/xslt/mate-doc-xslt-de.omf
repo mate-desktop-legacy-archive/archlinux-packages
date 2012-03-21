@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<omf>
+  <resource>
+    <creator>shaunm@gnome.org (Shaun McCance)</creator>
+    <creator>mate@nextreality.net (Brent Smith)</creator>
+    <maintainer>shaunm@gnome.org (Shaun McCance)</maintainer>
+    <title>MATE Dokumentation-XSLT-Handbuch</title>
+    <date>11. Februar 2006</date>
+    <version identifier="0.2" date="11. Februar 2006"/>
+    <subject category="System|Other"/>
+    <description>
+      The MATE Documentation XSLT stylesheets were created to provide fast DocBook to HTML
+      conversion for real-time document viewing in MATE's help browser, Yelp.
+    </description>
+    <type>manual</type>
+    <format mime="text/xml" dtd="-//OASIS//DTD DocBook XML V4.4//EN"/>
+    <identifier url="file:///usr/share/mate/help/mate-doc-xslt/de/mate-doc-xslt.xml"/>
+    <language code="de"/>
+    <relation seriesid="adc33656-82cd-11d8-842e-ea94c94967c5"/>
+    <rights type="GNU FDL" license.version="1.1" holder="Shaun McCance"/>
+  </resource>
+</omf>

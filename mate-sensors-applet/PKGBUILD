@@ -17,8 +17,7 @@ sha256sums=('1db4160bc7e5037c1ae563514e1bc82f647ef3381d8ada6fe5ea00d9b803ebeb')
 build() {
 cd $srcdir/$pkgname-$pkgver
  
-  ./autogen.sh
-  ./configure LDFLAGS="-ldl" --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib/$pkgname \
+  ./autogen.sh LDFLAGS="-ldl" --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib/$pkgname \
   --disable-static --disable-scrollkeeper
   make
 }

@@ -17,8 +17,7 @@ sha256sums=('d12e5ccb7985e81eaeb91b89237f55be8963b1d621b53ce5604e2aac4f298beb')
 
 build() {
 	cd "${srcdir}/${pkgname}-${pkgver}"
-	./autogen.sh
-	./configure --prefix=/usr --sysconfdir=/etc \
+	./autogen.sh --prefix=/usr --sysconfdir=/etc \
 		--localstatedir=/var --disable-desktop-update \
 		--disable-icon-update || return 1
 		#--disable-schemas-compile

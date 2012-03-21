@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<section id="S__db2html-media"><title>DocBook to HTML - Images and Media</title>
+  <remark>Describe this module</remark>
+  <variablelist><title>Templates</title><varlistentry><term><link linkend="T__db2html_imagedata"><function>db2html.imagedata</function></link></term><listitem><para>Renders an <literal>imagedata</literal> element into an <literal>img</literal> element</para></listitem></varlistentry><varlistentry><term><link linkend="T__db2html_imagedata_src"><function>db2html.imagedata.src</function></link></term><listitem><para>Outputs the content of the <literal>src</literal> attribute for an <literal>img</literal> element</para></listitem></varlistentry><varlistentry><term><link linkend="T__db2html_mediaobject"><function>db2html.mediaobject</function></link></term><listitem><para>Outputs HTML for a <literal>mediaobject</literal> element</para></listitem></varlistentry></variablelist><refentry id="T__db2html_imagedata"><indexterm><primary>db2html.imagedata</primary></indexterm><refnamediv><refname><function>db2html.imagedata</function></refname><refpurpose>Renders an <literal>imagedata</literal> element into an <literal>img</literal> element</refpurpose></refnamediv><refsection><title>Parameters</title><variablelist><varlistentry><term><parameter>node</parameter></term><listitem><para>The element to render</para></listitem></varlistentry></variablelist></refsection><refsection><title>Description</title>
+  <para>This template creates an <literal>img</literal> element in the HTML output.  This named template
+  is called not only for <literal>imagedata</literal> elements, but also for <literal>graphic</literal> and
+  <literal>inlinegraphic</literal> elements.  Note that <literal>graphic</literal> and <literal>inlinegraphic</literal> are
+  deprecated and should not be used in any newly-written DocBook files.  Use
+  <literal>mediaobject</literal> instead.</para>
+  <remark>calls db2html.imagedata.src, how other attrs are gotten</remark>
+  </refsection></refentry><refentry id="T__db2html_imagedata_src"><indexterm><primary>db2html.imagedata.src</primary></indexterm><refnamediv><refname><function>db2html.imagedata.src</function></refname><refpurpose>Outputs the content of the <literal>src</literal> attribute for an <literal>img</literal> element</refpurpose></refnamediv><refsection><title>Parameters</title><variablelist><varlistentry><term><parameter>node</parameter></term><listitem><para>The element to render</para></listitem></varlistentry></variablelist></refsection><refsection><title>Description</title>
+  <para>This template is called by <function><link linkend="T__db2html_imagedata_src">db2html.imagedata.src</link></function> for the content of the
+  <literal>src</literal> attribute of an <literal>img</literal> element.</para>
+  </refsection></refentry><refentry id="T__db2html_mediaobject"><indexterm><primary>db2html.mediaobject</primary></indexterm><refnamediv><refname><function>db2html.mediaobject</function></refname><refpurpose>Outputs HTML for a <literal>mediaobject</literal> element</refpurpose></refnamediv><refsection><title>Parameters</title><variablelist><varlistentry><term><parameter>node</parameter></term><listitem><para>The element to render</para></listitem></varlistentry></variablelist></refsection><refsection><title>Description</title>
+  <para>This template processes a <literal>mediaobject</literal> element and outputs the appropriate
+  HTML.  DocBook allows multiple objects to be listed in a <literal>mediaobject</literal> element.
+  Processing tools are expected to choose the earliest suitable object.  Currently,
+  this template only chooses the first suitable <literal>imageobject</literal> element.  Support
+  for <literal>videobject</literal> and <literal>audioobject</literal> should be added in future versions, as well
+  as a text-only mode.</para>
+  </refsection></refentry></section>

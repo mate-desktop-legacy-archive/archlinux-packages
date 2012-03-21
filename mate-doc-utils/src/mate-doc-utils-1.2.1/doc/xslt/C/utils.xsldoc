@@ -1,0 +1,29 @@
+<section id="utils"><metas><meta><name>calls-names</name><desc>utils.strip_newlines</desc></meta><meta><name>calls-modes</name></meta><meta><name>uses-modes</name></meta><meta><name>uses-params</name></meta></metas>
+  <name>Common XSLT Utilities</name>
+  <body>
+  <remark>Describe this module</remark>
+  </body>
+<template>
+  <name>utils.strip_newlines</name>
+  <desc>Strips leading or trailing newlines from a string</desc>
+
+  <params>
+    <param><name>string</name>
+      <desc>The string to strip newlines from</desc>
+    </param>
+    <param><name>leading</name>
+      <desc>Whether to strip leading newlines</desc>
+    </param>
+    <param><name>trailing</name>
+      <desc>Whether to strip trailing newlines</desc>
+    </param>
+  </params>
+
+  <body>
+  <para>This template strips at most one leading and one trailing newline from
+  <parameter>string</parameter>.  This is useful for preformatted block elements where leading and
+  trailing newlines are ignored to make source formatting easier for authors.</para>
+  </body>
+</template>
+
+</section>

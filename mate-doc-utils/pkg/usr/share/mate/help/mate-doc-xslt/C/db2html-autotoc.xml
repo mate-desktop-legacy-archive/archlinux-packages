@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<section id="S__db2html-autotoc"><title>DocBook to HTML - Tables of Contents</title>
+  <para>This module provides templates to create tables of contents from any
+  division-level elements.</para>
+  <variablelist><title>Modes</title><varlistentry><term><link linkend="M__db2html_autotoc_mode"><function>db2html.autotoc.mode</function></link></term><listitem><para>Renders a TOC entry for an element and its children</para></listitem></varlistentry></variablelist><variablelist><title>Templates</title><varlistentry><term><link linkend="T__db2html_autotoc"><function>db2html.autotoc</function></link></term><listitem><para>Creates a table of contents for a given element</para></listitem></varlistentry></variablelist><refentry id="M__db2html_autotoc_mode"><indexterm><primary>db2html.autotoc.mode</primary></indexterm><refnamediv><refname><function>db2html.autotoc.mode</function></refname><refpurpose>Renders a TOC entry for an element and its children</refpurpose></refnamediv><refsection><title>Parameters</title><variablelist><varlistentry><term><parameter>is_info</parameter></term><listitem><para>Whether this contents list is for the info page</para></listitem></varlistentry><varlistentry><term><parameter>selected</parameter></term><listitem><para>A currently-selected page</para></listitem></varlistentry><varlistentry><term><parameter>toc_depth</parameter></term><listitem><para>How deep to create entries in the table of contents</para></listitem></varlistentry><varlistentry><term><parameter>labels</parameter></term><listitem><para>Whether to generate labels</para></listitem></varlistentry><varlistentry><term><parameter>titleabbrev</parameter></term><listitem><para>Whether to use <literal>titleabbrev</literal> instead of <literal>title</literal></para></listitem></varlistentry></variablelist></refsection><refsection><title>Description</title>
+  <para>This mode outputs a single element in a table of contents.  If the
+  <parameter>toc_depth</parameter> parameter is non-zero, then templates implementing this
+  mode should call <function><link linkend="T__db2html_autotoc">db2html.autotoc</link></function> in their context node, passing
+  their division-level child elements and decrementing <parameter>toc_depth</parameter>
+  by one.</para>
+  <para>For a description of the other parameters, see <function><link linkend="T__db2html_autotoc">db2html.autotoc</link></function>.</para>
+  </refsection></refentry><refentry id="T__db2html_autotoc"><indexterm><primary>db2html.autotoc</primary></indexterm><refnamediv><refname><function>db2html.autotoc</function></refname><refpurpose>Creates a table of contents for a given element</refpurpose></refnamediv><refsection><title>Parameters</title><variablelist><varlistentry><term><parameter>node</parameter></term><listitem><para>The element to create a table of contents for</para></listitem></varlistentry><varlistentry><term><parameter>show_info</parameter></term><listitem><para>Whether to include a link to the info page</para></listitem></varlistentry><varlistentry><term><parameter>is_info</parameter></term><listitem><para>Whether this contents list is for the info page</para></listitem></varlistentry><varlistentry><term><parameter>show_title</parameter></term><listitem><para>Whether to give the contents list a title</para></listitem></varlistentry><varlistentry><term><parameter>selected</parameter></term><listitem><para>A currently-selected page</para></listitem></varlistentry><varlistentry><term><parameter>divisions</parameter></term><listitem><para>The division-level child elements of <parameter>node</parameter></para></listitem></varlistentry><varlistentry><term><parameter>toc_depth</parameter></term><listitem><para>How deep nested contents should be listed.</para></listitem></varlistentry><varlistentry><term><parameter>labels</parameter></term><listitem><para>Whether to generate labels</para></listitem></varlistentry><varlistentry><term><parameter>titleabbrev</parameter></term><listitem><para>Whether to use <literal>titleabbrev</literal> instead of <literal>title</literal></para></listitem></varlistentry></variablelist></refsection><refsection><title>Description</title>
+  <para>This template creates a table of contents for a given division-level element.
+  The calling template should pass the division-level child elements in the
+  <parameter>divisions</parameter> parameter.  Nested divisions will be listed to the depth
+  specified in the <parameter>toc_depth</parameter> parameter.  If the <parameter>selected</parameter> parameter is
+  set to an existing element, then this template will only output ancestors
+  and siblings of ancestors of the selected element.  This effectively creates
+  a tree which is expanded sufficiently to show a particular element.</para>
+  <para>This template accepts a number of parameters that control the style of the
+  table of contents.  The <parameter>show_info</parameter> parameter specifies whether a link to
+  the info page ("About This Document") should be shown.  The <parameter>is_info</parameter>
+  parameter specifies whether the info page should be treated as the selected
+  page.  If the info page is selected, it will not be displayed as a link.</para>
+  <para>The <parameter>show_title</parameter> specifies whether a title should be placed at the top of
+  the table of contents.  The <parameter>labels</parameter> parameter specifies whether to place
+  section numbers as labels before each element in the list.  Finally, the
+  <parameter>titleabbrev</parameter> element specifies whether list elements should use the
+  <literal>titleabbrev</literal> of each element for the link text, if available.</para>
+  </refsection></refentry></section>

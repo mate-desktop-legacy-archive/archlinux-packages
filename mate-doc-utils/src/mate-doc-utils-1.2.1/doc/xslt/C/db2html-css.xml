@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<section id="S__db2html-css"><title>DocBook to HTML - CSS</title>
+  <remark>Describe this module</remark>
+  <variablelist><title>Parameters</title><varlistentry><term><link linkend="P__db2html_css_file"><parameter>db2html.css.file</parameter></link></term><listitem><para>The file to output CSS to</para></listitem></varlistentry></variablelist><variablelist><title>Templates</title><varlistentry><term><link linkend="T__db2html_css"><function>db2html.css</function></link></term><listitem><para>Outputs the CSS that controls the appearance of the entire document</para></listitem></varlistentry><varlistentry><term><link linkend="T__db2html_css_content"><function>db2html.css.content</function></link></term><listitem><para>Outputs the actual CSS directives</para></listitem></varlistentry><varlistentry><term><link linkend="T__db2html_css_custom"><function>db2html.css.custom</function></link></term><listitem><para>Allows extension stylesheets to extend or override CSS</para></listitem></varlistentry></variablelist><refentry id="P__db2html_css_file"><indexterm><primary>db2html.css.file</primary></indexterm><refnamediv><refname><parameter>db2html.css.file</parameter></refname><refpurpose>The file to output CSS to</refpurpose></refnamediv><refsection><title>Description</title>
+  <para>This parameter allows you to output the CSS to separate file which is referenced
+  by each HTML file.  If this parameter is blank, then the CSS is embedded inside
+  a <literal>style</literal> tag in the HTML instead.</para>
+  </refsection></refentry><refentry id="T__db2html_css"><indexterm><primary>db2html.css</primary></indexterm><refnamediv><refname><function>db2html.css</function></refname><refpurpose>Outputs the CSS that controls the appearance of the entire document</refpurpose></refnamediv><refsection><title>Parameters</title><variablelist><varlistentry><term><parameter>css_file</parameter></term><listitem><para>Whether to create a CSS file when <parameter><link linkend="P__db2html_css_file">db2html.css.file</link></parameter> is set.</para></listitem></varlistentry></variablelist></refsection><refsection><title>Description</title>
+  <para>This template outputs a <literal>style</literal> or <literal>link</literal> tag and calls <function><link linkend="T__db2html_css_content">db2html.css.content</link></function>
+  to output the actual CSS directives.  An external CSS file will only be created
+  when <parameter>css_file</parameter> is true.  This is only set to true by the top-level chunk to
+  avoid creating the same file multiple times.</para>
+  </refsection></refentry><refentry id="T__db2html_css_content"><indexterm><primary>db2html.css.content</primary></indexterm><refnamediv><refname><function>db2html.css.content</function></refname><refpurpose>Outputs the actual CSS directives</refpurpose></refnamediv><refsection><title>Description</title>
+  <para>This template is called by <function><link linkend="T__db2html_css">db2html.css</link></function> to output CSS content.  It also calls
+  templates from other modules to output CSS specific to the content addressed in
+  those modules.</para>
+  <para>This template calls <function><link linkend="T__db2html_css_custom">db2html.css.custom</link></function> at the end.  That template may be used
+  by extension stylesheets to extend or override the CSS.</para>
+  </refsection></refentry><refentry id="T__db2html_css_custom"><indexterm><primary>db2html.css.custom</primary></indexterm><refnamediv><refname><function>db2html.css.custom</function></refname><refpurpose>Allows extension stylesheets to extend or override CSS</refpurpose></refnamediv><refsection><title>Description</title>
+  <para>This stub template has no content.  Extension stylesheets can override this
+  template to output extra CSS.</para>
+  </refsection></refentry></section>

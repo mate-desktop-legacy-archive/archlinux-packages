@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- -*- indent-tabs-mode: nil -*- -->
+<?db.chunk.max_depth 2?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<article id="index" lang="de">
+  <articleinfo>
+    <title>MATE Dokumentation-XSLT-Handbuch</title>
+    
+    <abstract role="description">
+      <para>The MATE Documentation XSLT stylesheets were created to provide fast DocBook to HTML
+      conversion for real-time document viewing in MATE's help browser, <application>Yelp.</application></para>
+    </abstract>
+
+    <copyright>
+      <year>2004</year>
+
+      <holder>Shaun McCance</holder>
+    </copyright><copyright><year>2009</year><holder>Mario Blättermann (mariobl@gnome.org)</holder></copyright>
+
+    <publisher>
+      <publishername>MATE-Dokumentationsprojekt</publishername>
+    </publisher>
+
+    <include xmlns="http://www.w3.org/2001/XInclude" href="legal.xml"/>
+
+    <authorgroup>
+      <author role="maintainer">
+        <firstname>Shaun</firstname>
+
+        <surname>McCance</surname>
+
+        <affiliation>
+          <orgname>MATE-Dokumentationsprojekt</orgname>
+        </affiliation>
+
+        <email>shaunm@gnome.org</email>
+      </author>
+
+      <author>
+        <firstname>Brent</firstname>
+
+        <surname>Smith</surname>
+
+        <affiliation>
+          <orgname>MATE-Dokumentationsprojekt</orgname>
+        </affiliation>
+
+        <email>mate@nextreality.net</email>
+      </author>
+    </authorgroup>
+
+    <revhistory>
+      <revision>
+        <revnumber>0.1</revnumber>
+
+        <date>31. März 2004</date>
+      </revision>
+
+      <revision>
+        <revnumber>0.2</revnumber>
+
+        <date>11. Februar 2006</date>
+      </revision>
+    </revhistory>
+  </articleinfo>
+
+  <section id="intro">
+    <title>Einführung</title>
+
+    <para>Die MATE XSLT-Stilvorlagen werden verwendet, um HTML aus DocBook-Dateien zu erzeugen.</para>
+
+    <para>Einige der Ziele dieser Stilvorlagen sind:<itemizedlist>
+        <listitem>
+          <para>Bereitstellung einer Übertragung von DocBook in HTML in Echtzeit. Der MATE Hilfebrowser <application>Yelp</application> verwendet diese Stilvorlagen zur Formatierung von Hilfedokumenten.</para>
+        </listitem>
+
+        <listitem>
+          <para>Bereitstellung eines benutzerdefinierten Erscheinungsbildes für die Dokumentation von MATE.</para>
+        </listitem>
+
+        <listitem>
+          <para>Unterstützung für die Übersetzung der MATE-Dokumentation.</para>
+        </listitem>
+      </itemizedlist></para>
+  </section>
+
+  <section id="using">
+    <title>Verwendung der Stilvorlagen</title>
+
+    <para>Um die Stilvorlagen zu verwenden, sollten Sie mit der Anwendung <application>xsltproc</application> vertraut sein. Das erste Argument ist der Ort der <filename>db2html.xsl</filename>-Stilvorlage. Das zweite Argument ist die Basis-DocBook-Datei, aus welcher HTML erzeugt werden soll.</para>
+
+    <example id="example-db2html">
+      <title>Erstellung von HTML aus einer DocBook-Datei</title>
+
+      <para><screen><prompt>$</prompt> xsltproc /usr/share/xml/mate/xslt/docbook/html/db2html.xsl &lt;docbook file&gt;</screen></para>
+    </example>
+
+    <para>Weitere Informationen über <application>xsltproc</application> und die <application>libxslt</application>-Bibliotheken finden Sie auf <ulink url="http://www.xmlsoft.org/">http://xmlsoft.org/</ulink>.</para>
+
+    <note>
+      <title>XInclude-Verarbeitung</title>
+
+      <para>If you make use of <ulink url="http://www.w3.org/TR/xinclude/">XInclude</ulink> to include other
+      files in your document, then you must use the 
+      <parameter>--xinclude</parameter> parameter to generate the complete
+      DocBook file before processing it with the
+      <filename>db2html.xsl</filename> stylesheet(s).</para>
+    </note>
+  </section>
+
+  <section id="parameters">
+    <title>Angeben von Parametern</title>
+
+    <para>There are a number of parameters available in the stylesheets which
+    you can set to customize the generated html. An exhaustive list is
+    available in the following sections, but we will go over a few of the more
+    commonly used ones in this section.</para>
+
+    <para>To specify a parameter to the stylesheets, use the
+    <parameter>--stringparam</parameter> option of the
+    <application>xsltproc</application> application.</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>db.chunk.chunk_top</term>
+
+        <listitem>
+          <para>Set this parameter to <literal>1</literal> if you want the
+          stylesheets to chunk<footnote>
+              <para>Chunking refers to creating a separate output file for an
+              element. For example, if there are three
+              <literal>&lt;sect1&gt;</literal> elements within a document,
+              (with no subsections) then there will be three files generated
+              for each element. Incidentally, the name of the files will be
+              the same as the element's <literal>id</literal>
+              attribute.</para>
+            </footnote> the top level element
+          (<literal>&lt;article&gt;</literal> or
+          <literal>&lt;book&gt;</literal>) into a file called
+          <filename>index.xhtml</filename>.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>db.chunk.max_depth</term>
+
+        <listitem>
+          <para>Specifies the maximum depth of chunked elements specified in
+          <parameter>db.chunk.chunks</parameter> parameter.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>db.chunk.extension</term>
+
+        <listitem>
+          <para>Set this parameter to <literal>the extension</literal> you
+          would like for the chunked output files.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <example id="example-parameters">
+      <title>Example of specifying stylesheet parameters</title>
+
+      <para><screen><prompt>$</prompt> xsltproc \
+   --stringparam db.chunk.chunk_top 1        \
+   --stringparam db.chunk.max_depth 1        \
+   --stringparam db.chunk.extension '.html'  \
+   /usr/share/xml/mate/xslt/docbook/html/db2html.xsl \
+   &lt;path to docbook file&gt;</screen><xref linkend="example-parameters"/> will chunk the top level element, chunk
+      to a maximum depth of 1 and chunk the title page.</para>
+    </example>
+  </section>
+
+  <section id="limitations">
+    <title>Einschränkungen</title>
+
+    <para>Gegenwärtig erfordern die Stilvorlagen ein <literal>id</literal>-Attribut zu jedem enthaltenen Element.</para>
+  </section>
+
+  <include xmlns="http://www.w3.org/2001/XInclude" href="translating.xml"/>
+
+  <section id="reference">
+    <title>Referenz der Stilvorlagen</title>
+
+    <!--BEGIN-->
+    <include xmlns="http://www.w3.org/2001/XInclude" href="db-chunk.xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="db-common.xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="db-label.xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="db-title.xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="db-xref.xml"/>
+
+    <include xmlns="http://www.w3.org/2001/XInclude" href="db2html.xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="db2xhtml.xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="db2html-autotoc.xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="db2html-bibliography.xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="db2html-block.xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="db2html-callout.xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="db2html-classsynopsis.xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="db2html-cmdsynopsis.xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="db2html-css.xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="db2html-division.xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="db2html-ebnf.xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="db2html-footnote.xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="db2html-funcsynopsis.xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="db2html-index.xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="db2html-info.xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="db2html-inline.xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="db2html-l10n.xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="db2html-list.xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="db2html-media.xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="db2html-qanda.xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="db2html-refentry.xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="db2html-table.xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="db2html-title.xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="db2html-xref.xml"/>
+
+    <include xmlns="http://www.w3.org/2001/XInclude" href="db2omf.xml"/>
+
+    <include xmlns="http://www.w3.org/2001/XInclude" href="theme.xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="utils.xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="gettext.xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="l10n-numbers.xml"/>
+    <!--END-->
+  </section>
+
+</article>

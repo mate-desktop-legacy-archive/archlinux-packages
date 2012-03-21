@@ -17,8 +17,7 @@ sha256sums=('0d2e252c292f75eb07b6ca39c171ee984b0c2b51af2b2bd17772137cb0dbeeca')
 
 build() {
 	cd "$srcdir/$pkgname-$pkgver"
-	./autogen.sh
-	./configure --prefix=/usr || return 1
+	./autogen.sh --prefix=/usr 
 
 	#fix non-standard directory
 	sed -i 's|${prefix}/etc|/etc|' Makefile

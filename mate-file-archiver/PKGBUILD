@@ -24,12 +24,7 @@ sha256sums=('f6aa182085e063469ab2058585ce1dd2eedce97a925c1f720768d549a8848416')
 
 build() {
 	cd "$srcdir/$pkgname-$pkgver"
-  ./autogen.sh
-	mate-doc-prepare --force
-	autoreconf -i
-	aclocal
-
-	./configure --prefix=/usr \
+  ./autogen.sh --prefix=/usr \
 		--disable-static \
 		--localstatedir=/var \
 		--libexecdir=/usr/lib/${pkgname} \
@@ -37,6 +32,10 @@ build() {
 		--disable-schemas-install \
 		--sysconfdir=/etc \
 		--disable-packagekit
+	mate-doc-prepare --force
+	autoreconf -i
+	aclocal
+
 	make
 }
 

@@ -1,0 +1,200 @@
+<section id="db2html-info"><metas><meta><name>calls-names</name><desc>db.chunk.depth-of-chunk</desc><desc>db2html.anchor</desc><desc>db2html.info.title</desc><desc>db2html.info.subtitle</desc><desc>db2html.info.authors</desc><desc>db2html.info.editors</desc><desc>db2html.info.collabs</desc><desc>db2html.info.translators</desc><desc>db2html.info.publishers</desc><desc>db2html.info.othercredits</desc><desc>db2html.info.copyrights</desc><desc>l10n.gettext</desc><desc>db.personname</desc><desc>db.copyright</desc><desc>db2html.block</desc><desc>db2html.inline</desc><desc>db2html.division.html</desc></meta><meta><name>calls-modes</name><desc>db2html.info.mode</desc></meta><meta><name>uses-modes</name><desc>db2html.info.mode</desc><desc>db.chunk.info.content.mode</desc></meta><meta><name>uses-params</name></meta><meta><name>Requires</name><desc>db-chunk</desc><desc>db-common</desc><desc>db2html-block</desc><desc>db2html-division</desc><desc>db2html-inline</desc><desc>db2html-xref</desc><desc>gettext</desc></meta></metas>
+  <name>DocBook to HTML - Title Pages</name>
+  
+  <body>
+  <remark>Describe this module</remark>
+  </body>
+<template>
+  <name>db2html.info.div</name>
+  <desc>Renders the contents of the title page of a division element</desc>
+
+  <params>
+    <param><name>node</name>
+      <desc>The division element to generate a title page for</desc>
+    </param>
+    <param><name>info</name>
+      <desc>The info child element of <parameter>node</parameter></desc>
+    </param>
+    <param><name>depth_of_chunk</name>
+      <desc>The depth of the containing chunk in the document</desc>
+    </param>
+  </params>
+
+  <body>
+  <remark>Describe this template</remark>
+  </body>
+</template>
+
+<template>
+  <name>db2html.info.title</name>
+  <desc>Outputs the title of a title page</desc>
+
+  <params>
+    <param><name>node</name>
+      <desc>The division element for which a title page is being generated</desc>
+    </param>
+    <param><name>info</name>
+      <desc>The info child element of <parameter>node</parameter></desc>
+    </param>
+  </params>
+
+  <body>
+  <remark>Describe this template</remark>
+  </body>
+</template>
+
+<template>
+  <name>db2html.info.subtitle</name>
+  <desc>Outputs the subtitle of a title page</desc>
+
+  <params>
+    <param><name>node</name>
+      <desc>The division element for which a title page is being generated</desc>
+    </param>
+    <param><name>info</name>
+      <desc>The info child element of <parameter>node</parameter></desc>
+    </param>
+  </params>
+
+  <body>
+  <remark>Describe this template</remark>
+  </body>
+</template>
+
+<template>
+  <name>db2html.info.authors</name>
+  <desc>Creates the author credits in a title page</desc>
+
+  <params>
+    <param><name>node</name>
+      <desc>The division element for which a title page is being generated</desc>
+    </param>
+    <param><name>info</name>
+      <desc>The info child element of <parameter>node</parameter></desc>
+    </param>
+  </params>
+
+  <body>
+  <remark>Describe this template</remark>
+  </body>
+</template>
+
+<template>
+  <name>db2html.info.editors</name>
+  <desc>Creates the editor credits in a title page</desc>
+
+  <params>
+    <param><name>node</name>
+      <desc>The division element for which a title page is being generated</desc>
+    </param>
+    <param><name>info</name>
+      <desc>The info child element of <parameter>node</parameter></desc>
+    </param>
+  </params>
+
+  <body>
+  <remark>Describe this template</remark>
+  </body>
+</template>
+
+<template>
+  <name>db2html.info.collabs</name>
+  <desc>Creates the collaborator credits in a title page</desc>
+
+  <params>
+    <param><name>node</name>
+      <desc>The division element for which a title page is being generated</desc>
+    </param>
+    <param><name>info</name>
+      <desc>The info child element of <parameter>node</parameter></desc>
+    </param>
+  </params>
+
+  <body>
+  <remark>Describe this template</remark>
+  </body>
+</template>
+
+<template>
+  <name>db2html.info.translators</name>
+  <desc>Creates the translator credits in a title page</desc>
+
+  <params>
+    <param><name>node</name>
+      <desc>The division element for which a title page is being generated</desc>
+    </param>
+    <param><name>info</name>
+      <desc>The info child element of <parameter>node</parameter></desc>
+    </param>
+  </params>
+
+  <body>
+  <remark>Describe this template</remark>
+  </body>
+</template>
+
+<template>
+  <name>db2html.info.publishers</name>
+  <desc>Creates the publisher credits in a title page</desc>
+
+  <params>
+    <param><name>node</name>
+      <desc>The division element for which a title page is being generated</desc>
+    </param>
+    <param><name>info</name>
+      <desc>The info child element of <parameter>node</parameter></desc>
+    </param>
+  </params>
+
+  <body>
+  <remark>Describe this template</remark>
+  </body>
+</template>
+
+<template>
+  <name>db2html.info.othercredits</name>
+  <desc>Creates all other credits in a title page</desc>
+
+  <params>
+    <param><name>node</name>
+      <desc>The division element for which a title page is being generated</desc>
+    </param>
+    <param><name>info</name>
+      <desc>The info child element of <parameter>node</parameter></desc>
+    </param>
+  </params>
+
+  <body>
+  <remark>Describe this template</remark>
+  </body>
+</template>
+
+<template>
+  <name>db2html.info.copyrights</name>
+  <desc>Creates the copyright statements in a title page</desc>
+
+  <params>
+    <param><name>node</name>
+      <desc>The division element for which a title page is being generated</desc>
+    </param>
+    <param><name>info</name>
+      <desc>The info child element of <parameter>node</parameter></desc>
+    </param>
+  </params>
+
+  <body>
+  <remark>Describe this template</remark>
+  </body>
+</template>
+
+<mode>
+  <name>db2html.info.mode</name>
+  <desc>FIXME</desc>
+
+  <body>
+  <remark>Describe this mode.</remark>
+  </body>
+</mode>
+
+<mode private="true"><name>db.chunk.info.content.mode</name></mode>
+</section>

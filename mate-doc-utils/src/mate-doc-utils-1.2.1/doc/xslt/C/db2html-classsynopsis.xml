@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<section id="S__db2html-classsynopsis"><title>DocBook to HTML - Class Synopses</title>
+  <remark>Describe this module.  Implmentation note: for C++, we expect the first
+  modifier to be the visibility</remark>
+  <variablelist><title>Parameters</title><varlistentry><term><link linkend="P__db2html_classsynopsis_language"><parameter>db2html.classsynopsis.language</parameter></link></term><listitem><para>The default programming language used to format <literal>classsynopsis</literal> elements</para></listitem></varlistentry></variablelist><variablelist><title>Modes</title><varlistentry><term><link linkend="M__db2html_class_cpp_mode"><function>db2html.class.cpp.mode</function></link></term><listitem><para/></listitem></varlistentry><varlistentry><term><link linkend="M__db2html_class_python_mode"><function>db2html.class.python.mode</function></link></term><listitem><para/></listitem></varlistentry></variablelist><refentry id="P__db2html_classsynopsis_language"><indexterm><primary>db2html.classsynopsis.language</primary></indexterm><refnamediv><refname><parameter>db2html.classsynopsis.language</parameter></refname><refpurpose>The default programming language used to format <literal>classsynopsis</literal> elements</refpurpose></refnamediv><refsection><title>Description</title>
+  <remark>Describe this param</remark>
+  </refsection></refentry><refentry id="M__db2html_class_cpp_mode"><indexterm><primary>db2html.class.cpp.mode</primary></indexterm><refnamediv><refname><function>db2html.class.cpp.mode</function></refname><refpurpose/></refnamediv><refsection><title>Description</title>
+  <remark>Describe this mode</remark>
+  </refsection></refentry><refentry id="M__db2html_class_python_mode"><indexterm><primary>db2html.class.python.mode</primary></indexterm><refnamediv><refname><function>db2html.class.python.mode</function></refname><refpurpose/></refnamediv><refsection><title>Description</title>
+  <remark>Describe this mode</remark>
+  </refsection></refentry></section>

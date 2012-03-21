@@ -1,0 +1,32 @@
+<section id="db2html-classsynopsis"><metas><meta><name>calls-names</name><desc>l10n.direction</desc><desc>db2html.anchor</desc><desc>db2html.inline</desc><desc>db2html.class.cpp.modifier</desc></meta><meta><name>calls-modes</name><desc>db2html.class.cpp.mode</desc><desc>db2html.class.python.mode</desc></meta><meta><name>uses-modes</name><desc>db2html.class.cpp.mode</desc><desc>db2html.class.python.mode</desc></meta><meta><name>uses-params</name><desc>db2html.classsynopsis.language</desc><desc>cpp.tab</desc><desc>python.tab</desc></meta><meta><name>Requires</name><desc>db2html-inline</desc><desc>db2html-xref</desc><desc>gettext</desc></meta></metas>
+  <name>DocBook to HTML - Class Synopses</name>
+  
+  <body>
+  <remark>Describe this module.  Implmentation note: for C++, we expect the first
+  modifier to be the visibility</remark>
+  </body>
+<param>
+  <name>db2html.classsynopsis.language</name>
+  <desc>The default programming language used to format <literal>classsynopsis</literal> elements</desc>
+
+  <body>
+  <remark>Describe this param</remark>
+  </body>
+</param>
+
+<template private="true"><name>db2html.class.cpp.modifier</name></template>
+<mode>
+  <name>db2html.class.cpp.mode</name>
+  <body>
+  <remark>Describe this mode</remark>
+  </body>
+</mode>
+
+<mode>
+  <name>db2html.class.python.mode</name>
+  <body>
+  <remark>Describe this mode</remark>
+  </body>
+</mode>
+
+</section>

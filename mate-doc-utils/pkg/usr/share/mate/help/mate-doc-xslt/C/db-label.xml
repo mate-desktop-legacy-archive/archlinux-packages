@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<section id="S__db-label"><title>DocBook Labels</title>
+  <remark>Explain labels</remark>
+  <variablelist><title>Modes</title><varlistentry><term><link linkend="M__db_label_mode"><function>db.label.mode</function></link></term><listitem><para/></listitem></varlistentry><varlistentry><term><link linkend="M__db_number_mode"><function>db.number.mode</function></link></term><listitem><para>FIXME</para></listitem></varlistentry><varlistentry><term><link linkend="M__db_digit_mode"><function>db.digit.mode</function></link></term><listitem><para>FIXME</para></listitem></varlistentry><varlistentry><term><link linkend="M__db_number_parent_mode"><function>db.number.parent.mode</function></link></term><listitem><para>FIXME</para></listitem></varlistentry></variablelist><variablelist><title>Templates</title><varlistentry><term><link linkend="T__db_label"><function>db.label</function></link></term><listitem><para>Generates the label for an element</para></listitem></varlistentry><varlistentry><term><link linkend="T__db_number"><function>db.number</function></link></term><listitem><para>Generates the number portion of a label</para></listitem></varlistentry><varlistentry><term><link linkend="T__db_digit"><function>db.digit</function></link></term><listitem><para>FIXME</para></listitem></varlistentry></variablelist><refentry id="M__db_label_mode"><indexterm><primary>db.label.mode</primary></indexterm><refnamediv><refname><function>db.label.mode</function></refname><refpurpose/></refnamediv><refsection><title>Parameters</title><variablelist><varlistentry><term><parameter>role</parameter></term><listitem><para>The role of the label, as passed to the format template</para></listitem></varlistentry></variablelist></refsection><refsection><title>Description</title>
+  <remark>Document this mode, and the role param</remark>
+  </refsection></refentry><refentry id="M__db_number_mode"><indexterm><primary>db.number.mode</primary></indexterm><refnamediv><refname><function>db.number.mode</function></refname><refpurpose>FIXME</refpurpose></refnamediv><refsection><title>Description</title>
+  <remark>Document this mode</remark>
+  </refsection></refentry><refentry id="M__db_digit_mode"><indexterm><primary>db.digit.mode</primary></indexterm><refnamediv><refname><function>db.digit.mode</function></refname><refpurpose>FIXME</refpurpose></refnamediv><refsection><title>Description</title>
+  <remark>Document this mode.  Rename to db.number.digit.mode?</remark>
+  </refsection></refentry><refentry id="M__db_number_parent_mode"><indexterm><primary>db.number.parent.mode</primary></indexterm><refnamediv><refname><function>db.number.parent.mode</function></refname><refpurpose>FIXME</refpurpose></refnamediv><refsection><title>Description</title>
+  <remark>Document this mode</remark>
+  </refsection></refentry><refentry id="T__db_label"><indexterm><primary>db.label</primary></indexterm><refnamediv><refname><function>db.label</function></refname><refpurpose>Generates the label for an element</refpurpose></refnamediv><refsection><title>Parameters</title><variablelist><varlistentry><term><parameter>node</parameter></term><listitem><para>The node to generate a label for</para></listitem></varlistentry><varlistentry><term><parameter>role</parameter></term><listitem><para>The role of the label, as passed to the format template</para></listitem></varlistentry></variablelist></refsection><refsection><title>Description</title>
+  <para>This template generates the label used for some sectioning and block-level
+  elements.  For instance, this would generate strings such as Section 14.3
+  or Table 5-2.  The template simply applies the mode <function><link linkend="M__db_label_mode">db.label.mode</link></function> to the
+  element.  To change the behavior of a particular type of element, you should
+  always override the mode template for that element.</para>
+  <para>Overriding the <function><link linkend="T__db_label">db.label</link></function> template should only be done if you wish to change
+  the labelling mechanism completely, or if you wish to wrap the labelling
+  mechanism (for instance, with a caching extension).  Do not override this
+  template to suppress label prefixes in titles.</para>
+  <remark>Do not, but instead?</remark>
+  </refsection></refentry><refentry id="T__db_number"><indexterm><primary>db.number</primary></indexterm><refnamediv><refname><function>db.number</function></refname><refpurpose>Generates the number portion of a label</refpurpose></refnamediv><refsection><title>Parameters</title><variablelist><varlistentry><term><parameter>node</parameter></term><listitem><para>The element to generate a number for</para></listitem></varlistentry></variablelist></refsection><refsection><title>Description</title>
+  <para>This template generates the number portion of the label used for some sectioning
+  and block-level elements.  The template simply applies the mode <function><link linkend="M__db_number_mode">db.number.mode</link></function>
+  to the element.  To change the behavior of a particular type of element, you
+  should always override the mode template for that type of element.</para>
+  <para>Overriding the <function><link linkend="T__db_number">db.number</link></function> template should only be done if you wish to change
+  the numbering mechanism completely, or you wish to wrap the numbering mechanism
+  (for example, with a caching extension).</para>
+  </refsection></refentry><refentry id="T__db_digit"><indexterm><primary>db.digit</primary></indexterm><refnamediv><refname><function>db.digit</function></refname><refpurpose>FIXME</refpurpose></refnamediv><refsection><title>Description</title>
+  <remark>Document this template</remark>
+  </refsection></refentry></section>

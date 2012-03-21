@@ -1,0 +1,9 @@
+prefix=/usr
+exec_prefix=${prefix}
+datarootdir=${prefix}/share
+modesdir=${prefix}/lib/python2.7/site-packages/xml2po
+
+Name: xml2po
+Description: Tool for translating XML documents
+Version: 1.2.1
+Requires: libxml-2.0

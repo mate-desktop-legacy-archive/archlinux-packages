@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="S__utils"><title>Common XSLT Utilities</title>
+  <remark>Describe this module</remark>
+  <variablelist><title>Templates</title><varlistentry><term><link linkend="T__utils_strip_newlines"><function>utils.strip_newlines</function></link></term><listitem><para>Strips leading or trailing newlines from a string</para></listitem></varlistentry></variablelist><refentry id="T__utils_strip_newlines"><indexterm><primary>utils.strip_newlines</primary></indexterm><refnamediv><refname><function>utils.strip_newlines</function></refname><refpurpose>Strips leading or trailing newlines from a string</refpurpose></refnamediv><refsection><title>Parameters</title><variablelist><varlistentry><term><parameter>string</parameter></term><listitem><para>The string to strip newlines from</para></listitem></varlistentry><varlistentry><term><parameter>leading</parameter></term><listitem><para>Whether to strip leading newlines</para></listitem></varlistentry><varlistentry><term><parameter>trailing</parameter></term><listitem><para>Whether to strip trailing newlines</para></listitem></varlistentry></variablelist></refsection><refsection><title>Description</title>
+  <para>This template strips at most one leading and one trailing newline from
+  <parameter>string</parameter>.  This is useful for preformatted block elements where leading and
+  trailing newlines are ignored to make source formatting easier for authors.</para>
+  </refsection></refentry></section>
