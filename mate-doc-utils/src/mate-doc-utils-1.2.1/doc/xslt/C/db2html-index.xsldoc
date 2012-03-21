@@ -1,8 +1,0 @@
-<section id="db2html-index"><metas><meta><name>calls-names</name><desc>l10n.gettext</desc><desc>db.chunk.depth-in-chunk</desc><desc>db.chunk.depth-of-chunk</desc><desc>db2html.division.div</desc></meta><meta><name>calls-modes</name></meta><meta><name>uses-modes</name><desc>l10n.format.mode</desc></meta><meta><name>uses-params</name></meta><meta><name>Requires</name><desc>db-chunk</desc><desc>db2html-division</desc><desc>gettext</desc></meta></metas>
-  <name>DocBook to HTML - Indexes</name>
-  
-  <body>
-  <para>This module provides templates to process DocBook indexes.</para>
-  </body>
-<mode private="true"><name>l10n.format.mode</name></mode>
-</section>

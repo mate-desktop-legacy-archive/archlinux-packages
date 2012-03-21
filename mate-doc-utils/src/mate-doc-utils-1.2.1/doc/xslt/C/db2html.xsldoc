@@ -1,9 +1,0 @@
-<section id="db2html"><metas><meta><name>calls-names</name></meta><meta><name>calls-modes</name></meta><meta><name>uses-modes</name></meta><meta><name>uses-params</name></meta></metas>
-<param private="true"><name>db.chunk.doctype_public</name></param>
-<param private="true"><name>db.chunk.doctype_system</name></param>
-<param private="true"><name>db2html.namespace</name></param>
-  <name>DocBook to HTML</name>
-  <body>
-  </body>
-<param private="true"><name>db.chunk.extension</name></param>
-</section>

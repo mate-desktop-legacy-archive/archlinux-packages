@@ -1,8 +1,0 @@
-<section id="db2html-refentry"><metas><meta><name>calls-names</name><desc>l10n.gettext</desc><desc>db.chunk.depth-in-chunk</desc><desc>db.chunk.depth-of-chunk</desc><desc>db2html.division.div</desc><desc>db.title</desc><desc>db2html.inline</desc><desc>db2html.anchor</desc></meta><meta><name>calls-modes</name></meta><meta><name>uses-modes</name><desc>db2html.division.div.content.mode</desc></meta><meta><name>uses-params</name></meta><meta><name>Requires</name><desc>db-chunk</desc><desc>db-title</desc><desc>db2html-inline</desc><desc>db2html-division</desc><desc>db2html-xref</desc><desc>gettext</desc></meta></metas>
-  <name>DocBook to HTML - Reference Pages</name>
-  
-  <body>
-  <remark>Describe this module. Talk about refenty and friends</remark>
-  </body>
-<mode private="true"><name>db2html.division.div.content.mode</name></mode>
-</section>
