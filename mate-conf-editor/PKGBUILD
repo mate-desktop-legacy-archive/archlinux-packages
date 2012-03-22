@@ -16,8 +16,7 @@ sha256sums=('15033a678a52589e913f23fe8071611066dda39711ee26da458aa834af649f30')
 
 build() {
 	cd "${srcdir}/$pkgname-$pkgver"
-	./autogen.sh
-	./configure --prefix=/usr --sysconfdir=/etc \
+	./autogen.sh --prefix=/usr --sysconfdir=/etc \
 		--libexecdir=/usr/lib/MateConf \
 		--localstatedir=/var || return 1
 
