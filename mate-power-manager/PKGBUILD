@@ -13,7 +13,7 @@ install=mate-power-manager.install
 url="http://mate-desktop.org"
 groups=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('dc07a792aad0f1e1db8b1b2f3dade3a4bb7cdd3edfb2803bef3dfcf89c38e071')
+sha256sums=('add0ad727465d3a9f5410f24c87516438c457a5243136bbad5d2d88d96409047')
 
 build() {
 

@@ -9,7 +9,7 @@ license=('GPL')
 depends=('gstreamer0.10-base-plugins' 'mate-panel' 'libgtop' 'libmatenotify'
          'cpufrequtils')
 makedepends=('mate-doc-utils' 'pkgconfig' 'mate-settings-daemon' 'intltool'
-              'mate-icon-theme' 'networkmanager' 'mate-character-map') # 'mate-python-desktop'
+              'mate-icon-theme' 'networkmanager') # 'mate-python-desktop' 'mate-character-map'
 groups=('mate-extras')
 options=(!emptydirs)
 replace=('gnome-applets')

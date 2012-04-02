@@ -26,7 +26,7 @@ build() {
 		--enable-mateconf \
 		--enable-matecomponent_activation \
 		--enable-matecomponent \
-		--enable-matecomponentui
+		--enable-matecomponentui \
 		--prefix=/usr \
 		--sysconfdir=/etc \
 		--localstatedir=/var \
