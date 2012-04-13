@@ -1,4 +1,4 @@
-pkgname=engrampa
+pkgname=mate-file-archiver
 
 post_install() {
 	usr/sbin/mateconfpkg --install ${pkgname}
