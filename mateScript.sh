@@ -45,19 +45,21 @@ listofpackages=(
     mate-applets
     )
     
+##TODO: ADD VERSION CONTROL CHECK!
     
 for package in ${listofpackages[@]}
 	do
 	echo "Starting $package build"
 	cd $package
 
-	if [ -f *.pkg.tar.xz ]; then 
-    	echo "----- $package package already exists ^^ I'm checking if it's already installed..."
-		if [[ `pacman -Qqe | grep "$package"` ]]; 
-			then  echo "****Package $package already installed,skipping"
-	else (echo "---------- START Making ->  $package -------------------" && makepkg --asroot -f ) && pacman -U --noconfirm $package-*.pkg.tar.xz
-		fi
-	fi
+	#if [ -f *.pkg.tar.xz ]; then 
+    		echo "----- $package package already exists ^^ I'm checking if it's already installed..."
+		#	if [[ `pacman -Qqe | grep "$package"` ]]; 
+		#		then  echo "****Package $package already installed,skipping"
+		#else
+			 (echo "---------- START Making ->  $package -------------------" && makepkg --asroot -f ) && pacman -U --noconfirm $package-*.pkg.tar.xz
+		#fi
+	#fi
 
 	
 echo "Done building & installing $package"
