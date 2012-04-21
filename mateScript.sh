@@ -62,12 +62,8 @@ for package in ${listofpackages[@]}
 		newver=$(cat PKGBUILD | grep pkgver=) && newver=${newver##pkgver=};
 		installedver=$(pacman -Q | grep $package) && installedver=${installedver##$package} && installedver=${installedver%%-*};
 
-		 if [ $newver == $installedver ]
-			
-
-			
+		if [ $newver == $installedver ]
 				then  echo "!****! The same versione of package $package is already  installed,skipping...."
-						
 				else (echo "---------- START Making ->  $package -------------------" && makepkg --asroot -f ) && pacman -U --noconfirm $package-*.pkg.tar.xz
 		fi
 	fi
