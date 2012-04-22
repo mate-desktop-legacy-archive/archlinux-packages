@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+
+ #NOT WORKING ATM!!!!!
 listofpackages=(
     mate-common
     mate-doc-utils
