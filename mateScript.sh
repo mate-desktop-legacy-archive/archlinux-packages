@@ -45,8 +45,6 @@ listofpackages=(
     mate-applets
     )
     
-##TODO: ADD VERSION CONTROL CHECK!
-
 
 for package in ${listofpackages[@]}
 	do
@@ -55,17 +53,19 @@ for package in ${listofpackages[@]}
 	cd $package
 
 	if [ -f *.pkg.tar.xz ];
-		#then echo "----- $package package already exists ^^ I'm checking if it's already installed..."
-
-		then installed_pkg_stuff=$(pacman -Q | grep $package);
+		then echo "----- $package package already built ^^ I'm checking if it's already installed..."
+			if [[  `pacman -Qqe | grep "$package"` ]];
+				then installed_pkg_stuff=$(pacman -Q | grep $package);
 		#those operations could be done/written in a shorter [but a little more complex] way. I choose to let it this way to have a "readable" code
 		newver=$(cat PKGBUILD | grep pkgver=) && newver=${newver##pkgver=};
 		installedver=$(pacman -Q | grep $package) && installedver=${installedver##$package} && installedver=${installedver%%-*};
 
-		if [ $newver == $installedver ]
-				then  echo "!****! The same versione of package $package is already  installed,skipping...."
-				else (echo "---------- START Making ->  $package -------------------" && makepkg --asroot -f ) && pacman -U --noconfirm $package-*.pkg.tar.xz
-		fi
+				if [ $newver == $installedver ]
+						then  echo "!****! The same version of package $package is already  installed,skipping...."
+						
+				fi
+			else (echo "---------- START Making ->  $package -------------------" && makepkg --asroot -f ) && pacman -U --noconfirm $package-*.pkg.tar.xz
+			fi
 	fi
 
 	
