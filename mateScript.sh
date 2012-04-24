@@ -1,7 +1,7 @@
 #!/bin/bash -e
 set -e
 
- #working sometimes :D  I have to code something to handle dependencies missing
+ #working sometimes :D  I have to code something to handle missing dependencies
  
 listofpackages=(
     mate-common
