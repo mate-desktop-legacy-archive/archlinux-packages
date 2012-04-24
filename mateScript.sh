@@ -72,6 +72,13 @@ for package in ${listofpackages[@]}
 			
 	fi
 
+
+  if [ $? -ne 0 ]
+  then
+    break
+  fi
+
+
 	
 echo "-----> Done building & installing $package"
 echo " "
