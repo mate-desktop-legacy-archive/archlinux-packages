@@ -72,7 +72,7 @@ for package in ${listofpackages[@]}
 			
 	fi
 
-
+#break if there is some error
   if [ $? -ne 0 ]
   then
     break
