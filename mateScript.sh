@@ -68,7 +68,7 @@ for package in ${listofpackages[@]}
 						
 				fi
 			fi
-	else (echo "---------- START Making ->  $package -------------------" && makepkg --asroot -f ) && pacman -U --noconfirm $package-*.pkg.tar.xz
+	else (echo "---------- START Making ->  $package -------------------" && makepkg -f ) && sudo pacman -U --noconfirm $package-*.pkg.tar.xz
 			
 	fi
 

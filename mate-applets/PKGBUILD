@@ -1,7 +1,7 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-applets
-pkgver=1.2.0
+pkgver=1.2.2
 pkgrel=1
 pkgdesc="Applets for MATE panel"
 arch=('i686' 'x86_64')
@@ -17,7 +17,7 @@ conflicts=('gnome-applets')
 url="http://mate-desktop.org"
 install=mate-applets.install
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('23dd41dd616f3871ea75c93c2484ae7f89a00ee67960c77c8ceaa5e58462f81f')
+sha256sums=('6eacf8e4119f2eeeb222cc9b8165cf564e5560b5269130238335ff3ea001e1d1')
 
 build() {
     cd "${srcdir}/$pkgname-$pkgver"
