@@ -1,6 +1,6 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 pkgname=libmatecomponent
-pkgver=1.2.0
+pkgver=1.2.1
 pkgrel=1
 pkgdesc="A set of language and system independant CORBA interfaces for creating reusable components"
 arch=('i686' 'x86_64')
@@ -13,7 +13,7 @@ backup=('etc/matecomponent-activation/matecomponent-activation-config.xml')
 url="http://mate-desktop.org"
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz ./matecomponent-activation-config.xml)
 install=libmatecomponent.install
-sha256sums=('121bd7573186a81885942d82432bbdc2b69d37108b79e00f85994d68d770fdf3'
+sha256sums=('de9a842c5b329c68c852dfe3c686c908f77f52c2f0533e10f22c130e1a7df9d5'
             'c1fc9b102f2635b0d4be39728d19737c1013b61395d0bd0c508fc6ad6b61643e')
 
 build() {
