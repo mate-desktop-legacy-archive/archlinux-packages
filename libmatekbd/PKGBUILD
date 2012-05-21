@@ -13,7 +13,7 @@ url="http://mate-desktop.org"
 options=('!emptydirs' '!libtool')
 install=libmatekbd.install
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('6c3d0b07c69bc63822f66d58080826fa04a7ef485ed73987d75d4ccf320b18b5')
+sha256sums=('72d70df0642377988148d6b73dff5d0f42c3a5dcc79c36864489ec904df99486')
 
 build() {
     cd "${srcdir}/$pkgname-$pkgver"
