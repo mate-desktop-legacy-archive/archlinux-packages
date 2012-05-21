@@ -1,7 +1,7 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-corba
-pkgver=1.2.1
+pkgver=1.2.2
 pkgrel=1
 pkgdesc="Thin/fast CORBA ORB"
 arch=('i686' 'x86_64')
@@ -12,7 +12,7 @@ options=('!emptydirs' '!libtool')
 groups=('mate')
 url="http://mate-desktop.org"
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('0b6a40718e260bc5556147866cbf6a9f988e08c635f2fc4007974af840c427bb')
+sha256sums=('46cd558e97c31d7ffeeb2c7f5ebc2c0e76dea6eae3c1801884b51f0470f2fc02')
 
 
 build() {
