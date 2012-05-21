@@ -11,10 +11,10 @@ groups=('mate')
 options=('!emptydirs' '!libtool')
 backup=('etc/matecomponent-activation/matecomponent-activation-config.xml')
 url="http://mate-desktop.org"
-source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz ./matecomponent-activation-config.xml)
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz ./matecomponent-activation-config.xml ./libmatecomponent-1.2.1.patch)
 install=libmatecomponent.install
 sha256sums=('de9a842c5b329c68c852dfe3c686c908f77f52c2f0533e10f22c130e1a7df9d5'
-            'c1fc9b102f2635b0d4be39728d19737c1013b61395d0bd0c508fc6ad6b61643e')
+            'c1fc9b102f2635b0d4be39728d19737c1013b61395d0bd0c508fc6ad6b61643e' 'f8a952a6180e528edb53f2bc7e87b13eb963188c65e0f21da450fb749173003a')
 
 build() {
     cd "${srcdir}/$pkgname-$pkgver"
@@ -24,6 +24,7 @@ build() {
         --localstatedir=/var \
         --disable-static \
         --libexecdir=/usr/lib/matecomponent || return 1
+    patch -p1 -i $srcdir/$pkgname-$pkgver.patch
     make || return 1
 }
 
