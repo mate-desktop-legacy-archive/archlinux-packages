@@ -13,8 +13,8 @@ url="http://mate-desktop.org"
 groups=('mate')
 options=('!libtool' '!emptydirs')
 install=mate-notification-daemon.install
-source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('ffce1feab092c04f9a4c9b5076a3b573514d53f8d1e829ae5e30cf46a7551d3e')
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz ./mate-notification-daemon-1.2.0.patch)
+sha256sums=('ffce1feab092c04f9a4c9b5076a3b573514d53f8d1e829ae5e30cf46a7551d3e' 'c4f1e6acc84055e4de730798863acd8d23a06b68a167b2c0bcedf9084536045d')
 
 
 build() {
@@ -27,7 +27,7 @@ build() {
         --disable-static \
         --libexecdir=/usr/lib/mate-notification-daemon \
         --disable-schemas-install || return 1
-
+	patch -p1 -i $srcdir/$pkgname-$pkgver.patch
     make || return 1
 }
 
