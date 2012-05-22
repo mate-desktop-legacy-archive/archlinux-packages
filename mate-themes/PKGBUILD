@@ -14,7 +14,7 @@ options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
 groups=('mate')
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('d706160216ba6bb08d7ae6ac2fa7ddea1aa8205f703f20e0c7fe948bd31b1c7e')
+sha256sums=('f181140a1827391e93071c5539813e926c19f846ad73e09b8d88480079d5277c')
 
 
 build() {

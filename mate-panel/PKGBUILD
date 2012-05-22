@@ -11,7 +11,7 @@ makedepends=('mate-doc-utils' 'pkgconfig' 'intltool' 'networkmanager')
 options=('!emptydirs' '!libtool')
 install=mate-panel.install
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('67a34e087c2af28b3e626a3389996007f2d62a920f19c6bf6dc737fcf3d5f35b')
+sha256sums=('7bd00433f6724b2ac2b7a1e841fc2e4d024ab4b15ce5e42d94cee11ff7d58171')
 
 url="http://mate-desktop.org"
 groups=('mate')

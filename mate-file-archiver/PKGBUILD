@@ -20,7 +20,7 @@ install=mate-file-archiver.install
 url="http://mate-desktop.org"
 groups=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('f6aa182085e063469ab2058585ce1dd2eedce97a925c1f720768d549a8848416')
+sha256sums=('977588f630fd437eebdec986e4b9762fcee9d636613d4c8e4c3c0a311f2b747e')
 
 build() {
 	cd "$srcdir/$pkgname-$pkgver"
