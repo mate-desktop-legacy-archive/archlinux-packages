@@ -15,7 +15,7 @@ groups=('mate')
 install=libmate.install
 
 source=(http://pub.mate-desktop.org/releases/1.3/$pkgname-$pkgver.tar.xz)
-sha256sums=('729971d0d998f4705ae2ca276f1d16d1580ced9f75a17ddf3de3f6f330e2f298')
+sha256sums=('2c05fd97ed5e281f490ea8788b1a4aafdb276455a5e2568c5d5fb5ac011cd8fd')
 
 build() {
     cd "${srcdir}/$pkgname-$pkgver"
