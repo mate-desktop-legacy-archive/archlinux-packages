@@ -13,14 +13,14 @@ conflicts=('eog')
 url="http://mate-desktop.org"
 groups=('mate-extras')
 install=mate-image-viewer.install
-source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('eb2f209bf86f5580ec66a4e154033bfcdbd77396c0c4e09b71dc8e946929361a')
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz ./mate-image-viewer-1.2.0.patch)
+sha256sums=('eb2f209bf86f5580ec66a4e154033bfcdbd77396c0c4e09b71dc8e946929361a' 'eebbc12ba4b03c758ce9ceb575639774085873ab5e771c51074424c0139deeae')
 
 build() {
 	cd "${srcdir}/${pkgname}-$pkgver"
 	PYTHON=/usr/bin/python2 ./autogen.sh --prefix=/usr --sysconfdir=/etc \
 		--localstatedir=/var --disable-scrollkeeper || return 1
-
+	patch -p1 -i $srcdir/$pkgname-$pkgver.patch
 	make || return 1
 }
 

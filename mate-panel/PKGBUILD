@@ -10,8 +10,8 @@ depends=('libwnck' 'mate-conf' 'mate-menus' 'mate-desktop' 'librsvg' 'hicolor-ic
 makedepends=('mate-doc-utils' 'pkgconfig' 'intltool' 'networkmanager')
 options=('!emptydirs' '!libtool')
 install=mate-panel.install
-source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('7bd00433f6724b2ac2b7a1e841fc2e4d024ab4b15ce5e42d94cee11ff7d58171')
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz ./mate-panel-1.2.1.patch)
+sha256sums=('7bd00433f6724b2ac2b7a1e841fc2e4d024ab4b15ce5e42d94cee11ff7d58171' '7d679de4bc8d178154d8f5dc306a71b259fe48b03ed97e9f4ab8b44915deb364')
 
 url="http://mate-desktop.org"
 groups=('mate')
@@ -28,6 +28,7 @@ build() {
         --disable-scrollkeeper \
         --enable-introspection \
         --enable-matecomponent || return 1
+	patch -p1 -i $srcdir/$pkgname-$pkgver.patch
     make || return 1
 }
 

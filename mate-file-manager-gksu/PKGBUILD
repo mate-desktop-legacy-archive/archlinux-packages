@@ -3,17 +3,16 @@
 pkgname=mate-file-manager-gksu
 pkgver=1.2.1
 pkgrel=1
-pkgdesc="An extension for opening terminals in arbitrary local paths"
+pkgdesc="A graphical su for Mate"
 arch=('i686' 'x86_64')
-url="http://manny.cluecoder.org/packages/nautilus-open-terminal"
 license=('GPL')
 depends=('mate-file-manager')
-makedepends=('pkgconfig' 'intltool')
-install=mate-file-manager-open-terminal.install
+makedepends=('pkgconfig' 'intltool' 'libgksu')
 options=('!libtool')
+install=mate-file-manager-gksu.install
 group=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('0d2e252c292f75eb07b6ca39c171ee984b0c2b51af2b2bd17772137cb0dbeeca')
+sha256sums=('e9bcccaf83638c691f1bacb99b6cf68f52f2b3870a394c0d57c1c645fd2ba8a4')
 
 build() {
 	cd "$srcdir/$pkgname-$pkgver"

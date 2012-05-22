@@ -12,8 +12,8 @@ groups=('mate-extras')
 options=(!emptydirs !libtool)
 url="http://mate-desktop.org"
 install=mate-system-monitor.install
-source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('6946c0e676a13a558725e30fe89b5293ab985126c754b08dc3579ad54a67e61a')
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz ./mate-system-monitor-1.2.1.patch)
+sha256sums=('31714d960eac8e5559178b60e76fe32ded6afd8d716d578aa39f3271f01f4578' '2192728c8f1a8a16920e0a07efb1084da799062398a7deb7980892fd8770688f')
 
 build() {
 	cd "${srcdir}/${pkgname}-$pkgver"
@@ -25,6 +25,7 @@ build() {
 
 	# there is some pre-compiled files on the tar
 	make clean
+	patch -p1 -i $srcdir/$pkgname-$pkgver.patch
 	make || return 1
 }
 

@@ -13,8 +13,8 @@ conflicts=('pluma')
 url="http://mate-desktop.org"
 groups=('mate-extras')
 install=mate-text-editor.install
-source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('09ea9afc17b1ceb677489d8ac684113910f9075f0f0be7d52c2b1257a2cd25d1')
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz ./mate-text-editor-1.2.0.patch)
+sha256sums=('09ea9afc17b1ceb677489d8ac684113910f9075f0f0be7d52c2b1257a2cd25d1' '0ce8fe2a88237d22b71b7ebe33c6aa631f1096e6a33a1f7dfdbd2c567a84d33c')
 
 build() {
     cd "${srcdir}/${pkgname}-$pkgver"
@@ -22,6 +22,7 @@ build() {
     PYTHON=/usr/bin/python2 ./autogen.sh --prefix=/usr --sysconfdir=/etc \
         --localstatedir=/var --libexecdir=/usr/lib/ \
         --disable-scrollkeeper --enable-python || return 1
+	patch -p1 -i $srcdir/$pkgname-$pkgver.patch
     make || return 1
 
 }

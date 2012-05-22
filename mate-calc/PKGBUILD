@@ -9,7 +9,7 @@ license=('LGPL' 'GPL')
 depends=('gtk2' 'libxml2' 'libpng' 'freetype2' 'flex' 'bison' 'pixman' 'glib2' 'pango' 'gdk-pixbuf2' 
 'cairo' 'atk')
 makedepends=('pkgconfig')
-groups=('mate-extra')
+groups=('mate-extras')
 url="http://mate-desktop.org"
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
 sha256sums=('831b241127694ae0610db6f230ab761a903cefd059b16fe2e2dd9533cb252501')

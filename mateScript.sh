@@ -46,6 +46,22 @@ listofpackages=(
     python-caja
     mate-file-manager-open-terminal
     mate-applets
+	ffmpegthumbnailer-caja
+	mate-calc
+	mate-conf-editor
+	mate-file-manager-gksu
+	mate-file-manager-image-converter
+	mate-image-viewer
+	mate-media
+	mate-menu-editor
+	mate-netspeed
+	mate-screensaver
+	mate-sensors-applet
+	mate-system-monitor
+	system-tools-backends
+	mate-system-tools
+	mate-terminal
+	mate-utils
     )
     
 

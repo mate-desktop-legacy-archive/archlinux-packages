@@ -1,0 +1,14 @@
+diff -aur mate-image-viewer-1.2.0/configure.ac mate-image-viewer-1.2.0-patch/configure.ac
+--- mate-image-viewer-1.2.0/configure.ac	2012-03-07 09:10:13.000000000 -0600
++++ mate-image-viewer-1.2.0-patch/configure.ac	2012-05-22 13:26:46.414721773 -0500
+@@ -93,8 +93,10 @@
+ SHARED_MIME_INFO_REQUIRED=0.20
+ EXEMPI_REQUIRED=1.99.5
+ 
++PKG_CHECK_MODULES(GMODULE, gmodule-2.0, [GMODULE_ADD="gmodule-2.0"],[GMODULE_ADD=""])
+ EOM_MODULES="gtk+-2.0 >= $GTK_REQUIRED \
+              glib-2.0 >= $GLIB_REQUIRED \
++			 $GMODULE_ADD \
+              gio-2.0 >= $GLIB_REQUIRED \
+              gthread-2.0 >= $GLIB_REQUIRED \
+              mate-desktop-2.0 >= $MATE_DESKTOP_REQUIRED \
