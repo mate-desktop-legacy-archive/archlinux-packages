@@ -13,7 +13,7 @@ groups=('mate')
 options=('!libtool' '!emptydirs')
 install=mate-keyring.install
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('4275cf7e0021581458e4e41dcf6c7c2fd41d0828dbd818e624d79f33c202f4a5')
+sha256sums=('83204b68dd10a5ef2f95556b8631ac5f3ce027ab306bec2e98cea16d15ee9a5d')
 
 
 build() {

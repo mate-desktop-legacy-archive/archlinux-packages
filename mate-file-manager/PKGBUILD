@@ -12,8 +12,8 @@ makedepends=('pkgconfig' 'intltool')
 url="http://mate-desktop.org"
 options=('!libtool' '!emptydirs')
 install=mate-file-manager.install
-source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('898388b2a876c10be5325e1a8bb46a0484ba2ae1478b1cdf796866426065754c')
+source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz ./$pkgname-$pkgver.patch)
+sha256sums=('898388b2a876c10be5325e1a8bb46a0484ba2ae1478b1cdf796866426065754c' '7fcd18f6949537fa98c624d1e958fddf54a718e5aa593c7da65ba68b0b445445')
 
 groups=('mate')
 
@@ -28,7 +28,7 @@ build() {
         --libexecdir=/usr/lib/caja \
         --enable-unique \
         --disable-update-mimedb || return 1
-
+	patch -p1 -i $srcdir/$pkgname-$pkgver.patch
     make || return 1
 }
 

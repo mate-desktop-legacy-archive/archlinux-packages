@@ -1,0 +1,14 @@
+diff -aur mate-file-manager-1.2.2/configure.in mate-file-manager-1.2.2-patch/configure.in
+--- mate-file-manager-1.2.2/configure.in	2012-05-09 11:15:51.000000000 -0500
++++ mate-file-manager-1.2.2-patch/configure.in	2012-05-21 21:13:49.962154687 -0500
+@@ -423,7 +423,8 @@
+ AC_SUBST(LIBCAJA_EXTENSION_LIBS)
+ 
+ dnl core caja
+-CORE_MODULES="glib-2.0 mate-desktop-2.0 gthread-2.0 gio-2.0 gio-unix-2.0 gail mateconf-2.0 libxml-2.0 $EXTRA_CORE_MODULES gtk+-$GTK_API_VERSION"
++PKG_CHECK_MODULES(GMODULE, gmodule-2.0, [GMODULE_ADD="gmodule-2.0"],[GMODULE_ADD=""])
++CORE_MODULES="glib-2.0 $GMODULE_ADD mate-desktop-2.0 gthread-2.0 gio-2.0 gio-unix-2.0 gail mateconf-2.0 libxml-2.0 $EXTRA_CORE_MODULES gtk+-$GTK_API_VERSION"
+ CORE_CFLAGS="`$PKG_CONFIG --cflags $CORE_MODULES` $x_cflags"
+ AC_SUBST(CORE_CFLAGS)
+ CORE_LIBS="`$PKG_CONFIG --libs $CORE_MODULES` $x_libs"
+
