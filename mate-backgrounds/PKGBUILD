@@ -10,7 +10,7 @@ url="http://mate-desktop.org"
 makedepends=('intltool' 'mate-common')
 groups=('mate')
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('7605775808884cb8c60ed6abe2501068a4955c66839d3e8aae306cf108d20b4c')
+sha256sums=('deb5fb2bb3ac352854fde51ee37ae12d99fa469e23f9bb279d6f97df339712b5')
 
 
 
