@@ -1,7 +1,7 @@
 #Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-notification-daemon
-pkgver=1.3.0
+pkgver=1.3.1
 pkgrel=1
 pkgdesc="Notification daemon for MATE"
 arch=(i686 x86_64)
@@ -13,8 +13,8 @@ url="http://mate-desktop.org"
 groups=('mate')
 options=('!libtool' '!emptydirs')
 install=mate-notification-daemon.install
-source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('ffce1feab092c04f9a4c9b5076a3b573514d53f8d1e829ae5e30cf46a7551d3e')
+source=(http://pub.mate-desktop.org/releases/1.3/$pkgname-$pkgver.tar.xz)
+sha256sums=('bc4dbad801a6ff58a1bb07f635fa10b5ba0a1100285088ba5de922040fe51fac')
 
 
 build() {
