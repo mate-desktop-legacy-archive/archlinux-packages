@@ -11,8 +11,8 @@ makedepends=('intltool' 'pkgconfig' 'python')
 groups=('mate')
 options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
-source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('b0a7f4be2cad79b08852b77967e5acab41be70aebdf5bde0ce51ac16f40b2b2a')
+source=(http://pub.mate-desktop.org/releases/1.3/$pkgname-$pkgver.tar.xz)
+sha256sums=('00c89ec92232de15410909c78df122df0f4139e8bc5d85fbef66bf70997197bb')
 
 build() {
     cd "${srcdir}/$pkgname-$pkgver"
