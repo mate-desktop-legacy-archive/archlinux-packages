@@ -12,8 +12,8 @@ options=('!emptydirs')
 install=mate-file-manager-sendto.install
 url="http://mate-desktop.org"
 groups=('mate-extras')
-source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('64500e3e33b36243f9d1b1c263107fade8ee7474fbd5c21cb8e92ca3f53b1ca3')
+source=(http://pub.mate-desktop.org/releases/1.3/$pkgname-$pkgver.tar.xz)
+sha256sums=('fd7601b61f7a74f8c2ffecbbc6304437a3d59da29df5fbbd5c69731f64ffacff')
 
 build() {
 	cd "${srcdir}/${pkgname}-$pkgver"
