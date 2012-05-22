@@ -1,7 +1,7 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-conf-editor
-pkgver=1.2.0
+pkgver=1.3.0
 pkgrel=1
 pkgdesc="A configuration database system editor"
 arch=(i686 x86_64)

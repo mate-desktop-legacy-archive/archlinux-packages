@@ -1,7 +1,7 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-media
-pkgver=1.2.1
+pkgver=1.3.0
 pkgrel=1
 pkgdesc="MATE Media Tools"
 arch=(i686 x86_64)

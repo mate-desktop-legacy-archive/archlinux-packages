@@ -1,7 +1,7 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-file-manager-sendto
-pkgver=1.2.0
+pkgver=1.3.0
 pkgrel=1
 pkgdesc="Context menu for sending files on MATE File Manager"
 arch=('i686' 'x86_64')

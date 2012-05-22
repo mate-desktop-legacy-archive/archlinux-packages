@@ -3,7 +3,7 @@
 # Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-file-archiver
-pkgver=1.2.1
+pkgver=1.3.0
 pkgrel=1
 pkgdesc="Archive manipulator for MATE"
 arch=('i686' 'x86_64')

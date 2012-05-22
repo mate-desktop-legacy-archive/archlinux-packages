@@ -1,6 +1,6 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 pkgname=libmatecomponent
-pkgver=1.2.1
+pkgver=1.3.0
 pkgrel=1
 pkgdesc="A set of language and system independant CORBA interfaces for creating reusable components"
 arch=('i686' 'x86_64')

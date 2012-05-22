@@ -1,7 +1,7 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-file-manager-image-converter
-pkgver=1.2.0
+pkgver=1.3.0
 pkgrel=1
 pkgdesc="An extension for opening terminals in arbitrary local paths"
 arch=('i686' 'x86_64')
