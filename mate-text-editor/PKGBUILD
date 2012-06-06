@@ -3,7 +3,7 @@
 pkgname=mate-text-editor
 pkgver=1.2.0
 pkgrel=1
-pkgdesc="An powerfull text editor for MATE"
+pkgdesc="An powerful text editor for MATE"
 arch=('i686' 'x86_64')
 license=('GPL')
 depends=('mate-conf' 'gtk2' 'gtksourceview2' 'libxml2' 'pygtksourceview2')

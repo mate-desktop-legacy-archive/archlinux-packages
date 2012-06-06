@@ -2,7 +2,7 @@
 pkgname=mate-netspeed
 pkgver=1.2.0
 pkgrel=1
-pkgdesc=""
+pkgdesc="A panel applet that shows the current network speed"
 arch=('i686' 'x86_64')
 url="http://mate-desktop.org"
 license=('GPL')
