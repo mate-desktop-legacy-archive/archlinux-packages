@@ -12,8 +12,8 @@ groups=('mate')
 options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
 install=libmateweather.install
-source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('440bca0ffaf762b235c82a3beec5c80579e6239cbd4addda0c5ec3c3858c66c6')
+source=(http://pub.mate-desktop.org/releases/1.3/$pkgname-$pkgver.tar.xz)
+sha256sums=('889532c8b71db70440e1fcb97c76597ab914e05fcbb9cffd9bcdcb69e8af3e4f')
 
 
 build() {
