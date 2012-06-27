@@ -12,8 +12,8 @@ makedepends=('pkgconfig' 'intltool')
 url="http://mate-desktop.org"
 options=('!libtool' '!emptydirs')
 install=mate-file-manager.install
-source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('898388b2a876c10be5325e1a8bb46a0484ba2ae1478b1cdf796866426065754c')
+source=(http://pub.mate-desktop.org/releases/1.3/$pkgname-$pkgver.tar.xz)
+sha256sums=('6e0591bca307a99293d419b5fba9d15d6ba73c072664e661c32941a435f67d73')
 
 groups=('mate')
 
