@@ -1,7 +1,7 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-control-center
-pkgver=1.3.0
+pkgver=1.2.1
 pkgrel=1
 pkgdesc="The Control Center for MATE"
 arch=('i686' 'x86_64')
@@ -16,7 +16,7 @@ url="http://mate-desktop.org"
 groups=('mate')
 install=mate-control-center.install
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('10e36953403a3b5133ac89798bf9d573f2917309946cc8d0d707126c99dcb9b6')
+sha256sums=('8fc4801cfd9977afc60ee39e28e1d23f5b4e306d30b26527c95ceecf5505a034')
 
 build() {
     cd "${srcdir}/$pkgname-$pkgver"
