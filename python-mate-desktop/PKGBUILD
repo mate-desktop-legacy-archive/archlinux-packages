@@ -30,8 +30,8 @@ depends=(	'python'
                'avahi'
                'libgcrypt')
                
-source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('bb8a738aac0c450b1be1439ad9d389ef444e9c23cfe6dd7edb3303a4c01f8c70') 
+source=(http://pub.mate-desktop.org/releases/1.3/$pkgname-$pkgver.tar.xz)
+sha256sums=('eded06d8ad68e7093bf1c8041a74554d3b7500661c61c005fa9de3d2d190446d') 
 
 build() {
 	export PYTHON=python2
