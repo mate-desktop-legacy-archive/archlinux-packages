@@ -1,9 +1,8 @@
-#Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-document-viewer
-pkgver=1.3.0
-pkgrel=2
+pkgver=1.2.1
+pkgrel=1
 pkgdesc="Simply a document viewer"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
