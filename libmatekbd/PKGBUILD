@@ -1,7 +1,7 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=libmatekbd
-pkgver=1.3.0
+pkgver=1.2.0
 pkgrel=2
 pkgdesc="MATE keyboard library"
 arch=('i686' 'x86_64')
