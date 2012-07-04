@@ -1,7 +1,7 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-icon-theme
-pkgver=1.3.0
+pkgver=1.2.0
 pkgrel=1
 pkgdesc="MATE icon theme"
 arch=('any')
