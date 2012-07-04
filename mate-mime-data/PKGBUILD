@@ -11,7 +11,7 @@ makedepends=('intltool')
 url="http://mate-desktop.org"
 groups=('mate')
 source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('785ebb32f058fe25213d781a9f62658656c0e45cf433445e268be7346e36a5ee')
+sha256sums=('d810c6ddaa01eab16d178a535851a575771e622f43a2d776f3c10cf595e1ce42')
 
 
 build() {
