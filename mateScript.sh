@@ -4,6 +4,7 @@ set -e
  #working sometimes :D  I have to code something to handle missing dependencies
  
 listofpackages=(
+    libmatewnck
     mate-common
     mate-doc-utils
     mate-corba
