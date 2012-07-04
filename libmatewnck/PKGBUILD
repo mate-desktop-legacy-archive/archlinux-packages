@@ -1,0 +1,47 @@
+#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+
+pkgname=libmatewnck
+pkgver=1.3.0
+pkgrel=1
+pkgdesc="Description: MATE Window Navigator Construction Kit. A library to use for writing pagers and task lists."
+arch=('i686' 'x86_64')
+license=('LGPL')
+depends=('gtk-doc' 'glib2' 'gtk2' 'libx11' 'libxres' 'libxt' 'libxres' 'mate-common' 'glib' 'gobject-introspection' 'startup-notification' )
+
+url="http://mate-desktop.org"
+groups=('mate')
+
+source=(http://pub.mate-desktop.org/releases/1.3/$pkgname-$pkgver.tar.xz)
+sha256sums=('bd680434785c161494351f2b3d5be836efeec39e06d932f2c65037ef3493fd7a')
+
+build() {
+ 	 
+ 	 cd "${srcdir}/$pkgname-$pkgver"
+
+    ./autogen.sh \
+        --prefix=/usr \
+        --sysconfdir=/etc \
+        --localstatedir=/var \
+        --disable-static \
+        --libexecdir=/usr/lib/libmate \
+        --disable-canberra \
+        --enable-gtk-doc \
+		--enable-startup-notification \
+		--enable-introspection \
+        --disable-schemas-install || return 1
+
+    make || return 1
+
+}
+
+package() {
+    cd "${srcdir}/$pkgname-$pkgver"
+
+    make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1  DESTDIR="${pkgdir}" install || return 1
+
+    install -m755 -d "${pkgdir}/usr/share/mateconf/schemas"
+    mateconf-merge-schema "${pkgdir}/usr/share/mateconf/schemas/${pkgname}.schemas" --domain ${pkgname} ${pkgdir}/etc/mateconf/schemas/*.schemas || 
+return 1
+    rm -f ${pkgdir}/etc/mateconf/schemas/*.schemas
+}
+
