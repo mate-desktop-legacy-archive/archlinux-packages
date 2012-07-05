@@ -1,7 +1,7 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=libmateui
-pkgver=1.2.0
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="User Interface library for MATE"
 arch=('i686' 'x86_64')
@@ -11,8 +11,8 @@ makedepends=('intltool' 'pkgconfig')
 groups=('mate')
 options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
-source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('4f3c869cbf0e0b981e47b486704e556a0e5fb55b216e02f1dda7502f98f7fd87')
+source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
+sha256sums=('275ee6c9a9a00bb802de9f8d196493639a7e3f80d950b836bcc29dcb2a05c5ad')
 
 build() {
     cd "${srcdir}/$pkgname-$pkgver"
