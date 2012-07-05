@@ -1,7 +1,7 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-doc-utils
-pkgver=1.2.1
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="Documentation utilities for MATE"
 arch=('any')
@@ -11,8 +11,8 @@ makedepends=('pkgconfig' 'intltool' 'mate-common')
 #conflicts=('gnome-doc-utils')
 options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
-source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('b537901a876db92805e4347590df2fb2ec5c913a69c12b52df5b20108a0beb10')
+source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
+sha256sums=('cd9064322e1a23b57eb71ec739bdfedadb666617e9a1800545a0b22b7a09cb8a')
 
 groups=('mate')
 
