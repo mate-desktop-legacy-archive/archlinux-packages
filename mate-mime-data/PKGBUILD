@@ -1,7 +1,7 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-mime-data
-pkgver=1.2.2
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="The base MIME and Application database for MATE"
 arch=('any')
@@ -10,8 +10,8 @@ depends=('shared-mime-info')
 makedepends=('intltool')
 url="http://mate-desktop.org"
 groups=('mate')
-source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('d810c6ddaa01eab16d178a535851a575771e622f43a2d776f3c10cf595e1ce42')
+source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
+sha256sums=('d914aa9ed1335ab1da908026667ec5b58337c9123dce7b3d3b2035e3bd7fbc7f ')
 
 
 build() {
