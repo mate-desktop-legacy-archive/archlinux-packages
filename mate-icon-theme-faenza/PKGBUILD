@@ -1,1 +1,31 @@
-ToBeAdded
+#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+
+pkgname=mate-icon-theme-faenza
+pkgver=1.3.2
+pkgrel=1
+pkgdesc="Description: MATE icon theme: Faenza."
+arch=('i686' 'x86_64')
+license=('LGPL')
+depends=('gtk2' 'librsvg' 'hicolor-icon-theme' )
+makedepends=('gettext' 'hicolor-icon-theme' 'intltool' 'pkg-config' 'icon-naming-utils' 'librsvg' 'mate-common')
+url="http://mate-desktop.org"
+groups=('mate')
+source=(http://pub.mate-desktop.org/releases/1.3/$pkgname-$pkgver.tar.xz)
+sha256sums=('f957a2cff8a562d30169c3a0782a5849bba094e779fd88c3e1ba3f56d0e6aa9b')
+
+install=mate-icon-theme-faenza.install
+
+build() {
+    cd "${srcdir}/$pkgname-$pkgver"
+    ./autogen.sh --prefix=/usr || return 1
+    make || return 1
+}
+
+package() {
+    cd "${srcdir}/$pkgname-$pkgver"
+    make DESTDIR="${pkgdir}" install
+    #don't include icon cache
+    rm -f  "${pkgdir}/usr/share/icons/mate/icon-theme.cache"
+}
+
+
