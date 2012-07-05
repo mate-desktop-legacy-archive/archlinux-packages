@@ -1,7 +1,7 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=libmatekeyring
-pkgver=1.3.0
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="MATE keyring client library"
 arch=('i686' 'x86_64')
@@ -11,8 +11,8 @@ makedepends=('intltool' 'pkgconfig' 'python')
 groups=('mate')
 options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
-source=(http://pub.mate-desktop.org/releases/1.3/$pkgname-$pkgver.tar.xz)
-sha256sums=('00c89ec92232de15410909c78df122df0f4139e8bc5d85fbef66bf70997197bb')
+source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
+sha256sums=('454c2c8ab6dc474314abced78c3ff97f57368e93a5231e71acbd3cec9354890b')
 
 build() {
     cd "${srcdir}/$pkgname-$pkgver"
