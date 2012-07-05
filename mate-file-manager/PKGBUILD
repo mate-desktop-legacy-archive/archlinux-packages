@@ -1,7 +1,7 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-file-manager
-pkgver=1.3.0
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="The MATE shell and file manager"
 arch=('i686' 'x86_64')
@@ -12,8 +12,8 @@ makedepends=('pkgconfig' 'intltool')
 url="http://mate-desktop.org"
 options=('!libtool' '!emptydirs')
 install=mate-file-manager.install
-source=(http://pub.mate-desktop.org/releases/1.3/$pkgname-$pkgver.tar.xz)
-sha256sums=('6e0591bca307a99293d419b5fba9d15d6ba73c072664e661c32941a435f67d73')
+source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
+sha256sums=('cc70fbc72614f068fd8dd2aa8d3d9fe68d3f45da17671e20b1dfe8f70c6a2132')
 
 groups=('mate')
 
