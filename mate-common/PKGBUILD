@@ -1,7 +1,7 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-common
-pkgver=1.3.0
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="Common development macros for MATE"
 arch=('any')
@@ -11,8 +11,8 @@ makedepends=()
 options=('!libtool')
 url="http://mate-desktop.org"
 groups=('mate')
-source=(http://pub.mate-desktop.org/releases/1.3/$pkgname-$pkgver.tar.xz)
-sha256sums=('ff9563f43d93978bee5a11afc78c5a21bc342765427c1e56cbe31a53af9f783a')
+source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
+sha256sums=('3ee494158e24b03ef2e92e9c9defef76769bdb017c49412e7a97aab4e698f72a')
 
 
 build() {
