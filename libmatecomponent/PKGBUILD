@@ -1,6 +1,6 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 pkgname=libmatecomponent
-pkgver=1.2.1
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="A set of language and system independant CORBA interfaces for creating reusable components"
 arch=('i686' 'x86_64')
@@ -11,10 +11,10 @@ groups=('mate')
 options=('!emptydirs' '!libtool')
 backup=('etc/matecomponent-activation/matecomponent-activation-config.xml')
 url="http://mate-desktop.org"
-source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz ./matecomponent-activation-config.xml ./libmatecomponent-1.2.1.patch)
+source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz ./matecomponent-activation-config.xml)
 install=libmatecomponent.install
-sha256sums=('de9a842c5b329c68c852dfe3c686c908f77f52c2f0533e10f22c130e1a7df9d5'
-            'c1fc9b102f2635b0d4be39728d19737c1013b61395d0bd0c508fc6ad6b61643e' 'f8a952a6180e528edb53f2bc7e87b13eb963188c65e0f21da450fb749173003a')
+sha256sums=('c604056ec36fe23e2912e7fef2616ea9fe02b70f6638696c133cdb693e38ac13'
+            'c1fc9b102f2635b0d4be39728d19737c1013b61395d0bd0c508fc6ad6b61643e')
 
 build() {
     cd "${srcdir}/$pkgname-$pkgver"
@@ -24,7 +24,6 @@ build() {
         --localstatedir=/var \
         --disable-static \
         --libexecdir=/usr/lib/matecomponent || return 1
-    patch -p1 -i $srcdir/$pkgname-$pkgver.patch
     make || return 1
 }
 
