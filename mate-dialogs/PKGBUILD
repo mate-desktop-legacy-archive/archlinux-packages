@@ -1,7 +1,7 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-dialogs
-pkgver=1.2.0
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="Display graphical dialog boxes from shell scripts"
 arch=(i686 x86_64)
@@ -13,8 +13,8 @@ groups=('mate')
 provides=('zenity')
 conflicts=('zenity')
 options=('!emptydirs' '!libtool')
-source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('cdb0e099d3422e8d238287d8886082114b46502d7b3580636904e6c602a25e36')
+source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
+sha256sums=('3f0f245bb3eaf66545e8bc5d85c73aec23636fc7ac37bf3caddee7a86d90b3c7')
 
 
 build() {
