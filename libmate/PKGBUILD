@@ -1,7 +1,7 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=libmate
-pkgver=1.3.0
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="Common libraries for MATE"
 arch=('i686' 'x86_64')
@@ -14,8 +14,8 @@ url="http://mate-desktop.org"
 groups=('mate')
 install=libmate.install
 
-source=(http://pub.mate-desktop.org/releases/1.3/$pkgname-$pkgver.tar.xz)
-sha256sums=('2c05fd97ed5e281f490ea8788b1a4aafdb276455a5e2568c5d5fb5ac011cd8fd')
+source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
+sha256sums=('256d0132164cf8b19146354d2a03b409efb95dfb3c64ab7cc79b157e3feac662')
 
 build() {
     cd "${srcdir}/$pkgname-$pkgver"
