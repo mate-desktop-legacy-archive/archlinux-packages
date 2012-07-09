@@ -1,7 +1,7 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-keyring
-pkgver=1.3.0
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="MATE Password Management daemon"
 arch=(i686 x86_64)
@@ -12,8 +12,8 @@ url="http://mate-desktop.org"
 groups=('mate')
 options=('!libtool' '!emptydirs')
 install=mate-keyring.install
-source=(http://pub.mate-desktop.org/releases/1.3/$pkgname-$pkgver.tar.xz)
-sha256sums=('4b0d98fd113fa72f1664afe0623e0d9d0eddbe9d499d4ff651aa7eeaf5b35f81')
+source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
+sha256sums=('295d0e9969e614afd0616425dacb3921b7fd16626985278c88d6cbe36f4efd6a')
 
 
 build() {
