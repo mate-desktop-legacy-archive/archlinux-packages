@@ -1,7 +1,7 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-image-viewer
-pkgver=1.3.0
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="An image viewing and cataloging program for MATE"
 arch=('i686' 'x86_64')
@@ -13,8 +13,8 @@ conflicts=('eog')
 url="http://mate-desktop.org"
 groups=('mate-extras')
 install=mate-image-viewer.install
-source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('eb2f209bf86f5580ec66a4e154033bfcdbd77396c0c4e09b71dc8e946929361a')
+source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
+sha256sums=('41d1df54b55e5e6efc0c98bb4e29fc7294b85cdef38ffbd2c7514f3556929c1f')
 
 build() {
 	cd "${srcdir}/${pkgname}-$pkgver"
