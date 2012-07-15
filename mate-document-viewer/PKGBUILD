@@ -1,7 +1,7 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-document-viewer
-pkgver=1.2.1
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="Simply a document viewer"
 url="http://mate-desktop.org"
@@ -15,8 +15,8 @@ optdepends=('texlive-bin: DVI support')
 groups=('mate-extra')
 install=mate-document-viewer.install
 options=('!libtool' '!emptydirs')
-source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('c09b71b10c7388c1fca99008a6bfbf5d94dee54f84efc641914f3c0a4a085130')
+source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
+sha256sums=('96da48e303e4842cda1cd7150d861acf65f3082079999a1fb35d12c6f6df320a')
 
 build() {
     cd "${srcdir}/$pkgname-$pkgver"
