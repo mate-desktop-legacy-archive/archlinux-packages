@@ -1,7 +1,7 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-bluetooth
-pkgver=1.2.1
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="A collection of Bluetooth utilities and modules for MATE"
 arch=('i686' 'x86_64')
@@ -12,8 +12,8 @@ options=('!emptydirs')
 install=mate-bluetooth.install
 url="http://mate-desktop.org"
 groups=('mate-extras')
-source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('8f57225e82eefcb4825163f4166e8750ab3f07ebcdf6831bd6c8f9c2b35937fa')
+source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
+sha256sums=('9f22eb482b4b26192ce77d1879658a0396989e62ddc8f14ec91d3805f7f91a3f')
 
 build() {
 	cd "${srcdir}/${pkgname}-${pkgver}"
