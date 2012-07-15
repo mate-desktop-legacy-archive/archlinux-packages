@@ -1,13 +1,13 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 pkgname=ffmpegthumbnailer-caja
-pkgver=1.3.0
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="MateConf schemas to use ffmpegthumbnailer in MATE Caja "
 arch=('any')
 depends=('mate-conf')
 install=ffmpegthumbnailer-caja.install
-source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('c2e089a5af97006e822d6efbd534740a42473f6cbeed2b172e02a61772e61395')
+source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
+sha256sums=('cf661f922dde0270dd0d5550b6b99a0d5a8f704018f5d0c2400935ac833254bf')
 
 build() {
     cd "${srcdir}/${pkgname}-$pkgver"
