@@ -1,7 +1,7 @@
 #Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-panel
-pkgver=1.3.2
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="The MATE Panel"
 arch=('i686' 'x86_64')
@@ -10,8 +10,8 @@ depends=('libwnck' 'mate-conf' 'mate-menus' 'mate-desktop' 'librsvg' 'hicolor-ic
 makedepends=('mate-doc-utils' 'pkgconfig' 'intltool' 'networkmanager')
 options=('!emptydirs' '!libtool')
 install=mate-panel.install
-source=(http://pub.mate-desktop.org/releases/1.3/$pkgname-$pkgver.tar.xz)
-sha256sums=('d8d9ad1925c9ffbaf1b0a994c1489a7a960bbe7d4fc3e09ce25557884a8dbf31')
+source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
+sha256sums=('3438a9d19ae367b28611f7bf1496d10cd9863574bd63ed4f2650503e8b96e192')
 
 url="http://mate-desktop.org"
 groups=('mate')
