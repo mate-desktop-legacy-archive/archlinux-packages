@@ -1,7 +1,7 @@
 #Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-text-editor
-pkgver=1.2.0
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="An powerfull text editor for MATE"
 arch=('i686' 'x86_64')
@@ -13,8 +13,8 @@ conflicts=('pluma')
 url="http://mate-desktop.org"
 groups=('mate-extras')
 install=mate-text-editor.install
-source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('09ea9afc17b1ceb677489d8ac684113910f9075f0f0be7d52c2b1257a2cd25d1')
+source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
+sha256sums=('45e57cad8c9d9a4ae1704ee28c4f7cfec816e808f1c40331ed9fbbade8503f8b ')
 
 build() {
     cd "${srcdir}/${pkgname}-$pkgver"
