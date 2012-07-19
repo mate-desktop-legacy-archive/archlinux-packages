@@ -1,7 +1,7 @@
 #Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-session-manager
-pkgver=1.2.0
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="The MATE Session Handler"
 arch=(i686 x86_64)
@@ -12,8 +12,8 @@ options=('!emptydirs' '!libtool')
 install=mate-session-manager.install
 url="http://mate-desktop.org"
 groups=('mate')
-source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('f1f7b551916b843d1518e785ca8efde58f1ea837031380b8f1ba628dcb4021a2')
+source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
+sha256sums=('92637eb6935a4cbe11c3a3195c965c8df87112ad0a62bb367488a979773f3305')
 
 
 build() {
