@@ -1,7 +1,7 @@
-#Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-vfs
-pkgver=1.2.1
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="The MATE Virtual File System"
 arch=(i686 x86_64)
@@ -12,8 +12,8 @@ options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
 groups=('mate')
 install=mate-vfs.install
-source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('9ce0d26fcde09a7553a4842b33218b78af1470dbd41f8846f6d4ce5d5693d5a2')
+source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
+sha256sums=('0e5e0c4cb607c13d6d356c59699de78d93f2b72e620b99244bf4fc329925dd9b')
 
 
 build() {
