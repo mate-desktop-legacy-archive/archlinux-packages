@@ -1,7 +1,7 @@
-#Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-utils
-pkgver=1.3.0
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="Common MATE utilities for viewing disk usage, logs and fonts, taking screenshots, managing dictionaries and searching files"
 arch=('i686' 'x86_64')
@@ -12,8 +12,8 @@ options=('!libtool' '!emptydirs')
 install=mate-utils.install
 url="http://mate-desktop.org"
 groups=('mate-extras')
-source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('2e9fd84b3d05ded4c1b64023fbd034400de73e4bddbaf97f368ba756d7a18212')
+source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
+sha256sums=('49ec02682b8146bb96cf30c61a7d4e7c7630d22bcfe8fbeb8a7c20fd6bec5591')
 
 build() {
 	cd "${srcdir}/${pkgname}-$pkgver"
