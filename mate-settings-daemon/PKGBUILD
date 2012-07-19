@@ -1,7 +1,7 @@
 #Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-settings-daemon
-pkgver=1.2.0
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="The MATE Settings daemon"
 arch=('i686' 'x86_64')
@@ -12,8 +12,8 @@ options=('!libtool')
 url="http://mate-desktop.org"
 install=mate-settings-daemon.install
 groups=('mate')
-source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('9db26630a0e823773bab4a9f99cc0a516c2a1ba4c570ba593c8539ac6207eb33')
+source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
+sha256sums=('5e75cb59c0b5b5733de6852639ebc1551158df757dcf103a9711f95a86664370')
 
 
 build() {
