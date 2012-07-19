@@ -1,13 +1,13 @@
 # Maintainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 pkgname=mate-netspeed
-pkgver=1.3.0
+pkgver=1.4.0
 pkgrel=1
 pkgdesc=""
 arch=('i686' 'x86_64')
 url="http://mate-desktop.org"
 license=('GPL')
 groups=()
-depends=(		'mate-panel'
+depends=(	'mate-panel'
                'expat'
                'libgtop>=2'
                'gtk2'
@@ -22,8 +22,8 @@ depends=(		'mate-panel'
                'mate-common')
                
 install=$pkgname.install
-source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('35628c83531952fbae37245554b93ddfd0e490219e05240629cf9bec817f6097') 
+source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
+sha256sums=('e78a189cbd95664a90bee428ce7fdb3dfeb7b3bf141f94b4061a98b990a89549') 
 
 build() {
 cd $srcdir/$pkgname-$pkgver
