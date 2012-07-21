@@ -1,7 +1,7 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=python-mate-desktop
-pkgver=1.3.0
+pkgver=1.4.0
 pkgrel=1
 pkgdesc=""
 arch=('i686' 'x86_64')
@@ -30,8 +30,8 @@ depends=(	'python'
                'avahi'
                'libgcrypt')
                
-source=(http://pub.mate-desktop.org/releases/1.3/$pkgname-$pkgver.tar.xz)
-sha256sums=('eded06d8ad68e7093bf1c8041a74554d3b7500661c61c005fa9de3d2d190446d') 
+source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
+sha256sums=('d9629eb2b589d3a65246625ddca2f568ce78c782335fb48537e3f9d37cc32a5e') 
 
 build() {
 	export PYTHON=python2
