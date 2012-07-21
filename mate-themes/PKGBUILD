@@ -1,7 +1,7 @@
 #Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-themes
-pkgver=1.2.0
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="Default themes for the MATE desktop"
 arch=('i686' 'x86_64')
@@ -13,8 +13,8 @@ conflicts=('gnome-themes')
 options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
 groups=('mate')
-source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('d706160216ba6bb08d7ae6ac2fa7ddea1aa8205f703f20e0c7fe948bd31b1c7e')
+source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
+sha256sums=('a9168894fa3361f61102b2e18ad22a1f5c381866cce953af46dc7356c2abd097')
 
 
 build() {
