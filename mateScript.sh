@@ -18,6 +18,7 @@ listofpackages=(
     libmatekeyring
     mate-keyring
     libmateui
+    libindicator
     libmatenotify
     libmatekbd
     libmateweather
