@@ -2,7 +2,7 @@
 # Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-file-archiver
-pkgver=1.5.0
+pkgver=1.5.1
 pkgrel=1
 pkgdesc="Archive manipulator for MATE"
 arch=('i686' 'x86_64')
@@ -19,7 +19,7 @@ install=mate-file-archiver.install
 url="http://mate-desktop.org"
 groups=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.5/$pkgname-$pkgver.tar.xz)
-sha256sums=('6be234c3d8bb816193eb2ce4908d98f2109746f6a564a152d41d24ff7888cd7e')
+sha256sums=('eb63973b0020f3ed935bd79f69148f23e03ec562517356b5b48a4fd317228a9d')
 
 build() {
 	cd "$srcdir/$pkgname-$pkgver"
