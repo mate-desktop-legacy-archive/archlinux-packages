@@ -1,7 +1,7 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-menus
-pkgver=1.4.0
+pkgver=1.5.0
 pkgrel=1
 pkgdesc="MATE menu specifications"
 arch=('i686' 'x86_64')
@@ -9,8 +9,8 @@ license=('GPL')
 depends=('glib2' 'python2')
 makedepends=('intltool' 'gobject-introspection')
 options=('!emptydirs' '!libtool')
-source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
-sha256sums=('c31c233bf2674646170277cc33962e24e74b98b8b575b7a33985f23c3feaaf92')
+source=(http://pub.mate-desktop.org/releases/1.5/$pkgname-$pkgver.tar.xz)
+sha256sums=('01cb3bdec06a02f1fec5a46399ff018fa9d5d9fe6e85eb73885f030b07911dc9')
 
 url="http://mate-desktop.org"
 groups=('mate')
