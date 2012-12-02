@@ -1,7 +1,7 @@
 #Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-power-manager
-pkgver=1.4.0
+pkgver=1.5.1
 pkgrel=1
 pkgdesc="Session daemon that makes it easy to manage your laptop or desktop system for Mate Desktop"
 arch=('i686' 'x86_64')
@@ -12,8 +12,8 @@ options=('!emptydirs')
 install=mate-power-manager.install
 url="http://mate-desktop.org"
 groups=('mate-extras')
-source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
-sha256sums=('84943d4ab97c400af428a1dba90898e068114ff7a6a62d8d546a98279cd554a9')
+source=(http://pub.mate-desktop.org/releases/1.5/$pkgname-$pkgver.tar.xz)
+sha256sums=('b1c4e1f4c0d7d00c3436801f9f26ac5513220c46dd6f18d4c1b8220c11de6dca')
 
 build() {
 
