@@ -1,0 +1,49 @@
+#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+
+
+# TO  BE  EDITED!!!! IT WORK, OTHERWISE!
+
+pkgname=mate-user-share
+pkgver=1.5.0
+pkgrel=1
+pkgdesc=""
+arch=('i686' 'x86_64')
+license=('GPL')
+depends=('')
+makedepends=('') #
+groups=('mate-extras')
+options=(!emptydirs)
+replace=('')
+conflicts=('')
+url="http://mate-desktop.org"
+install=mate-applets.install
+source=(http://pub.mate-desktop.org/releases/1.5/$pkgname-$pkgver.tar.xz)
+sha256sums=('')
+
+build() {
+    cd "${srcdir}/$pkgname-$pkgver"
+    PYTHON=/usr/bin/python2 ./autogen.sh \
+        --prefix=/usr \
+        --sysconfdir=/etc \
+        --localstatedir=/var \
+        --libexecdir=/usr/lib/mate-applets \
+        --disable-static \
+        --disable-scrollkeeper \
+        --enable-polkit \
+        --enable-networkmanager \
+        --enable-mixer-applet \
+        --enable-mini-commander \
+        --enable-frequency-selector \
+        --enable-ipv6 \
+        --disable-schemas-install || return 1
+	make || return 1
+}
+
+package() {
+    cd "${srcdir}/$pkgname-$pkgver"
+    make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install || return 1
+
+    install -m755 -d "${pkgdir}/usr/share/mateconf/schemas"
+    mateconf-merge-schema "${pkgdir}/usr/share/mateconf/schemas/${pkgname}.schemas" --domain ${pkgname} ${pkgdir}/etc/mateconf/schemas/*.schemas || return 1
+    rm -f ${pkgdir}/etc/mateconf/schemas/*.schemas
+}
