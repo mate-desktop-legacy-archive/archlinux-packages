@@ -1,4 +1,5 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+#Contributor:Xpander <xpander0@gmail.com>
 
 pkgname=mate-applets
 pkgver=1.4.0
@@ -32,7 +33,7 @@ build() {
         --enable-networkmanager \
         --enable-mixer-applet \
         --enable-mini-commander \
-        --enable-frequency-selector \
+        --disable-cpufreq \
         --enable-ipv6 \
         --disable-schemas-install || return 1
 	make || return 1
