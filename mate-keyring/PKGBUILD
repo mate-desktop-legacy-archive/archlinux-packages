@@ -12,6 +12,7 @@ url="http://mate-desktop.org"
 groups=('mate')
 options=('!libtool' '!emptydirs')
 install=mate-keyring.install
+provides=('gnome-keyring')
 source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
 sha256sums=('295d0e9969e614afd0616425dacb3921b7fd16626985278c88d6cbe36f4efd6a')
 
