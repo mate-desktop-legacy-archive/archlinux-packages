@@ -1,7 +1,8 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+#Contributor: Xpander <xpander0@gmail.com>
 
 pkgname=mate-calc
-pkgver=1.5.1
+pkgver=1.6.0
 pkgrel=1
 pkgdesc="Calculator for the Mate desktop environment"
 arch=('i686' 'x86_64')
@@ -11,8 +12,8 @@ depends=('gtk2' 'libxml2' 'libpng' 'freetype2' 'flex' 'bison' 'pixman' 'glib2' '
 makedepends=('pkgconfig')
 groups=('mate-extra')
 url="http://mate-desktop.org"
-source=(http://pub.mate-desktop.org/releases/1.5/$pkgname-$pkgver.tar.xz)
-sha256sums=('ebaf13e8eb2c938b70016d46aad58bbd08fdcfc4d361b6d2bf6f6fc7d8fe2dd4')
+source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+sha256sums=('400d5c4d2927edfec4abed6c340ddc125d62ec2b99bf272db09d799efcd2993f')
 build()
 {
 cd "${srcdir}/${pkgname}-$pkgver"
