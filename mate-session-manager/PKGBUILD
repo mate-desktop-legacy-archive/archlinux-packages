@@ -1,7 +1,8 @@
 #Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+#Contributor: Xpander <xpander0@gmail.com>
 
 pkgname=mate-session-manager
-pkgver=1.4.0
+pkgver=1.6.0
 pkgrel=1
 pkgdesc="The MATE Session Handler"
 arch=(i686 x86_64)
@@ -12,8 +13,8 @@ options=('!emptydirs' '!libtool')
 install=mate-session-manager.install
 url="http://mate-desktop.org"
 groups=('mate')
-source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
-sha256sums=('92637eb6935a4cbe11c3a3195c965c8df87112ad0a62bb367488a979773f3305')
+source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+sha256sums=('32a9976955d9fe06731a061f2bb69f00528faf45c86f0468b4c43af4eac463e4')
 
 
 build() {
@@ -31,11 +32,5 @@ build() {
 package() {
     cd "${srcdir}/$pkgname-$pkgver"
 
-    make DESTDIR="${pkgdir}" MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 install || return 1
-
-    install -d -m755 "${pkgdir}/usr/share/mateconf/schemas"
-    mateconf-merge-schema "${pkgdir}/usr/share/mateconf/schemas/${pkgname}.schemas" --domain ${pkgname} ${pkgdir}/etc/mateconf/schemas/*.schemas || return 1
-
-    # --disable-schemas-compile <- check if work <- nop
-    rm -f ${pkgdir}/etc/mateconf/schemas/*.schemas
+    make DESTDIR="$pkgdir/" install
 }
