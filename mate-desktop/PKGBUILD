@@ -1,17 +1,19 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+#Contributor: Xpander <xpander0@gmail.com>
+
 pkgname=mate-desktop
-pkgver=1.5.4
+pkgver=1.6.0
 pkgrel=1
 pkgdesc="Library with common API for various MATE modules"
 arch=(i686 x86_64)
 license=(GPL LGPL)
-depends=('libunique' 'libmatenotify' 'hicolor-icon-theme' 'gvfs-obexftp' 'obexd-client')
+depends=('libunique' 'libnotify' 'hicolor-icon-theme' 'gvfs-obexftp' 'obexd-client')
 makedepends=('mate-doc-utils' 'intltool' 'mate-common' 'gtk-doc')
 options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
 groups=('mate')
-source=(http://pub.mate-desktop.org/releases/1.5/$pkgname-$pkgver.tar.xz)
-sha256sums=('cf9ad011fd746b13c1a537d7bd09cb9fd850839a9b18528adbc5a82a2d91a595')
+source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+sha256sums=('d8c0dd7cc0cbd36088363bb1358e0acbf239c518e42504029a837cb993373d94')
 
 
 build() {
