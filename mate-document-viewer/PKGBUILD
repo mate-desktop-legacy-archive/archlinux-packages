@@ -1,7 +1,8 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+#Contributor: Xpander <xpander0@gmail.com>
 
 pkgname=mate-document-viewer
-pkgver=1.5.0
+pkgver=1.6.0
 pkgrel=1
 pkgdesc="Simply a document viewer"
 url="http://mate-desktop.org"
@@ -15,8 +16,8 @@ optdepends=('texlive-bin: DVI support')
 groups=('mate-extra')
 install=mate-document-viewer.install
 options=('!libtool' '!emptydirs')
-source=(http://pub.mate-desktop.org/releases/1.5/$pkgname-$pkgver.tar.xz)
-sha256sums=('34bf7de1598bc054ac5f7cbe8d7dacb0027580cf452ee3b98153a99f4be6c183')
+source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+sha256sums=('40d2dcc9dcfafff567dd23870202d826ddab305ed0626b4a890d88ef6b1b5ccf')
 
 build() {
     cd "${srcdir}/$pkgname-$pkgver"
@@ -46,11 +47,9 @@ build() {
 
 package() {
     cd "${srcdir}/$pkgname-$pkgver"
-    make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install || return 1
+
+    make DESTDIR="$pkgdir/" install
 
     ln -s atril ${pkgdir}/usr/bin/mate-document-viewer
 
-    install -m755 -d "${pkgdir}/usr/share/mateconf/schemas"
-    mateconf-merge-schema "${pkgdir}/usr/share/mateconf/schemas/${pkgname}.schemas" --domain ${pkgname} ${pkgdir}/etc/mateconf/schemas/*.schemas
-    rm -f ${pkgdir}/etc/mateconf/schemas/*.schemas
-}
+}    
