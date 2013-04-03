@@ -1,7 +1,8 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+#Contributor: Xpander <xpander0@gmail.com>
 
 pkgname=mate-icon-theme-faenza
-pkgver=1.5.0
+pkgver=1.6.0
 pkgrel=1
 pkgdesc="Description: MATE icon theme: Faenza."
 arch=('i686' 'x86_64')
@@ -10,8 +11,8 @@ depends=('gtk2' 'librsvg' 'hicolor-icon-theme' )
 makedepends=('gettext' 'hicolor-icon-theme' 'intltool' 'pkg-config' 'icon-naming-utils' 'librsvg' 'mate-common')
 url="http://mate-desktop.org"
 groups=('mate')
-source=(http://pub.mate-desktop.org/releases/1.5/$pkgname-$pkgver.tar.xz)
-sha256sums=('38b100be8fa02a81f41b7404edd5a1f53e8e7579d05cbc451d4d6ff0dd13f371')
+source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+sha256sums=('8fdf1ebf45b1156230ac923c237e55b26366ffafe19db6c6ba1d46ccb819928b')
 
 #install=mate-icon-theme-faenza.install
 
