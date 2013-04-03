@@ -1,19 +1,20 @@
 #Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+#Contributor: Xpander <xpander0@gmail.com>
 
 pkgname=mate-settings-daemon
-pkgver=1.4.0
+pkgver=1.6.0
 pkgrel=1
 pkgdesc="The MATE Settings daemon"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('libmatekbd' 'mate-desktop' 'libmatenotify' 'gstreamer0.10-base' 'hicolor-icon-theme')
+depends=('libmatekbd' 'mate-desktop' 'libnotify' 'gstreamer0.10-base' 'hicolor-icon-theme')
 makedepends=('intltool' 'pkgconfig')
 options=('!libtool')
 url="http://mate-desktop.org"
 install=mate-settings-daemon.install
 groups=('mate')
-source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
-sha256sums=('5e75cb59c0b5b5733de6852639ebc1551158df757dcf103a9711f95a86664370')
+source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+sha256sums=('4203861f730ae12402803e805320ebb7301ad36be7cc631f3c00827669773005')
 
 
 build() {
@@ -34,9 +35,5 @@ build() {
 package() {
     cd "${srcdir}/$pkgname-$pkgver"
 
-    make DESTDIR="${pkgdir}" MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 install || return 1
-
-    install -d -m755 "${pkgdir}/usr/share/mateconf/schemas"
-    mateconf-merge-schema "${pkgdir}/usr/share/mateconf/schemas/${pkgname}.schemas" --domain ${pkgname} ${pkgdir}/etc/mateconf/schemas/*.schemas || return 1
-    rm -f ${pkgdir}/etc/mateconf/schemas/*.schemas
+    make DESTDIR="$pkgdir/" install
 }
