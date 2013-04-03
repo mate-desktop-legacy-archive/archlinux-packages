@@ -1,19 +1,20 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+#Contributor: Xpander <xpander0@gmail.com>
 
 pkgname=mate-bluetooth
-pkgver=1.4.0
+pkgver=1.6.0
 pkgrel=1
 pkgdesc="A collection of Bluetooth utilities and modules for MATE"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('libunique' 'libmatenotify' 'hicolor-icon-theme' 'gvfs-obexftp' 'obexd-client')
+depends=('libunique' 'libnotify' 'hicolor-icon-theme' 'gvfs-obexftp' 'obexd-client')
 makedepends=('intltool' 'pygtk' 'mate-doc-utils' 'mate-file-manager-sendto' 'gobject-introspection')
 options=('!emptydirs')
 install=mate-bluetooth.install
 url="http://mate-desktop.org"
 groups=('mate-extras')
-source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
-sha256sums=('9f22eb482b4b26192ce77d1879658a0396989e62ddc8f14ec91d3805f7f91a3f')
+source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+sha256sums=('1ac4d00e282518db3e0385fa6e338eae32dce2240ab248457887ce07a441070f')
 
 build() {
 	cd "${srcdir}/${pkgname}-${pkgver}"
@@ -25,11 +26,7 @@ build() {
 }
 
 package() {
-    cd "$srcdir/$pkgname-$pkgver"
+    cd "${srcdir}/$pkgname-$pkgver"
 
-	make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install || return 1
-
-	install -m755 -d "${pkgdir}/usr/share/mateconf/schemas"
-	mateconf-merge-schema "${pkgdir}/usr/share/mateconf/schemas/${pkgname}.schemas" --domain ${pkgname} ${pkgdir}/etc/mateconf/schemas/*.schemas || return 1
-	rm -f ${pkgdir}/etc/mateconf/schemas/*.schemas
+    make DESTDIR="$pkgdir/" install
 }
