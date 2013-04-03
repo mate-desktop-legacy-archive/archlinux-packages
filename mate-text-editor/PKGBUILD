@@ -1,20 +1,20 @@
 #Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-text-editor
-pkgver=1.4.0
+pkgver=1.6.0
 pkgrel=1
 pkgdesc="An powerfull text editor for MATE"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('mate-conf' 'gtk2' 'gtksourceview2' 'libxml2' 'pygtksourceview2')
+depends=('gtk2' 'gtksourceview2' 'libxml2' 'pygtksourceview2')
 makedepends=('pkgconfig' 'mate-doc-utils' 'intltool')
 options=('!emptydirs' '!libtool')
 conflicts=('pluma')
 url="http://mate-desktop.org"
 groups=('mate-extras')
 install=mate-text-editor.install
-source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
-sha256sums=('45e57cad8c9d9a4ae1704ee28c4f7cfec816e808f1c40331ed9fbbade8503f8b ')
+source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+sha256sums=('52339cb8d265d7a538c9b3b3e6a37f68ece5100d18c029dfc87c3f4b61cf8288')
 
 build() {
     cd "${srcdir}/${pkgname}-$pkgver"
@@ -27,13 +27,9 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-$pkgver"
+    cd "${srcdir}/$pkgname-$pkgver"
 
-    make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install || return 1
-
-    install -m755 -d "${pkgdir}/usr/share/mateconf/schemas"
-    mateconf-merge-schema "${pkgdir}/usr/share/mateconf/schemas/${pkgname}.schemas" --domain ${pkgname} ${pkgdir}/etc/mateconf/schemas/*.schemas || return 1
-    rm -f ${pkgdir}/etc/mateconf/schemas/*.schemas
+    make DESTDIR="$pkgdir/" install
 }
 
 
