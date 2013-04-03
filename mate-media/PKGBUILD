@@ -1,7 +1,8 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+#Contributor: Xpander <xpander0@gmail.com>
 
 pkgname=mate-media
-pkgver=1.5.1
+pkgver=1.6.0
 pkgrel=1
 pkgdesc="MATE Media Tools"
 arch=(i686 x86_64)
@@ -12,8 +13,8 @@ groups=('mate-extras')
 options=(!emptydirs !libtool)
 url="http://mate-desktop.org"
 install=mate-media.install
-source=(http://pub.mate-desktop.org/releases/1.5/$pkgname-$pkgver.tar.xz)
-sha256sums=('c76abdf5eeb2794087252c2c2d08b8a0d2da7bbf9e6d4f8cfcd207d7439c4b06')
+source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+sha256sums=('baf0ac85685a376107feee47b372b678a86404ce215b19c7fc259b012a3694a6')
 
 build() {
 	cd "${srcdir}/${pkgname}-$pkgver"
@@ -24,7 +25,7 @@ build() {
 		--disable-scrollkeeper \
 		--enable-pulseaudio \
 		--enable-profiles --enable-grecord \
-		--enable-gstprops --enable-gstmix 
+		--enable-gstprops 
 	# brute force
 	mate-doc-prepare --force --copy
 	automake
@@ -45,12 +46,7 @@ build() {
 }
 
 package() {
-	cd "${srcdir}/${pkgname}-$pkgver"
+    cd "${srcdir}/$pkgname-$pkgver"
 
-	make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install || return 1
-	#rm -f ${pkgdir}/usr/lib/*.la # can be used options=(!libtools)
-
-	install -m755 -d "${pkgdir}/usr/share/mateconf/schemas"
-	mateconf-merge-schema "${pkgdir}/usr/share/mateconf/schemas/${pkgname}.schemas" --domain ${pkgname} ${pkgdir}/etc/mateconf/schemas/*.schemas || return 1
-	rm -f ${pkgdir}/etc/mateconf/schemas/*.schemas
+    make DESTDIR="$pkgdir/" install
 }
