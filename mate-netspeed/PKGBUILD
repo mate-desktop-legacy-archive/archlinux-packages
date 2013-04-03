@@ -9,7 +9,8 @@ arch=('i686' 'x86_64')
 url="http://mate-desktop.org"
 license=('GPL')
 groups=()
-depends=(               'mate-panel'
+depends=(      'mate-panel'
+               'glib2'
                'expat'
                'libgtop>=2'
                'gtk2'
