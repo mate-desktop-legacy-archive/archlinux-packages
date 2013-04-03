@@ -1,29 +1,26 @@
 # Maintainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+#Contributor: Xpander <xpander0@gmail.com>
+
 pkgname=mate-netspeed
-pkgver=1.5.0
+pkgver=1.6.0
 pkgrel=1
 pkgdesc=""
 arch=('i686' 'x86_64')
 url="http://mate-desktop.org"
 license=('GPL')
 groups=()
-depends=(	'mate-panel'
+depends=(               'mate-panel'
                'expat'
                'libgtop>=2'
                'gtk2'
-               'libmate'
-               'mate-conf'
-               'libmatecomponent'
-               'libmatecomponentui'
-               'libmatecanvas'
                'mate-doc-utils'
                'gnome-doc-utils'
                'wireless_tools'
                'mate-common')
                
 install=$pkgname.install
-source=(http://pub.mate-desktop.org/releases/1.5/$pkgname-$pkgver.tar.xz)
-sha256sums=('6bd79e341720b012f0741afec75d322a9fee84e540445a527398fc4714fb5bca') 
+source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+sha256sums=('91b90a85983d119fd40006b47847c737ad1c27836894355fb387adbca8250634') 
 
 build() {
 cd $srcdir/$pkgname-$pkgver
