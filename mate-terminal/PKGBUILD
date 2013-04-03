@@ -1,19 +1,19 @@
 #Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-terminal
-pkgver=1.4.0
+pkgver=1.6.0
 pkgrel=1
 pkgdesc="The MATE Terminal Emulator"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('mate-conf' 'vte' 'libmate' 'libsm')
+depends=('vte' 'libsm')
 makedepends=('pkgconfig' 'mate-doc-utils' 'intltool')
 options=('!emptydirs' '!libtool')
 install=mate-terminal.install
 url="http://mate-desktop.org"
 groups=('mate-extras')
-source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
-sha256sums=('2fe35f705d1e2b43fdfe49bf01f0a402e1263df4ac7c9cd6fcc23ef7a5956f66')
+source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+sha256sums=('6e75be530bf46ea1df5a13de79d3e0e1d25421a16d29fe095b467356cb57b019')
 
 build() {
 	cd "${srcdir}/${pkgname}-$pkgver"
@@ -23,11 +23,7 @@ build() {
 }
 
 package() {
-    cd "$srcdir/$pkgname-$pkgver"
+    cd "${srcdir}/$pkgname-$pkgver"
 
-	make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install || return 1
-
-	install -m755 -d "${pkgdir}/usr/share/mateconf/schemas"
-	mateconf-merge-schema "${pkgdir}/usr/share/mateconf/schemas/${pkgname}.schemas" --domain ${pkgname} ${pkgdir}/etc/mateconf/schemas/*.schemas || return 1
-	rm -f ${pkgdir}/etc/mateconf/schemas/*.schemas
+    make DESTDIR="$pkgdir/" install
 }
