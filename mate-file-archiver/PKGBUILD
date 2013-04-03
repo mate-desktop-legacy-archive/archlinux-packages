@@ -1,8 +1,9 @@
 # Contributor: Alessio Sergi <asergi at archlinux dot us>
 # Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Xpander <xpander0@gmail.com>
 
 pkgname=mate-file-archiver
-pkgver=1.5.1
+pkgver=1.6.0
 pkgrel=1
 pkgdesc="Archive manipulator for MATE"
 arch=('i686' 'x86_64')
@@ -18,8 +19,8 @@ options=('!libtool' '!emptydirs')
 install=mate-file-archiver.install
 url="http://mate-desktop.org"
 groups=('mate-extras')
-source=(http://pub.mate-desktop.org/releases/1.5/$pkgname-$pkgver.tar.xz)
-sha256sums=('eb63973b0020f3ed935bd79f69148f23e03ec562517356b5b48a4fd317228a9d')
+source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+sha256sums=('b959c41d1c86991e4f72224df0519bf0aaccfdd49afd8e799268b779ce9d2285')
 
 build() {
 	cd "$srcdir/$pkgname-$pkgver"
@@ -39,11 +40,9 @@ build() {
 }
 
 package() {
-	cd "$srcdir/$pkgname-$pkgver"
-	make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="$pkgdir/" install
-	install -d -m755 "${pkgdir}/usr/share/mateconf/schemas"
-	mateconf-merge-schema "${pkgdir}/usr/share/mateconf/schemas/${pkgname}.schemas" --domain ${pkgname} "${pkgdir}/etc/mateconf/schemas/*.schemas"
-	rm -f "${pkgdir}/etc/mateconf/schemas/*.schemas"
+    cd "${srcdir}/$pkgname-$pkgver"
+
+    make DESTDIR="$pkgdir/" install
 }
 
 # vim:set ts=2 sw=2 et:
