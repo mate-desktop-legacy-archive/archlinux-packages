@@ -1,18 +1,19 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+#Contributor: Xpander <xpander0@gmail.com>
 
 pkgname=mate-menu-editor
-pkgver=1.5.0
+pkgver=1.6.0
 pkgrel=1
 pkgdesc="An powerfull text editor for MATE"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('mate-conf' 'gtk2' 'gtksourceview2' 'libxml2' 'pygtksourceview2')
+depends=('gtk2' 'gtksourceview2' 'libxml2' 'pygtksourceview2')
 makedepends=('pkgconfig' 'mate-doc-utils' 'intltool')
 options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
 groups=('mate-extras')
-source=(http://pub.mate-desktop.org/releases/1.5/$pkgname-$pkgver.tar.xz)
-sha256sums=('c80b22a9277787a06b69048fab202aefd39fc88e9269dcfbd4e5e5bc740b51e4')
+source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+sha256sums=('5c7b96e04ab3e495ae88065d1a084719ce72da050f9b869347edc3fc21ca4f61')
 
 build() {
     cd "${srcdir}/${pkgname}-$pkgver"
@@ -27,7 +28,7 @@ build() {
 package() {
     cd "${srcdir}/${pkgname}-$pkgver"
 
-    make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install || return 1
+    make DESTDIR="$pkgdir/" install
 }
 
 
