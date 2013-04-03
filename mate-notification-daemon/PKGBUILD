@@ -1,20 +1,21 @@
 #Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+#Contributor: Xpander <xpander0@gmail.com>
 
 pkgname=mate-notification-daemon
-pkgver=1.5.0
+pkgver=1.6.0
 pkgrel=1
 pkgdesc="Notification daemon for MATE"
 arch=(i686 x86_64)
 license=('GPL' 'LGPL')
-depends=('libmatenotify' 'libwnck' 'gtk2' 'libcanberra')
+depends=('libnotify' 'libwnck' 'gtk2' 'libcanberra')
 makedepends=('intltool')
 provides=('notification-daemon')
 url="http://mate-desktop.org"
 groups=('mate')
 options=('!libtool' '!emptydirs')
 install=mate-notification-daemon.install
-source=(http://pub.mate-desktop.org/releases/1.5/$pkgname-$pkgver.tar.xz)
-sha256sums=('e34ae82fc97ac814c57ae888b28b7438fe018ab847b031db611ea2c8ef368757')
+source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+sha256sums=('baa96685b20a07dbec1cf3ea945352b5da1a6ca12a0cf693413797e331a30ddd')
 
 
 build() {
@@ -34,12 +35,5 @@ build() {
 package() {
     cd "${srcdir}/$pkgname-$pkgver"
 
-    make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install || return 1
-
-    # hax! still conflicts with libnotify
-    #ln -s mate-notify-send ${pkgdir}/usr/bin/notify-send
-
-    install -m755 -d "${pkgdir}/usr/share/mateconf/schemas"
-    mateconf-merge-schema "${pkgdir}/usr/share/mateconf/schemas/${pkgname}.schemas" --domain ${pkgname} ${pkgdir}/etc/mateconf/schemas/*.schemas || return 1
-    rm -f ${pkgdir}/etc/mateconf/schemas/*.schemas
+    make DESTDIR="$pkgdir/" install
 }
