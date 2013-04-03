@@ -1,7 +1,8 @@
 #Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+#Contributor: Xpander <xpander0@gmail.com>
 
 pkgname=mate-panel
-pkgver=1.5.2
+pkgver=1.6.0
 pkgrel=1
 pkgdesc="The MATE Panel"
 arch=('i686' 'x86_64')
@@ -10,8 +11,8 @@ depends=('libmatewnck' 'mate-menus' 'mate-desktop' 'librsvg' 'hicolor-icon-theme
 makedepends=('mate-doc-utils' 'pkgconfig' 'intltool' 'networkmanager')
 options=('!emptydirs' '!libtool')
 install=mate-panel.install
-source=(http://pub.mate-desktop.org/releases/1.5/$pkgname-$pkgver.tar.xz)
-sha256sums=('b2d00f4a71a6e9625cf1011447bc8d976f8b3516486d804a070e20298d97c902')
+source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+sha256sums=('41a0c30b7b2ddd3d4964c451d8d1ee12ba5fc62977232bd283ad9d28e217cafb')
 
 url="http://mate-desktop.org"
 groups=('mate')
@@ -26,9 +27,8 @@ build() {
         --disable-static \
         --libexecdir=/usr/lib/mate-panel \
         --disable-scrollkeeper \
-        --enable-introspection \
-        --enable-matecomponent || return 1
-    make || return 1
+        --enable-introspection || return 1
+       make || return 1
 }
 
 package() {
