@@ -1,19 +1,20 @@
 #Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+#Contributor: Xpander <xpander0@gmail.com>
 
 pkgname=mate-power-manager
-pkgver=1.5.1
+pkgver=1.6.0
 pkgrel=1
 pkgdesc="Session daemon that makes it easy to manage your laptop or desktop system for Mate Desktop"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('libmatenotify' 'libunique' 'libcanberra' 'hicolor-icon-theme' 'upower' 'libmatekeyring')
+depends=('libnotify' 'libunique' 'libcanberra' 'hicolor-icon-theme' 'upower' 'libmatekeyring')
 makedepends=('intltool' 'pkgconfig' 'mate-doc-utils' 'mate-panel' 'mate-control-center')
 options=('!emptydirs')
 install=mate-power-manager.install
 url="http://mate-desktop.org"
 groups=('mate-extras')
-source=(http://pub.mate-desktop.org/releases/1.5/$pkgname-$pkgver.tar.xz)
-sha256sums=('b1c4e1f4c0d7d00c3436801f9f26ac5513220c46dd6f18d4c1b8220c11de6dca')
+source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+sha256sums=('9730e62ed4049d9c9b707740d2ce9cac5eb4fb7f512a9bba2c9d78137b9ce5bf')
 
 build() {
 
@@ -30,11 +31,7 @@ build() {
 }
 
 package() {
-    cd "$srcdir/$pkgname-$pkgver"
+    cd "${srcdir}/$pkgname-$pkgver"
 
-	make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install || return 1
-
-	install -m755 -d "${pkgdir}/usr/share/mateconf/schemas"
-	mateconf-merge-schema "${pkgdir}/usr/share/mateconf/schemas/${pkgname}.schemas" --domain ${pkgname} ${pkgdir}/etc/mateconf/schemas/*.schemas || return 1
-	rm -f ${pkgdir}/etc/mateconf/schemas/*.schemas
+    make DESTDIR="$pkgdir/" install
 }
