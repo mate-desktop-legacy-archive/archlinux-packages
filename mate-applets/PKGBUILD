@@ -1,7 +1,8 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+#Contributor:Xpander <xpander0@gmail.com>
 
 pkgname=mate-applets
-pkgver=1.4.0
+pkgver=1.6.0
 pkgrel=1
 pkgdesc="Applets for MATE panel"
 arch=('i686' 'x86_64')
@@ -16,8 +17,8 @@ replace=('gnome-applets')
 conflicts=('gnome-applets')
 url="http://mate-desktop.org"
 install=mate-applets.install
-source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
-sha256sums=('53e30e0ff0b29aff2a042088a4d1e071b7b1e63eadb5554455d08bf7f9a669c7')
+source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+sha256sums=('5429188712e3899b4f5f67cd9de7f23e5a9547f4b6fe30c6bb8d189afb538ab8')
 
 build() {
     cd "${srcdir}/$pkgname-$pkgver"
@@ -32,7 +33,7 @@ build() {
         --enable-networkmanager \
         --enable-mixer-applet \
         --enable-mini-commander \
-        --enable-frequency-selector \
+        --disable-cpufreq \
         --enable-ipv6 \
         --disable-schemas-install || return 1
 	make || return 1
@@ -40,9 +41,6 @@ build() {
 
 package() {
     cd "${srcdir}/$pkgname-$pkgver"
-    make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install || return 1
 
-    install -m755 -d "${pkgdir}/usr/share/mateconf/schemas"
-    mateconf-merge-schema "${pkgdir}/usr/share/mateconf/schemas/${pkgname}.schemas" --domain ${pkgname} ${pkgdir}/etc/mateconf/schemas/*.schemas || return 1
-    rm -f ${pkgdir}/etc/mateconf/schemas/*.schemas
+    make DESTDIR="$pkgdir/" install
 }
