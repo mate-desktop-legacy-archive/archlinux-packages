@@ -1,7 +1,8 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+#Contributor: Xpander <xpander0@gmail.com>
 
 pkgname=mate-control-center
-pkgver=1.4.0
+pkgver=1.6.0
 pkgrel=1
 pkgdesc="The Control Center for MATE"
 arch=('i686' 'x86_64')
@@ -15,8 +16,8 @@ options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
 groups=('mate')
 install=mate-control-center.install
-source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
-sha256sums=('251a773736bd07e84aac74e13c3b46cabc3fc0113efcd5dd4551594e5336f53b')
+source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+sha256sums=('b3782db60e5843d7cacf3c4a6c0b4fac1c94b6ddec6cbd60a58838197df1b95a')
 
 build() {
     cd "${srcdir}/$pkgname-$pkgver"
@@ -34,12 +35,5 @@ build() {
 package() {
     cd "${srcdir}/$pkgname-$pkgver"
 
-    make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install || return 1
-
-    install -m755 -d "${pkgdir}/usr/share/mateconf/schemas"
-    mateconf-merge-schema "${pkgdir}/usr/share/mateconf/schemas/${pkgname}.schemas" --domain ${pkgname} ${pkgdir}/etc/mateconf/schemas/*.schemas || return 1
-    rm -f ${pkgdir}/etc/mateconf/schemas/*.schemas
-
-    # --disable-update-mimedb?
-    rm -f "${pkgdir}/usr/share/applications/mimeinfo.cache"
+    make DESTDIR="$pkgdir/" install
 }
