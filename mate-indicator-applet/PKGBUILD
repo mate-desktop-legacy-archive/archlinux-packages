@@ -7,7 +7,7 @@ pkgdesc="Indicator Applet for MATE"
 arch=('i686' 'x86_64')
 url=""
 license=('GPL')
-makedepends=('gtk2>=2.18' 'mate-panel')
+makedepends=('gtk2' 'mate-panel')
 options=(!libtool)
 source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
 sha256sums=('79c5154075096b4622c782d798b5981a2f277b9079e545a9bcb4644e6a6e4dfd')
