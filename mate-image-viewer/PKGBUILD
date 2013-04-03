@@ -1,7 +1,8 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+#Contributor: Xpander <xpander0@gmail.com>
 
 pkgname=mate-image-viewer
-pkgver=1.5.0
+pkgver=1.6.0
 pkgrel=1
 pkgdesc="An image viewing and cataloging program for MATE"
 arch=('i686' 'x86_64')
@@ -13,8 +14,8 @@ conflicts=('eog')
 url="http://mate-desktop.org"
 groups=('mate-extras')
 install=mate-image-viewer.install
-source=(http://pub.mate-desktop.org/releases/1.5/$pkgname-$pkgver.tar.xz)
-sha256sums=('255d23c43e74ea2a55b50af3ceee6089dcbb6b38271234a8ff73d065b4033769')
+source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+sha256sums=('a4bcfc303bac29f2f016427e1aee422f2ec7f55fd6332e201814e451bd706f4f')
 
 build() {
 	cd "${srcdir}/${pkgname}-$pkgver"
@@ -25,11 +26,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-$pkgver"
+    cd "${srcdir}/$pkgname-$pkgver"
 
-	make MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install || return 1
-
-	install -m755 -d "${pkgdir}/usr/share/mateconf/schemas"
-	mateconf-merge-schema "${pkgdir}/usr/share/mateconf/schemas/${pkgname}.schemas" --domain ${pkgname} ${pkgdir}/etc/mateconf/schemas/*.schemas || return 1
-	rm -f ${pkgdir}/etc/mateconf/schemas/*.schemas
+    make DESTDIR="$pkgdir/" install
 }
