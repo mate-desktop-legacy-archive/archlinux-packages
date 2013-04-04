@@ -8,7 +8,7 @@ arch=('i686' 'x86_64')
 url="http://mate-desktop.org"
 license=('GPL')
 groups=()
-depends=('libmatewnck' 'glib2' 'gtk2' 'unique' 'libxtst' 'libfakekey' 'mate-panel')
+depends=('libmatewnck' 'glib2' 'gtk2' 'libunique' 'libxtst' 'libfakekey' 'mate-panel')
                
 install=$pkgname.install
 source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
