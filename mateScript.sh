@@ -53,7 +53,7 @@ listofpackages=(
     mate-text-editor
     mate-user-share # automake-1.13 issue
     mate-utils
-    python-caja
+    #python-caja # does not compile; can not find pythong headers
     libindicator # not a MATE 1.6 package
     #mate-display-manager # not a MATE 1.6 package # fail
     )
