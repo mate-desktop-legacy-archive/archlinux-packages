@@ -12,7 +12,7 @@ depends=('mate-file-manager' 'mate-common')
                
 install=$pkgname.install
 source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
-sha256sums=('b209898de9482650136bd2c8afb319eb8d3769c463c80caf3c6b5e5eedb5ed66') 
+sha256sums=('2a696f24dd3b34609117d66ac4a768409419964fa21db300bdb19d042e513990') 
 
 build() {
 cd $srcdir/$pkgname-$pkgver
