@@ -9,24 +9,17 @@ url=""
 license=('GPL')
 makedepends=('gtk2' 'mate-panel')
 options=(!libtool)
+install=$pkgname.install
 source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
 sha256sums=('79c5154075096b4622c782d798b5981a2f277b9079e545a9bcb4644e6a6e4dfd')
 
 build() {
-  cd "$srcdir/$pkgname-$pkgver"
-
-  # Use different location for header files for GTK+3
-  sed -i 's/libindicator-/libindicator3-/' libindicator/indicator3-0.4.pc.in.in
-  sed -i 's/libindicator-/libindicator$(VER)-/' libindicator/Makefile.in
-
-  # Disable building tests
-  sed -i '/tests/ d' Makefile.in
-
-  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib/$pkgname \
-              --disable-static --with-gtk=2
+cd $srcdir/$pkgname-$pkgver
+ 
+  ./autogen.sh LDFLAGS="-lm" --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib/$pkgname \
+  --disable-static --disable-scrollkeeper
   make
 }
-
 package() {
     cd "${srcdir}/$pkgname-$pkgver"
 
