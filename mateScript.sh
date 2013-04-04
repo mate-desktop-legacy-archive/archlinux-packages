@@ -31,7 +31,7 @@ listofpackages=(
     mate-media
     mate-power-manager
     mate-system-monitor
-    #caja-dropbox # fail
+    #caja-dropbox # fail; package is also in aur
     mate-applets
     mate-bluetooth
     mate-calc
@@ -54,7 +54,7 @@ listofpackages=(
     mate-user-share # automake-1.13 issue
     mate-utils
     #python-caja # does not compile; can not find pythong headers
-    libindicator # not a MATE 1.6 package
+    #libindicator # not a MATE 1.6 package
     #mate-display-manager # not a MATE 1.6 package # fail
     )
 
