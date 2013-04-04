@@ -43,9 +43,9 @@ listofpackages=(
     mate-file-manager-sendto
     mate-file-manager-share
     mate-icon-theme-faenza
-    #mate-indicator-applet # not in archlinux-packages yet
+    mate-indicator-applet
     mate-menu-editor
-    #mate-netbook # not in archlinux-packages yet
+    mate-netbook
     mate-netspeed
     mate-sensors-applet
     #mate-system-tools # automake-1.13 issue, missing libboobs and system-tools-backends
@@ -53,7 +53,7 @@ listofpackages=(
     mate-text-editor
     mate-user-share # automake-1.13 issue
     mate-utils
-    #python-caja # not in archlinux-packages yet
+    python-caja
     libindicator # not a MATE 1.6 package
     #mate-display-manager # not a MATE 1.6 package # fail
     )
