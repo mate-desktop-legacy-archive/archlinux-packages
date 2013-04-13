@@ -18,7 +18,7 @@ conflicts=('gnome-applets')
 url="http://mate-desktop.org"
 install=mate-applets.install
 source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
-sha256sums=('5429188712e3899b4f5f67cd9de7f23e5a9547f4b6fe30c6bb8d189afb538ab8')
+sha256sums=('8693cd88c4731796c09294c962d0ff12092d536121a5c41ddb06fffbc78aa00a')
 
 build() {
     cd "${srcdir}/$pkgname-$pkgver"
