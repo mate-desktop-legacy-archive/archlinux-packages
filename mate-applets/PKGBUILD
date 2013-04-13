@@ -2,7 +2,7 @@
 #Contributor:Xpander <xpander0@gmail.com>
 
 pkgname=mate-applets
-pkgver=1.6.0
+pkgver=1.6.1
 pkgrel=1
 pkgdesc="Applets for MATE panel"
 arch=('i686' 'x86_64')
