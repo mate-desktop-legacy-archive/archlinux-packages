@@ -1,17 +1,18 @@
 #Contributor: Xpander <xpander0@gmail.com>
 
-pkgname=mate-indicator-applet
+pkgname=python-caja
 pkgver=1.6.0
 pkgrel=1
-pkgdesc="Indicator Applet for MATE"
+pkgdesc=""
 arch=('i686' 'x86_64')
-url=""
+url="http://mate-desktop.org"
 license=('GPL')
-makedepends=('gtk2' 'mate-panel')
-options=(!libtool)
+groups=()
+depends=('mate-file-manager' 'mate-common')
+               
 install=$pkgname.install
 source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
-sha256sums=('79c5154075096b4622c782d798b5981a2f277b9079e545a9bcb4644e6a6e4dfd')
+sha256sums=('2a696f24dd3b34609117d66ac4a768409419964fa21db300bdb19d042e513990') 
 
 build() {
 cd $srcdir/$pkgname-$pkgver
@@ -20,8 +21,8 @@ cd $srcdir/$pkgname-$pkgver
   --disable-static --disable-scrollkeeper
   make
 }
-package() {
-    cd "${srcdir}/$pkgname-$pkgver"
 
-    make DESTDIR="${pkgdir}" install
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+  make DESTDIR="$pkgdir/" install
 }

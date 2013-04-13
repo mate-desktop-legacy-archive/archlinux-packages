@@ -14,6 +14,7 @@ groups=('mate')
 options=('!libtool' '!emptydirs')
 install=mate-keyring.install
 provides=('gnome-keyring')
+conflicts=('gnome-keyring')
 source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
 sha256sums=('f77c48c59a9611baa9721d0a30e78f148629d1754066844bea053cb80141652b')
 

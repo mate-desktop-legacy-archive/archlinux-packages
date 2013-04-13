@@ -1,17 +1,18 @@
 #Contributor: Xpander <xpander0@gmail.com>
 
-pkgname=mate-indicator-applet
+pkgname=mate-netbook
 pkgver=1.6.0
 pkgrel=1
-pkgdesc="Indicator Applet for MATE"
+pkgdesc=""
 arch=('i686' 'x86_64')
-url=""
+url="http://mate-desktop.org"
 license=('GPL')
-makedepends=('gtk2' 'mate-panel')
-options=(!libtool)
+groups=()
+depends=('libmatewnck' 'glib2' 'gtk2' 'libunique' 'libxtst' 'libfakekey' 'mate-panel')
+               
 install=$pkgname.install
 source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
-sha256sums=('79c5154075096b4622c782d798b5981a2f277b9079e545a9bcb4644e6a6e4dfd')
+sha256sums=('b209898de9482650136bd2c8afb319eb8d3769c463c80caf3c6b5e5eedb5ed66') 
 
 build() {
 cd $srcdir/$pkgname-$pkgver
@@ -20,8 +21,8 @@ cd $srcdir/$pkgname-$pkgver
   --disable-static --disable-scrollkeeper
   make
 }
-package() {
-    cd "${srcdir}/$pkgname-$pkgver"
 
-    make DESTDIR="${pkgdir}" install
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+  make DESTDIR="$pkgdir/" install
 }
