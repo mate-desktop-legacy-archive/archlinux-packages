@@ -23,7 +23,7 @@ build() {
 		--localstatedir=/var --disable-static \
 		--disable-schemas-install \
 		--disable-scrollkeeper \
-		--enable-pulseaudio \
+		--disable-pulseaudio \
 		--enable-profiles --enable-grecord \
 		--enable-gstprops --enable-gstmix
 	# brute force
