@@ -27,7 +27,7 @@ build() {
         --localstatedir=/var \
         --disable-static \
         --disable-scrollkeeper \
-        --enable-aboutme
+        --enable-aboutme \
         --disable-update-mimedb || return 1
        make || return 1
 }
