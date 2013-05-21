@@ -2,7 +2,7 @@
 #Contributor: Xpander <xpander0@gmail.com>
 
 pkgname=mate-desktop
-pkgver=1.6.0
+pkgver=1.6.1
 pkgrel=1
 pkgdesc="Library with common API for various MATE modules"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -13,7 +13,7 @@ options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
 groups=('mate')
 source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
-sha256sums=('d8c0dd7cc0cbd36088363bb1358e0acbf239c518e42504029a837cb993373d94')
+sha256sums=('fe65f4035fe74510e6f35df0c0e29cbf8a6501852adc3971773d0072b914aed5')
 
 
 build() {

@@ -2,7 +2,7 @@
 #Contributor: Xpander <xpander0@gmail.com>
 
 pkgname=mate-common
-pkgver=1.6.0
+pkgver=1.6.1
 pkgrel=1
 pkgdesc="Common development macros for MATE"
 arch=('any')
@@ -13,7 +13,7 @@ options=('!libtool')
 url="http://mate-desktop.org"
 groups=('mate')
 source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
-sha256sums=('9a10fbe7d0c08b4c497d63419c9dd47324103cdae4d80422f2f581260e325a5f')
+sha256sums=('234996ae9a0e49f0a55a4a4dfc45e89f1ecdfc1f950381a1a5f192e41b6605cc')
 
 
 build() {

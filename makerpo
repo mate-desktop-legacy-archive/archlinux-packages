@@ -42,7 +42,7 @@ BUILD_ORDER=(
   mate-bluetooth
   mate-file-manager-share
   mate-icon-theme-faenza
-  mate-indicator-applet
+  mate-indicator-applet #automake-1.13 issue
   mate-menu-editor
   mate-netbook
   mate-netspeed
@@ -229,7 +229,7 @@ mr_build() {
         printf '\e[1;34m======> \e[1;31mPackage tree might depend on new "%s".\e[0m\n' "$PKG"
         printf 'Proceed to install "%s"? [Y/n] ' "$PKG"
         read
-        if [[ "$REPLY" != "n" && "$REPLY" != "N" ]]; then
+        if [ "$REPLY" != "n" ] && [ "$REPLY" != "N" ]; then
           sudo pacman -U $(ls *$NEW_VER*.pkg.tar.xz --color=none -t -1 | head -n 1)
         fi
       fi

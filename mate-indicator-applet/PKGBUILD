@@ -15,7 +15,7 @@ sha256sums=('79c5154075096b4622c782d798b5981a2f277b9079e545a9bcb4644e6a6e4dfd')
 
 build() {
 cd $srcdir/$pkgname-$pkgver
- 
+   sed -i s/AM_CONFIG_HEADER/AC_CONFIG_HEADERS/ configure.ac #FIXME: >1.6.0
   ./autogen.sh LDFLAGS="-lm" --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib/$pkgname \
   --disable-static --disable-scrollkeeper
   make

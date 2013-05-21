@@ -19,7 +19,7 @@ groups=('mate')
 
 build() {
     cd "${srcdir}/$pkgname-$pkgver"
-    PYTHON=/usr/bin/python2 ./autogen.sh \
+    PYTHON=/usr/bin/python2 ./configure \
         --prefix=/usr \
         --sysconfdir=/etc \
         --mandir=/usr/share/man \
