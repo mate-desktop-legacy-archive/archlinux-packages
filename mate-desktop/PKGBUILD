@@ -19,7 +19,7 @@ sha256sums=('fe65f4035fe74510e6f35df0c0e29cbf8a6501852adc3971773d0072b914aed5')
 build() {
     cd "$srcdir/$pkgname-$pkgver"
 
-    ./autogen.sh \
+    ./configure \
         --prefix=/usr \
         --sysconfdir=/etc \
         --localstatedir=/var \
