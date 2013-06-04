@@ -19,7 +19,7 @@ sha256sums=('f402c110c5d2fb98fb4f550bde4274cdb40300773b9b3772a507c07fc710af47')
 build() {
 
 	cd "${srcdir}/${pkgname}-${pkgver}"
-	./autogen.sh --prefix=/usr --sysconfdir=/etc \
+	./configure --prefix=/usr --sysconfdir=/etc \
 		--localstatedir=/var \
 		--libexecdir=/usr/lib/${pkgname} \
 		--disable-scrollkeeper 
