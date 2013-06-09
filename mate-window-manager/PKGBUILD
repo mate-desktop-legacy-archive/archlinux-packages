@@ -19,7 +19,7 @@ sha256sums=('sha256sums=('d4c887c7de76073409bf653701ae1d16d17ca5205776fd4dcc952c
 build() {
     cd "${srcdir}/$pkgname-$pkgver"
     #patch -Np1 -i "${srcdir}/metacity-restartstyle.patch" || return 1
-    ./autogen.sh \
+    ./configure \
         --prefix=/usr \
         --sysconfdir=/etc \
         --localstatedir=/var \
