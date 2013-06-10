@@ -2,7 +2,7 @@
 
 MATE_VER=1.6
 
-BUILD_ORDER=(
+MATE_BUILD_ORDER=(
   mate-common
   mate-doc-utils
   mate-desktop
@@ -47,14 +47,18 @@ BUILD_ORDER=(
   mate-netbook
   mate-netspeed
   mate-sensors-applet
-  #mate-system-tools # automake-1.13 issue, missing liboobs and  system-tools-backends
+  #mate-system-tools # automake-1.13 issue
   mate-terminal
   mate-text-editor
   mate-user-share # automake-1.13 issue
   mate-utils
   #python-caja # does not compile; cannot find python headers
-  #libindicator # not a MATE 1.6 package
-  #mate-display-manager # not a MATE 1.6 package # fail
+)
+
+AUR_BUILD_ORDER=(
+  aur/libindicator
+  aur/system-tools-backends
+  aur/liboobs
 )
 
 #-----------------------------------------------------------------------------
@@ -73,8 +77,7 @@ mr_help() {
   echo "-r, --remove   Remove Mate packages and dependencies."
   echo "-u, --update   Update package tree."
   echo
-  echo 'clean:     Perform "make clean" and "maintainer-clean" throughout'
-  echo "           the package tree."
+  echo 'clean:     Perform "maintainer-clean" throughout the package tree.'
   echo 'delete:    Delete "pkg" directories and ".pkg.tar.xz" files from the'
   echo "           the package tree."
   echo 'remove:    Perform "pacman -Rs" on installed packages,'
@@ -90,7 +93,7 @@ mr_list() {
   for DIR in $DIRS
   do
    PKG=$(find $DIR -mindepth 1 -maxdepth 1 -name *.pkg.tar.xz)
-   if [[ "$PKG" != *xz* &&  $(basename $DIR) != ".git" ]]; then
+   if [[ "$PKG" != *xz* &&  $(basename $DIR) != ".git"  && $(basename $DIR) != "aur" ]]; then
     basename $DIR
    fi
   done
@@ -100,19 +103,19 @@ mr_list() {
 # Clean binary build files in package tree.
 mr_clean() {
   cd $BASEDIR
-  DIRS=$(find . -maxdepth 1 -type d | sed s@./@@)
+  DIRS=$(find ./aur -mindepth 1 -maxdepth 1 -type d | sed s@./@@)
+  DIRS="$DIRS $(find . -mindepth 1 -maxdepth 1 -type d | sed s@./@@)"
 
   for DIR in $DIRS
   do
    if [ -d $BASEDIR/$DIR/src ]; then
      cd $BASEDIR/$DIR/src
-      SDIRS=$(find . -maxdepth 2 -type d | sed s@./@@)
+      SDIRS=$(find . -mindepth 1 -maxdepth 1 -type d | sed s@./@@)
       for SDIR in $SDIRS
       do
-        if [ -e $BASEDIR/$DIR/$SDIR/Makefile ]; then
+        if [ -e $BASEDIR/$DIR/src/$SDIR/Makefile ]; then
           printf "\e[1;34m======> $(basename $DIR)\e[0m\n"
-          cd $BASEDIR/$DIR/$SDIR
-          make clean &> /dev/null
+          cd $BASEDIR/$DIR/src/$SDIR
           make maintainer-clean &> /dev/null
           cd $BASEDIR
         fi
@@ -125,7 +128,8 @@ mr_clean() {
 # Delete all binary package files in package tree.
 mr_delete() {
   cd $BASEDIR
-  DIRS=$(find . -maxdepth 1 -type d | sed s@./@@)
+  DIRS=$(find ./aur -mindepth 1 -maxdepth 1 -type d | sed s@./@@)
+  DIRS="$DIRS $(find . -mindepth 1 -maxdepth 1 -type d | sed s@./@@)"
 
   for DIR in $DIRS
   do
@@ -142,7 +146,7 @@ mr_delete() {
 # Update package tree.
 mr_update() {
   cd $BASEDIR
-  DIRS=$(find . -maxdepth 1 -type d | sed s@./@@)
+  DIRS=$(find . -mindepth 1 -maxdepth 1 -type d | sed s@./@@)
 
   for DIR in $DIRS
   do
@@ -199,6 +203,7 @@ mr_update() {
 #-----------------------------------------------------------------------------
 # Build Mate packages.
 mr_build() {
+  BUILD_ORDER=( ${AUR_BUILD_ORDER[@]} ${MATE_BUILD_ORDER[@]} )
   for PKG in ${BUILD_ORDER[@]}
   do
     cd $BASEDIR/$PKG
@@ -215,7 +220,7 @@ mr_build() {
     if [ ! -f *$NEW_VER*.pkg.tar.xz ]; then
       makepkg -s
       if [ "$?" -ne 0 ]; then
-        printf '\e[1;34m======> \e[1;31mBuilding "%s" failed.\e[0m\n' "$PKG"
+        printf '\e[1;34m======> \e[1;31mBuilding "%s" failed.\e[0m\n' "$(basename $PKG)"
         printf "Continue with package tree? [Y/n] "
         read
         if [[ "$REPLY" = "n" || "$REPLY" = "N" ]]; then
@@ -226,8 +231,8 @@ mr_build() {
 
     if [ -f *$NEW_VER*.pkg.tar.xz ]; then
       if [[ "$CUR_VER" != "$NEW_VER" ]]; then
-        printf '\e[1;34m======> \e[1;31mPackage tree might depend on new "%s".\e[0m\n' "$PKG"
-        printf 'Proceed to install "%s"? [Y/n] ' "$PKG"
+        printf '\e[1;34m======> \e[1;31mPackage tree might depend on new "%s".\e[0m\n' "$(basename $PKG)"
+        printf 'Proceed to install "%s"? [Y/n] ' "$(basename $PKG)"
         read
         if [ "$REPLY" != "n" ] && [ "$REPLY" != "N" ]; then
           sudo pacman -U $(ls *$NEW_VER*.pkg.tar.xz --color=none -t -1 | head -n 1)
@@ -240,7 +245,7 @@ mr_build() {
 }
 
 #-----------------------------------------------------------------------------
-# Remove Mate packages and dependencies from system."
+# Remove Mate packages and orphan dependencies from system."
 mr_remove() {
   PKG_LIST=$(pacman -Qq)
 
