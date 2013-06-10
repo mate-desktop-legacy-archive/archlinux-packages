@@ -3,7 +3,7 @@
 
 pkgname=mate-control-center
 pkgver=1.6.0
-pkgrel=1
+pkgrel=4
 pkgdesc="The Control Center for MATE"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
@@ -35,6 +35,9 @@ build() {
 package() {
     cd "${srcdir}/$pkgname-$pkgver"
     make DESTDIR="$pkgdir/" install
+   # usrmove
+    mv "${pkgdir}/usr/sbin/"* "${pkgdir}/usr/bin/"
+    rmdir "${pkgdir}/usr/sbin"
    #don't include mime cache
     rm -f  "${pkgdir}/usr/share/applications/mimeinfo.cache"
 }
