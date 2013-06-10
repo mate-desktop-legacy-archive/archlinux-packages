@@ -1,9 +1,10 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 #Contributor: Xpander <xpander0@gmail.com>
+#Contributor: hekel <hekel@archlinux.info>
 
 pkgname=mate-control-center
 pkgver=1.6.0
-pkgrel=4
+pkgrel=5
 pkgdesc="The Control Center for MATE"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
@@ -25,6 +26,7 @@ build() {
         --prefix=/usr \
         --sysconfdir=/etc \
         --localstatedir=/var \
+        --sbindir=/usr/bin \
         --disable-static \
         --disable-scrollkeeper \
         --enable-aboutme \
@@ -35,9 +37,6 @@ build() {
 package() {
     cd "${srcdir}/$pkgname-$pkgver"
     make DESTDIR="$pkgdir/" install
-   # usrmove
-    mv "${pkgdir}/usr/sbin/"* "${pkgdir}/usr/bin/"
-    rmdir "${pkgdir}/usr/sbin"
    #don't include mime cache
     rm -f  "${pkgdir}/usr/share/applications/mimeinfo.cache"
 }
