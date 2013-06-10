@@ -1,9 +1,10 @@
 #Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
 #Contributor: Xpander <xpander0@gmail.com>
+#Contributor: hekel <hekel@archlinux.info>
 
 pkgname=mate-power-manager
 pkgver=1.6.1
-pkgrel=2
+pkgrel=3
 pkgdesc="Session daemon that makes it easy to manage your laptop or desktop system for Mate Desktop"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
@@ -21,6 +22,7 @@ build() {
 	cd "${srcdir}/${pkgname}-${pkgver}"
 	./configure --prefix=/usr --sysconfdir=/etc \
 		--localstatedir=/var \
+		--sbindir=/usr/bin \
 		--libexecdir=/usr/lib/${pkgname} \
 		--disable-scrollkeeper 
 		#--enable-applets
@@ -33,7 +35,4 @@ build() {
 package() {
     cd "${srcdir}/$pkgname-$pkgver"
     make DESTDIR="$pkgdir/" install
-   # usrmove
-    mv "${pkgdir}/usr/sbin/"* "${pkgdir}/usr/bin/"
-    rmdir "${pkgdir}/usr/sbin"
 }
