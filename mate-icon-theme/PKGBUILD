@@ -18,7 +18,7 @@ install=mate-icon-theme.install
 
 build() {
     cd "${srcdir}/$pkgname-$pkgver"
-    ./autogen.sh --prefix=/usr || return 1
+    ./configure --prefix=/usr || return 1
     make || return 1
 }
 
