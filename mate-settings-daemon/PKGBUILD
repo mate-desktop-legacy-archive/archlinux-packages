@@ -20,7 +20,7 @@ sha256sums=('8104c5c1dfb02a6d7b2743931a04b390baf2e466b8fe612d32a906b1a2fbe64d')
 build() {
     cd "$srcdir/$pkgname-$pkgver"
     # Remove --disable-pulse if you want pulseaudio support
-    ./autogen.sh \
+    ./configure \
         --prefix=/usr \
         --sysconfdir=/etc \
         --localstatedir=/var \
