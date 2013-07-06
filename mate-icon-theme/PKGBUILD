@@ -2,7 +2,7 @@
 #Contributor: Xpander <xpander0@gmail.com>
 
 pkgname=mate-icon-theme
-pkgver=1.6.0
+pkgver=1.6.1
 pkgrel=1
 pkgdesc="MATE icon theme"
 arch=('any')
@@ -12,7 +12,7 @@ makedepends=('intltool')
 url="http://mate-desktop.org"
 groups=('mate')
 source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
-sha256sums=('48a00c9293c66e6596716b52035a116ee26e794e5663ee962caaf3f2b7901c1b')
+sha256sums=('7d1c22d8aa53d3003b47e52d9a961ade367f21827292143741bfcaad59059d94')
 
 install=mate-icon-theme.install
 
