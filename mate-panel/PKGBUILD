@@ -2,7 +2,7 @@
 #Contributor: Xpander <xpander0@gmail.com>
 
 pkgname=mate-panel
-pkgver=1.6.0
+pkgver=1.6.1
 pkgrel=1
 pkgdesc="The MATE Panel"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -12,7 +12,7 @@ makedepends=('mate-doc-utils' 'pkgconfig' 'intltool' 'networkmanager')
 options=('!emptydirs' '!libtool')
 install=mate-panel.install
 source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
-sha256sums=('41a0c30b7b2ddd3d4964c451d8d1ee12ba5fc62977232bd283ad9d28e217cafb')
+sha256sums=('88bf0620e1eba7e2e165060ac6fa21896b8e24d1ac742ff6f8c884c5408dd53b')
 
 url="http://mate-desktop.org"
 groups=('mate')
@@ -20,7 +20,7 @@ groups=('mate')
 build() {
     cd "${srcdir}/$pkgname-$pkgver"
 
-    PYTHON=/usr/bin/python2 ./autogen.sh \
+    PYTHON=/usr/bin/python2 ./configure \
         --prefix=/usr \
         --sysconfdir=/etc \
         --localstatedir=/var \
