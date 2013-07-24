@@ -2,7 +2,7 @@
 #Contributor: Xpander <xpander0@gmail.com>
 
 pkgname=libmatewnck
-pkgver=1.6.0
+pkgver=1.6.1
 pkgrel=1
 pkgdesc="Description: MATE Window Navigator Construction Kit. A library to use for writing pagers and task lists."
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -13,13 +13,13 @@ url="http://mate-desktop.org"
 groups=('mate')
 
 source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
-sha256sums=('ee95c3cf5d94a2f20f4c79a355a17f5683c329f4c7f2c92e996b7c32bf117dd1')
+sha256sums=('39c1b291178153dec9c7036475c61e7acb622f3a38f39810cf5d6f1ba4f51e0c')
 
 build() {
  	 
  	 cd "${srcdir}/$pkgname-$pkgver"
 
-    ./autogen.sh \
+    ./configure \
         --prefix=/usr \
         --sysconfdir=/etc \
         --localstatedir=/var \
