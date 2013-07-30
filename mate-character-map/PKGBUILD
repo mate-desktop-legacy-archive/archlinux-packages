@@ -2,7 +2,7 @@
 
 pkgname=mate-character-map
 pkgver=1.6.0
-pkgrel=1
+pkgrel=2
 pkgdesc="MATE Unicode Charmap"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
