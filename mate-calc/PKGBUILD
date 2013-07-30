@@ -3,7 +3,7 @@
 
 pkgname=mate-calc
 pkgver=1.6.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Calculator for the Mate desktop environment"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('LGPL' 'GPL')
