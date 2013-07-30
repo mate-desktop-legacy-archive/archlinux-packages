@@ -3,8 +3,8 @@
 #Contributor: hekel <hekel@archlinux.info>
 
 pkgname=mate-power-manager
-pkgver=1.6.1
-pkgrel=3
+pkgver=1.6.2
+pkgrel=1
 pkgdesc="Session daemon that makes it easy to manage your laptop or desktop system for Mate Desktop"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
@@ -15,7 +15,7 @@ install=mate-power-manager.install
 url="http://mate-desktop.org"
 groups=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
-sha256sums=('f402c110c5d2fb98fb4f550bde4274cdb40300773b9b3772a507c07fc710af47')
+sha256sums=('b80d531271f9a7ee692d69173b28f46feba025b4ffcc9e0ab2f5b09934f8d80f')
 
 build() {
 
