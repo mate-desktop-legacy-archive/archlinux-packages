@@ -8,6 +8,7 @@ pkgdesc="An applet for the MATE Panel to display readings from hardware sensors,
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 url="http://mate-desktop.org"
 license=('GPL')
+groups=('mate-extras')
 depends=('mate-panel' 'lm_sensors' 'udisks' 'xdg-utils')
 makedepends=('intltool' 'mate-doc-utils' 'git' 'autoconf' 'automake')
 options=('!libtool')
