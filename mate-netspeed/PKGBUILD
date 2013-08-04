@@ -8,7 +8,7 @@ pkgdesc=""
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 url="http://mate-desktop.org"
 license=('GPL')
-groups=()
+groups=('mate-extras')
 depends=(      'mate-panel'
                'glib2'
                'expat'
