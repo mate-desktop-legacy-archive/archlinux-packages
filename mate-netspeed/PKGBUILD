@@ -16,7 +16,8 @@ depends=(      'mate-panel'
                'gtk2'
                'mate-doc-utils'
                'wireless_tools'
-               'mate-common')
+               'mate-common'
+               'xdg-utils')
                
 install=$pkgname.install
 source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
