@@ -1,7 +1,7 @@
 #Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-screensaver
-pkgver=1.6.0
+pkgver=1.6.1
 pkgrel=1
 pkgdesc='Screensaver for MATE'
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -13,14 +13,14 @@ options=('!libtool' '!emptydirs')
 source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz
 		mate-screensaver.pam)
 install=mate-screensaver.install
-sha256sums=('76a4269d9feb7ee8850000700e2cfdff32e4b39e0e269e94573c15b24c01051e'
+sha256sums=('b04801e68d013c899cdfefceed25e28040c21197a2da40cd650be52ac643843c'
             '2744d1fc39da46fc681b7cf1c9230d2035b2bb8d9f510213fbe439c114eb76a2')
 
 build() {
 	# this is a hack for tarballs on github
 	cd $srcdir/${pkgname}-$pkgver
 
-	./autogen.sh \
+	./configure \
 		--prefix=/usr --sysconfdir=/etc \
 		--mandir=/usr/share \
 		--disable-static \
