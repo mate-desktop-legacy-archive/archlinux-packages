@@ -3,8 +3,8 @@
 #Contributor: hekel <hekel@archlinux.info>
 
 pkgname=mate-control-center
-pkgver=1.6.0
-pkgrel=5
+pkgver=1.6.1
+pkgrel=1
 pkgdesc="The Control Center for MATE"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
@@ -18,11 +18,11 @@ url="http://mate-desktop.org"
 groups=('mate')
 install=mate-control-center.install
 source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
-sha256sums=('b3782db60e5843d7cacf3c4a6c0b4fac1c94b6ddec6cbd60a58838197df1b95a')
+sha256sums=('1e6fce881187d99f46eee2bf304b55fd74c60cb1ecaf687c709b1477122c1220')
 
 build() {
     cd "${srcdir}/$pkgname-$pkgver"
-    ./autogen.sh \
+    ./configure \
         --prefix=/usr \
         --sysconfdir=/etc \
         --localstatedir=/var \
