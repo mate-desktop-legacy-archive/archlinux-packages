@@ -2,8 +2,8 @@
 #Contributor: Xpander <xpander0@gmail.com>
 
 pkgname=mate-document-viewer
-pkgver=1.6.0
-pkgrel=2
+pkgver=1.6.1
+pkgrel=1
 pkgdesc="Simply a document viewer"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -17,12 +17,12 @@ groups=('mate-extras')
 install=mate-document-viewer.install
 options=('!libtool' '!emptydirs')
 source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
-sha256sums=('40d2dcc9dcfafff567dd23870202d826ddab305ed0626b4a890d88ef6b1b5ccf')
+sha256sums=('100feb278bb919de874e76bd2344cb49fa60e2819e98b1394226086e34bf59ce')
 
 build() {
     cd "${srcdir}/$pkgname-$pkgver"
 
-    ./autogen.sh \
+    ./configure \
         --prefix=/usr \
         --sysconfdir=/etc \
         --localstatedir=/var \
