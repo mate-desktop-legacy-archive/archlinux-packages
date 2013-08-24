@@ -2,7 +2,7 @@
 #Contributor: Xpander <xpander0@gmail.com>
 
 pkgname=libmateweather
-pkgver=1.6.1
+pkgver=1.6.2
 pkgrel=1
 pkgdesc="Provides access to weather information from the net"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -14,12 +14,12 @@ options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
 install=libmateweather.install
 source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
-sha256sums=('664b7d00a41a36f7747a099f557056919cd90a1ef315f1200628014a018a6115')
+sha256sums=('2b8c13d448011f1f6ddedcbff5498d5ae6f34cc6330c36010ba25d4062aeda60')
 
 
 build() {
     cd "${srcdir}/$pkgname-$pkgver"
-    ./autogen.sh \
+    ./configure \
         --prefix=/usr \
         --sysconfdir=/etc \
         --localstatedir=/var \
