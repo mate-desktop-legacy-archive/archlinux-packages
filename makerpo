@@ -28,6 +28,7 @@ MATE_BUILD_ORDER=(
   mate-screensaver
   mate-file-archiver
   mate-media
+  #mate-media-gstreamer # fail
   mate-power-manager
   mate-system-monitor
   #caja-dropbox # fail; package is also in AUR
@@ -35,30 +36,31 @@ MATE_BUILD_ORDER=(
   mate-calc
   mate-character-map
   mate-document-viewer
-  mate-file-manager-gksu # automake-1.13 issue
+  mate-file-manager-gksu
   mate-file-manager-image-converter
   mate-file-manager-open-terminal
   mate-file-manager-sendto
   mate-bluetooth
   mate-file-manager-share
   mate-icon-theme-faenza
-  mate-indicator-applet #automake-1.13 issue
+  mate-indicator-applet
   mate-menu-editor
   mate-netbook
   mate-netspeed
   mate-sensors-applet
-  #mate-system-tools # automake-1.13 issue
+  #mate-system-tools # fail; linker flag -lm missing
   mate-terminal
   mate-text-editor
-  mate-user-share # automake-1.13 issue
+  mate-user-share
   mate-utils
-  #python-caja # does not compile; cannot find python headers
+  #python-caja # fail; cannot find python headers
 )
 
 AUR_BUILD_ORDER=(
   aur/libindicator
   aur/system-tools-backends
   aur/liboobs
+  aur/libxnvctrl
 )
 
 #-----------------------------------------------------------------------------
@@ -212,7 +214,7 @@ mr_build() {
     cd $BASEDIR/$PKG
     printf "\e[1;34m======> $(basename $PKG)\e[0m\n"
 
-    CUR_VER=$(pacman -Q | grep $PKG)
+    CUR_VER=$(pacman -Q | grep `basename $PKG`)
     CUR_VER=$(echo $CUR_VER | cut -d ' ' -f2)
     NEW_VER=$(cat PKGBUILD | grep pkgver=)
     NEW_VER=$(echo $NEW_VER | cut -d = -f2)
