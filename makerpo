@@ -64,7 +64,7 @@ AUR_BUILD_ORDER=(
 #-----------------------------------------------------------------------------
 # Shows help message.
 mr_help() {
-  echo "makerpo 2013.04.28 - Repository build script for Mate."
+  echo "makerpo 2013.08.27 - Repository build script for Mate."
   echo
   echo "Usage: ./makerpo [option]"
   echo
@@ -76,12 +76,15 @@ mr_help() {
   echo "-l, --list     Show which packages remain to be built."
   echo "-r, --remove   Remove Mate packages and dependencies."
   echo "-u, --update   Update package tree."
+  echo "-p, --purge    Purge outdated source code."
   echo
   echo 'clean:     Perform "maintainer-clean" throughout the package tree.'
   echo 'delete:    Delete "pkg" directories and ".pkg.tar.xz" files from the'
   echo "           the package tree."
   echo 'remove:    Perform "pacman -Rs" on installed packages,'
   echo "           corresponding to package names in the package tree."
+  echo 'purge:     Purge outdated ".tar.xz" source packages and extracted'
+  echo '           packages in "../src" keeping latest versions.'
 }
 
 #-----------------------------------------------------------------------------
@@ -245,7 +248,7 @@ mr_build() {
 }
 
 #-----------------------------------------------------------------------------
-# Remove Mate packages and orphan dependencies from system."
+# Remove Mate packages and orphan dependencies from system.
 mr_remove() {
   PKG_LIST=$(pacman -Qq)
 
@@ -256,6 +259,50 @@ mr_remove() {
     fi
   done
   pacman -Rs $RM_PKG
+}
+
+#-----------------------------------------------------------------------------
+# Purge outdated source code, keeping latest version.
+mr_purge() {
+  cd $BASEDIR
+  DIRS=$(find . -mindepth 1 -maxdepth 1 -type d | sed s@./@@)
+
+  for DIR in $DIRS
+  do
+    if [ -e $BASEDIR/$DIR/PKGBUILD ]; then
+      cd $BASEDIR/$DIR
+      PURGE=false
+
+      # Purge outdated source packages
+      SPKGS=$(find . -maxdepth 1 -type f -name \*.tar.xz | grep [0-9].tar.xz | tail -n +2 )
+      if [ -n "$SPKGS" ]; then
+        PURGE=true
+        rm $SPKGS
+      fi
+
+      # Purge outdated symbolic links
+      if [ -d ./src ]; then
+        SPKGS=$(find ./src -maxdepth 1 -type l -name \*.tar.xz | grep [0-9].tar.xz | tail -n +2 )
+        if [ -n "$SPKGS" ]; then
+          PURGE=true
+          rm $SPKGS
+        fi
+      fi
+
+      # Purge outdated extracted source packages
+      if [ -d ./src ]; then
+        SRC_DIRS=$(find ./src -mindepth 1 -maxdepth 1 -type d | tail -n +2)
+        if [ -n "$SRC_DIRS" ]; then
+          PURGE=true
+          rm -rf $SRC_DIRS
+        fi
+      fi
+
+      if  $PURGE; then
+        printf "\e[1;34m======> $(basename $DIR)\e[0m\n"
+      fi
+    fi
+  done
 }
 
 #-----------------------------------------------------------------------------
@@ -281,6 +328,9 @@ mr_parse_args() {
     ;;
     --remove|-r)
       mr_remove
+    ;;
+    --purge|-p)
+      mr_purge
     ;;
     *)
       mr_help
