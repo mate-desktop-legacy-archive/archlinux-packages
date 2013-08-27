@@ -274,7 +274,7 @@ mr_purge() {
       PURGE=false
 
       # Purge outdated source packages
-      SPKGS=$(find . -maxdepth 1 -type f -name \*.tar.xz | grep [0-9].tar.xz | tail -n +2 )
+      SPKGS=$(find . -maxdepth 1 -type f -name \*.tar.xz | grep [0-9].tar.xz | sort | head -n -1 )
       if [ -n "$SPKGS" ]; then
         PURGE=true
         rm $SPKGS
@@ -282,7 +282,7 @@ mr_purge() {
 
       # Purge outdated symbolic links
       if [ -d ./src ]; then
-        SPKGS=$(find ./src -maxdepth 1 -type l -name \*.tar.xz | grep [0-9].tar.xz | tail -n +2 )
+        SPKGS=$(find ./src -maxdepth 1 -type l -name \*.tar.xz | grep [0-9].tar.xz | sort | head -n -1 )
         if [ -n "$SPKGS" ]; then
           PURGE=true
           rm $SPKGS
@@ -291,7 +291,7 @@ mr_purge() {
 
       # Purge outdated extracted source packages
       if [ -d ./src ]; then
-        SRC_DIRS=$(find ./src -mindepth 1 -maxdepth 1 -type d | tail -n +2)
+        SRC_DIRS=$(find ./src -mindepth 1 -maxdepth 1 -type d | sort | head -n -1)
         if [ -n "$SRC_DIRS" ]; then
           PURGE=true
           rm -rf $SRC_DIRS
