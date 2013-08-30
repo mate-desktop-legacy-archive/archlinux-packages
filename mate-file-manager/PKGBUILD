@@ -3,7 +3,7 @@
 
 pkgname=mate-file-manager
 pkgver=1.6.2
-pkgrel=1
+pkgrel=2
 pkgdesc="The MATE shell and file manager"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
