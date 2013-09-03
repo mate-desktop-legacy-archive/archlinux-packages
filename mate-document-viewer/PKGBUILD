@@ -10,7 +10,7 @@ url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('gtk2' 'libspectre' 'gsfonts' 'poppler-glib' 'djvulibre' 'mate-icon-theme'
-         't1lib' 'libsecret' 'desktop-file-utils' 'libgxps') #  'dconf' 'gsettings-desktop-schemas'
+         't1lib' 'libmatekeyring' 'desktop-file-utils' 'libgxps') #  'dconf' 'gsettings-desktop-schemas'
 makedepends=('mate-doc-utils' 'mate-file-manager' 'intltool'
              'gobject-introspection' 'gtk-doc' 'texlive-bin')
 optdepends=('texlive-bin: DVI support')
@@ -22,8 +22,9 @@ sha256sums=('100feb278bb919de874e76bd2344cb49fa60e2819e98b1394226086e34bf59ce')
 
 build() {
     cd "${srcdir}/$pkgname-$pkgver"
-    # Avoid link error : http://paste.mate-desktop.org/view/2f157646
-    sed -i 's/-latrildocument//' atril-document.pc.in
+
+    # Work around a build system issue. This may not be required for 1.8
+    autoreconf -v -i --force
 
     ./configure \
         --prefix=/usr \
