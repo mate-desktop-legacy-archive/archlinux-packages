@@ -68,12 +68,12 @@ AUR_BUILD_ORDER=(
 mr_help() {
     echo "$(basename ${0}) 2013.09.04 - Repository build script for Mate."
     echo
-    echo "Usage: $(basename ${0}) [option]"
+    echo "Usage: $(basename ${0}) -t [task]"
     echo
     echo "Options:"
     echo "-a  Enable automatic mode"
     echo "-h  Shows this help message."
-    echo "-t  Provide a task which can be one of:"
+    echo "-t  Provide a task to run which can be one of:"
     echo "      c|clean    Clean binary build files."
     echo "      b|build    Build Mate packages."
     echo "      d|delete   Delete all binary package files."
