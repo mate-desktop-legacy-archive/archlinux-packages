@@ -236,15 +236,23 @@ mr_build() {
         if [ -f *$NEW_VER*.pkg.tar.xz ]; then
             if [[ "$CUR_VER" != "$NEW_VER" ]]; then
                 printf '\e[1;34m======> \e[1;31mPackage tree might depend on new "%s".\e[0m\n' "$(basename $PKG)"
+                INSTALL_IT=1
                 if [ ${AUTOMATE} -eq 0 ]; then
                     printf 'Proceed to install "%s"? [Y/n] ' "$(basename $PKG)"
                     read
                     if [ "$REPLY" != "n" ] && [ "$REPLY" != "N" ]; then
-                        sudo pacman -U --noconfirm $(ls *$NEW_VER*.pkg.tar.xz --color=none -t -1 | head -n 1)
+                        INSTALL_IT=0
                     fi
                 else
                     sleep 5
+                fi
+
+                if [ ${INSTALL_IT} -eq 1 ]; then
                     sudo pacman -U --noconfirm $(ls *$NEW_VER*.pkg.tar.xz --color=none -t -1 | head -n 1)
+                    if [ "$?" -ne 0 ]; then
+                        printf '\e[1;34m======> \e[1;31mInstalling "%s" failed.\e[0m\n' "$(basename $PKG)"
+                        exit 1
+                    fi
                 fi
             fi
         fi
