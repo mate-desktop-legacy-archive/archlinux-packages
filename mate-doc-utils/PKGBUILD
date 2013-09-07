@@ -3,18 +3,17 @@
 
 pkgname=mate-doc-utils
 pkgver=1.6.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Documentation utilities for MATE"
 arch=('any')
 license=('GPL' 'LGPL')
-depends=('libxslt' 'python2' 'docbook-xml' 'rarian' 'gnome-doc-utils')
-makedepends=('pkgconfig' 'intltool' 'mate-common')
+depends=('libxml2' 'libxslt' 'python2' 'python2-lxml')
+makedepends=('mate-common' 'rarian')
 #conflicts=('gnome-doc-utils')
 options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
 source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
 sha256sums=('96a3b8dd1350d6531e9ddd1ca47eefe6881551b5ac5fb225bd41d2bec8aaf5eb')
-
 groups=('mate')
 
 build() {

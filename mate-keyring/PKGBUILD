@@ -3,12 +3,12 @@
 
 pkgname=mate-keyring
 pkgver=1.6.0
-pkgrel=1
+pkgrel=2
 pkgdesc="MATE Password Management daemon"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL' 'LGPL')
-depends=('dbus' 'gtk-doc' 'gtk2')
-makedepends=('intltool' 'pkgconfig' 'python2' 'glib2')
+depends=('dbus' 'glib2' 'gtk2' 'libtasn1' 'pam')
+makedepends=('docbook-xml' 'mate-common')
 url="http://mate-desktop.org"
 groups=('mate')
 options=('!libtool' '!emptydirs')

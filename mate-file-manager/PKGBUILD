@@ -3,13 +3,15 @@
 
 pkgname=mate-file-manager
 pkgver=1.6.2
-pkgrel=2
+pkgrel=3
 pkgdesc="The MATE shell and file manager"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('libexif' 'exempi' 'mate-icon-theme' 'shared-mime-info'
-         'desktop-file-utils' 'gvfs' 'libunique' 'mate-desktop')
-makedepends=('pkgconfig' 'intltool')
+depends=('dbus' 'desktop-file-utils' 'exempi' 'glib2' 'gobject-introspection'
+         'gtk2' 'gvfs' 'libexif' 'libunique' 'libxml2' 'libx11' 'libxt'
+         'libxrender' 'libxext' 'mate-desktop' 'mate-icon-theme' 'pangox-compat'
+         'shared-mime-info' 'startup-notification')
+makedepends=('mate-common')
 optdepends=('gstreamer0.10-good-plugins: automatic media playback when mouseover')
 url="http://mate-desktop.org"
 options=('!libtool' '!emptydirs')
@@ -26,9 +28,10 @@ build() {
         --prefix=/usr \
         --sysconfdir=/etc \
         --localstatedir=/var \
-        --disable-static \
         --libexecdir=/usr/lib/caja \
         --enable-unique \
+        --enable-introspection \
+        --disable-static \
         --disable-update-mimedb || return 1
 
     make || return 1

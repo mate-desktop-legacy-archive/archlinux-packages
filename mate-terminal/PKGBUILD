@@ -2,12 +2,12 @@
 
 pkgname=mate-terminal
 pkgver=1.6.1
-pkgrel=2
+pkgrel=3
 pkgdesc="The MATE Terminal Emulator"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('dconf' 'vte')
-makedepends=('pkgconfig' 'mate-doc-utils' 'intltool' 'mate-common')
+depends=('dbus' 'dconf' 'glib2' 'gtk2' 'libx11' 'libsm' 'vte')
+makedepends=('docbook2x' 'mate-common' 'mate-doc-utils' )
 options=('!emptydirs' '!libtool')
 install=mate-terminal.install
 url="http://mate-desktop.org"
@@ -17,13 +17,14 @@ sha256sums=('ebcb1c323e9a5cae7f4ed0548b57de34f6ef3361d5b1bf6bc5921f5a49e0301b')
 
 build() {
 	cd "${srcdir}/${pkgname}-$pkgver"
-	./autogen.sh --prefix=/usr --sysconfdir=/etc --disable-static \
-		--localstatedir=/var --disable-scrollkeeper --with-gnu-ld || return 1
+    ./autogen.sh \
+        --prefix=/usr \
+        --disable-static \
+		--disable-scrollkeeper || return 1
 	make || return 1
 }
 
 package() {
     cd "${srcdir}/$pkgname-$pkgver"
-
     make DESTDIR="$pkgdir/" install
 }

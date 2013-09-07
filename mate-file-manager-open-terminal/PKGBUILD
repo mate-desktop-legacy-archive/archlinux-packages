@@ -3,13 +3,13 @@
 
 pkgname=mate-file-manager-open-terminal
 pkgver=1.6.0
-pkgrel=2
+pkgrel=3
 pkgdesc="An extension for opening terminals in arbitrary local paths"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 url="http://manny.cluecoder.org/packages/nautilus-open-terminal"
 license=('GPL')
-depends=('mate-file-manager')
-makedepends=('pkgconfig' 'intltool')
+depends=('gtk2' 'mate-desktop' 'mate-file-manager')
+makedepends=('mate-common' 'perl-xml-parser')
 install=mate-file-manager-open-terminal.install
 options=('!libtool')
 groups=('mate-extras')
@@ -18,16 +18,12 @@ sha256sums=('9898d640aad99be84fbc42f3e2e4f90400939480f94ac5a1ed1a09475df944e8')
 
 build() {
 	cd "$srcdir/$pkgname-$pkgver"
-	./autogen.sh --prefix=/usr 
-
-	#fix non-standard directory
-	sed -i 's|${prefix}/etc|/etc|' Makefile
-
+    ./autogen.sh \
+        --prefix=/usr
 	make || return 1
 }
 
 package() {
 	cd "$srcdir/$pkgname-$pkgver"
-
 	make DESTDIR="${pkgdir}" install || return 1
 }

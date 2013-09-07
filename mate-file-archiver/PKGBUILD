@@ -5,12 +5,12 @@
 
 pkgname=mate-file-archiver
 pkgver=1.6.0
-pkgrel=3
+pkgrel=4
 pkgdesc="Archive manipulator for MATE"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('desktop-file-utils' 'dconf' 'gtk2' 'hicolor-icon-theme')
-makedepends=('mate-common' 'mate-doc-utils' 'intltool')
+depends=('bzip2' 'glib2' 'gtk2' 'gzip' 'mate-file-manager' 'tar')
+makedepends=('mate-common' 'mate-doc-utils')
 conflicts=('file-roller' 'file-roller2' 'mate-extract')
 optdepends=('unrar: for RAR uncompression'
 'zip: for ZIP archives' 'unzip: for ZIP archives'
@@ -28,17 +28,17 @@ sha256sums=('b959c41d1c86991e4f72224df0519bf0aaccfdd49afd8e799268b779ce9d2285'
 build() {
 	cd "$srcdir/$pkgname-$pkgver"
 	patch -Np1 -i "${srcdir}/fr-rpm-bsdtar.patch"
-  ./autogen.sh --prefix=/usr \
-		--disable-static \
+    ./autogen.sh --prefix=/usr \
 		--localstatedir=/var \
+		--sysconfdir=/etc \
 		--libexecdir=/usr/lib/${pkgname} \
+		--disable-static \
 		--disable-scrollkeeper \
 		--disable-schemas-install \
-		--sysconfdir=/etc \
 		--disable-packagekit
 	mate-doc-prepare --force
-	autoreconf -i
-	aclocal
+	#autoreconf -i
+	#aclocal
 	make
 }
 

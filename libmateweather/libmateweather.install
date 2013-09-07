@@ -1,5 +1,6 @@
 post_install() {
 	/usr/bin/glib-compile-schemas /usr/share/glib-2.0/schemas/
+	/usr/bin/gtk-update-icon-cache -f -t /usr/share/icons/mate
 }
 
 post_upgrade() {

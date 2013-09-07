@@ -17,9 +17,9 @@ MATE_BUILD_ORDER=(
   mate-polkit
   mate-window-manager
   mate-settings-daemon
-  mate-session-manager
   mate-menus
   mate-panel
+  mate-session-manager
   mate-backgrounds
   mate-themes
   mate-notification-daemon

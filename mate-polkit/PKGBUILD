@@ -3,17 +3,16 @@
 
 pkgname=mate-polkit
 pkgver=1.6.0
-pkgrel=1
+pkgrel=2
 pkgdesc="PolicyKit integration for the MATE desktop"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 url="http://www.freedesktop.org/wiki/Software/PolicyKit"
 license=('LGPL')
-depends=('polkit>=0.101' 'gtk2')
-makedepends=('intltool' 'gobject-introspection')
+depends=('dbus' 'gobject-introspection' 'gtk2' 'polkit>=0.101')
+makedepends=('mate-common')
 options=('!emptydirs' '!libtool')
 source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
 sha256sums=('fa222151e67369ba085fb5d9dd3874716f1fdf2d428d4bb454f2412ed39b87c2')
-
 url="http://matsusoft.com.ar/projects/mate/"
 groups=('mate')
 
@@ -24,6 +23,7 @@ build() {
         --sysconfdir=/etc \
         --localstatedir=/var \
         --libexecdir=/usr/lib/polkit-mate \
+        --disable-introspection \
         --disable-static || return 1
     make || return 1
 }

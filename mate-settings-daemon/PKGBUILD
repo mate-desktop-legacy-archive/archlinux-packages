@@ -3,12 +3,15 @@
 
 pkgname=mate-settings-daemon
 pkgver=1.6.1
-pkgrel=1
+pkgrel=2
 pkgdesc="The MATE Settings daemon"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('libmatekbd' 'mate-desktop' 'libnotify' 'gstreamer0.10-base' 'hicolor-icon-theme')
-makedepends=('intltool' 'pkgconfig')
+depends=('dbus' 'dconf' 'fontconfig' 'glib2' 'gstreamer0.10-base-plugins' 'gtk2'
+         'libcanberra' 'libcanberra-gstreamer' 'libmatekbd' 'libnotify'
+         'libx11' 'libxext' 'libxt' 'libxi' 'libxrandr' 'libxrender'
+         'mate-desktop' 'mate-polkit' 'startup-notification')
+makedepends=('intltool' 'mate-common')
 options=('!libtool')
 url="http://mate-desktop.org"
 install=mate-settings-daemon.install
@@ -16,10 +19,9 @@ groups=('mate')
 source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
 sha256sums=('8104c5c1dfb02a6d7b2743931a04b390baf2e466b8fe612d32a906b1a2fbe64d')
 
-
 build() {
     cd "$srcdir/$pkgname-$pkgver"
-    # Remove --disable-pulse if you want pulseaudio support
+    # Remove --disable-pulse and add libpulse if you want pulseaudio support
     ./configure \
         --prefix=/usr \
         --sysconfdir=/etc \
@@ -28,6 +30,7 @@ build() {
         --disable-static \
         --disable-pulse \
         --disable-schemas-install \
+        --enable-gstreamer \
         --enable-polkit || return 1
     make || return 1
 }

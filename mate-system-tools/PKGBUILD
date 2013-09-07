@@ -7,8 +7,10 @@ pkgdesc="An extension for opening terminals in arbitrary local paths"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 url="http://manny.cluecoder.org/packages/nautilus-open-terminal"
 license=('GPL')
-depends=('mate-file-manager' 'liboobs' 'system-tools-backends')
-makedepends=('pkgconfig' 'intltool')
+depends=('glib2' 'gtk2' 'liboobs' 'mate-file-manager' 'mate-polkit'
+         'system-tools-backends')
+makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
+optdepends=('ntp: Automatic time syncronisation.')
 install=mate-system-tools.install
 options=('!libtool')
 groups=('mate-extras')
@@ -17,13 +19,15 @@ sha256sums=('3e545ae4462332cd4e4b1c0b2f0e41a7fbacbb86be3e95254155e92ed249a14a')
 
 build() {
     cd "$srcdir/$pkgname-$pkgver"
-    ./autogen.sh
-    ./configure --prefix=/usr --sysconfdir=/etc LIBS="-lm"
+    ./autogen.sh \
+        --prefix=/usr \
+        --sysconfdir=/etc \
+        --disable-scrollkeeper \
+        LIBS="-lm" # Required for MATE 1.6 but can be remove in 1.7/1.8
     make || return 1
 }
 
 package() {
     cd "${srcdir}/$pkgname-$pkgver"
-
     make DESTDIR="$pkgdir/" install
 }

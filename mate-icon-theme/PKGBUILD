@@ -4,12 +4,13 @@
 
 pkgname=mate-icon-theme
 pkgver=1.6.2
-pkgrel=1
+pkgrel=2
 pkgdesc="MATE icon theme"
 arch=('any')
 license=('GPL')
-depends=('hicolor-icon-theme' 'icon-naming-utils' 'gtk-update-icon-cache')
-makedepends=('intltool')
+depends=('hicolor-icon-theme' 'gtk2' 'gtk-update-icon-cache' 'librsvg')
+makedepends=('icon-naming-utils' 'mate-common')
+options=(!strip)
 url="http://mate-desktop.org"
 groups=('mate')
 source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
@@ -18,7 +19,8 @@ install=mate-icon-theme.install
 
 build() {
     cd "${srcdir}/$pkgname-$pkgver"
-    ./configure --prefix=/usr || return 1
+    ./configure --prefix=/usr \
+        --enable-test-themes || return 1
     make || return 1
 }
 

@@ -3,11 +3,11 @@
 
 pkgname=mate-common
 pkgver=1.6.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Common development macros for MATE"
 arch=('any')
 license=('GPL')
-depends=()
+depends=('autoconf' 'automake' 'libtool' 'gettext' 'intltool' 'pkg-config' 'gtk-doc')
 makedepends=()
 options=('!libtool')
 url="http://mate-desktop.org"
@@ -18,9 +18,8 @@ sha256sums=('234996ae9a0e49f0a55a4a4dfc45e89f1ecdfc1f950381a1a5f192e41b6605cc')
 
 build() {
     cd "${srcdir}/$pkgname-$pkgver"
-
     # Bump automake version, when required.
-    sed -i "s/1.10/1.14/g" ./macros/mate-autogen
+    sed -i "s/automake-1.13/automake-1.14 automake-1.13/g" ./macros/mate-autogen
 
     ./autogen.sh \
         --prefix=/usr || return 1

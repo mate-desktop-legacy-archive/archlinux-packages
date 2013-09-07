@@ -3,12 +3,12 @@
 
 pkgname=mate-menu-editor
 pkgver=1.6.0
-pkgrel=1
+pkgrel=2
 pkgdesc="An powerfull text editor for MATE"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('glib2' 'gtk2' 'gtksourceview2' 'libxml2' 'pygtksourceview2')
-makedepends=('pkgconfig' 'mate-doc-utils' 'intltool')
+depends=('libxml2' 'pygtk' 'python2' 'python2-gobject2')
+makedepends=('mate-common' 'mate-doc-utils')
 options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
 groups=('mate-extras')
@@ -17,18 +17,16 @@ sha256sums=('5c7b96e04ab3e495ae88065d1a084719ce72da050f9b869347edc3fc21ca4f61')
 
 build() {
     cd "${srcdir}/${pkgname}-$pkgver"
-
-    PYTHON=/usr/bin/python2 ./autogen.sh --prefix=/usr --sysconfdir=/etc \
-        --localstatedir=/var --libexecdir=/usr/lib/ \
-        --disable-scrollkeeper --enable-python || return 1
+    PYTHON=python2 ./autogen.sh \
+        --prefix=/usr || return 1
     make || return 1
-
 }
 
 package() {
     cd "${srcdir}/${pkgname}-$pkgver"
-
     make DESTDIR="$pkgdir/" install
+    # Remove the byte-code
+    rm -fv ${pkgdir}/usr/lib/python2.*/site-packages/Mozo/*.py{c,o}
 }
 
 

@@ -3,13 +3,15 @@
 
 pkgname=mate-file-manager-sendto
 pkgver=1.6.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Context menu for sending files on MATE File Manager"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('mate-file-manager')
-makedepends=('gettext' 'intltool')
-optdepends=('pidgin' 'gajim')
+depends=('dbus' 'glib2' 'gupnp' 'gtk2' 'mate-file-manager')
+makedepends=('mate-common' 'perl-xml-parser')
+optdepends=('pidgin: Support for sending to instant messaging networks.'
+            'gajim: Support for sending to Jabber.'
+            'mate-bluetooth: Support for sending to bluetooth.')
 options=('!emptydirs')
 install=mate-file-manager-sendto.install
 url="http://mate-desktop.org"
@@ -19,14 +21,15 @@ sha256sums=('2581c36de76205280290fca601b9edfbfeed75dcc0713a2eb8630e2a2c988aa3')
 
 build() {
 	cd "${srcdir}/${pkgname}-$pkgver"
-	./autogen.sh --prefix=/usr --sysconfdir=/etc \
-		--localstatedir=/var
-		#--disable-schemas-compile
+	./autogen.sh \
+        --prefix=/usr \
+        --sysconfdir=/etc \
+		--localstatedir=/var \
+		--with-plugins=gajim,pidgin,removable-devices,upnp,emailclient
 	make || return 1
 }
 
 package() {
     cd "${srcdir}/$pkgname-$pkgver"
-
     make DESTDIR="$pkgdir/" install
 }

@@ -2,30 +2,34 @@
 
 pkgname=mate-character-map
 pkgver=1.6.0
-pkgrel=2
+pkgrel=3
 pkgdesc="MATE Unicode Charmap"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('hicolor-icon-theme')
-makedepends=('mate-doc-utils' 'pkgconfig' 'intltool')
+depends=('glib2' 'gtk2' 'libxml2')
+makedepends=('goject-introspection' 'mate-common' 'mate-doc-utils' 'pygtk' 'python2')
 groups=('mate-extras')
 url="http://mate-desktop.org"
 install='mate-character-map.install'
 source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
 sha256sums=('14a18a02db1a7a966d74229350eec64468e0aaf47ec5726a1b2042def9719635')
 
-build()
-{
-cd "${srcdir}/${pkgname}-$pkgver"
-bash autogen.sh --prefix=/usr --sysconfdir=/etc \
-	--localstatedir=/var --disable-static \
-	--disable-scrollkeeper || return 1
-make || return 1
+build() {
+    cd "${srcdir}/${pkgname}-$pkgver"
+    PYTHON=python2 ./autogen.sh \
+        --prefix=/usr \
+        --sysconfdir=/etc \
+        --localstatedir=/var \
+        --enable-charmap \
+        --enable-python-bindings \
+        --enable-introspection \
+        --disable-static \
+        --disable-scrollkeeper || return 1
+    make || return 1
 }
 
 
-package()
-{
-cd "${srcdir}/${pkgname}-$pkgver"
-make DESTDIR="${pkgdir}" install || return 1
+package() {
+    cd "${srcdir}/${pkgname}-$pkgver"
+    make DESTDIR="${pkgdir}" install || return 1
 }

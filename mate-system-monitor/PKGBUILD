@@ -2,12 +2,13 @@
 
 pkgname=mate-system-monitor
 pkgver=1.6.1
-pkgrel=1
+pkgrel=2
 pkgdesc="A system monitor for MATE"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('libmatewnck' 'libgtop' 'gtkmm' 'librsvg' 'mate-icon-theme')
-makedepends=('mate-doc-utils' 'pkgconfig' 'intltool')
+depends=('dbus' 'glib2' 'glibmm' 'gtk2' 'gtkmm' 'libgtop' 'libmatewnck' 'librsvg' 
+         'libxml2' 'mate-icon-theme')
+makedepends=('docbook2x' 'mate-common' 'mate-doc-utils')
 groups=('mate-extras')
 options=(!emptydirs !libtool)
 url="http://mate-desktop.org"
@@ -16,12 +17,15 @@ source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
 sha256sums=('c49fc4ec245c869ddd5e464e560d368c6090ab2bf617c6ba9ceb84c3c7a66348')
 
 build() {
-	cd "${srcdir}/${pkgname}-$pkgver"
-	./configure --prefix=/usr --sysconfdir=/etc \
+    cd "${srcdir}/${pkgname}-$pkgver"
+    ./configure --prefix=/usr \
+        --sysconfdir=/etc \
 		--libexecdir=/usr/lib/${pkgname} \
-		--localstatedir=/var --disable-static \
-		--disable-scrollkeeper \
-		--disable-schemas-install
+		--localstatedir=/var \
+		--disable-static \
+		--disable-scrollkeeper
+		#\
+		#--disable-schemas-install
 
 	# there is some pre-compiled files on the tar
 	make clean

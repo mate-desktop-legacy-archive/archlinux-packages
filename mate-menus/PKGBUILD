@@ -3,22 +3,21 @@
 
 pkgname=mate-menus
 pkgver=1.6.0
-pkgrel=1
+pkgrel=2
 pkgdesc="MATE menu specifications"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('glib2' 'python2')
-makedepends=('intltool' 'gobject-introspection')
+depends=('glib2' 'gobject-introspection' 'pygtk' 'python2')
+makedepends=('mate-common')
 options=('!emptydirs' '!libtool')
 source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
 sha256sums=('f9955ee91397696e9bc5aee4151c94b638d5869cad7acfba12016b683c8fc4a9')
-
 url="http://mate-desktop.org"
 groups=('mate')
 
 build() {
     cd "${srcdir}/$pkgname-$pkgver"
-    PYTHON=/usr/bin/python2 ./autogen.sh \
+    PYTHON=python2 ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
         --localstatedir=/var  \

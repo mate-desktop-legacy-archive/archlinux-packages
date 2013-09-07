@@ -3,17 +3,16 @@
 
 pkgname=mate-backgrounds
 pkgver=1.6.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Background images and data for MATE"
 arch=('any')
 license=('GPL')
 url="http://mate-desktop.org"
-makedepends=('intltool' 'mate-common')
+depends=('glib2')
+makedepends=('mate-common')
 groups=('mate')
 source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
 sha256sums=('1a97f7e3e8551d3ccba4bf205855ac01e3aaf9db6b3666b89ae17fb7f2b99301')
-
-
 
 build() {
 	cd "${srcdir}/$pkgname-$pkgver"

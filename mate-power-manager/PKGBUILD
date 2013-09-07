@@ -4,12 +4,15 @@
 
 pkgname=mate-power-manager
 pkgver=1.6.2
-pkgrel=1
+pkgrel=2
 pkgdesc="Session daemon that makes it easy to manage your laptop or desktop system for Mate Desktop"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('libnotify' 'libunique' 'libcanberra' 'hicolor-icon-theme' 'upower' 'libmatekeyring')
-makedepends=('intltool' 'pkgconfig' 'mate-doc-utils' 'mate-panel' 'mate-control-center')
+depends=('avahi' 'dbus' 'glib2' 'gtk2' 'libcanberra' 'libgcrypt' 'libmatekeyring'
+         'libnotify' 'libunique' 'libx11' 'libxext' 'libxrandr'
+         'mate-notification-daemon' 'mate-panel' 'upower')
+makedepends=('docbook-xml' 'mate-common' 'mate-doc-utils')
+# docbook2x xmlto should be a makedepends but the build fails.
 options=('!emptydirs')
 install=mate-power-manager.install
 url="http://mate-desktop.org"
@@ -24,10 +27,8 @@ build() {
 		--localstatedir=/var \
 		--sbindir=/usr/bin \
 		--libexecdir=/usr/lib/${pkgname} \
-		--disable-scrollkeeper 
-		#--enable-applets
-		#--with-dbus-services=/usr/share/dbus-1/services \
-		#--with-dpms-ext \
+		--enable-unique \
+		--disable-scrollkeeper
 
 	make || return 1
 }

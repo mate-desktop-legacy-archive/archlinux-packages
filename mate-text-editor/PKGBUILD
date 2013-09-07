@@ -2,14 +2,14 @@
 
 pkgname=mate-text-editor
 pkgver=1.6.0
-pkgrel=2
+pkgrel=3
 pkgdesc="An powerfull text editor for MATE"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('gtk2' 'gtksourceview2' 'libxml2' 'pygtksourceview2')
-makedepends=('enchant' 'pkgconfig' 'mate-doc-utils' 'intltool')
+depends=('enchant' 'glib2' 'gtk2' 'gtksourceview2' 'iso-codes' 'libsm' 'libxml2' 
+         'python2' 'python2-gobject2' 'pygtksourceview2')
+makedepends=('gtk-update-icon-cache' 'mate-common' 'mate-doc-utils')
 options=('!emptydirs' '!libtool')
-conflicts=('pluma')
 url="http://mate-desktop.org"
 groups=('mate-extras')
 install=mate-text-editor.install
@@ -19,17 +19,20 @@ sha256sums=('52339cb8d265d7a538c9b3b3e6a37f68ece5100d18c029dfc87c3f4b61cf8288')
 build() {
     cd "${srcdir}/${pkgname}-$pkgver"
 
-    PYTHON=/usr/bin/python2 ./autogen.sh --prefix=/usr --sysconfdir=/etc \
-        --localstatedir=/var --libexecdir=/usr/lib/ \
-        --disable-scrollkeeper --enable-python || return 1
+    PYTHON=python2 ./autogen.sh \
+        --prefix=/usr \
+        --sysconfdir=/etc \
+        --localstatedir=/var \
+        --libexecdir=/usr/lib/ \
+        --disable-scrollkeeper \
+        --enable-python || return 1
     make || return 1
 
 }
 
 package() {
     cd "${srcdir}/$pkgname-$pkgver"
-
     make DESTDIR="$pkgdir/" install
+    # Remove python byte-code
+    rm -fv ${pkgdir}/usr/lib/pluma/plugins/*/*.py{c,o}
 }
-
-

@@ -7,8 +7,12 @@ pkgdesc='Screensaver for MATE'
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 url="http://mate-desktop.org"
 license=('GPL')
-depends=('gtk2' 'dbus' 'mate-desktop')
-makedepends=('pkgconfig' 'intltool' 'mate-doc-utils' 'glib2')
+depends=('dbus' 'glib2' 'gtk2' 'libmatekbd' 'libnotify' 'libx11' 'libxext'
+         'libxss' 'libxt' 'libxxf86vm' 'mate-desktop' 'mate-icon-theme' 
+         'mate-menus' 'mate-session-manager' 'mesa-libgl' 'pam' 'scrnsaverproto'
+         'startup-notification' 'systemd' 'xproto')
+makedepends=('mate-common' 'mate-doc-utils' 'xmlto')
+optdepends=('mate-power-manager: Add power management support.')
 options=('!libtool' '!emptydirs')
 source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz
 		mate-screensaver.pam)
@@ -23,11 +27,13 @@ build() {
 	./configure \
 		--prefix=/usr --sysconfdir=/etc \
 		--mandir=/usr/share \
-		--disable-static \
+        --libexecdir=/usr/lib/${pkgname} \
 		--with-xscreensaverdir=/usr/share/xscreensaver/config \
 		--with-xscreensaverhackdir=/usr/lib/xscreensaver \
 		--with-mit-ext \
-		--libexecdir=/usr/lib/${pkgname} || return 1
+		--with-libnotify \
+		--enable-locking \
+		--disable-static || return 1
 
 	make || return 1
 }
