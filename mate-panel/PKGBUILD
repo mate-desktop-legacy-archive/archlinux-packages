@@ -8,11 +8,11 @@ pkgrel=2
 pkgdesc="The MATE Panel"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('avahi' 'cairo' 'dbus' 'dconf' 'gtk2' 'libmatewnck' 'mate-menus'
-         'mate-desktop' 'mate-polkit' 'networkmanager' 'libcanberra' 'libice'
+depends=('avahi' 'cairo' 'dbus' 'dconf' 'gobject-introspection' 'gtk2' 'libmatewnck'
+         'mate-menus' 'mate-desktop' 'mate-polkit' 'libcanberra' 'libice'
          'libmateweather' 'librsvg' 'libsm' 'libsoup' 'libx11' 'libxau' 'libxrandr'
          'pango' 'python2')
-makedepends=('gobject-introspection' 'mate-common' 'mate-doc-utils')
+makedepends=('mate-common' 'mate-doc-utils' 'networkmanager')
 options=('!emptydirs' '!libtool')
 install=mate-panel.install
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
@@ -21,7 +21,7 @@ url="http://mate-desktop.org"
 groups=('mate')
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     PYTHON=python2 ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
@@ -34,6 +34,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     make DESTDIR="${pkgdir}" install
 }
