@@ -3,7 +3,7 @@
 
 pkgname=mate-system-tools
 pkgver=1.6.0
-pkgrel=3
+pkgrel=4
 pkgdesc="An extension for opening terminals in arbitrary local paths"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 url="http://manny.cluecoder.org/packages/nautilus-open-terminal"
@@ -11,7 +11,8 @@ license=('GPL')
 depends=('glib2' 'gtk2' 'liboobs' 'mate-file-manager' 'mate-polkit'
          'system-tools-backends')
 makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
-optdepends=('ntp: Automatic time syncronisation.')
+optdepends=('ntp: Automatic time syncronisation.'
+            'system-config-printer: Add CUPS printer configuration tool.')
 install=mate-system-tools.install
 options=('!libtool')
 groups=('mate-extras')
