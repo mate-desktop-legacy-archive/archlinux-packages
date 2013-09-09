@@ -1,4 +1,5 @@
-#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-character-map
 pkgver=1.6.0
@@ -7,29 +8,26 @@ pkgdesc="MATE Unicode Charmap"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('glib2' 'gtk2' 'libxml2')
-makedepends=('goject-introspection' 'mate-common' 'mate-doc-utils' 'pygtk' 'python2')
+makedepends=('gobject-introspection' 'mate-common' 'mate-doc-utils' 'pygtk' 'python2')
 groups=('mate-extras')
 url="http://mate-desktop.org"
 install='mate-character-map.install'
-source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('14a18a02db1a7a966d74229350eec64468e0aaf47ec5726a1b2042def9719635')
 
 build() {
-    cd "${srcdir}/${pkgname}-$pkgver"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     PYTHON=python2 ./autogen.sh \
         --prefix=/usr \
-        --sysconfdir=/etc \
-        --localstatedir=/var \
         --enable-charmap \
         --enable-python-bindings \
         --enable-introspection \
         --disable-static \
-        --disable-scrollkeeper || return 1
-    make || return 1
+        --disable-scrollkeeper
+    make
 }
 
-
 package() {
-    cd "${srcdir}/${pkgname}-$pkgver"
-    make DESTDIR="${pkgdir}" install || return 1
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
 }

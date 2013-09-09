@@ -1,5 +1,6 @@
-#Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
-#Contributor: Xpander <xpander0@gmail.com>
+# Contributor: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Xpander <xpander0@gmail.com>
+# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-session-manager
 pkgver=1.6.1
@@ -16,24 +17,21 @@ options=('!emptydirs' '!libtool')
 install=mate-session-manager.install
 url="http://mate-desktop.org"
 groups=('mate')
-source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('4ee7b4ae18df5becd986b05634428edf0ad8de150a14dc29848b6d34ab312ce9')
 
 build() {
-    cd "${srcdir}/$pkgname-$pkgver"
-
+    cd "${srcdir}/${pkgname}-${pkgver}"
     ./configure \
         --prefix=/usr \
+        --libexecdir=/usr/lib/${pkgname} \
         --sysconfdir=/etc \
         --localstatedir=/var \
-        --libexecdir=/usr/lib \
-        --disable-introspection || return 1
-
-    make || return 1
+        --disable-introspection
+    make
 }
 
 package() {
-    cd "${srcdir}/$pkgname-$pkgver"
-
-    make DESTDIR="$pkgdir/" install
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
 }

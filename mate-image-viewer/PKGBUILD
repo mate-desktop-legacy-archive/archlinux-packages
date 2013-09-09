@@ -1,5 +1,6 @@
-#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
-#Contributor: Xpander <xpander0@gmail.com>
+# Contributor: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Xpander <xpander0@gmail.com>
+# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-image-viewer
 pkgver=1.6.1
@@ -17,22 +18,19 @@ conflicts=('eog')
 url="http://mate-desktop.org"
 groups=('mate-extras')
 install=mate-image-viewer.install
-source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('32a24e473e44a22ce60f0f61d30a1009fcc4bcc702e8ed3bb414f88f1f209545')
 
 build() {
-	cd "${srcdir}/${pkgname}-$pkgver"
+	cd "${srcdir}/${pkgname}-${pkgver}"
 	PYTHON=python2 ./configure \
         --prefix=/usr \
-        --sysconfdir=/etc \
 		--localstatedir=/var \
-		--disable-scrollkeeper || return 1
-
-	make || return 1
+		--disable-scrollkeeper
+	make
 }
 
 package() {
-    cd "${srcdir}/$pkgname-$pkgver"
-
-    make DESTDIR="$pkgdir/" install
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
 }

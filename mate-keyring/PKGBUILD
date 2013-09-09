@@ -1,5 +1,6 @@
-#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
-#Contributor: Xpander <xpander0@gmail.com>
+# Contributor: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Xpander <xpander0@gmail.com>
+# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-keyring
 pkgver=1.6.0
@@ -15,23 +16,23 @@ options=('!libtool' '!emptydirs')
 install=mate-keyring.install
 provides=('gnome-keyring')
 conflicts=('gnome-keyring')
-source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('f77c48c59a9611baa9721d0a30e78f148629d1754066844bea053cb80141652b')
 
-
 build() {
-    cd "${srcdir}/$pkgname-$pkgver"
-
-    ./autogen.sh --prefix=/usr --sysconfdir=/etc \
-        --localstatedir=/var --disable-static \
-        --libexecdir=/usr/lib/mate-keyring \
-        --with-pam-dir=/usr/lib/security --with-root-certs=/etc/ssl/certs || return 1
-
-    make || return 1
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    ./autogen.sh \
+        --prefix=/usr \
+        --libexecdir=/usr/lib/${pkgname} \
+        --sysconfdir=/etc \
+        --localstatedir=/var \
+        --with-pam-dir=/usr/lib/security \
+        --with-root-certs=/etc/ssl/certs \
+        --disable-static
+    make
 }
 
 package() {
-    cd "${srcdir}/$pkgname-$pkgver"
-
-    make DESTDIR="$pkgdir/" install
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
 }

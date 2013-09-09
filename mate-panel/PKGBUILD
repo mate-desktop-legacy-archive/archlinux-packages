@@ -1,5 +1,6 @@
-#Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
-#Contributor: Xpander <xpander0@gmail.com>
+# Contributor: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Xpander <xpander0@gmail.com>
+# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-panel
 pkgver=1.6.1
@@ -14,27 +15,25 @@ depends=('avahi' 'cairo' 'dbus' 'dconf' 'gtk2' 'libmatewnck' 'mate-menus'
 makedepends=('gobject-introspection' 'mate-common' 'mate-doc-utils')
 options=('!emptydirs' '!libtool')
 install=mate-panel.install
-source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('88bf0620e1eba7e2e165060ac6fa21896b8e24d1ac742ff6f8c884c5408dd53b')
 url="http://mate-desktop.org"
 groups=('mate')
 
 build() {
-    cd "${srcdir}/$pkgname-$pkgver"
-
+    cd "${srcdir}/${pkgname}-${pkgver}"
     PYTHON=python2 ./configure \
         --prefix=/usr \
+        --libexecdir=/usr/lib/${pkgname} \
         --sysconfdir=/etc \
         --localstatedir=/var \
-        --libexecdir=/usr/lib/mate-panel \
         --enable-introspection \
         --disable-static \
-        --disable-scrollkeeper || return 1
-       make || return 1
+        --disable-scrollkeeper
+    make
 }
 
 package() {
-    cd "${srcdir}/$pkgname-$pkgver"
-
-    make DESTDIR="${pkgdir}" install || return 1
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
 }

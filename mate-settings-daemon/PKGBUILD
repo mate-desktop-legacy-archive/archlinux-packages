@@ -1,5 +1,6 @@
-#Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
-#Contributor: Xpander <xpander0@gmail.com>
+# Contributor: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Xpander <xpander0@gmail.com>
+# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-settings-daemon
 pkgver=1.6.1
@@ -8,7 +9,7 @@ pkgdesc="The MATE Settings daemon"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('dbus' 'dconf' 'fontconfig' 'glib2' 'gstreamer0.10-base-plugins' 'gtk2'
-         'libcanberra' 'libcanberra-gstreamer' 'libmatekbd' 'libnotify'
+         'libcanberra' 'libcanberra-gstreamer' 'libmatekbd' 'libnotify' 'libpulse'
          'libx11' 'libxext' 'libxt' 'libxi' 'libxrandr' 'libxrender'
          'mate-desktop' 'mate-polkit' 'startup-notification')
 makedepends=('intltool' 'mate-common')
@@ -16,27 +17,23 @@ options=('!libtool')
 url="http://mate-desktop.org"
 install=mate-settings-daemon.install
 groups=('mate')
-source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('8104c5c1dfb02a6d7b2743931a04b390baf2e466b8fe612d32a906b1a2fbe64d')
 
 build() {
-    cd "$srcdir/$pkgname-$pkgver"
-    # Remove --disable-pulse and add libpulse if you want pulseaudio support
+    cd ${srcdir}/${pkgname}-${pkgver}
     ./configure \
         --prefix=/usr \
+        --libexecdir=/usr/lib/${pkgname} \
         --sysconfdir=/etc \
-        --localstatedir=/var \
-        --libexecdir=/usr/lib/mate-settings-daemon \
-        --disable-static \
-        --disable-pulse \
-        --disable-schemas-install \
-        --enable-gstreamer \
-        --enable-polkit || return 1
-    make || return 1
+        --enable-polkit \
+        --enable-pulse \
+        --disable-gstreamer \
+        --disable-static
+    make
 }
 
 package() {
-    cd "${srcdir}/$pkgname-$pkgver"
-
-    make DESTDIR="$pkgdir/" install
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
 }

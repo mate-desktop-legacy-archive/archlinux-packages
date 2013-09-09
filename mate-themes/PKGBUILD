@@ -1,4 +1,5 @@
-#Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-themes
 pkgver=1.6.1
@@ -13,22 +14,20 @@ conflicts=('gnome-themes')
 options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
 groups=('mate')
-source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('d7d5c6c530f125ba63b78bba130bb9e05b9303d4e1090b96fd3703c9e99ea252')
 
-
 build() {
-    cd "${srcdir}/$pkgname-$pkgver"
-
+    cd ${srcdir}/${pkgname}-${pkgver}
     ./configure \
         --prefix=/usr \
         --enable-all-themes \
         --enable-test-themes \
-        --disable-placeholders || return 1
-    make || return 1
+        --disable-placeholders
+    make
 }
 
 package() {
-    cd "${srcdir}/$pkgname-$pkgver"
-    make DESTDIR="$pkgdir" install || return 1
+    cd ${srcdir}/${pkgname}-${pkgver}
+    make DESTDIR="${pkgdir}" install
 }

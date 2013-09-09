@@ -1,4 +1,5 @@
-#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+#Contributor: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+#Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-user-share
 pkgver=1.6.0
@@ -10,25 +11,24 @@ depends=('apache' 'dbus' 'glib2' 'gtk2' 'libcanberra' 'libnotify' 'libunique'
          'mate-bluetooth' 'mate-file-manager' 'mod_dnssd' 'obex-data-server')
 makedepends=('mate-common' 'mate-doc-utils')
 groups=('mate-extras')
-options=(!emptydirs)
+options=(!emptydirs !libtool)
 url="http://mate-desktop.org"
 install=mate-user-share.install
-source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 md5sums=('ee26e90c51aa0d1f04d66cb2daf50fca')
 
 build() {
-    cd "${srcdir}/$pkgname-$pkgver"
+    cd ${srcdir}/${pkgname}-${pkgver}
     PYTHON=python2 ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
         --disable-static \
-        --disable-scrollkeeper || return 1
-	make || return 1
+        --disable-scrollkeeper
+	make
 }
 
 package() {
-    cd "${srcdir}/$pkgname-$pkgver"
-    make  DESTDIR="${pkgdir}" install || return 1
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make  DESTDIR="${pkgdir}" install
     rm -f ${pkgdir}/usr/share/mate-user-share/dav_user_2.0.conf
-    find ${pkgdir} -name "*.la" -delete
 }

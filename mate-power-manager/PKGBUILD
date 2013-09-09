@@ -1,6 +1,7 @@
-#Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
-#Contributor: Xpander <xpander0@gmail.com>
-#Contributor: hekel <hekel@archlinux.info>
+# Contributor: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Xpander <xpander0@gmail.com>
+# Contributor: hekel <hekel@archlinux.info>
+# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-power-manager
 pkgver=1.6.2
@@ -11,29 +12,33 @@ license=('GPL')
 depends=('avahi' 'dbus' 'glib2' 'gtk2' 'libcanberra' 'libgcrypt' 'libmatekeyring'
          'libnotify' 'libunique' 'libx11' 'libxext' 'libxrandr'
          'mate-notification-daemon' 'mate-panel' 'upower')
-makedepends=('docbook-xml' 'mate-common' 'mate-doc-utils')
-# docbook2x xmlto should be a makedepends but the build fails.
+makedepends=('docbook2x' 'docbook-xml' 'mate-common' 'mate-doc-utils' 'xmlto')
 options=('!emptydirs')
 install=mate-power-manager.install
 url="http://mate-desktop.org"
 groups=('mate-extras')
-source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('b80d531271f9a7ee692d69173b28f46feba025b4ffcc9e0ab2f5b09934f8d80f')
 
 build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
 
-	cd "${srcdir}/${pkgname}-${pkgver}"
-	./configure --prefix=/usr --sysconfdir=/etc \
+    #Work around a problem where the .sgml fail to parse.
+    sed -e 's:@HAVE_DOCBOOK2MAN_TRUE@.*::' -i man/Makefile.in
+
+    ./configure \
+        --prefix=/usr \
+		--libexecdir=/usr/lib/${pkgname} \
+        --sysconfdir=/etc \
 		--localstatedir=/var \
 		--sbindir=/usr/bin \
-		--libexecdir=/usr/lib/${pkgname} \
+		--enable-applets \
 		--enable-unique \
 		--disable-scrollkeeper
-
-	make || return 1
+    make
 }
 
 package() {
-    cd "${srcdir}/$pkgname-$pkgver"
-    make DESTDIR="$pkgdir/" install
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
 }

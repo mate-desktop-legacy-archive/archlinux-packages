@@ -1,4 +1,5 @@
-#Contributor: Xpander <xpander0@gmail.com>
+# Contributor: Xpander <xpander0@gmail.com>
+# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-netbook
 pkgver=1.6.0
@@ -10,20 +11,21 @@ license=('GPL')
 groups=('mate-extras')
 depends=('gtk2' 'libfakekey' 'libmatewnck' 'libunique' 'mate-panel')
 makedepends=('mate-common' 'mate-doc-utils')
-install=$pkgname.install
-source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+install=${pkgname}.install
+source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('b209898de9482650136bd2c8afb319eb8d3769c463c80caf3c6b5e5eedb5ed66')
 
 build() {
-    cd $srcdir/$pkgname-$pkgver
+    cd ${srcdir}/${pkgname}-${pkgver}
     ./autogen.sh \
         --prefix=/usr \
+        --libexec=/usr/lib/${pkgname} \
         --sysconfdir=/etc \
         --disable-static
     make
 }
 
 package() {
-    cd "$srcdir/$pkgname-$pkgver"
-    make DESTDIR="$pkgdir/" install
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
 }

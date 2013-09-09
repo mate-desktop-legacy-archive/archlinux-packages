@@ -1,5 +1,6 @@
-#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
-#Contributor: Xpander <xpander0@gmail.com>
+# Contributor: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Xpander <xpander0@gmail.com>
+# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-menu-editor
 pkgver=1.6.0
@@ -12,21 +13,21 @@ makedepends=('mate-common' 'mate-doc-utils')
 options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
 groups=('mate-extras')
-source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('5c7b96e04ab3e495ae88065d1a084719ce72da050f9b869347edc3fc21ca4f61')
 
 build() {
-    cd "${srcdir}/${pkgname}-$pkgver"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     PYTHON=python2 ./autogen.sh \
-        --prefix=/usr || return 1
-    make || return 1
+        --prefix=/usr
+    make
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-$pkgver"
-    make DESTDIR="$pkgdir/" install
-    # Remove the byte-code
-    rm -fv ${pkgdir}/usr/lib/python2.*/site-packages/Mozo/*.py{c,o}
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
+    # Remove the Python byte-code
+    rm -f ${pkgdir}/usr/lib/python2.*/site-packages/Mozo/*.py{c,o}
 }
 
 

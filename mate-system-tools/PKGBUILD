@@ -1,4 +1,5 @@
-#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-system-tools
 pkgver=1.6.0
@@ -14,20 +15,20 @@ optdepends=('ntp: Automatic time syncronisation.')
 install=mate-system-tools.install
 options=('!libtool')
 groups=('mate-extras')
-source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('3e545ae4462332cd4e4b1c0b2f0e41a7fbacbb86be3e95254155e92ed249a14a')
 
 build() {
-    cd "$srcdir/$pkgname-$pkgver"
+    cd ${srcdir}/${pkgname}-${pkgver}
     ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
         --disable-scrollkeeper \
-        LIBS="-lm" # Required for MATE 1.6 but can be remove in 1.7/1.8
-    make || return 1
+        LIBS="-lm" # Required for MATE 1.6 but can be removed in MATE 1.7/1.8
+    make
 }
 
 package() {
-    cd "${srcdir}/$pkgname-$pkgver"
-    make DESTDIR="$pkgdir/" install
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
 }

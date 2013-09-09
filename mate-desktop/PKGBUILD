@@ -1,5 +1,6 @@
-#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
-#Contributor: Xpander <xpander0@gmail.com>
+# Contributor: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Xpander <xpander0@gmail.com>
+# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-desktop
 pkgver=1.6.1
@@ -13,28 +14,23 @@ makedepends=('mate-common' 'mate-doc-utils')
 options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
 groups=('mate')
-source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('fe65f4035fe74510e6f35df0c0e29cbf8a6501852adc3971773d0072b914aed5')
 
 build() {
-    cd "$srcdir/$pkgname-$pkgver"
-
+    cd "${srcdir}/${pkgname}-${pkgver}"
     PYTHON=python2 ./configure \
         --prefix=/usr \
-        --sysconfdir=/etc \
-        --localstatedir=/var \
         --disable-static \
         --disable-scrollkeeper \
         --disable-schemas-compile \
-        --enable-gtk-doc \
-        --enable-unique || return 1
-    make || return 1
+        --enable-gtk-doc
+    make
 }
 
 package() {
-    cd "$srcdir/$pkgname-$pkgver"
-    make DESTDIR="$pkgdir" install
-
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
     # prevent conflicts errors
-    mv "${pkgdir}/usr/share/omf" "${pkgdir}/usr/share/mate-omf"
+    mv ${pkgdir}/usr/share/omf ${pkgdir}/usr/share/mate-omf
 }

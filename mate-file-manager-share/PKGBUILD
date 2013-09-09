@@ -1,4 +1,6 @@
-#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Martin Wimpress <code@flexion.org>
+
 pkgname=mate-file-manager-share
 pkgver=1.6.0
 pkgrel=2
@@ -8,20 +10,21 @@ license=('GPL')
 depends=('mate-file-manager' 'samba')
 makedepends=('mate-common')
 groups=('mate-extras')
-options=(!emptydirs)
+options=(!emptydirs !libtool)
 url="http://mate-desktop.org"
 install=mate-file-manager-share.install
-source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 md5sums=('70a7a02fee63ae358e7e4d943f9206c5')
 
 build() {
-    cd "${srcdir}/$pkgname-$pkgver"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     PYTHON=python2 ./autogen.sh \
-        --prefix=/usr || return 1
-	make || return 1
+        --prefix=/usr
+	make
 }
 
 package() {
-    cd "${srcdir}/$pkgname-$pkgver"
-    make DESTDIR="${pkgdir}" install || return 1
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
+    rm -f ${pkgdir}/usr/lib/caja/extensions-*/libcaja-share.a
 }

@@ -1,5 +1,6 @@
-#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
-#Contributor: Xpander <xpander0@gmail.com>
+# Contributor: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Xpander <xpander0@gmail.com>
+# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-bluetooth
 pkgver=1.6.0
@@ -16,7 +17,7 @@ options=('!emptydirs')
 install=mate-bluetooth.install
 url="http://mate-desktop.org"
 groups=('mate-extras')
-source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('1ac4d00e282518db3e0385fa6e338eae32dce2240ab248457887ce07a441070f')
 
 build() {
@@ -28,11 +29,11 @@ build() {
 		--disable-scrollkeeper \
 		--disable-desktop-update \
 		--disable-icon-update \
-		--disable-introspection || return 1
-	make || return 1
+		--disable-introspection
+	make
 }
 
 package() {
-    cd "${srcdir}/$pkgname-$pkgver"
-    make DESTDIR="$pkgdir/" install
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
 }

@@ -1,6 +1,7 @@
-#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
-#Contributor: Xpander <xpander0@gmail.com>
-#Contributor: hekel <hekel@archlinux.info>
+# Contributor: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Xpander <xpander0@gmail.com>
+# Contributor: hekel <hekel@archlinux.info>
+# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-control-center
 pkgver=1.6.1
@@ -18,25 +19,25 @@ options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
 groups=('mate')
 install=mate-control-center.install
-source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('1e6fce881187d99f46eee2bf304b55fd74c60cb1ecaf687c709b1477122c1220')
 
 build() {
-    cd "${srcdir}/$pkgname-$pkgver"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     ./configure \
         --prefix=/usr \
         --sysconfdir=/etc \
-        --localstatedir=/var \
         --sbindir=/usr/bin \
+        --localstatedir=/var \
         --disable-static \
         --disable-scrollkeeper \
-        --disable-update-mimedb || return 1
-       make || return 1
+        --disable-update-mimedb
+    make
 }
 
 package() {
-    cd "${srcdir}/$pkgname-$pkgver"
-    make DESTDIR="$pkgdir/" install
-   #don't include mime cache
-    rm -f  "${pkgdir}/usr/share/applications/mimeinfo.cache"
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
+    #don't include mime cache
+    rm -f ${pkgdir}/usr/share/applications/mimeinfo.cache
 }

@@ -1,4 +1,5 @@
-#Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-window-manager
 pkgver=1.6.2
@@ -14,26 +15,22 @@ options=('!emptydirs' '!libtool')
 install=mate-window-manager.install
 url="http://mate-desktop.org"
 groups=('mate')
-source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz
-        metacity-restartstyle.patch)
-sha256sums=('d4c887c7de76073409bf653701ae1d16d17ca5205776fd4dcc952cb3128120e1'
-            'ea2450ca3e4fb59166ec18ff4844cc61cb16865880dc6b125078a3ab47bf2caf')
+source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
+sha256sums=('d4c887c7de76073409bf653701ae1d16d17ca5205776fd4dcc952cb3128120e1')
 
 build() {
-    cd "${srcdir}/$pkgname-$pkgver"
-    #patch -Np1 -i "${srcdir}/metacity-restartstyle.patch" || return 1
+    cd ${srcdir}/${pkgname}-${pkgver}
     ./configure \
         --prefix=/usr \
         --sysconfdir=/etc \
         --localstatedir=/var \
-        --libexecdir=/usr/lib/mate-window-manager \
         --enable-startup-notification \
         --disable-static \
-        --disable-scrollkeeper || return 1
-    make || return 1
+        --disable-scrollkeeper
+    make
 }
 
 package() {
-    cd "${srcdir}/$pkgname-$pkgver"
-    make DESTDIR="${pkgdir}" install || return 1
+    cd ${srcdir}/${pkgname}-${pkgver}
+    make DESTDIR="${pkgdir}" install
 }

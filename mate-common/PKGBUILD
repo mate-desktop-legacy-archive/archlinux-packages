@@ -1,5 +1,6 @@
-#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
-#Contributor: Xpander <xpander0@gmail.com>
+# Contributor: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Xpander <xpander0@gmail.com>
+# Contributor: Martin Wimpress <code@flexion>
 
 pkgname=mate-common
 pkgver=1.6.1
@@ -12,21 +13,20 @@ makedepends=()
 options=('!libtool')
 url="http://mate-desktop.org"
 groups=('mate')
-source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('234996ae9a0e49f0a55a4a4dfc45e89f1ecdfc1f950381a1a5f192e41b6605cc')
 
-
 build() {
-    cd "${srcdir}/$pkgname-$pkgver"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     # Bump automake version, when required.
     sed -i "s/automake-1.13/automake-1.14 automake-1.13/g" ./macros/mate-autogen
 
     ./autogen.sh \
-        --prefix=/usr || return 1
-    make || return 1
+        --prefix=/usr
+    make
 }
 
 package() {
-    cd "${srcdir}/$pkgname-$pkgver"
-    make DESTDIR="${pkgdir}" install || return 1
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
 }

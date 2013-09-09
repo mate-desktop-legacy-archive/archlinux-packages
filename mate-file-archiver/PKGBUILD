@@ -1,7 +1,8 @@
-# Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 # Contributor: Alessio Sergi <asergi at archlinux dot us>
 # Contributor: Xpander <xpander0@gmail.com>
 # Contributor: hekel <hekel(at)archlinux.info>
+# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-file-archiver
 pkgver=1.6.0
@@ -20,29 +21,25 @@ options=('!libtool' '!emptydirs')
 install=mate-file-archiver.install
 url="http://mate-desktop.org"
 groups=('mate-extras')
-source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz
-	fr-rpm-bsdtar.patch)
+source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz
+        fr-rpm-bsdtar.patch)
 sha256sums=('b959c41d1c86991e4f72224df0519bf0aaccfdd49afd8e799268b779ce9d2285'
             'dc05c3b3fbc8242d1c85b58f756f998d644d920c8444d0872e9ffef1ce297f77')
 
 build() {
-	cd "$srcdir/$pkgname-$pkgver"
-	patch -Np1 -i "${srcdir}/fr-rpm-bsdtar.patch"
-    ./autogen.sh --prefix=/usr \
-		--localstatedir=/var \
-		--sysconfdir=/etc \
+	cd "${srcdir}/${pkgname}-${pkgver}"
+	patch -Np1 -i ${srcdir}/fr-rpm-bsdtar.patch
+    ./autogen.sh \
+        --prefix=/usr \
 		--libexecdir=/usr/lib/${pkgname} \
 		--disable-static \
 		--disable-scrollkeeper \
-		--disable-schemas-install \
 		--disable-packagekit
 	mate-doc-prepare --force
-	#autoreconf -i
-	#aclocal
 	make
 }
 
 package() {
-    cd "${srcdir}/$pkgname-$pkgver"
-    make DESTDIR="$pkgdir/" install
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
 }

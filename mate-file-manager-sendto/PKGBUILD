@@ -1,5 +1,6 @@
-#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
-#Contributor: Xpander <xpander0@gmail.com>
+# Contributor: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Xpander <xpander0@gmail.com>
+# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-file-manager-sendto
 pkgver=1.6.0
@@ -12,24 +13,22 @@ makedepends=('mate-common' 'perl-xml-parser')
 optdepends=('pidgin: Support for sending to instant messaging networks.'
             'gajim: Support for sending to Jabber.'
             'mate-bluetooth: Support for sending to bluetooth.')
-options=('!emptydirs')
+options=('!emptydirs' '!libtool')
 install=mate-file-manager-sendto.install
 url="http://mate-desktop.org"
 groups=('mate-extras')
-source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('2581c36de76205280290fca601b9edfbfeed75dcc0713a2eb8630e2a2c988aa3')
 
 build() {
-	cd "${srcdir}/${pkgname}-$pkgver"
+	cd "${srcdir}/${pkgname}-${pkgver}"
 	./autogen.sh \
         --prefix=/usr \
-        --sysconfdir=/etc \
-		--localstatedir=/var \
 		--with-plugins=gajim,pidgin,removable-devices,upnp,emailclient
-	make || return 1
+	make
 }
 
 package() {
-    cd "${srcdir}/$pkgname-$pkgver"
-    make DESTDIR="$pkgdir/" install
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
 }

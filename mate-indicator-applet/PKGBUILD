@@ -1,4 +1,5 @@
-#Contributor: Xpander <xpander0@gmail.com>
+# Contributor: Xpander <xpander0@gmail.com>
+# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-indicator-applet
 pkgver=1.6.0
@@ -11,19 +12,19 @@ depends=('dbus' 'gtk2' 'libindicator' 'libxml2' 'mate-panel')
 makedepends=('mate-common' 'mate-doc-utils')
 options=(!libtool)
 install=$pkgname.install
-source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('79c5154075096b4622c782d798b5981a2f277b9079e545a9bcb4644e6a6e4dfd')
 
 build() {
-    cd $srcdir/$pkgname-$pkgver
+    cd ${srcdir}/${pkgname}-${pkgver}
     ./autogen.sh \
         --prefix=/usr \
+        --libexec=/usr/lib/${pkgname} \
         --disable-static
     make
-#        LDFLAGS="-lm" \
-    
 }
+
 package() {
-    cd "${srcdir}/$pkgname-$pkgver"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     make DESTDIR="${pkgdir}" install
 }

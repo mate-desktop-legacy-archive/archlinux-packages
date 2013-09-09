@@ -1,4 +1,5 @@
-#Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-screensaver
 pkgver=1.6.1
@@ -8,38 +9,34 @@ arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 url="http://mate-desktop.org"
 license=('GPL')
 depends=('dbus' 'glib2' 'gtk2' 'libmatekbd' 'libnotify' 'libx11' 'libxext'
-         'libxss' 'libxt' 'libxxf86vm' 'mate-desktop' 'mate-icon-theme' 
+         'libxss' 'libxt' 'libxxf86vm' 'mate-desktop' 'mate-icon-theme'
          'mate-menus' 'mate-session-manager' 'mesa-libgl' 'pam' 'scrnsaverproto'
          'startup-notification' 'systemd' 'xproto')
 makedepends=('mate-common' 'mate-doc-utils' 'xmlto')
 optdepends=('mate-power-manager: Add power management support.')
 options=('!libtool' '!emptydirs')
-source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz
+source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz
 		mate-screensaver.pam)
 install=mate-screensaver.install
 sha256sums=('b04801e68d013c899cdfefceed25e28040c21197a2da40cd650be52ac643843c'
             '2744d1fc39da46fc681b7cf1c9230d2035b2bb8d9f510213fbe439c114eb76a2')
 groups=('mate-extras')
 build() {
-	# this is a hack for tarballs on github
-	cd $srcdir/${pkgname}-$pkgver
-
+	cd $srcdir/${pkgname}-${pkgver}
 	./configure \
-		--prefix=/usr --sysconfdir=/etc \
-		--mandir=/usr/share \
+		--prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
+		--sysconfdir=/etc \
 		--with-xscreensaverdir=/usr/share/xscreensaver/config \
 		--with-xscreensaverhackdir=/usr/lib/xscreensaver \
 		--with-mit-ext \
 		--with-libnotify \
 		--enable-locking \
-		--disable-static || return 1
-
-	make || return 1
+		--disable-static
+	make
 }
 
 package() {
-    cd "${srcdir}/$pkgname-$pkgver"
-
-    make DESTDIR="$pkgdir/" install
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
 }

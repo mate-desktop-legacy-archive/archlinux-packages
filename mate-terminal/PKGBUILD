@@ -1,4 +1,5 @@
-#Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Giovanni Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-terminal
 pkgver=1.6.1
@@ -12,19 +13,19 @@ options=('!emptydirs' '!libtool')
 install=mate-terminal.install
 url="http://mate-desktop.org"
 groups=('mate-extras')
-source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('ebcb1c323e9a5cae7f4ed0548b57de34f6ef3361d5b1bf6bc5921f5a49e0301b')
 
 build() {
-	cd "${srcdir}/${pkgname}-$pkgver"
+	cd ${srcdir}/${pkgname}-${pkgver}
     ./autogen.sh \
         --prefix=/usr \
         --disable-static \
-		--disable-scrollkeeper || return 1
-	make || return 1
+		--disable-scrollkeeper
+	make
 }
 
 package() {
-    cd "${srcdir}/$pkgname-$pkgver"
-    make DESTDIR="$pkgdir/" install
+    cd ${srcdir}/${pkgname}-${pkgver}
+    make DESTDIR="${pkgdir}" install
 }

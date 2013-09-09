@@ -1,5 +1,6 @@
-#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
-#Contributor: Xpander <xpander0@gmail.com>
+# Contributor: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Xpander <xpander0@gmail.com>
+# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=libmatewnck
 pkgver=1.6.1
@@ -12,31 +13,23 @@ depends=('glib2' 'gobject-introspection' 'gtk2' 'libx11' 'libxres' 'libxt'
 makedepends=('mate-common')
 url="http://mate-desktop.org"
 groups=('mate')
-
-source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('39c1b291178153dec9c7036475c61e7acb622f3a38f39810cf5d6f1ba4f51e0c')
 
 build() {
-    cd "${srcdir}/$pkgname-$pkgver"
-
+    cd "${srcdir}/${pkgname}-${pkgver}"
     ./configure \
         --prefix=/usr \
-        --sysconfdir=/etc \
-        --localstatedir=/var \
         --disable-static \
-        --libexecdir=/usr/lib/libmate \
         --enable-gtk-doc \
 		--enable-startup-notification \
 		--enable-introspection \
-        --disable-schemas-install || return 1
-#        --disable-canberra \
+        --disable-schemas-install
 
-    make || return 1
-
+    make
 }
 
 package() {
-    cd "${srcdir}/$pkgname-$pkgver"
-
-    make DESTDIR="$pkgdir/" install
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
 }

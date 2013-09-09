@@ -1,5 +1,6 @@
-#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
-#Contributor: Xpander <xpander0@gmail.com>
+# Contributor: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Xpander <xpander0@gmail.com>
+# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-document-viewer
 pkgver=1.6.1
@@ -16,31 +17,29 @@ makedepends=('gobject-introspection' 'gtk-update-icon-cache' 'mate-common' 'mate
 groups=('mate-extras')
 install=mate-document-viewer.install
 options=('!libtool' '!emptydirs')
-source=(http://pub.mate-desktop.org/releases/1.6/$pkgname-$pkgver.tar.xz)
+source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('100feb278bb919de874e76bd2344cb49fa60e2819e98b1394226086e34bf59ce')
 
 build() {
-    cd "${srcdir}/$pkgname-$pkgver"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     autoreconf -v -i --force
     ./configure \
         --prefix=/usr \
-        --sysconfdir=/etc \
-        --localstatedir=/var \
-        --libexecdir=/usr/lib/mate-document-viewer \
-        --enable-introspection \
+        --libexecdir=/usr/lib/${pkgname} \
         --enable-gtk-doc \
         --enable-djvu \
         --enable-dvi \
         --enable-t1lib \
         --enable-pixbuf \
         --enable-comics \
+        --disable-introspection \
         --disable-static \
-        --disable-scrollkeeper || return 1
-    make || return 1
+        --disable-scrollkeeper
+    make
 }
 
 package() {
-    cd "${srcdir}/$pkgname-$pkgver"
-    make DESTDIR="$pkgdir/" install
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
     ln -s atril ${pkgdir}/usr/bin/mate-document-viewer
 }

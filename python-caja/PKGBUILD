@@ -1,5 +1,5 @@
-#Contributor: Xpander <xpander0@gmail.com>
-#Contributor: Martin Wimpress <code@flexion.org>
+# Contributor: Xpander <xpander0@gmail.com>
+# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=python2-caja
 _pkgname=python-caja
@@ -27,6 +27,6 @@ build() {
 }
 
 package() {
-  cd "${srcdir}/${_pkgname}-${pkgver}"
-  make DESTDIR="${pkgdir}" install
+    cd ${srcdir}/${_pkgname}-${pkgver}
+    make DESTDIR="${pkgdir}" install
 }
