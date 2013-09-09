@@ -21,6 +21,7 @@ build() {
     cd ${srcdir}/${pkgname}-${pkgver}
     PYTHON=python2 ./autogen.sh \
         --prefix=/usr \
+        --libexec=/usr/lib/${pkgname} \
         --sysconfdir=/etc \
         --disable-static \
         --disable-scrollkeeper
