@@ -10,19 +10,19 @@ arch=('any')
 license=('GPL')
 url="http://mate-desktop.org"
 depends=('glib2')
-makedepends=('mate-common')
+makedepends=('mate-common' 'perl-xml-parser')
 groups=('mate')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('1a97f7e3e8551d3ccba4bf205855ac01e3aaf9db6b3666b89ae17fb7f2b99301')
 
 build() {
-	cd "${srcdir}/${pkgname}-${pkgver}"
+	cd ${srcdir}/${pkgname}-${pkgver}
 	./autogen.sh \
 		--prefix=/usr
 	make
 }
 
 package() {
-	cd "${srcdir}/${pkgname}-${pkgver}"
+	cd ${srcdir}/${pkgname}-${pkgver}
 	make DESTDIR="${pkgdir}" install
 }

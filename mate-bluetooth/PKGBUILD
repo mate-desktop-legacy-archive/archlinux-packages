@@ -10,7 +10,7 @@ arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('dbus' 'glib2' 'gobject-introspection' 'gtk2' 'gvfs-obexftp' 'libnotify'
          'libunique' 'libx11' 'libxi' 'libxml2'  'obexd-client' 'obex-data-server')
-makedepends=('mate-common' 'mate-doc-utils' 'mate-file-manager-sendto')
+makedepends=('mate-common' 'mate-doc-utils' 'mate-file-manager-sendto' 'perl-xml-parser')
 optdepends=('mate-user-share: Enable sharing via bluetooth and other protocols.')
 options=('!emptydirs')
 install=mate-bluetooth.install
@@ -20,7 +20,7 @@ source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('1ac4d00e282518db3e0385fa6e338eae32dce2240ab248457887ce07a441070f')
 
 build() {
-	cd "${srcdir}/${pkgname}-${pkgver}"
+	cd ${srcdir}/${pkgname}-${pkgver}
     ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
@@ -33,6 +33,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     make DESTDIR="${pkgdir}" install
 }

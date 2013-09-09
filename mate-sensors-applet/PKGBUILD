@@ -12,7 +12,7 @@ license=('GPL')
 groups=('mate-extras')
 depends=('cairo' 'dbus' 'glib2' 'gtk2' 'libatasmart' 'libnotify' 'libxnvctrl'
          'lm_sensors' 'mate-panel' )
-makedepends=('docbook-xml' 'mate-common' 'mate-doc-utils' 'rarian')
+makedepends=('docbook-xml' 'mate-common' 'mate-doc-utils' 'perl-xml-parser' 'rarian')
 options=('!libtool')
 install=$pkgname.install
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)

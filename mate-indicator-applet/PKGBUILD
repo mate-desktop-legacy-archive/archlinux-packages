@@ -9,7 +9,7 @@ arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 url="http://mate-desktop.org"
 license=('GPL')
 depends=('dbus' 'gtk2' 'libindicator' 'libxml2' 'mate-panel')
-makedepends=('mate-common' 'mate-doc-utils')
+makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
 options=(!libtool)
 install=$pkgname.install
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
@@ -25,6 +25,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     make DESTDIR="${pkgdir}" install
 }

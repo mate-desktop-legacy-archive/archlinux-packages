@@ -14,7 +14,7 @@ depends=('dbus' 'dconf' 'desktop-file-utils' 'gsettings-desktop-schemas' 'glib2'
          'mate-window-manager' 'libgtop' 'libmatekbd' 'libunique' 'librsvg'
          'libx11' 'libxcursor' 'libxft' 'libxi' 'libxml2' 'libxrandr'
          'libxrender' 'libxss' 'libxt' 'shared-mime-info' 'startup-notification')
-makedepends=('docbook2x' 'mate-common' 'mate-doc-utils')
+makedepends=('docbook2x' 'mate-common' 'mate-doc-utils' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
 groups=('mate')
@@ -23,7 +23,7 @@ source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('1e6fce881187d99f46eee2bf304b55fd74c60cb1ecaf687c709b1477122c1220')
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     ./configure \
         --prefix=/usr \
         --sysconfdir=/etc \
@@ -36,8 +36,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     make DESTDIR="${pkgdir}" install
-    #don't include mime cache
     rm -f ${pkgdir}/usr/share/applications/mimeinfo.cache
 }

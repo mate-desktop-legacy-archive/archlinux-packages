@@ -9,7 +9,7 @@ pkgdesc="Documentation utilities for MATE"
 arch=('any')
 license=('GPL' 'LGPL')
 depends=('libxml2' 'libxslt' 'python2' 'python2-lxml')
-makedepends=('mate-common' 'rarian')
+makedepends=('mate-common' 'rarian' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
@@ -17,7 +17,7 @@ sha256sums=('96a3b8dd1350d6531e9ddd1ca47eefe6881551b5ac5fb225bd41d2bec8aaf5eb')
 groups=('mate')
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     PYTHON=python2 ./configure \
         --prefix=/usr \
         --disable-scrollkeeper
@@ -25,9 +25,9 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     make DESTDIR="${pkgdir}" install
-    # Remove files that conflicts with `gnome-doc-utils`
+    # Remove files that conflict with `gnome-doc-utils`
     rm -rf ${pkgdir}/usr/share/xml/mallard/
     rm -rf ${pkgdir}/usr/share/man/
     rm -rf ${pkgdir}/usr/lib/

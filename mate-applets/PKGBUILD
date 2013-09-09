@@ -16,7 +16,7 @@ depends=('avahi' 'dbus' 'glib2' 'gsettings-desktop-schemas' 'gstreamer0.10-base-
          'python2-gobject2' 'python2-notify' 'sharutils' 'system-tools-backends'
          'upower' 'xproto')
 makedepends=('docbook2x' 'docbook-xsl' 'gtk-update-icon-cache' 'mate-common'
-             'mate-doc-utils' 'networkmanager')
+             'mate-doc-utils' 'networkmanager' 'perl-xml-parser')
 groups=('mate-extras')
 options=(!emptydirs)
 replaces=('gnome-applets')
@@ -27,7 +27,7 @@ source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('8693cd88c4731796c09294c962d0ff12092d536121a5c41ddb06fffbc78aa00a')
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     PYTHON=python2 ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
@@ -42,8 +42,9 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     make DESTDIR="${pkgdir}" install
+    # Remove Python byte-code
     rm -rf ${pkgdir}/usr/lib/python2.*/site-packages/mate_invest/*.py{c,o}
     rm -rf ${pkgdir}/usr/lib/python2.*/site-packages/timerapplet/*.py{c,o}
 }

@@ -9,20 +9,20 @@ pkgdesc="Calculator for the Mate desktop environment"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('LGPL' 'GPL')
 depends=('atk' 'glib2' 'gtk2' 'libxml2')
-makedepends=('flex' 'bison' 'mate-common' 'mate-doc-utils')
+makedepends=('flex' 'bison' 'mate-common' 'mate-doc-utils' 'perl-xml-parser')
 groups=('mate-extras')
 url="http://mate-desktop.org"
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('400d5c4d2927edfec4abed6c340ddc125d62ec2b99bf272db09d799efcd2993f')
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     ./autogen.sh \
         --prefix=/usr
     make
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     make DESTDIR="${pkgdir}" install
 }

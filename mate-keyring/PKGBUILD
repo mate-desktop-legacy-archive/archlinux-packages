@@ -9,7 +9,7 @@ pkgdesc="MATE Password Management daemon"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL' 'LGPL')
 depends=('dbus' 'glib2' 'gtk2' 'libtasn1' 'pam')
-makedepends=('docbook-xml' 'mate-common')
+makedepends=('docbook-xml' 'mate-common' 'perl-xml-parser')
 url="http://mate-desktop.org"
 groups=('mate')
 options=('!libtool' '!emptydirs')
@@ -20,7 +20,7 @@ source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('f77c48c59a9611baa9721d0a30e78f148629d1754066844bea053cb80141652b')
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     ./autogen.sh \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
@@ -33,6 +33,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     make DESTDIR="${pkgdir}" install
 }

@@ -9,11 +9,11 @@ pkgdesc="Simply a document viewer"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('dbus' 'djvulibre' 'glib2' 'gtk2' 'libgxps' 'libmatekeyring' 'libsm'
-         'libspectre' 'libtiff' 'libx11' 'libxml2' 'mate-file-manager'
-         'mate-icon-theme' 'poppler-glib' 'shared-mime-info' 't1lib'
-         'texlive-bin' 'zlib')
-makedepends=('gobject-introspection' 'gtk-update-icon-cache' 'mate-common' 'mate-doc-utils')
+depends=('dbus' 'djvulibre' 'glib2' 'gobject-introspection' 'gtk2' 'libgxps'
+         'libmatekeyring' 'libsm' 'libspectre' 'libtiff' 'libx11' 'libxml2'
+         'mate-file-manager' 'mate-icon-theme' 'poppler-glib' 'shared-mime-info'
+         't1lib' 'texlive-bin' 'zlib')
+makedepends=('gtk-update-icon-cache' 'mate-common' 'mate-doc-utils' 'perl-xml-parser')
 groups=('mate-extras')
 install=mate-document-viewer.install
 options=('!libtool' '!emptydirs')
@@ -21,7 +21,8 @@ source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('100feb278bb919de874e76bd2344cb49fa60e2819e98b1394226086e34bf59ce')
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
+    # Work around a build system problem
     autoreconf -v -i --force
     ./configure \
         --prefix=/usr \
@@ -39,7 +40,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     make DESTDIR="${pkgdir}" install
     ln -s atril ${pkgdir}/usr/bin/mate-document-viewer
 }

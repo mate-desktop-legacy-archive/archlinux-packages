@@ -9,7 +9,7 @@ arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('dbus' 'glib2' 'glibmm' 'gtk2' 'gtkmm' 'libgtop' 'libmatewnck' 'librsvg'
          'libxml2' 'mate-icon-theme')
-makedepends=('docbook2x' 'mate-common' 'mate-doc-utils')
+makedepends=('docbook2x' 'mate-common' 'mate-doc-utils' 'perl-xml-parser')
 groups=('mate-extras')
 options=(!emptydirs !libtool)
 url="http://mate-desktop.org"
@@ -30,6 +30,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     make DESTDIR="${pkgdir}" install
 }

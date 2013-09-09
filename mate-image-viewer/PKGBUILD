@@ -12,7 +12,7 @@ depends=('dbus' 'desktop-file-utils' 'glib2' 'gtk2' 'exempi' 'lcms' 'libexif'
          'libjpeg-turbo' 'libxml2' 'mate-desktop' 'mate-icon-theme' 'pygtk'
          'python2' 'python2-gobject2' 'shared-mime-info' 'startup-notification'
          'zlib')
-makedepends=('mate-common' 'mate-doc-utils')
+makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
 conflicts=('eog')
 url="http://mate-desktop.org"
@@ -22,7 +22,7 @@ source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('32a24e473e44a22ce60f0f61d30a1009fcc4bcc702e8ed3bb414f88f1f209545')
 
 build() {
-	cd "${srcdir}/${pkgname}-${pkgver}"
+	cd ${srcdir}/${pkgname}-${pkgver}
 	PYTHON=python2 ./configure \
         --prefix=/usr \
 		--localstatedir=/var \
@@ -31,6 +31,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     make DESTDIR="${pkgdir}" install
 }

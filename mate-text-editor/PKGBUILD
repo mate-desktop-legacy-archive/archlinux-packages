@@ -9,7 +9,7 @@ arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('enchant' 'glib2' 'gtk2' 'gtksourceview2' 'iso-codes' 'libsm' 'libxml2'
          'python2' 'python2-gobject2' 'pygtksourceview2')
-makedepends=('gtk-update-icon-cache' 'mate-common' 'mate-doc-utils')
+makedepends=('gtk-update-icon-cache' 'mate-common' 'mate-doc-utils' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
 groups=('mate-extras')
@@ -28,7 +28,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     make DESTDIR="${pkgdir}" install
     # Remove Python byte-code
     rm -f ${pkgdir}/usr/lib/pluma/plugins/*/*.py{c,o}

@@ -10,7 +10,7 @@ arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=(GPL LGPL)
 depends=('glib2' 'gtk2' 'hicolor-icon-theme' 'libunique' 'libx11' 'libxml2'
          'libxrandr' 'python2' 'startup-notification')
-makedepends=('mate-common' 'mate-doc-utils')
+makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
 groups=('mate')
@@ -18,7 +18,7 @@ source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('fe65f4035fe74510e6f35df0c0e29cbf8a6501852adc3971773d0072b914aed5')
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     PYTHON=python2 ./configure \
         --prefix=/usr \
         --disable-static \
@@ -29,8 +29,8 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     make DESTDIR="${pkgdir}" install
-    # prevent conflicts errors
+    # Prevent conflict errors
     mv ${pkgdir}/usr/share/omf ${pkgdir}/usr/share/mate-omf
 }

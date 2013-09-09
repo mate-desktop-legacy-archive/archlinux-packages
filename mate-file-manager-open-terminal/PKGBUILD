@@ -18,13 +18,13 @@ source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('9898d640aad99be84fbc42f3e2e4f90400939480f94ac5a1ed1a09475df944e8')
 
 build() {
-	cd "${srcdir}/${pkgname}-${pkgver}"
+	cd ${srcdir}/${pkgname}-${pkgver}
     ./autogen.sh \
         --prefix=/usr
 	make
 }
 
 package() {
-	cd "${srcdir}/${pkgname}-${pkgver}"
+	cd ${srcdir}/${pkgname}-${pkgver}
 	make DESTDIR="${pkgdir}" install
 }

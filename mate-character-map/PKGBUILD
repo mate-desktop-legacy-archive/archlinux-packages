@@ -7,8 +7,8 @@ pkgrel=3
 pkgdesc="MATE Unicode Charmap"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('glib2' 'gobject-introspection' 'gtk2' 'libxml2')
-makedepends=('mate-common' 'mate-doc-utils' 'pygtk' 'python2')
+depends=('glib2' 'gobject-introspection' 'gtk2' 'libxml2' 'pygtk' 'python2')
+makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
 groups=('mate-extras')
 url="http://mate-desktop.org"
 install='mate-character-map.install'
@@ -16,7 +16,7 @@ source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('14a18a02db1a7a966d74229350eec64468e0aaf47ec5726a1b2042def9719635')
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     PYTHON=python2 ./autogen.sh \
         --prefix=/usr \
         --enable-charmap \
@@ -28,6 +28,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     make DESTDIR="${pkgdir}" install
 }

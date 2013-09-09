@@ -9,7 +9,7 @@ pkgdesc="MATE keyring client library"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL' 'LGPL')
 depends=('dbus' 'glib2' 'libgcrypt')
-makedepends=('docbook-xml' 'mate-common')
+makedepends=('docbook-xml' 'mate-common' 'perl-xml-parser')
 groups=('mate')
 options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
@@ -17,7 +17,7 @@ source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('7ce673bbf7e2d20811b5197c9a79e813226c4ef8d2719f606ad6d98e5958cc99')
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     ./autogen.sh \
         --prefix=/usr \
         --libexecdir=/usr/lib/mate-keyring
@@ -26,6 +26,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/$pkgname-$pkgver"
+    cd ${srcdir}/$pkgname-$pkgver
     make DESTDIR="${pkgdir}" install
 }

@@ -9,9 +9,9 @@ arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('apache' 'dbus' 'glib2' 'gtk2' 'libcanberra' 'libnotify' 'libunique'
          'mate-bluetooth' 'mate-file-manager' 'mod_dnssd' 'obex-data-server')
-makedepends=('mate-common' 'mate-doc-utils')
+makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
 groups=('mate-extras')
-options=(!emptydirs !libtool)
+options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
 install=mate-user-share.install
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
@@ -29,7 +29,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     make  DESTDIR="${pkgdir}" install
     rm -f ${pkgdir}/usr/share/mate-user-share/dav_user_2.0.conf
 }

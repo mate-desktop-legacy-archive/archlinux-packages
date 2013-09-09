@@ -8,7 +8,7 @@ pkgdesc="Quickly share a folder from the Caja file manager."
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('mate-file-manager' 'samba')
-makedepends=('mate-common')
+makedepends=('mate-common' 'perl-xml-parser')
 groups=('mate-extras')
 options=(!emptydirs !libtool)
 url="http://mate-desktop.org"
@@ -17,14 +17,14 @@ source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 md5sums=('70a7a02fee63ae358e7e4d943f9206c5')
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     PYTHON=python2 ./autogen.sh \
         --prefix=/usr
 	make
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     make DESTDIR="${pkgdir}" install
     rm -f ${pkgdir}/usr/lib/caja/extensions-*/libcaja-share.a
 }

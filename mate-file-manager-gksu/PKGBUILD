@@ -10,21 +10,21 @@ arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 url="http://manny.cluecoder.org/packages/nautilus-open-terminal"
 license=('GPL')
 depends=('gtk2' 'mate-file-manager')
-makedepends=('mate-common')
+makedepends=('mate-common' 'perl-xml-parser')
 install=mate-file-manager-gksu.install
 options=('!libtool')
 groups=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('deef71c2aabb6185eaab59b375f3b672748d08c945a78c7d87b0c6f0c432aebe')
 
-build() {
-	cd "${srcdir}/${pkgname}-${pkgver}"
+build()
+	cd ${srcdir}/${pkgname}-${pkgver}
 	./autogen.sh \
         --prefix=/usr
 	make
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     make DESTDIR="${pkgdir}" install
 }

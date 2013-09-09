@@ -21,7 +21,7 @@ source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('2581c36de76205280290fca601b9edfbfeed75dcc0713a2eb8630e2a2c988aa3')
 
 build() {
-	cd "${srcdir}/${pkgname}-${pkgver}"
+	cd ${srcdir}/${pkgname}-${pkgver}
 	./autogen.sh \
         --prefix=/usr \
 		--with-plugins=gajim,pidgin,removable-devices,upnp,emailclient
@@ -29,6 +29,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     make DESTDIR="${pkgdir}" install
 }

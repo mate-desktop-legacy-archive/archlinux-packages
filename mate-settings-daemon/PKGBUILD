@@ -12,7 +12,7 @@ depends=('dbus' 'dconf' 'fontconfig' 'glib2' 'gstreamer0.10-base-plugins' 'gtk2'
          'libcanberra' 'libcanberra-gstreamer' 'libmatekbd' 'libnotify' 'libpulse'
          'libx11' 'libxext' 'libxt' 'libxi' 'libxrandr' 'libxrender'
          'mate-desktop' 'mate-polkit' 'startup-notification')
-makedepends=('intltool' 'mate-common')
+makedepends=('mate-common' 'perl-xml-parser')
 options=('!libtool')
 url="http://mate-desktop.org"
 install=mate-settings-daemon.install
@@ -34,6 +34,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     make DESTDIR="${pkgdir}" install
 }

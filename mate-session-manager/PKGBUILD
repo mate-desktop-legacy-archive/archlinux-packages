@@ -12,7 +12,7 @@ depends=('dbus' 'glib2' 'gobject-introspection' 'gtk2' 'libice' 'libsm'
          'libx11' 'libxau' 'libxext' 'libxrender' 'libxt' 'libxtst'
          'mate-file-manager' 'mate-panel' 'mate-polkit' 'mate-settings-daemon'
          'mate-window-manager' 'startup-notification' 'systemd' 'upower')
-makedepends=('mate-common' 'xmlto')
+makedepends=('mate-common' 'perl-xml-parser' 'xmlto')
 options=('!emptydirs' '!libtool')
 install=mate-session-manager.install
 url="http://mate-desktop.org"
@@ -21,7 +21,7 @@ source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('4ee7b4ae18df5becd986b05634428edf0ad8de150a14dc29848b6d34ab312ce9')
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
@@ -32,6 +32,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     make DESTDIR="${pkgdir}" install
 }

@@ -12,7 +12,7 @@ depends=('dbus' 'glib2' 'gtk2' 'libmatekbd' 'libnotify' 'libx11' 'libxext'
          'libxss' 'libxt' 'libxxf86vm' 'mate-desktop' 'mate-icon-theme'
          'mate-menus' 'mate-session-manager' 'mesa-libgl' 'pam' 'scrnsaverproto'
          'startup-notification' 'systemd' 'xproto')
-makedepends=('mate-common' 'mate-doc-utils' 'xmlto')
+makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser' 'xmlto')
 optdepends=('mate-power-manager: Add power management support.')
 options=('!libtool' '!emptydirs')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz
@@ -37,6 +37,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     make DESTDIR="${pkgdir}" install
 }

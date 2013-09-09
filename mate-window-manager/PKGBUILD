@@ -10,7 +10,7 @@ license=('GPL')
 depends=('gtk2' 'libcanberra' 'libgtop' 'libice' 'libsm' 'libx11' 'libxcomposite'
          'libxcursor' 'libxdamage' 'libxext' 'libxfixes' 'libxinerama' 'libxrandr'
          'libxrender' 'libxt' 'mate-dialogs' 'pango' 'startup-notification')
-makedepends=('mate-common' 'mate-doc-utils')
+makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
 install=mate-window-manager.install
 url="http://mate-desktop.org"

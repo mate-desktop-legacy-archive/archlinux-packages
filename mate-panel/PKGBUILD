@@ -12,7 +12,7 @@ depends=('avahi' 'cairo' 'dbus' 'dconf' 'gobject-introspection' 'gtk2' 'libmatew
          'mate-menus' 'mate-desktop' 'mate-polkit' 'libcanberra' 'libice'
          'libmateweather' 'librsvg' 'libsm' 'libsoup' 'libx11' 'libxau' 'libxrandr'
          'pango' 'python2')
-makedepends=('mate-common' 'mate-doc-utils' 'networkmanager')
+makedepends=('mate-common' 'mate-doc-utils' 'networkmanager' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
 install=mate-panel.install
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)

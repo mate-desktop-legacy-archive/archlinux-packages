@@ -12,7 +12,7 @@ license=('GPL')
 depends=('avahi' 'dbus' 'glib2' 'gtk2' 'libcanberra' 'libgcrypt' 'libmatekeyring'
          'libnotify' 'libunique' 'libx11' 'libxext' 'libxrandr'
          'mate-notification-daemon' 'mate-panel' 'upower')
-makedepends=('docbook2x' 'docbook-xml' 'mate-common' 'mate-doc-utils' 'xmlto')
+makedepends=('docbook2x' 'docbook-xml' 'mate-common' 'mate-doc-utils' 'perl-xml-parser' 'xmlto')
 options=('!emptydirs')
 install=mate-power-manager.install
 url="http://mate-desktop.org"
@@ -21,7 +21,7 @@ source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('b80d531271f9a7ee692d69173b28f46feba025b4ffcc9e0ab2f5b09934f8d80f')
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
 
     #Work around a problem where the .sgml fail to parse.
     sed -e 's:@HAVE_DOCBOOK2MAN_TRUE@.*::' -i man/Makefile.in
@@ -39,6 +39,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     make DESTDIR="${pkgdir}" install
 }
