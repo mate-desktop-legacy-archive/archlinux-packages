@@ -6,17 +6,17 @@ pkgname=mate-sensors-applet
 pkgver=1.6.0
 pkgrel=3
 pkgdesc="An applet for the MATE Panel to display readings from hardware sensors, including CPU temperature, fan speeds and voltage readings under Linux"
-arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 url="http://mate-desktop.org"
+arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-groups=('mate-extras')
 depends=('cairo' 'dbus' 'glib2' 'gtk2' 'libatasmart' 'libnotify' 'libxnvctrl'
          'lm_sensors' 'mate-panel' )
 makedepends=('docbook-xml' 'mate-common' 'mate-doc-utils' 'perl-xml-parser' 'rarian')
-options=('!libtool')
-install=${pkgname}.install
+options=('!emptydirs' '!libtool')
+groups=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('34b1484479206a86d332112018c6fcbe7712e12856d1137b2f202cc196db4f71')
+install=${pkgname}.install
 
 build() {
     cd ${srcdir}/${pkgname}-${pkgver}

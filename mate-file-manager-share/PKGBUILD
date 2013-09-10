@@ -5,13 +5,13 @@ pkgname=mate-file-manager-share
 pkgver=1.6.0
 pkgrel=2
 pkgdesc="Quickly share a folder from the Caja file manager."
+url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('mate-file-manager' 'samba')
 makedepends=('mate-common' 'perl-xml-parser')
+options=('!emptydirs' '!libtool')
 groups=('mate-extras')
-options=(!emptydirs !libtool)
-url="http://mate-desktop.org"
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 md5sums=('70a7a02fee63ae358e7e4d943f9206c5')
 

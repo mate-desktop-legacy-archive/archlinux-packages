@@ -5,16 +5,16 @@ pkgname=mate-character-map
 pkgver=1.6.0
 pkgrel=3
 pkgdesc="MATE Unicode Charmap"
+url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('glib2' 'gobject-introspection' 'gtk2' 'libxml2' 'pygtk' 'python2')
 makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
 groups=('mate-extras')
-url="http://mate-desktop.org"
-install=${pkgname}.install
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('14a18a02db1a7a966d74229350eec64468e0aaf47ec5726a1b2042def9719635')
+install=${pkgname}.install
 
 build() {
     cd ${srcdir}/${pkgname}-${pkgver}

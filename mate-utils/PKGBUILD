@@ -5,19 +5,19 @@ pkgname=mate-utils
 pkgver=1.6.0
 pkgrel=6
 pkgdesc="Common MATE utilities for viewing disk usage, logs and fonts, taking screenshots, managing dictionaries and searching files"
+url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('glib2' 'gtk2' 'libcanberra' 'libgtop'  'libsm' 'libx11' 'libxext'
          'mate-panel' 'xproto' 'zlib')
 makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser' 'rarian')
 options=('!libtool' '!emptydirs')
-install=${pkgname}.install
-url="http://mate-desktop.org"
 groups=('mate-extras')
 source=("http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz"
 		'patch.diff')
 sha256sums=('150b7ed3831f865b5e1276108f2ad1ce6c2fa129b5689ec50bc35f882f93d01c'
 			'5f43cae0b223e16191c786591d2d91f974fd6345c0f07412c790577df390eb99')
+install=${pkgname}.install
 
 build() {
     cd ${srcdir}/${pkgname}-${pkgver}

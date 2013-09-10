@@ -6,6 +6,7 @@ pkgname=mate-file-manager
 pkgver=1.6.2
 pkgrel=3
 pkgdesc="The MATE shell and file manager"
+url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('dbus' 'desktop-file-utils' 'exempi' 'glib2' 'gobject-introspection'
@@ -14,12 +15,11 @@ depends=('dbus' 'desktop-file-utils' 'exempi' 'glib2' 'gobject-introspection'
          'shared-mime-info' 'startup-notification')
 makedepends=('mate-common')
 optdepends=('gstreamer0.10-good-plugins: automatic media playback when mouseover')
-url="http://mate-desktop.org"
-options=('!libtool' '!emptydirs')
-install=${pkgname}.install
+options=('!emptydirs' '!libtool')
+groups=('mate')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('c1df364fa72ca7e37faf2124cecd90d6d1be9532030d11d2d7bbe2aa93db74f3')
-groups=('mate')
+install=${pkgname}.install
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"

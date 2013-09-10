@@ -5,15 +5,16 @@ pkgname=mate-indicator-applet
 pkgver=1.6.0
 pkgrel=2
 pkgdesc="Indicator Applet for MATE"
-arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 url="http://mate-desktop.org"
+arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('dbus' 'gtk2' 'libindicator' 'libxml2' 'mate-panel')
 makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
-options=(!libtool)
-install=${pkgname}.install
+options=('!emptydirs' '!libtool')
+groups=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('79c5154075096b4622c782d798b5981a2f277b9079e545a9bcb4644e6a6e4dfd')
+install=${pkgname}.install
 
 build() {
     cd ${srcdir}/${pkgname}-${pkgver}

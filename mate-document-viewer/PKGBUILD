@@ -14,11 +14,11 @@ depends=('dbus' 'djvulibre' 'glib2' 'gobject-introspection' 'gtk2' 'libgxps'
          'mate-file-manager' 'mate-icon-theme' 'poppler-glib' 'shared-mime-info'
          't1lib' 'texlive-bin' 'zlib')
 makedepends=('gtk-update-icon-cache' 'mate-common' 'mate-doc-utils' 'perl-xml-parser')
+options=('!emptydirs' '!libtool')
 groups=('mate-extras')
-install=${pkgname}.install
-options=('!libtool' '!emptydirs')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('100feb278bb919de874e76bd2344cb49fa60e2819e98b1394226086e34bf59ce')
+install=${pkgname}.install
 
 build() {
     cd ${srcdir}/${pkgname}-${pkgver}

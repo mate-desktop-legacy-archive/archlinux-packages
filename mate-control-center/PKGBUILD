@@ -7,6 +7,7 @@ pkgname=mate-control-center
 pkgver=1.6.1
 pkgrel=2
 pkgdesc="The Control Center for MATE"
+url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('dbus' 'dconf' 'desktop-file-utils' 'gsettings-desktop-schemas' 'glib2'
@@ -16,11 +17,10 @@ depends=('dbus' 'dconf' 'desktop-file-utils' 'gsettings-desktop-schemas' 'glib2'
          'libxrender' 'libxss' 'libxt' 'shared-mime-info' 'startup-notification')
 makedepends=('docbook2x' 'mate-common' 'mate-doc-utils' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
-url="http://mate-desktop.org"
 groups=('mate')
-install=${pkgname}.install
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('1e6fce881187d99f46eee2bf304b55fd74c60cb1ecaf687c709b1477122c1220')
+install=${pkgname}.install
 
 build() {
     cd ${srcdir}/${pkgname}-${pkgver}

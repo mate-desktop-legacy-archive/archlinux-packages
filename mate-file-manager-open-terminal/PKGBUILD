@@ -6,16 +6,16 @@ pkgname=mate-file-manager-open-terminal
 pkgver=1.6.0
 pkgrel=3
 pkgdesc="An extension for opening terminals in arbitrary local paths"
-arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 url="http://manny.cluecoder.org/packages/nautilus-open-terminal"
+arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('gtk2' 'mate-desktop' 'mate-file-manager')
 makedepends=('mate-common' 'perl-xml-parser')
-install=${pkgname}.install
-options=('!libtool')
+options=('!emptydirs' '!libtool')
 groups=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('9898d640aad99be84fbc42f3e2e4f90400939480f94ac5a1ed1a09475df944e8')
+install=${pkgname}.install
 
 build() {
 	cd ${srcdir}/${pkgname}-${pkgver}

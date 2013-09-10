@@ -5,15 +5,16 @@ pkgname=mate-netbook
 pkgver=1.6.0
 pkgrel=2
 pkgdesc="A simple window management tool."
-arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 url="http://mate-desktop.org"
+arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 groups=('mate-extras')
 depends=('gtk2' 'libfakekey' 'libmatewnck' 'libunique' 'mate-panel')
 makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
-install=${pkgname}.install
+options=('!emptydirs' '!libtool')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('b209898de9482650136bd2c8afb319eb8d3769c463c80caf3c6b5e5eedb5ed66')
+install=${pkgname}.install
 
 build() {
     cd ${srcdir}/${pkgname}-${pkgver}

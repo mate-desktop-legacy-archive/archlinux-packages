@@ -6,6 +6,7 @@ pkgname=mate-image-viewer
 pkgver=1.6.1
 pkgrel=2
 pkgdesc="An image viewing and cataloging program for MATE"
+url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('dbus' 'desktop-file-utils' 'glib2' 'gtk2' 'exempi' 'lcms' 'libexif'
@@ -14,12 +15,11 @@ depends=('dbus' 'desktop-file-utils' 'glib2' 'gtk2' 'exempi' 'lcms' 'libexif'
          'zlib')
 makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
-conflicts=('eog')
-url="http://mate-desktop.org"
 groups=('mate-extras')
-install=${pkgname}.install
+conflicts=('eog')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('32a24e473e44a22ce60f0f61d30a1009fcc4bcc702e8ed3bb414f88f1f209545')
+install=${pkgname}.install
 
 build() {
 	cd ${srcdir}/${pkgname}-${pkgver}

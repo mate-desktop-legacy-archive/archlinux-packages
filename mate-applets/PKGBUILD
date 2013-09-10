@@ -7,6 +7,7 @@ pkgver=1.6.1
 pkgrel=2
 pkgdesc="Applets for MATE panel"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
+url="http://mate-desktop.org"
 license=('GPL')
 depends=('avahi' 'dbus' 'glib2' 'gsettings-desktop-schemas' 'gstreamer0.10-base-plugins'
          'gstreamer0.10-good-plugins' 'gtk2' 'gvfs' 'libgtop' 'libmateweather'
@@ -17,14 +18,13 @@ depends=('avahi' 'dbus' 'glib2' 'gsettings-desktop-schemas' 'gstreamer0.10-base-
          'upower' 'xproto')
 makedepends=('docbook2x' 'docbook-xsl' 'gtk-update-icon-cache' 'mate-common'
              'mate-doc-utils' 'networkmanager' 'perl-xml-parser')
+options=('!emptydirs' '!libtool')
 groups=('mate-extras')
-options=(!emptydirs)
 replaces=('gnome-applets')
 conflicts=('gnome-applets')
-url="http://mate-desktop.org"
-install=${pkgname}.install
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('8693cd88c4731796c09294c962d0ff12092d536121a5c41ddb06fffbc78aa00a')
+install=${pkgname}.install
 
 build() {
     cd ${srcdir}/${pkgname}-${pkgver}

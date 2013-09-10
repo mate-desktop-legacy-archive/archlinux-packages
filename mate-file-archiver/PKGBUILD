@@ -8,6 +8,7 @@ pkgname=mate-file-archiver
 pkgver=1.6.0
 pkgrel=4
 pkgdesc="Archive manipulator for MATE"
+url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('bzip2' 'glib2' 'gtk2' 'gzip' 'mate-file-manager' 'tar')
@@ -18,13 +19,12 @@ optdepends=('unrar: for RAR uncompression'
 'p7zip: 7zip compression utility' 'arj: for ARJ archives'
 'unace: extraction tool for the proprietary ace archive format')
 options=('!libtool' '!emptydirs')
-install=${pkgname}.install
-url="http://mate-desktop.org"
 groups=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz
         fr-rpm-bsdtar.patch)
 sha256sums=('b959c41d1c86991e4f72224df0519bf0aaccfdd49afd8e799268b779ce9d2285'
             'dc05c3b3fbc8242d1c85b58f756f998d644d920c8444d0872e9ffef1ce297f77')
+install=${pkgname}.install
 
 build() {
 	cd ${srcdir}/${pkgname}-${pkgver}

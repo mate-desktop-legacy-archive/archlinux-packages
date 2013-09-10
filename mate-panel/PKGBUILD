@@ -6,6 +6,7 @@ pkgname=mate-panel
 pkgver=1.6.1
 pkgrel=2
 pkgdesc="The MATE Panel"
+url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('avahi' 'cairo' 'dbus' 'dconf' 'gobject-introspection' 'gtk2' 'libmatewnck'
@@ -14,11 +15,10 @@ depends=('avahi' 'cairo' 'dbus' 'dconf' 'gobject-introspection' 'gtk2' 'libmatew
          'pango' 'python2')
 makedepends=('mate-common' 'mate-doc-utils' 'networkmanager' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
-install=${pkgname}.install
+groups=('mate')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('88bf0620e1eba7e2e165060ac6fa21896b8e24d1ac742ff6f8c884c5408dd53b')
-url="http://mate-desktop.org"
-groups=('mate')
+install=${pkgname}.install
 
 build() {
     cd ${srcdir}/${pkgname}-${pkgver}

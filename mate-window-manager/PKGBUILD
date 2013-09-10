@@ -5,6 +5,7 @@ pkgname=mate-window-manager
 pkgver=1.6.2
 pkgrel=2
 pkgdesc="A window manager for MATE"
+url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('gtk2' 'libcanberra' 'libgtop' 'libice' 'libsm' 'libx11' 'libxcomposite'
@@ -12,11 +13,10 @@ depends=('gtk2' 'libcanberra' 'libgtop' 'libice' 'libsm' 'libx11' 'libxcomposite
          'libxrender' 'libxt' 'mate-dialogs' 'pango' 'startup-notification')
 makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
-install=${pkgname}.install
-url="http://mate-desktop.org"
 groups=('mate')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('d4c887c7de76073409bf653701ae1d16d17ca5205776fd4dcc952cb3128120e1')
+install=${pkgname}.install
 
 build() {
     cd ${srcdir}/${pkgname}-${pkgver}

@@ -6,6 +6,7 @@ pkgname=mate-settings-daemon
 pkgver=1.6.1
 pkgrel=2
 pkgdesc="The MATE Settings daemon"
+url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('dbus' 'dconf' 'fontconfig' 'glib2' 'gstreamer0.10-base-plugins' 'gtk2'
@@ -13,12 +14,11 @@ depends=('dbus' 'dconf' 'fontconfig' 'glib2' 'gstreamer0.10-base-plugins' 'gtk2'
          'libx11' 'libxext' 'libxt' 'libxi' 'libxrandr' 'libxrender'
          'mate-desktop' 'mate-polkit' 'startup-notification')
 makedepends=('mate-common' 'perl-xml-parser')
-options=('!libtool')
-url="http://mate-desktop.org"
-install=${pkgname}.install
+options=('!emptydirs' '!libtool')
 groups=('mate')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('8104c5c1dfb02a6d7b2743931a04b390baf2e466b8fe612d32a906b1a2fbe64d')
+install=${pkgname}.install
 
 build() {
     cd ${srcdir}/${pkgname}-${pkgver}

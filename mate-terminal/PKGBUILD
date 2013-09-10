@@ -5,16 +5,16 @@ pkgname=mate-terminal
 pkgver=1.6.1
 pkgrel=3
 pkgdesc="The MATE Terminal Emulator"
+url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('dbus' 'dconf' 'glib2' 'gtk2' 'libx11' 'libsm' 'vte')
 makedepends=('docbook2x' 'mate-common' 'mate-doc-utils' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
-install=${pkgname}.install
-url="http://mate-desktop.org"
 groups=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('ebcb1c323e9a5cae7f4ed0548b57de34f6ef3361d5b1bf6bc5921f5a49e0301b')
+install=${pkgname}.install
 
 build() {
 	cd ${srcdir}/${pkgname}-${pkgver}

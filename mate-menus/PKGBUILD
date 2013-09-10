@@ -6,15 +6,15 @@ pkgname=mate-menus
 pkgver=1.6.0
 pkgrel=2
 pkgdesc="MATE menu specifications"
+url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('glib2' 'gobject-introspection' 'pygtk' 'python2')
 makedepends=('mate-common' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
+groups=('mate')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('f9955ee91397696e9bc5aee4151c94b638d5869cad7acfba12016b683c8fc4a9')
-url="http://mate-desktop.org"
-groups=('mate')
 
 build() {
     cd ${srcdir}/${pkgname}-${pkgver}
