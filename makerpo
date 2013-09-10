@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 MATE_VER=1.6
 
@@ -28,7 +28,7 @@ MATE_BUILD_ORDER=(
   mate-screensaver
   mate-file-archiver
   mate-media
-  #mate-media-gstreamer # fail
+  #mate-media-gstreamer # fail; doesn't compile
   mate-power-manager
   mate-system-monitor
   caja-dropbox
