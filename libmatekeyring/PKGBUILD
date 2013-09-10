@@ -20,7 +20,7 @@ build() {
     cd ${srcdir}/${pkgname}-${pkgver}
     ./autogen.sh \
         --prefix=/usr \
-        --libexecdir=/usr/lib/mate-keyring
+        --libexecdir=/usr/lib/mate-keyring \
         --disable-static \
     make
 }
