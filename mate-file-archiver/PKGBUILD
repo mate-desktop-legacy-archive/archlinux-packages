@@ -18,7 +18,7 @@ optdepends=('unrar: for RAR uncompression'
 'p7zip: 7zip compression utility' 'arj: for ARJ archives'
 'unace: extraction tool for the proprietary ace archive format')
 options=('!libtool' '!emptydirs')
-install=mate-file-archiver.install
+install=${pkgname}.install
 url="http://mate-desktop.org"
 groups=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz

@@ -13,7 +13,7 @@ makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
 groups=('mate-extras')
 options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
-install=mate-user-share.install
+install=${pkgname}.install
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 md5sums=('ee26e90c51aa0d1f04d66cb2daf50fca')
 

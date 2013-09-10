@@ -14,7 +14,7 @@ depends=('avahi' 'dbus' 'glib2' 'gtk2' 'libcanberra' 'libgcrypt' 'libmatekeyring
          'mate-notification-daemon' 'mate-panel' 'upower')
 makedepends=('docbook2x' 'docbook-xml' 'mate-common' 'mate-doc-utils' 'perl-xml-parser' 'xmlto')
 options=('!emptydirs')
-install=mate-power-manager.install
+install=${pkgname}.install
 url="http://mate-desktop.org"
 groups=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)

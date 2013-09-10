@@ -12,7 +12,7 @@ depends=('gtk2' 'libcanberra' 'libgtop' 'libice' 'libsm' 'libx11' 'libxcomposite
          'libxrender' 'libxt' 'mate-dialogs' 'pango' 'startup-notification')
 makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
-install=mate-window-manager.install
+install=${pkgname}.install
 url="http://mate-desktop.org"
 groups=('mate')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)

@@ -22,7 +22,7 @@ options=(!emptydirs)
 replaces=('gnome-applets')
 conflicts=('gnome-applets')
 url="http://mate-desktop.org"
-install=mate-applets.install
+install=${pkgname}.install
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('8693cd88c4731796c09294c962d0ff12092d536121a5c41ddb06fffbc78aa00a')
 

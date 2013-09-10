@@ -12,7 +12,6 @@ makedepends=('mate-common' 'perl-xml-parser')
 groups=('mate-extras')
 options=(!emptydirs !libtool)
 url="http://mate-desktop.org"
-install=mate-file-manager-share.install
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 md5sums=('70a7a02fee63ae358e7e4d943f9206c5')
 

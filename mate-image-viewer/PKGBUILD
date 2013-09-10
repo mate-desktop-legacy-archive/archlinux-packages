@@ -17,7 +17,7 @@ options=('!emptydirs' '!libtool')
 conflicts=('eog')
 url="http://mate-desktop.org"
 groups=('mate-extras')
-install=mate-image-viewer.install
+install=${pkgname}.install
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('32a24e473e44a22ce60f0f61d30a1009fcc4bcc702e8ed3bb414f88f1f209545')
 

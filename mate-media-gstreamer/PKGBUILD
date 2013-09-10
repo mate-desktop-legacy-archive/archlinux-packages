@@ -14,9 +14,9 @@ conflicts=('mate-media')
 provides=('mate-media')
 options=(!emptydirs !libtool)
 url="http://mate-desktop.org"
-install=mate-media.install
 source=(http://pub.mate-desktop.org/releases/1.6/mate-media-${pkgver}.tar.xz)
 sha256sums=('baf0ac85685a376107feee47b372b678a86404ce215b19c7fc259b012a3694a6')
+install=${pkgname}.install
 
 build() {
 	cd ${srcdir}/mate-media-${pkgver}

@@ -14,7 +14,7 @@ optdepends=('pidgin: Support for sending to instant messaging networks.'
             'gajim: Support for sending to Jabber.'
             'mate-bluetooth: Support for sending to bluetooth.')
 options=('!emptydirs' '!libtool')
-install=mate-file-manager-sendto.install
+install=${pkgname}.install
 url="http://mate-desktop.org"
 groups=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)

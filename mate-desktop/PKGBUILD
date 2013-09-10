@@ -11,6 +11,7 @@ license=(GPL LGPL)
 depends=('glib2' 'gtk2' 'hicolor-icon-theme' 'libunique' 'libx11' 'libxml2'
          'libxrandr' 'python2' 'startup-notification')
 makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
+install=${pkgname}.install
 options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
 groups=('mate')

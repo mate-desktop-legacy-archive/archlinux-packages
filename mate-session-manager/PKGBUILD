@@ -14,7 +14,7 @@ depends=('dbus' 'glib2' 'gobject-introspection' 'gtk2' 'libice' 'libsm'
          'mate-window-manager' 'startup-notification' 'systemd' 'upower')
 makedepends=('mate-common' 'perl-xml-parser' 'xmlto')
 options=('!emptydirs' '!libtool')
-install=mate-session-manager.install
+install=${pkgname}.install
 url="http://mate-desktop.org"
 groups=('mate')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)

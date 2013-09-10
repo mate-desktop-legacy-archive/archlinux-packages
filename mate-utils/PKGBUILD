@@ -11,7 +11,7 @@ depends=('glib2' 'gtk2' 'libcanberra' 'libgtop'  'libsm' 'libx11' 'libxext'
          'mate-panel' 'xproto' 'zlib')
 makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser' 'rarian')
 options=('!libtool' '!emptydirs')
-install=mate-utils.install
+install=${pkgname}.install
 url="http://mate-desktop.org"
 groups=('mate-extras')
 source=("http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz"

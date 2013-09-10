@@ -11,7 +11,7 @@ license=('GPL')
 depends=('dbus' 'gtk2' 'libindicator' 'libxml2' 'mate-panel')
 makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
 options=(!libtool)
-install=$pkgname.install
+install=${pkgname}.install
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('79c5154075096b4622c782d798b5981a2f277b9079e545a9bcb4644e6a6e4dfd')
 

@@ -13,7 +13,7 @@ depends=('glib2' 'gtk2' 'liboobs' 'mate-file-manager' 'mate-polkit'
 makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
 optdepends=('ntp: Automatic time syncronisation.'
             'system-config-printer: Add CUPS printer configuration tool.')
-install=mate-system-tools.install
+install=${pkgname}.install
 options=('!libtool')
 groups=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)

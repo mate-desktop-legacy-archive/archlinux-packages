@@ -13,7 +13,7 @@ makedepends=('mate-doc-utils' 'mate-settings-daemon' 'mate-icon-theme' 'perl-xml
 groups=('mate-extras')
 options=(!emptydirs !libtool)
 url="http://mate-desktop.org"
-install=mate-media.install
+install=${pkgname}.install
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('baf0ac85685a376107feee47b372b678a86404ce215b19c7fc259b012a3694a6')
 

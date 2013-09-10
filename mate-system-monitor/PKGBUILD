@@ -13,7 +13,7 @@ makedepends=('docbook2x' 'mate-common' 'mate-doc-utils' 'perl-xml-parser')
 groups=('mate-extras')
 options=(!emptydirs !libtool)
 url="http://mate-desktop.org"
-install=mate-system-monitor.install
+install=${pkgname}.install
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('c49fc4ec245c869ddd5e464e560d368c6090ab2bf617c6ba9ceb84c3c7a66348')
 

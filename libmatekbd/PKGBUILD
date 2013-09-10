@@ -13,7 +13,7 @@ makedepends=('mate-common' 'perl-xml-parser')
 groups=('mate')
 url="http://mate-desktop.org"
 options=('!emptydirs' '!libtool')
-install=libmatekbd.install
+install=${pkgname}.install
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('d10593e69cdbb591bf1704a13ff8cd4fbc6f1212f76554081da746bc1aff0685')
 

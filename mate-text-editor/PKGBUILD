@@ -13,7 +13,7 @@ makedepends=('gtk-update-icon-cache' 'mate-common' 'mate-doc-utils' 'perl-xml-pa
 options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
 groups=('mate-extras')
-install=mate-text-editor.install
+install=${pkgname}.install
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('52339cb8d265d7a538c9b3b3e6a37f68ece5100d18c029dfc87c3f4b61cf8288')
 

@@ -14,7 +14,7 @@ depends=('avahi' 'cairo' 'dbus' 'dconf' 'gobject-introspection' 'gtk2' 'libmatew
          'pango' 'python2')
 makedepends=('mate-common' 'mate-doc-utils' 'networkmanager' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
-install=mate-panel.install
+install=${pkgname}.install
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha256sums=('88bf0620e1eba7e2e165060ac6fa21896b8e24d1ac742ff6f8c884c5408dd53b')
 url="http://mate-desktop.org"
