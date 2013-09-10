@@ -16,7 +16,7 @@ groups=('mate-extras')
 replaces=('python-caja')
 provides=('python-caja')
 source=(http://pub.mate-desktop.org/releases/1.6/${_pkgname}-${pkgver}.tar.xz)
-sha256sums=('2a696f24dd3b34609117d66ac4a768409419964fa21db300bdb19d042e513990')
+sha1sums=('a7dbcff03b9dbdf2f33dbea96946426097eb9e56')
 
 build() {
     cd ${srcdir}/${_pkgname}-${pkgver}

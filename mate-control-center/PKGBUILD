@@ -19,7 +19,7 @@ makedepends=('docbook2x' 'mate-common' 'mate-doc-utils' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
 groups=('mate')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
-sha256sums=('1e6fce881187d99f46eee2bf304b55fd74c60cb1ecaf687c709b1477122c1220')
+sha1sums=('7908a1bdbbcce9d2b7a8604c83fdd30f2c19b106')
 install=${pkgname}.install
 
 build() {

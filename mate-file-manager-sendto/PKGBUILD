@@ -17,7 +17,7 @@ optdepends=('pidgin: Support for sending to instant messaging networks.'
 options=('!emptydirs' '!libtool')
 groups=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
-sha256sums=('2581c36de76205280290fca601b9edfbfeed75dcc0713a2eb8630e2a2c988aa3')
+sha1sums=('cf81a12d6d5d90f431d96fd67eed893f472b36f0')
 install=${pkgname}.install
 
 build() {

@@ -16,7 +16,7 @@ optdepends=('mate-user-share: Enable sharing via bluetooth and other protocols.'
 options=('!emptydirs' '!libtool')
 groups=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
-sha256sums=('1ac4d00e282518db3e0385fa6e338eae32dce2240ab248457887ce07a441070f')
+sha1sums=('fc8810f16a1b70bd24dd329b505d932f5b672a56')
 install=${pkgname}.install
 
 build() {

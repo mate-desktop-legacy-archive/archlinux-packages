@@ -15,7 +15,7 @@ groups=('mate')
 replaces=('gnome-themes')
 conflicts=('gnome-themes')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
-sha256sums=('d7d5c6c530f125ba63b78bba130bb9e05b9303d4e1090b96fd3703c9e99ea252')
+sha1sums=('d0dc8072bfed13b0f356c08e6ef67c89e9f9f12d')
 install=${pkgname}.install
 
 build() {

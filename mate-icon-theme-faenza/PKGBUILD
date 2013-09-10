@@ -14,7 +14,7 @@ makedepends=('icon-naming-utils' 'mate-common')
 options=(!strip)
 groups=('mate')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
-sha256sums=('8fdf1ebf45b1156230ac923c237e55b26366ffafe19db6c6ba1d46ccb819928b')
+sha1sums=('17fcac5602f9b3039101e03a17e9d0f693f2dd78')
 install=${pkgname}.install
 
 build() {

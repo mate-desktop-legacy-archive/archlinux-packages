@@ -15,8 +15,8 @@ options=('!libtool' '!emptydirs')
 groups=('mate-extras')
 source=("http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz"
 		'patch.diff')
-sha256sums=('150b7ed3831f865b5e1276108f2ad1ce6c2fa129b5689ec50bc35f882f93d01c'
-			'5f43cae0b223e16191c786591d2d91f974fd6345c0f07412c790577df390eb99')
+sha1sums=('a43b45cccffd6116c49475d7511cf58b219c0d72'
+		  'f1eb654b90423ab5468edd57dc33f3f7f9c3f390')
 install=${pkgname}.install
 
 build() {

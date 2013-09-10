@@ -14,7 +14,7 @@ depends=('gtk2' 'libgtop' 'mate-panel' 'wireless_tools')
 makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
 groups=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
-sha256sums=('91b90a85983d119fd40006b47847c737ad1c27836894355fb387adbca8250634')
+sha1sums=('892a69d3ac89abdedf29aceae98365986a539767')
 install=${pkgname}.install
 
 build() {

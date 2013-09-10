@@ -13,7 +13,7 @@ depends=('gtk2' 'libfakekey' 'libmatewnck' 'libunique' 'mate-panel')
 makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
-sha256sums=('b209898de9482650136bd2c8afb319eb8d3769c463c80caf3c6b5e5eedb5ed66')
+sha1sums=('15fd45b565585971a3bc3b7074e57ba169492cd7')
 install=${pkgname}.install
 
 build() {

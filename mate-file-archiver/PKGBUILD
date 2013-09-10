@@ -22,8 +22,8 @@ options=('!libtool' '!emptydirs')
 groups=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz
         fr-rpm-bsdtar.patch)
-sha256sums=('b959c41d1c86991e4f72224df0519bf0aaccfdd49afd8e799268b779ce9d2285'
-            'dc05c3b3fbc8242d1c85b58f756f998d644d920c8444d0872e9ffef1ce297f77')
+sha1sums=('c7df115b532a14fb7be193113da32cda4a2218e8'
+          '219b05a979bf6f249aaae27964f02345fd81168d')
 install=${pkgname}.install
 
 build() {

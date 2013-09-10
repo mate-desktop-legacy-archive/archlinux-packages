@@ -12,11 +12,12 @@ depends=('glib2' 'gtk2' 'liboobs' 'mate-file-manager' 'mate-polkit'
          'system-tools-backends')
 makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
 optdepends=('ntp: Automatic time syncronisation.'
-            'system-config-printer: Add CUPS printer configuration tool.')
+            'system-config-printer: Add CUPS printer configuration tool.'
+            'cups-pk-helper: A helper that makes system-config-printer use PolicyKit.')
 options=('!libtool')
 groups=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
-sha256sums=('3e545ae4462332cd4e4b1c0b2f0e41a7fbacbb86be3e95254155e92ed249a14a')
+sha1sums=('89d53c22171f6181ad4fb89387d4fa3300bb27b2')
 install=${pkgname}.install
 
 build() {

@@ -17,7 +17,7 @@ makedepends=('gtk-update-icon-cache' 'mate-common' 'mate-doc-utils' 'perl-xml-pa
 options=('!emptydirs' '!libtool')
 groups=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
-sha256sums=('100feb278bb919de874e76bd2344cb49fa60e2819e98b1394226086e34bf59ce')
+sha1sums=('5b3d1643b7945d56214ec13dc38cb641dfb688e1')
 install=${pkgname}.install
 
 build() {

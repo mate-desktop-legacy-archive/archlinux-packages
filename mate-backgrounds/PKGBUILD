@@ -14,7 +14,7 @@ makedepends=('mate-common' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
 groups=('mate')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
-sha256sums=('1a97f7e3e8551d3ccba4bf205855ac01e3aaf9db6b3666b89ae17fb7f2b99301')
+sha1sums=('3a399181b021f82281ed1f3145dfe9a45f44968c')
 
 build() {
 	cd ${srcdir}/${pkgname}-${pkgver}
