@@ -10,7 +10,7 @@ url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('dbus' 'desktop-file-utils' 'exempi' 'glib2' 'gobject-introspection'
-         'gtk2' 'gvfs' 'libexif' 'libunique' 'libxml2' 'libx11' 'libxt'
+         'gtk-update-icon-cache' 'gtk2' 'gvfs' 'libexif' 'libunique' 'libxml2' 'libx11' 'libxt'
          'libxrender' 'libxext' 'mate-desktop' 'mate-icon-theme' 'pangox-compat'
          'shared-mime-info' 'startup-notification')
 makedepends=('mate-common')

@@ -9,7 +9,7 @@ pkgdesc="Simply a document viewer"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('dbus' 'djvulibre' 'glib2' 'gobject-introspection' 'gtk2' 'libgxps'
+depends=('dbus' 'desktop-file-utils' 'djvulibre' 'glib2' 'gobject-introspection' 'gtk2' 'libgxps'
          'libmatekeyring' 'libsm' 'libspectre' 'libtiff' 'libx11' 'libxml2'
          'mate-file-manager' 'mate-icon-theme' 'poppler-glib' 'shared-mime-info'
          't1lib' 'texlive-bin' 'zlib')
