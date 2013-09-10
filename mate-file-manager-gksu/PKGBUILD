@@ -16,11 +16,11 @@ groups=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
 sha1sums=('fd6e6268e5e00706fbe5d20090aff94d2ce57302')
 
-build()
-	cd ${srcdir}/${pkgname}-${pkgver}
-	./autogen.sh \
+build() {
+    cd ${srcdir}/${pkgname}-${pkgver}
+    ./autogen.sh \
         --prefix=/usr
-	make
+    make
 }
 
 package() {
