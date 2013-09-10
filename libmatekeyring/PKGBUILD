@@ -21,7 +21,7 @@ build() {
     ./autogen.sh \
         --prefix=/usr \
         --libexecdir=/usr/lib/mate-keyring \
-        --disable-static \
+        --disable-static
     make
 }
 
