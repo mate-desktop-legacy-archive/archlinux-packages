@@ -22,12 +22,12 @@ sha1sums=('b1f41a2c18d62e4573f6e6c9e4383c5030947808')
 install=${pkgname}.install
 
 build() {
-	cd ${srcdir}/${pkgname}-${pkgver}
-	PYTHON=python2 ./configure \
+    cd ${srcdir}/${pkgname}-${pkgver}
+    PYTHON=/usr/bin/python2 ./configure \
         --prefix=/usr \
-		--localstatedir=/var \
-		--disable-scrollkeeper
-	make
+        --localstatedir=/var \
+        --disable-scrollkeeper
+    make
 }
 
 package() {

@@ -27,7 +27,7 @@ install=${pkgname}.install
 
 build() {
     cd ${srcdir}/${pkgname}-${pkgver}
-    PYTHON=python2 ./autogen.sh \
+    PYTHON=/usr/bin/python2 ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
         --libexecdir=/usr/lib/${pkgname} \
@@ -37,7 +37,7 @@ build() {
         --enable-ipv6 \
         --disable-static \
         --disable-scrollkeeper
-	make
+    make
 }
 
 package() {

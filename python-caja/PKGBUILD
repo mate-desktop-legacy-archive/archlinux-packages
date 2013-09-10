@@ -20,7 +20,7 @@ sha1sums=('a7dbcff03b9dbdf2f33dbea96946426097eb9e56')
 
 build() {
     cd ${srcdir}/${_pkgname}-${pkgver}
-    PYTHON=python2 ./autogen.sh \
+    PYTHON=/usr/bin/python2 ./autogen.sh \
         --prefix=/usr \
         --disable-static
     make

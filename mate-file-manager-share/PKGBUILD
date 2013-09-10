@@ -17,9 +17,9 @@ sha1sums=('28e8ec54330e41aa44866107c23f48b47ea198e4')
 
 build() {
     cd ${srcdir}/${pkgname}-${pkgver}
-    PYTHON=python2 ./autogen.sh \
+    PYTHON=/usr/bin/python2 ./autogen.sh \
         --prefix=/usr
-	make
+    make
 }
 
 package() {

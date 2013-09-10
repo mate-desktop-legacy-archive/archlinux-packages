@@ -19,7 +19,7 @@ install=${pkgname}.install
 
 build() {
     cd ${srcdir}/${pkgname}-${pkgver}
-    PYTHON=python2 ./autogen.sh \
+    PYTHON=/usr/bin/python2 ./autogen.sh \
         --prefix=/usr \
         --libexecdir=/usr/lib \
         --enable-python \

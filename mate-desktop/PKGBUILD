@@ -20,7 +20,7 @@ install=${pkgname}.install
 
 build() {
     cd ${srcdir}/${pkgname}-${pkgver}
-    PYTHON=python2 ./configure \
+    PYTHON=/usr/bin/python2 ./configure \
         --prefix=/usr \
         --disable-static \
         --disable-scrollkeeper \

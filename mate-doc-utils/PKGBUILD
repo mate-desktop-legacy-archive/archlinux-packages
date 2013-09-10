@@ -18,7 +18,7 @@ sha1sums=('8a4612a21884bb6474e9d695df186551e1b9f4fb')
 
 build() {
     cd ${srcdir}/${pkgname}-${pkgver}
-    PYTHON=python2 ./configure \
+    PYTHON=/usr/bin/python2 ./configure \
         --prefix=/usr \
         --disable-scrollkeeper
     make
