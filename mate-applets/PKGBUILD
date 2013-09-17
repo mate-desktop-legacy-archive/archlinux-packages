@@ -4,7 +4,7 @@
 
 pkgname=mate-applets
 pkgver=1.6.1
-pkgrel=2
+pkgrel=3
 pkgdesc="Applets for MATE panel"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 url="http://mate-desktop.org"
@@ -46,4 +46,10 @@ package() {
     # Remove Python byte-code
     rm -rf ${pkgdir}/usr/lib/python2.*/site-packages/mate_invest/*.py{c,o}
     rm -rf ${pkgdir}/usr/lib/python2.*/site-packages/timerapplet/*.py{c,o}
+    # Use python2
+    sed -i '1i\
+    #!/usr/bin/env python2' ${pkgdir}/usr/lib/${pkgname}/timer-applet
+    sed -i '1i\
+    #!/usr/bin/env python2' ${pkgdir}/usr/lib/${pkgname}/invest-applet
+
 }
