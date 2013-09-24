@@ -162,7 +162,7 @@ function tree_clean() {
     do
         if [ -f ${SRC}/Makefile ]; then
             echo " - Cleaning ${SRC}"
-            #make maintainer-clean &> /dev/null
+            make maintainer-clean 2>&1 /dev/null
         fi
     done
 }
@@ -173,7 +173,7 @@ function tree_delete() {
     for PACKAGE in ${PKG}/*.pkg.tar.xz
     do
         echo " - Deleting ${PACKAGE}"
-        #rm -f ${PACKAGE}
+        rm -f ${PACKAGE}
     done
 }
 
@@ -185,14 +185,14 @@ function tree_purge() {
     do
         if [ -f ${TARBALL} ] && [[ "${TARBALL}" != *pkg* ]]; then
             echo " - Deleting ${TARBALL}"
-            #rm -f ${TARBALL}
+            rm -f ${TARBALL}
         fi
     done
 
     # Remove the any 'src' directories created by `makepkg`.
     if [ -d ${PKG}/src ]; then
         echo " - Deleting ${PKG}/src"
-        #rm -rf $${PKG}/src
+        rm -rf $${PKG}/src
     fi
 }
 
