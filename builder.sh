@@ -106,26 +106,18 @@ function tree_build() {
     local EXISTS=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
     if [ -z "${EXISTS}" ]; then
         echo " - Building ${PKG}"
-        rm -f build.log 2>/dev/null
-        makepkg -cs --noconfirm --needed 2>&1 | tee build.log
-        # Did the build complete sucessfully?
-        ls -1 *${PKGBUILD}*.pkg.tar.xz
-        local SUCCESS=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
-        if [ -z ${SUCCESS} ]; then
+        makepkg -fs --noconfirm --needed --log
+        if [ $? -ne 0 ]; then
             echo " - Failed to build ${PKG}. Stopping here."
             exit 1
         else
-            echo " - ${PKG} build was successful."
+            sudo makepkg -i --noconfirm --asroot
+            echo
+            echo
             sleep 5
         fi
     else
         echo " - ${PKG} is built and current."
-    fi
-
-    # If we built a new version, install it.
-    if [ "${INSTALLED}" != "${PKGBUILD}" ]; then
-        echo " - Installing ${PKG}"
-        sudo pacman -U --noconfirm $(ls -1 *${PKGBUILD}*.pkg.tar.xz)
     fi
 }
 
