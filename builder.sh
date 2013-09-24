@@ -107,7 +107,7 @@ function tree_build() {
     if [ -z "${EXISTS}" ]; then
         echo " - Building ${PKG}"
         rm -f build.log 2>/dev/null
-        makepkg -s --noconfirm --needed 2>&1 | tee build.log
+        makepkg -cs --noconfirm --needed 2>&1 | tee build.log
         # Did the build complete sucessfully?
         ls -1 *${PKGBUILD}*.pkg.tar.xz
         local SUCCESS=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
