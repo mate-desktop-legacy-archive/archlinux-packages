@@ -96,7 +96,10 @@ function tree_audit() {
 function tree_build() {
     local PKG=${1}
     cd ${PKG}
-    local INSTALLED=$(pacman -Q | grep `basename ${PKG}` | cut -f2 -d' ')
+    if [[ "${PKG}" == *python* ]]; then
+        PKG=$(echo ${PKG} | sed 's/python/python2/')
+    fi
+    local INSTALLED=$(pacman -Q `basename ${PKG}` | cut -f2 -d' ')
     local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=')
     local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
     local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
