@@ -99,7 +99,7 @@ function tree_build() {
     if [[ "${PKG}" == *python* ]]; then
         PKG=$(echo ${PKG} | sed 's/python/python2/')
     fi
-    local INSTALLED=$(pacman -Q `basename ${PKG}` | cut -f2 -d' ')
+    local INSTALLED=$(pacman -Q `basename ${PKG}` 2>/dev/null | cut -f2 -d' ')
     local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=')
     local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
     local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
