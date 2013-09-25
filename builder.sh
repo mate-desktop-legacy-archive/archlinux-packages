@@ -197,11 +197,15 @@ function tree_uninstall() {
     cd ${BASEDIR}
     for PKG in ${BUILD_ORDER[@]};
     do
-        if [ -n "$(echo ${INSTALLED_PKGS} | grep `basename ${PKG}`)" ]; then
+        PKG=$(basename ${PKG})
+        if [[ "${PKG}" == *python* ]]; then
+            PKG=$(echo ${PKG} | sed 's/python/python2/')
+        fi
+        if [ -n "$(echo ${INSTALLED_PKGS} | grep ${PKG})" ]; then
             UNINSTALL_PKGS="${UNINSTALL_PKGS} ${PKG}"
         fi
     done
-    echo ${UNINSTALL_PKGS}
+    sudo pacman -Rs --noconfirm ${UNINSTALL_PKGS}
 }
 
 function tree_run() {
