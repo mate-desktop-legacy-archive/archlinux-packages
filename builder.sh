@@ -183,22 +183,29 @@ function tree_audit() {
         INSTALL_ICON=0
         INSTALL_MIME=0
         INSTALL_DESKTOP=0
-        local STATIC=$(find pkg/ -name *.a)
-        if [ -n "${STATIC}" ]; then
-            echo "    Contains static files, delete them in PKGBUILD."
-            echo "    ${STATIC}"
+        local FIND_A=$(find pkg/ -name *.a)
+        if [ -n "${FIND_A}" ]; then
+            echo "    Contains .a files, delete them via 'package()' in PKGBUILD."
+            echo "    ${FIND_A}"
         fi
-        local LIBTOOL=$(find pkg/ -name *.la)
-        if [ -n "${LIBTOOL}" ]; then
-            echo "    Contains libtool files, add '!libtool' to PKGBUILD 'options'"
-            echo "    ${LIBTOOL}"
+        local FIND_LA=$(find pkg/ -name *.la)
+        if [ -n "${FIND_LA}" ]; then
+            echo "    Contains .la files, add '!libtool' to 'options' in PKGBUILD."
+            echo "    ${FIND_LA}"
+        fi
+        local FIND_PYC=$(find pkg/ -name *.pyc)
+        local FIND_PYO=$(find pkg/ -name *.pyo)
+        if [ -n "${FIND_PYC}" ] || [ -n "${FIND_PYO}" ]; then
+            echo "    Contains Python byte-code, delete them via 'package()' in PKGBUILD."
+            echo "    ${FIND_PYC}"
+            echo "    ${FIND_PYO}"
         fi
         if [ -d pkg/*/usr/share/glib-2.0/schemas ]; then
-            echo "    Contains glib-2.0 schemas, ${PKG}.install will auto-update."
+            echo "    Contains glib-2.0 schemas, '.install' will auto-update."
             INSTALL_SCHEMA=1
         fi
         if [ -d pkg/*/usr/share/icons ]; then
-            echo "    Contains icons, ${PKG}.install will auto-update."
+            echo "    Contains icons, '.install' will auto-update."
             declare -a ICON_ARRAY=()
             for ICON in pkg/*/usr/share/icons/*
             do
