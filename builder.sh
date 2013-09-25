@@ -95,7 +95,7 @@ function usage() {
 # OK, this is as ugly as hell but it works.
 # Skip past this section and look how nice everything else it ;-)
 function make_install_file() {
-    local INSTALL_FILE=${1}
+    local INSTALL_FILE="${1}"
     echo "post_install() {" > ${INSTALL_FILE}
     if [ ${INSTALL_SCHEMA} -eq 1 ]; then
         echo "    glib-compile-schemas /usr/share/glib-2.0/schemas/" >> ${INSTALL_FILE}
@@ -154,12 +154,14 @@ function update_install_file() {
     local PKG=${1}
     local INSTALL_REQUIRED=$((${INSTALL_SCHEMA} + ${INSTALL_MIME} + ${INSTALL_ICON} + ${INSTALL_DESKTOP}))
     if [ ${INSTALL_REQUIRED} -ge 1 ]; then
-        local INSTALL_FILE=${PKG}.install
+        local INSTALL_FILE=`basename ${PKG}`.install
+
         if [ -f ${INSTALL_FILE} ]; then
             echo "    Updating ${INSTALL_FILE}"
         else
             echo "    Creating ${INSTALL_FILE}"
         fi
+
         local TEST_INSTALL=$(grep -E ^install= PKGBUILD)
         if [ $? -ne 0 ]; then
             echo "    Missing 'install=${INSTALL_FILE}' in PKGBUILD."
