@@ -7,6 +7,11 @@ AUR_BUILD_ORDER=(
   aur/libxnvctrl
 )
 
+COMMUNITY_BUILD_ORDER=(
+  community/mate-applet-lockkeys
+  community/mate-applet-softupd
+)
+
 MATE_BUILD_ORDER=(
   mate-common
   mate-doc-utils
@@ -60,6 +65,7 @@ MATE_BUILD_ORDER=(
   python-caja
 )
 
+BUILD_ORDER=( ${AUR_BUILD_ORDER[@]} ${MATE_BUILD_ORDER[@]} ${COMMUNITY_BUILD_ORDER[@]})
 BASEDIR=$(dirname $(readlink -f ${0}))
 
 # Show usgae information
@@ -353,7 +359,6 @@ function tree_repo() {
     rm -rf ${HOME}/mate/${CARCH} 2>/dev/null
     mkdir -p ${HOME}/mate/${CARCH}
 
-    local BUILD_ORDER=( ${AUR_BUILD_ORDER[@]} ${MATE_BUILD_ORDER[@]} )
     for PKG in ${BUILD_ORDER[@]};
     do
         cd ${BASEDIR}/${PKG}
@@ -378,7 +383,6 @@ function tree_uninstall() {
     echo "Action : uninstall"
     local INSTALLED_PKGS=$(pacman -Qq)
     local UNINSTALL_PKGS=""
-    local BUILD_ORDER=( ${AUR_BUILD_ORDER[@]} ${MATE_BUILD_ORDER[@]} )
     cd ${BASEDIR}
     for PKG in ${BUILD_ORDER[@]};
     do
@@ -396,7 +400,6 @@ function tree_uninstall() {
 function tree_run() {
     local ACTION=${1}
     echo "Action : ${ACTION}"
-    local BUILD_ORDER=( ${AUR_BUILD_ORDER[@]} ${MATE_BUILD_ORDER[@]} )
     for PKG in ${BUILD_ORDER[@]};
     do
         cd ${BASEDIR}
