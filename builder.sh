@@ -10,6 +10,7 @@ AUR_BUILD_ORDER=(
 COMMUNITY_BUILD_ORDER=(
   community/mate-applet-lockkeys
   community/mate-applet-softupd
+  community/mate-applet-streamer
 )
 
 MATE_BUILD_ORDER=(
