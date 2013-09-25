@@ -264,9 +264,10 @@ function tree_build() {
         if [ $? -ne 0 ]; then
             echo " - Failed to build ${PKG}. Stopping here."
             exit 1
+        else
+            sudo makepkg -i --noconfirm --asroot
         fi
     else
-        echo " - ${PKG} is built and current."
         if [ "${INSTALLED}" != "${PKGBUILD}" ]; then
             sudo makepkg -i --noconfirm --asroot
         fi
