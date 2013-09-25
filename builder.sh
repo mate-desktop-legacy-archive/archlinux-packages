@@ -77,7 +77,7 @@ function usage() {
     echo "  clean       Clean sources using 'make maintainer-clean' and remove 'src' directories."
     echo "  delete      Delete Arch Linux 'pkg.tar.xz binary package files."
     echo "  purge       Purge source tarballs and 'src' directories "
-    echo "  uninstall   Remove MATE packages and dependencies (unimplemented)"
+    echo "  uninstall   Uninstall MATE packages and dependencies."
     echo
     echo "Each of the tasks above run automatically and operate over the entire package tree."
     exit 1
@@ -190,13 +190,24 @@ function tree_purge() {
 
 # Uninstall MATE packages and orphans from the system.
 function tree_uninstall() {
-    :
+    echo "Action : uninstall"
+    local INSTALLED_PKGS=$(pacman -Qq)
+    local UNINSTALL_PKGS=""
+    local BUILD_ORDER=( ${AUR_BUILD_ORDER[@]} ${MATE_BUILD_ORDER[@]} )
+    cd ${BASEDIR}
+    for PKG in ${BUILD_ORDER[@]};
+    do
+        if [ -n "$(echo ${INSTALLED_PKGS} | grep `basename ${PKG}`)" ]; then
+            UNINSTALL_PKGS="${UNINSTALL_PKGS} ${PKG}"
+        fi
+    done
+    echo ${UNINSTALL_PKGS}
 }
 
 function tree_run() {
     local ACTION=${1}
     echo "Action : ${ACTION}"
-    BUILD_ORDER=( ${AUR_BUILD_ORDER[@]} ${MATE_BUILD_ORDER[@]} )
+    local BUILD_ORDER=( ${AUR_BUILD_ORDER[@]} ${MATE_BUILD_ORDER[@]} )
     for PKG in ${BUILD_ORDER[@]};
     do
         cd ${BASEDIR}
@@ -220,9 +231,10 @@ if [ "${TASK}" == "audit" ] ||
    [ "${TASK}" == "check" ] ||
    [ "${TASK}" == "clean" ] ||
    [ "${TASK}" == "delete" ] ||
-   [ "${TASK}" == "purge" ] ||
-   [ "${TASK}" == "uninstall" ]; then
+   [ "${TASK}" == "purge" ]; then
     tree_run ${TASK}
+elif [ "${TASK}" == "uninstall" ]; then
+    tree_uninstall
 else
     echo "ERROR! You've asked me to do something I don't understand."
     echo
