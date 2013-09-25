@@ -86,9 +86,22 @@ function usage() {
 # Show packages that are not yet built.
 function tree_audit() {
     local PKG=${1}
-    local EXISTS=$(ls -1 ${PKG}/*.pkg.tar.xz 2>/dev/null | tail -n1)
+    cd ${PKG}
+    if [[ "${PKG}" == *python* ]]; then
+        PKG=$(echo ${PKG} | sed 's/python/python2/')
+    fi
+    local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=')
+    local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
+    local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
+    local EXISTS=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
     if [ -z "${EXISTS}" ]; then
-        echo " - ${PKG}"
+        echo " - ${PKG} needs building"
+    elif [ -d pkg ]; then
+        local STATIC=$(find pkg/ -name *.a)
+        if [ -n "${STATIC}" ]; then
+            echo " - ${PKG} contains static files, delete them in PKGBUILD."
+            echo " +---> ${STATIC}"
+        fi
     fi
 }
 
