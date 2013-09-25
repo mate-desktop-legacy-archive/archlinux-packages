@@ -159,7 +159,7 @@ function update_install_file() {
         make_install_file ${INSTALL_FILE}
     else
         if [ -f *.install ]; then
-            echo "    Detected an obsolete install file."
+            echo "    Detected a custom '.install' file, please review it."
         fi
     fi
 }
