@@ -261,7 +261,11 @@ function tree_build() {
     local EXISTS=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
     if [ -z "${EXISTS}" ]; then
         echo " - Building ${PKG}"
-        makepkg -fs --noconfirm --needed --log
+	if [ $(id -u) eq 0 ]; then
+	        makepkg -fs --noconfirm --needed --log --asroot
+	else
+		makepkg -fs --noconfirm --needed --log
+	fi
         if [ $? -ne 0 ]; then
             echo " - Failed to build ${PKG}. Stopping here."
             exit 1
