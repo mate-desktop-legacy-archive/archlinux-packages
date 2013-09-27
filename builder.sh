@@ -85,6 +85,7 @@ function usage() {
     echo "  delete      Delete Arch Linux 'pkg.tar.xz binary package files."
     echo "  purge       Purge source tarballs, 'src' and 'pkg' directories."
     echo "  repo        Create a package repository in '${HOME}/mate/'"
+    echo "  sync        'rsync' a repo to ${RSYNC_UPSTREAM}."
     echo "  uninstall   Uninstall MATE packages and dependencies."
     echo
     echo "Each of the tasks above run automatically and operate over the entire package tree."
@@ -386,6 +387,21 @@ function tree_repo() {
     sudo chmod 644 ${HOME}/mate/${CARCH}/*
 }
 
+# 'rsync' repo upstream.
+function tree_sync() {
+    echo "Action : sync"
+    source /etc/makepkg.conf
+
+    # Modify this accordingly.
+    local RSYNC_UPSTREAM="mate@mate.flexion.org:mate"
+
+    if [ -L ${HOME}/mate/${CARCH}/mate.db ]; then
+        rsync -av --progress ${HOME}/mate/ ${RSYNC_UPSTREAM}
+    else
+        echo "A valid 'pacman' repository was not detected. Run './${0} -t repo' first."
+    fi
+}
+
 # Uninstall MATE packages and orphans from the system.
 function tree_uninstall() {
     echo "Action : uninstall"
@@ -433,7 +449,7 @@ if [ "${TASK}" == "audit" ] ||
    [ "${TASK}" == "delete" ] ||
    [ "${TASK}" == "purge" ]; then
     tree_run ${TASK}
-elif [ "${TASK}" == "repo" ] || [ "${TASK}" == "uninstall" ]; then
+elif [ "${TASK}" == "repo" ] || [ "${TASK}" == "sync" ] || [ "${TASK}" == "uninstall" ]; then
     tree_${TASK}
 else
     echo "ERROR! You've asked me to do something I don't understand."
