@@ -68,6 +68,7 @@ MATE_BUILD_ORDER=(
 
 BUILD_ORDER=( ${AUR_BUILD_ORDER[@]} ${MATE_BUILD_ORDER[@]} ${COMMUNITY_BUILD_ORDER[@]})
 BASEDIR=$(dirname $(readlink -f ${0}))
+MATE_VER=1.6
 
 # Show usgae information
 function usage() {
@@ -294,7 +295,7 @@ function tree_check() {
     local PKG=${1}
     if [ ! -f /tmp/SHA1SUMS ]; then
         echo " - Downloading SHA1SUMS"
-        wget -c -q http://pub.mate-desktop.org/releases/1.6/SHA1SUMS -O /tmp/SHA1SUMS
+        wget -c -q http://pub.mate-desktop.org/releases/${MATE_VER}/SHA1SUMS -O /tmp/SHA1SUMS
     fi
     echo " - Checking ${PKG}"
     IS_UPSTREAM=$(grep -E ${PKG}-[0-9]. /tmp/SHA1SUMS)
@@ -364,8 +365,8 @@ function tree_repo() {
     echo "Action : repo"
     source /etc/makepkg.conf
 
-    sudo rm -rf ${HOME}/mate/${CARCH} 2>/dev/null
-    mkdir -p ${HOME}/mate/${CARCH}
+    rm -rf ${HOME}/${MATE_VER}/${CARCH} 2>/dev/null
+    mkdir -p ${HOME}/${MATE_VER}/${CARCH}
 
     for PKG in ${BUILD_ORDER[@]};
     do
@@ -379,12 +380,10 @@ function tree_repo() {
         local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
         local NEWEST=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
         if [ -f ${NEWEST} ]; then
-            cp ${NEWEST} ${HOME}/mate/${CARCH}/
+            cp ${NEWEST} ${HOME}/${MATE_VER}/${CARCH}/
         fi
     done
-    repo-add -n ${HOME}/mate/${CARCH}/mate.db.tar.gz ${HOME}/mate/${CARCH}/*.pkg.tar.xz
-    sudo chown -R 33:33 ${HOME}/mate/${CARCH}
-    sudo chmod 644 ${HOME}/mate/${CARCH}/*
+    repo-add -n ${HOME}/${MATE_VER}/${CARCH}/mate.db.tar.gz ${HOME}/${MATE_VER}/${CARCH}/*.pkg.tar.xz
 }
 
 # 'rsync' repo upstream.
@@ -393,10 +392,10 @@ function tree_sync() {
     source /etc/makepkg.conf
 
     # Modify this accordingly.
-    local RSYNC_UPSTREAM="mate@mate.flexion.org:mate"
+    local RSYNC_UPSTREAM="mate@mate.flexion.org::mate-${MATE_VER}"
 
-    if [ -L ${HOME}/mate/${CARCH}/mate.db ]; then
-        rsync -av --progress ${HOME}/mate/ ${RSYNC_UPSTREAM}
+    if [ -L ${HOME}/${MATE_VER}/${CARCH}/mate.db ]; then
+        rsync -av --progress ${HOME}/${MATE_VER}/ ${RSYNC_UPSTREAM}
     else
         echo "A valid 'pacman' repository was not detected. Run './${0} -t repo' first."
     fi
