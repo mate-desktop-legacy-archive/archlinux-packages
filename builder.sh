@@ -271,7 +271,7 @@ function tree_build() {
     if [ -z "${EXISTS}" ]; then
         echo " - Building ${PKG}"
 	if [ $(id -u) -eq 0 ]; then
-	        makepkg -fs --noconfirm --needed --log --asroot
+        makepkg -fs --noconfirm --needed --log --asroot
 	else
 		makepkg -fs --noconfirm --needed --log
 	fi
@@ -363,7 +363,7 @@ function tree_repo() {
     echo "Action : repo"
     source /etc/makepkg.conf
 
-    rm -rf ${HOME}/mate/${CARCH} 2>/dev/null
+    sudo rm -rf ${HOME}/mate/${CARCH} 2>/dev/null
     mkdir -p ${HOME}/mate/${CARCH}
 
     for PKG in ${BUILD_ORDER[@]};
@@ -382,7 +382,8 @@ function tree_repo() {
         fi
     done
     repo-add -n ${HOME}/mate/${CARCH}/mate.db.tar.gz ${HOME}/mate/${CARCH}/*.pkg.tar.xz
-    sudo chown -R root: ${HOME}/mate/${CARCH}
+    sudo chown -R 33:33 ${HOME}/mate/${CARCH}
+    sudo chmod 644 ${HOME}/mate/${CARCH}/*
 }
 
 # Uninstall MATE packages and orphans from the system.
