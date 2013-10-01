@@ -1,6 +1,8 @@
 post_install() {
     gtk-update-icon-cache -q -t -f /usr/share/icons/hicolor
-    mcm-prefs --sync
+    if [ -n "${DISPLAY}" ]; then
+        mcm-prefs --sync
+    fi
 }
 
 pre_upgrade() {
