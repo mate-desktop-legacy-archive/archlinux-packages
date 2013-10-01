@@ -2,7 +2,7 @@
 
 pkgname=mate-color-manager
 pkgver=1.6.0
-pkgrel=2
+pkgrel=3
 pkgdesc="Color management application for MATE."
 url="https://github.com/NiceandGently/${pkgname}"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -29,7 +29,6 @@ build() {
 
     #Work around a problem where the .sgml fail to parse.
     sed -e 's:@HAVE_DOCBOOK2MAN_TRUE@.*::' -i man/Makefile.in
-
     make
 }
 

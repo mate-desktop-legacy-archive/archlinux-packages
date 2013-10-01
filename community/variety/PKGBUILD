@@ -17,12 +17,7 @@ source=("https://launchpad.net/variety/trunk/${pkgver}/+download/${pkgname}_${pk
 md5sums=('077ac75c5d93d6b4c98c1a56477f40f2')
 install=$pkgname.install
 
-build() {
-    cd ${srcdir}/${pkgname}
-    python2 setup.py install --root="${pkgdir}"
-}
-
 package() {
     cd ${srcdir}/${pkgname}
-    find . -name "*.pyc" | xargs rm -f
+    python2 setup.py install --root=${pkgdir} --optimize=1
 }
