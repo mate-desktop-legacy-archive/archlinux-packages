@@ -11,6 +11,8 @@ COMMUNITY_BUILD_ORDER=(
   community/mate-applet-lockkeys
   community/mate-applet-softupd
   community/mate-applet-streamer
+  community/mate-disk-utility
+  community/mate-color-manager
 )
 
 MATE_BUILD_ORDER=(
