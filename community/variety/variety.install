@@ -1,6 +1,6 @@
 show_message() {
    echo ">>> If you suffer error from libboost_python"
-   echo ">>> please rebuild pyexiv2."
+   echo ">>> please rebuild python2-exiv2."
 }
 
 post_install() {
