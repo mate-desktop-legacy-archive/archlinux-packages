@@ -5,6 +5,7 @@ AUR_BUILD_ORDER=(
   aur/system-tools-backends
   aur/liboobs
   aur/libxnvctrl
+  aur/pyexiv2
 )
 
 COMMUNITY_BUILD_ORDER=(
@@ -13,6 +14,7 @@ COMMUNITY_BUILD_ORDER=(
   community/mate-applet-streamer
   community/mate-disk-utility
   community/mate-color-manager
+  community/variety
 )
 
 MATE_BUILD_ORDER=(
