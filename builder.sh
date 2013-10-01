@@ -5,7 +5,7 @@ AUR_BUILD_ORDER=(
   aur/system-tools-backends
   aur/liboobs
   aur/libxnvctrl
-  aur/pyexiv2
+  aur/python2-exiv2
 )
 
 COMMUNITY_BUILD_ORDER=(
