@@ -4,12 +4,12 @@
 
 pkgname=mate-applets
 pkgver=1.6.1
-pkgrel=5
+pkgrel=6
 pkgdesc="Applets for MATE panel"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 url="http://mate-desktop.org"
 license=('GPL')
-depends=('avahi' 'dbus' 'gsettings-desktop-schemas' 'gstreamer0.10-base-plugins'
+depends=('avahi' 'dbus' 'cpufrequtils' 'gsettings-desktop-schemas' 'gstreamer0.10-base-plugins'
          'gstreamer0.10-good-plugins' 'gtk2' 'gvfs' 'libgtop' 'libmateweather'
          'libmatewnck' 'libnotify' 'liboobs' 'libsoup' 'libxklavier' 'libxt'
          'mate-desktop' 'mate-icon-theme' 'mate-panel' 'mate-settings-daemon'
