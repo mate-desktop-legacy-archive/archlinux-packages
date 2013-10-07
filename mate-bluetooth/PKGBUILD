@@ -4,7 +4,7 @@
 
 pkgname=mate-bluetooth
 pkgver=1.6.0
-pkgrel=2
+pkgrel=3
 pkgdesc="A collection of Bluetooth utilities and modules for MATE"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
