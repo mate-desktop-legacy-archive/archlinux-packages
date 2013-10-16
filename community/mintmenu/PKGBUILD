@@ -15,9 +15,11 @@ depends=('gksu' 'mate-panel>=1.6.0' 'python2-gobject'
 optdepends=('mate-menu-editor: for editing the gnome menu'
             'gnome-packagekit: package manager button'
             'mate-screensaver: lock screen button')
+groups=('mate-extras-community')
 source=("${url}/${pkgname}_${pkgver}.tar.gz")
 install=${pkgname}.install
 md5sums=('39826a17c8de746ad119208588be2ec2')
+
 
 build() {
     cd ${srcdir}/${pkgname}
