@@ -4,7 +4,7 @@
 
 pkgname=variety
 pkgver=0.4.17
-pkgrel=3
+pkgrel=4
 pkgdesc='Variety changes the wallpaper on a regular interval using user-specified or automatically downloaded images.'
 url="http://peterlevi.com/variety/"
 license=('GPL3')

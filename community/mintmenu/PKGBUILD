@@ -5,7 +5,7 @@
 
 pkgname=mintmenu
 pkgver=5.4.9
-pkgrel=3
+pkgrel=4
 pkgdesc="Linux Mint Menu for MATE"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 url="http://packages.linuxmint.com/pool/main/m/mintmenu"

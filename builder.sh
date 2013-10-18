@@ -166,16 +166,25 @@ function update_install_file() {
         local INSTALL_FILE=`basename ${PKG}`.install
 
         if [ -f ${INSTALL_FILE} ]; then
-            echo "    Updating ${INSTALL_FILE}"
+            echo "    Generating /tmp/${INSTALL_FILE}"
+            make_install_file /tmp/${INSTALL_FILE}
+            NEW_SUM=$(md5sum /tmp/${INSTALL_FILE} | cut -d' ' -f1)
+            CUR_SUM=$(md5sum ${INSTALL_FILE} | cut -d' ' -f1)
+            if [ "${NEW_SUM}" != "${CUR_SUM}" ]; then
+                echo "    Review /tmp/${INSTALL_FILE} as it differs."
+            else
+                echo "    Files are identical, removing /tmp/${INSTALL_FILE}"
+                rm -f /tmp/${INSTALL_FILE}
+            fi
         else
             echo "    Creating ${INSTALL_FILE}"
+            make_install_file ${INSTALL_FILE}
         fi
 
         local TEST_INSTALL=$(grep -E ^install= PKGBUILD)
         if [ $? -ne 0 ]; then
             echo "    Missing 'install=${INSTALL_FILE}' in PKGBUILD."
         fi
-        make_install_file ${INSTALL_FILE}
     else
         if [ -f *.install ]; then
             echo "    Detected a custom '.install' file, please review it."
