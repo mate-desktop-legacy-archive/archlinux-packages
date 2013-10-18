@@ -2,12 +2,12 @@
 
 pkgname=mate-nettool
 pkgver=1.8.1
-pkgrel=2
+pkgrel=3
 pkgdesc="MATE interface for various networking tools."
 url="https://github.com/NiceandGently/mate-nettool"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('coreutils' 'gtk3' 'iputils' 'libgtop' 'net-tools' 'nmap' 'traceroute' 'whois')
+depends=('coreutils' 'dnsutils' 'gtk3' 'iputils' 'libgtop' 'net-tools' 'nmap' 'traceroute' 'whois')
 makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
 options=('!libtool' '!emptydirs')
 groups=('mate-extras-community')
