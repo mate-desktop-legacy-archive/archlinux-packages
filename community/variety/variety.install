@@ -1,16 +1,19 @@
-show_message() {
-   echo ">>> If you suffer error from libboost_python"
-   echo ">>> please rebuild python2-exiv2."
+post_install() {
+    update-desktop-database -q
 }
 
-post_install() {
-   show_message
+pre_upgrade() {
+    pre_remove
 }
 
 post_upgrade() {
-   show_message
+    post_install
+}
+
+pre_remove() {
+    :
 }
 
 post_remove() {
-   return 1
+    update-desktop-database -q
 }
