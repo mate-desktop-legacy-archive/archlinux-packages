@@ -15,6 +15,7 @@ COMMUNITY_BUILD_ORDER=(
   community/mate-disk-utility
   community/mate-color-manager
   community/mate-mplayer
+  community/mate-nettool
   community/variety
   community/mintmenu
 )
