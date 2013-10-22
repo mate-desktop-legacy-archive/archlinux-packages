@@ -27,7 +27,7 @@ build() {
     # fix systemd-login1 support for hibernate/suspend 
     # https://github.com/mate-desktop/mate-session-manager/commit/f0b5b1ab78879d64f80117415aacf029359afea5
     
-    patch < ../../f0b5b1ab78879d64f80117415aacf029359afea5.diff
+    patch -p1 < ../../f0b5b1ab78879d64f80117415aacf029359afea5.diff
     ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
