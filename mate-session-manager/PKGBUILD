@@ -4,7 +4,7 @@
 
 pkgname=mate-session-manager
 pkgver=1.6.1
-pkgrel=2
+pkgrel=3
 pkgdesc="The MATE Session Handler"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -16,12 +16,18 @@ depends=('dbus' 'desktop-file-utils' 'gobject-introspection' 'gtk2' 'libice'
 makedepends=('mate-common' 'perl-xml-parser' 'xmlto')
 options=('!emptydirs' '!libtool')
 groups=('mate')
-source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
-sha1sums=('46188f6c02cc5978688af9d5db4be09f1b9199a5')
+source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz
+        f0b5b1ab78879d64f80117415aacf029359afea5.diff)
+sha1sums=('46188f6c02cc5978688af9d5db4be09f1b9199a5'
+          '20fb99c29731d05191cd0029d0573db784b06ccf')
 install=${pkgname}.install
 
 build() {
     cd ${srcdir}/${pkgname}-${pkgver}
+    # fix systemd-login1 support for hibernate/suspend 
+    # https://github.com/mate-desktop/mate-session-manager/commit/f0b5b1ab78879d64f80117415aacf029359afea5
+    
+    patch < ../../f0b5b1ab78879d64f80117415aacf029359afea5.diff
     ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
