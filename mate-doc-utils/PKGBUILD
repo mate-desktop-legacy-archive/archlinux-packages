@@ -3,8 +3,8 @@
 # Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-doc-utils
-pkgver=1.6.1
-pkgrel=3
+pkgver=1.6.2
+pkgrel=1
 pkgdesc="Documentation utilities for MATE"
 url="http://mate-desktop.org"
 arch=('any')
@@ -13,7 +13,7 @@ depends=('libxml2' 'libxslt' 'python2' 'python2-lxml')
 makedepends=('mate-common' 'rarian' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
-sha1sums=('8a4612a21884bb6474e9d695df186551e1b9f4fb')
+sha1sums=('34eca45e5b3a4620be419772acdefc7abd20937b')
 
 build() {
     cd ${srcdir}/${pkgname}-${pkgver}
