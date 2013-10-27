@@ -70,7 +70,7 @@ MATE_BUILD_ORDER=(
   mate-text-editor
   mate-user-share
   mate-utils
-  python-caja
+  python2-caja
 )
 
 BUILD_ORDER=( ${AUR_BUILD_ORDER[@]} ${MATE_BUILD_ORDER[@]} ${COMMUNITY_BUILD_ORDER[@]})
@@ -196,9 +196,6 @@ function update_install_file() {
 function tree_audit() {
     local PKG=${1}
     cd ${PKG}
-    if [[ "${PKG}" == *python* ]]; then
-        PKG=$(echo ${PKG} | sed 's/python/python2/')
-    fi
     local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=')
     local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
     local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
@@ -271,9 +268,6 @@ function tree_audit() {
 function tree_build() {
     local PKG=${1}
     cd ${PKG}
-    if [[ "${PKG}" == *python* ]]; then
-        PKG=$(echo ${PKG} | sed 's/python/python2/')
-    fi
     local INSTALLED=$(pacman -Q `basename ${PKG}` 2>/dev/null | cut -f2 -d' ')
     local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=')
     local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
@@ -302,6 +296,11 @@ function tree_build() {
 # Check for new upstream releases
 function tree_check() {
     local PKG=${1}
+
+    if [ "${PKG}" == python2-caja" ]; then
+        PKG="python-caja"
+    fi
+
     if [ ! -f /tmp/SHA1SUMS ]; then
         echo " - Downloading SHA1SUMS"
         wget -c -q http://pub.mate-desktop.org/releases/${MATE_VER}/SHA1SUMS -O /tmp/SHA1SUMS
@@ -381,9 +380,6 @@ function tree_repo() {
     do
         cd ${BASEDIR}/${PKG}
         PKG=$(basename ${PKG})
-        if [[ "${PKG}" == *python* ]]; then
-            PKG=$(echo ${PKG} | sed 's/python/python2/')
-        fi
         local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=')
         local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
         local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
@@ -419,9 +415,6 @@ function tree_uninstall() {
     for PKG in ${BUILD_ORDER[@]};
     do
         PKG=$(basename ${PKG})
-        if [[ "${PKG}" == *python* ]]; then
-            PKG=$(echo ${PKG} | sed 's/python/python2/')
-        fi
         if [ -n "$(echo ${INSTALLED_PKGS} | grep ${PKG})" ]; then
             UNINSTALL_PKGS="${UNINSTALL_PKGS} ${PKG}"
         fi
