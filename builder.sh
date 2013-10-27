@@ -297,7 +297,7 @@ function tree_build() {
 function tree_check() {
     local PKG=${1}
 
-    if [ "${PKG}" == python2-caja" ]; then
+    if [ "${PKG}" == "python2-caja" ]; then
         PKG="python-caja"
     fi
 
