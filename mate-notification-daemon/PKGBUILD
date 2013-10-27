@@ -3,8 +3,8 @@
 # Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-notification-daemon
-pkgver=1.6.0
-pkgrel=2
+pkgver=1.6.1
+pkgrel=1
 pkgdesc="Notification daemon for MATE"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -15,7 +15,7 @@ options=('!emptydirs' '!libtool')
 groups=('mate')
 provides=('notification-daemon')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
-sha1sums=('9988ac0d63ee8d2b7abd2ab47a8f57ad3d5c4c80')
+sha1sums=('b911efdc4e37dc0b521165168fee03889f776c12')
 install=${pkgname}.install
 
 build() {
