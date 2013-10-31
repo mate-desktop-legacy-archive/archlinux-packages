@@ -5,7 +5,7 @@
 _pkgname=mate-settings-daemon
 pkgname=${_pkgname}-gstreamer
 pkgver=1.6.1
-pkgrel=2
+pkgrel=3
 pkgdesc="The MATE Settings daemon (GStreamer)"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
