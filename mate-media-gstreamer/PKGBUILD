@@ -14,14 +14,14 @@ depends=('desktop-file-utils' 'gstreamer0.10-base-plugins' 'libnotify' 'mate-pan
 makedepends=('mate-doc-utils' 'mate-settings-daemon' 'mate-icon-theme' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
 groups=('mate')
-source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz
+source=(http://pub.mate-desktop.org/releases/1.6/${_pkgname}-${pkgver}.tar.xz
        187b768096a517b7bd89497ff906bd108a15ecdb.diff)
 sha1sums=('06c3418dfe0be26e74b0e40aa92eea6260579a72'
           '23749604452ca88aa4830620eed98a5fe984ce4a')          
 install=${pkgname}.install
 
 build() {
-    cd ${srcdir}/${pkgname}-${pkgver}
+    cd ${srcdir}/${_pkgname}-${pkgver}
     
     # Add option to enable deprecated
     # https://github.com/mate-desktop/mate-power-manager/commit/187b768096a517b7bd89497ff906bd108a15ecdb
@@ -30,7 +30,7 @@ build() {
 	./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
-		--libexecdir=/usr/lib/${pkgname} \
+		--libexecdir=/usr/lib/${_pkgname} \
 		--localstatedir=/var \
 		--enable-deprecated \
 		--enable-gstmix \
@@ -42,6 +42,6 @@ build() {
 }
 
 package() {
-    cd ${srcdir}/${pkgname}-${pkgver}
+    cd ${srcdir}/${_pkgname}-${pkgver}
     make DESTDIR="${pkgdir}" install
 }
