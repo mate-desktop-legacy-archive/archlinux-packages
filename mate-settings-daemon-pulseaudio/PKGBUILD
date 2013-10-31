@@ -5,13 +5,13 @@
 _pkgname=mate-settings-daemon
 pkgname=${_pkgname}-pulseaudio
 pkgver=1.6.1
-pkgrel=1
+pkgrel=2
 pkgdesc="The MATE Settings daemon (pulseaudio)"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('dbus' 'dconf' 'fontconfig' 'gstreamer0.10-base-plugins' 'gtk2'
-         'libcanberra' 'libcanberra-gstreamer' 'libmatekbd' 'libnotify' 
+         'libcanberra' 'libcanberra-gstreamer' 'libcanberra-pulse' 'libmatekbd' 'libnotify' 
          'libpulse' 'libxt' 'mate-desktop' 'mate-polkit' 'startup-notification')
 makedepends=('mate-common' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
