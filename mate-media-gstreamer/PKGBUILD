@@ -1,0 +1,47 @@
+# Contributor: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
+# Contributor: Xpander <xpander0@gmail.com>
+# Contributor: Martin Wimpress <code@flexion.org>
+
+_pkgname=mate-media
+pkgname=${_pkgname}-gstreamer
+pkgver=1.6.0
+pkgrel=1
+pkgdesc="MATE Media Tools (GStreamer)"
+url="http://mate-desktop.org"
+arch=('i686' 'x86_64' 'armv6h' 'armv7h')
+license=('GPL')
+depends=('desktop-file-utils' 'gstreamer0.10-base-plugins' 'libnotify' 'mate-panel')
+makedepends=('mate-doc-utils' 'mate-settings-daemon' 'mate-icon-theme' 'perl-xml-parser')
+options=('!emptydirs' '!libtool')
+groups=('mate')
+source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz
+       187b768096a517b7bd89497ff906bd108a15ecdb.diff)
+sha1sums=('06c3418dfe0be26e74b0e40aa92eea6260579a72'
+          '23749604452ca88aa4830620eed98a5fe984ce4a')          
+install=${pkgname}.install
+
+build() {
+    cd ${srcdir}/${pkgname}-${pkgver}
+    
+    # Add option to enable deprecated
+    # https://github.com/mate-desktop/mate-power-manager/commit/187b768096a517b7bd89497ff906bd108a15ecdb
+    patch -p1 < ../../187b768096a517b7bd89497ff906bd108a15ecdb.diff
+    
+	./autogen.sh \
+        --prefix=/usr \
+        --sysconfdir=/etc \
+		--libexecdir=/usr/lib/${pkgname} \
+		--localstatedir=/var \
+		--enable-deprecated \
+		--enable-gstmix \
+		--enable-gst-mixer-applet \
+		--disable-pulseaudio \
+		--disable-static \
+		--disable-scrollkeeper
+	make
+}
+
+package() {
+    cd ${srcdir}/${pkgname}-${pkgver}
+    make DESTDIR="${pkgdir}" install
+}
