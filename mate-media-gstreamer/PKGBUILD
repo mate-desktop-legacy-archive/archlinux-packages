@@ -24,7 +24,7 @@ build() {
     cd ${srcdir}/${_pkgname}-${pkgver}
     
     # Enable deprecated
-    patch -p1 < ../../enable_deprecated.diff
+    patch -p1 < ../../enable_deprecated.diff gst-mixer/src/Makefile.am
 
 	./autogen.sh \
         --prefix=/usr \
