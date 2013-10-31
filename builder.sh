@@ -275,6 +275,17 @@ function tree_build() {
     local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
     local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
     local EXISTS=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
+    
+    if [ "${PKG}" == "mate-settings-daemon-pulseaudio" ]; then
+		sudo pacman -Rsdd mate-settings-daemon-gstreamer
+    elif [ "${PKG}" == "mate-settings-daemon-gstreamer" ]; then
+		sudo pacman -Rsdd mate-settings-daemon-pulseaudio
+	elif [ "${PKG}" == "mate-media-gstreamer" ]; then
+		sudo pacman -Rsdd mate-media-pulseaudio		
+	elif [ "${PKG}" == "mate-media-pulseaudio" ]; then
+		sudo pacman -Rsdd mate-media-gstreamer				
+	fi
+    
     if [ -z "${EXISTS}" ]; then
         echo " - Building ${PKG}"
 	if [ $(id -u) -eq 0 ]; then
