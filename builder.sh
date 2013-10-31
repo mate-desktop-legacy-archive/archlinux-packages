@@ -34,7 +34,10 @@ MATE_BUILD_ORDER=(
   mate-file-manager
   mate-polkit
   mate-window-manager
-  mate-settings-daemon
+  mate-settings-daemon-gstreamer
+  mate-media-gstreamer
+  mate-settings-daemon-pulseaudio
+  mate-media-pulseaudio
   mate-menus
   mate-panel
   mate-session-manager
@@ -45,7 +48,6 @@ MATE_BUILD_ORDER=(
   mate-control-center
   mate-screensaver
   mate-file-archiver
-  mate-media
   mate-power-manager
   mate-system-monitor
   caja-dropbox

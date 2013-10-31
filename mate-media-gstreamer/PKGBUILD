@@ -10,12 +10,12 @@ pkgdesc="MATE Media Tools (GStreamer)"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('desktop-file-utils' 'gstreamer0.10-base-plugins' 'libnotify' 'mate-panel')
+depends=('desktop-file-utils' 'gstreamer0.10-base-plugins' 'libnotify' 
+         'mate-panel' 'mate-settings-daemon-gstreamer')
 makedepends=('mate-doc-utils' 'mate-settings-daemon' 'mate-icon-theme' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
-groups=('mate')
-conflicts=('mate-media-pulseaudio')
-provides=('mate-media')
+conflicts=("${_pkgname}-pulseaudio" 'mate-settings-daemon-pulseaudio')
+provides=("${_pkgname}")
 source=(http://pub.mate-desktop.org/releases/1.6/${_pkgname}-${pkgver}.tar.xz
         enable_deprecated.diff)
 sha1sums=('06c3418dfe0be26e74b0e40aa92eea6260579a72'
