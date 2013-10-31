@@ -278,12 +278,10 @@ function tree_build() {
     
     if [ "${PKG}" == "mate-settings-daemon-pulseaudio" ]; then
 		sudo pacman -Rsdd --noconfirm mate-settings-daemon-gstreamer
+		sudo pacman -Rsdd --noconfirm mate-media-gstreamer
     elif [ "${PKG}" == "mate-settings-daemon-gstreamer" ]; then
 		sudo pacman -Rsdd --noconfirm mate-settings-daemon-pulseaudio
-	#elif [ "${PKG}" == "mate-media-gstreamer" ]; then
-#		sudo pacman -Rsdd mate-media-pulseaudio		
-	#elif [ "${PKG}" == "mate-media-pulseaudio" ]; then
-	#	sudo pacman -Rsdd mate-media-gstreamer				
+		sudo pacman -Rsdd --noconfirm mate-media-pulseaudio				
 	fi
     
     if [ -z "${EXISTS}" ]; then
