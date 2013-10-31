@@ -15,24 +15,22 @@ makedepends=('mate-doc-utils' 'mate-settings-daemon' 'mate-icon-theme' 'perl-xml
 options=('!emptydirs' '!libtool')
 groups=('mate')
 source=(http://pub.mate-desktop.org/releases/1.6/${_pkgname}-${pkgver}.tar.xz
-       187b768096a517b7bd89497ff906bd108a15ecdb.diff)
+        enable_deprecated.diff)
 sha1sums=('06c3418dfe0be26e74b0e40aa92eea6260579a72'
-          '23749604452ca88aa4830620eed98a5fe984ce4a')          
+          'f0e38578aacacf9ee852b7a44a34908cc230b91f')          
 install=${pkgname}.install
 
 build() {
     cd ${srcdir}/${_pkgname}-${pkgver}
     
-    # Add option to enable deprecated
-    # https://github.com/mate-desktop/mate-power-manager/commit/187b768096a517b7bd89497ff906bd108a15ecdb
-    patch -p1 < ../../187b768096a517b7bd89497ff906bd108a15ecdb.diff
-    
+    # Enable deprecated
+    patch -p1 < ../../enable_deprecated.diff
+
 	./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
 		--libexecdir=/usr/lib/${_pkgname} \
 		--localstatedir=/var \
-		--enable-deprecated \
 		--enable-gstmix \
 		--enable-gst-mixer-applet \
 		--disable-pulseaudio \
