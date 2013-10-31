@@ -3,7 +3,7 @@
 pkgname=mate-mplayer
 pkgver=1.0.8
 pkgrel=1
-pkgdesc="MATE interface for various networking tools."
+pkgdesc="Mplayer GUI for MATE"
 url="https://github.com/NiceandGently/mate-nettool"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
