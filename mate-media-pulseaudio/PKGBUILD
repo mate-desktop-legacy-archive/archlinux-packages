@@ -3,7 +3,7 @@
 # Contributor: Martin Wimpress <code@flexion.org>
 
 _pkgname=mate-media
-pkgname=${_pkgname}-gstreamer
+pkgname=${_pkgname}-pulseaudio
 pkgver=1.6.0
 pkgrel=1
 pkgdesc="MATE Media Tools (pulseaudio)"
