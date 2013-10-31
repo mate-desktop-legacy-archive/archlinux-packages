@@ -14,6 +14,8 @@ depends=('desktop-file-utils' 'gstreamer0.10-base-plugins' 'libnotify' 'mate-pan
 makedepends=('mate-doc-utils' 'mate-settings-daemon' 'mate-icon-theme' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
 groups=('mate')
+conflicts=('mate-media-pulseaudio')
+provides=('mate-media')
 source=(http://pub.mate-desktop.org/releases/1.6/${_pkgname}-${pkgver}.tar.xz
         enable_deprecated.diff)
 sha1sums=('06c3418dfe0be26e74b0e40aa92eea6260579a72'
