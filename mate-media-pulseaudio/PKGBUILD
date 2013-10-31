@@ -17,16 +17,16 @@ options=('!emptydirs' '!libtool')
 groups=('mate')
 conflicts=("${_pkgname}-gstreamer" 'mate-settings-daemon-gstreamer')
 provides=("${_pkgname}")
-source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
+source=(http://pub.mate-desktop.org/releases/1.6/${_pkgname}-${pkgver}.tar.xz)
 sha1sums=('06c3418dfe0be26e74b0e40aa92eea6260579a72')
 install=${pkgname}.install
 
 build() {
-    cd ${srcdir}/${pkgname}-${pkgver}
+    cd ${srcdir}/${_pkgname}-${pkgver}
 	./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
-		--libexecdir=/usr/lib/${pkgname} \
+		--libexecdir=/usr/lib/${_pkgname} \
 		--localstatedir=/var \
 		--enable-pulseaudio \
 		--disable-gstmix \
@@ -37,6 +37,6 @@ build() {
 }
 
 package() {
-    cd ${srcdir}/${pkgname}-${pkgver}
+    cd ${srcdir}/${_pkgname}-${pkgver}
     make DESTDIR="${pkgdir}" install
 }
