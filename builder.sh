@@ -310,23 +310,40 @@ function tree_build() {
 
 # Check for new upstream releases
 function tree_check() {
-    local PKG=${1}
+    local PKG=${1}    
+    
+    # Account for version differences.
+    if [ "${PKG}" == "caja-dropbox" ]; then
+		local CHECK_VER="1.4"
+    else
+		local CHECK_VER="${MATE_VER}"
+	fi
 
-    if [ "${PKG}" == "python2-caja" ]; then
-        PKG="python-caja"
+	# Skip duplicate packages.
+    if [ "${PKG}" == "mate-settings-daemon-gstreamer" ] || [ "${PKG}" == "mate-media-gstreamer" ]; then
+		return
     fi
 
-    if [ ! -f /tmp/SHA1SUMS ]; then
-        echo " - Downloading SHA1SUMS"
-        wget -c -q http://pub.mate-desktop.org/releases/${MATE_VER}/SHA1SUMS -O /tmp/SHA1SUMS
+	case ${PKG} in
+        "python2-caja") UPSTREAM_PKG="python-caja";;
+        "mate-settings-daemon-gstreamer") UPSTREAM_PKG="mate-settings-daemon";;
+        "mate-settings-daemon-pulseaudio") UPSTREAM_PKG="mate-settings-daemon";;
+        "mate-media-gstreamer") UPSTREAM_PKG="mate-media";;
+        "mate-media-pulseaudio") UPSTREAM_PKG="mate-media";;
+        *) UPSTREAM_PKG="${PKG}"
+    esac
+
+    if [ ! -f /tmp/${CHECK_VER}_SUMS ]; then
+        echo " - Downloading MATE ${CHECK_VER} SHA1SUMS"
+        wget -c -q http://pub.mate-desktop.org/releases/${CHECK_VER}/SHA1SUMS -O /tmp/${CHECK_VER}_SUMS
     fi
-    echo " - Checking ${PKG}"
-    IS_UPSTREAM=$(grep -E ${PKG}-[0-9]. /tmp/SHA1SUMS)
+    echo " - Checking ${UPSTREAM_PKG}"
+    IS_UPSTREAM=$(grep -E ${UPSTREAM_PKG}-[0-9]. /tmp/${CHECK_VER}_SUMS)
     if [ -n "${IS_UPSTREAM}" ]; then
-        local UPSTREAM_TARBALL=$(grep -E ${PKG}-[0-9]. /tmp/SHA1SUMS | cut -c43- | tail -n1)
+        local UPSTREAM_TARBALL=$(grep -E ${UPSTREAM_PKG}-[0-9]. /tmp/${CHECK_VER}_SUMS | cut -c43- | tail -n1)
+        local UPSTREAM_SHA1=$(grep -E ${UPSTREAM_PKG}-[0-9]. /tmp/${CHECK_VER}_SUMS | cut -c1-40 | tail -n1)
         local DOWNSTREAM_VER=$(grep -E ^pkgver ${PKG}/PKGBUILD | cut -f2 -d'=')
-        local DOWNSTREAM_TARBALL="${PKG}-${DOWNSTREAM_VER}.tar.xz"
-        local UPSTREAM_SHA1=$(grep -E ${PKG}-[0-9]. /tmp/SHA1SUMS | cut -c1-40 | tail -n1)
+        local DOWNSTREAM_TARBALL="${UPSTREAM_PKG}-${DOWNSTREAM_VER}.tar.xz"        
         local DOWNSTREAM_SHA1=$(grep -E ^sha1 ${PKG}/PKGBUILD | cut -f2 -d"'")
         if [ "${UPSTREAM_TARBALL}" != "${DOWNSTREAM_TARBALL}" ]; then
             echo " +---> Upstream tarball differs : ${UPSTREAM_TARBALL}"
@@ -438,9 +455,16 @@ function tree_uninstall() {
 }
 
 function tree_run() {
-    local ACTION=${1}
+    local ACTION=${1}    
     echo "Action : ${ACTION}"
-    for PKG in ${BUILD_ORDER[@]};
+    
+    if [ "${ACTION}" == "check" ]; then
+		local ORDER=( ${MATE_BUILD_ORDER[@]} )
+	else
+		local ORDER=( ${BUILD_ORDER[@]} )
+	fi
+	
+    for PKG in ${ORDER[@]};
     do
         cd ${BASEDIR}
         tree_${ACTION} ${PKG}
@@ -474,6 +498,4 @@ else
 fi
 
 # Clean up
-if [ -f /tmp/SHA1SUMS ]; then
-    rm -f /tmp/SHA1SUMS
-fi
+rm -f /tmp/*_SUMS 2>/dev/null
