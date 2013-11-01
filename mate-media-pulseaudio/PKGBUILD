@@ -5,12 +5,12 @@
 _pkgname=mate-media
 pkgname=${_pkgname}-pulseaudio
 pkgver=1.6.0
-pkgrel=2
+pkgrel=4
 pkgdesc="MATE Media Tools (pulseaudio)"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('desktop-file-utils' 'gstreamer0.10-base-plugins' 'libnotify' 
+depends=('desktop-file-utils' 'gstreamer0.10-base-plugins' 'libnotify'
          'mate-panel' 'mate-settings-daemon-pulseaudio' 'pulseaudio')
 makedepends=('mate-doc-utils' 'mate-settings-daemon' 'mate-icon-theme' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')

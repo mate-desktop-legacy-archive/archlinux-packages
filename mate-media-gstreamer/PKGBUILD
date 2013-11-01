@@ -5,12 +5,12 @@
 _pkgname=mate-media
 pkgname=${_pkgname}-gstreamer
 pkgver=1.6.0
-pkgrel=3
+pkgrel=4
 pkgdesc="MATE Media Tools (GStreamer)"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('desktop-file-utils' 'gstreamer0.10-base-plugins' 'libnotify' 
+depends=('desktop-file-utils' 'gstreamer0.10-base-plugins' 'libnotify'
          'mate-panel' 'mate-settings-daemon-gstreamer')
 makedepends=('mate-doc-utils' 'mate-settings-daemon' 'mate-icon-theme' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
@@ -19,12 +19,12 @@ provides=("${_pkgname}")
 source=(http://pub.mate-desktop.org/releases/1.6/${_pkgname}-${pkgver}.tar.xz
         enable_deprecated.diff)
 sha1sums=('06c3418dfe0be26e74b0e40aa92eea6260579a72'
-          'f0e38578aacacf9ee852b7a44a34908cc230b91f')          
+          'f0e38578aacacf9ee852b7a44a34908cc230b91f')
 install=${pkgname}.install
 
 build() {
     cd ${srcdir}/${_pkgname}-${pkgver}
-    
+
     # Enable deprecated
     patch -p1 < ../../enable_deprecated.diff gst-mixer/src/Makefile.am
 
