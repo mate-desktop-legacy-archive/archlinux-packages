@@ -1,85 +1,85 @@
 #!/usr/bin/env bash
 
 AUR_BUILD_ORDER=(
-  aur/libindicator
-  aur/system-tools-backends
-  aur/liboobs
-  aur/libxnvctrl
-  aur/python2-exiv2
+    aur/libindicator
+    aur/system-tools-backends
+    aur/liboobs
+    aur/libxnvctrl
+    aur/python2-exiv2
 )
 
 COMMUNITY_BUILD_ORDER=(
-  community/mate-applet-lockkeys
-  community/mate-applet-softupd
-  community/mate-applet-streamer
-  community/mate-disk-utility
-  community/mate-color-manager
-  community/mate-mplayer
-  community/mate-nettool
-  community/variety
-  community/mintmenu
+    community/mate-applet-lockkeys
+    community/mate-applet-softupd
+    community/mate-applet-streamer
+    community/mate-disk-utility
+    community/mate-color-manager
+    community/mate-mplayer
+    community/mate-nettool
+    community/variety
+    community/mintmenu
 )
 
 MATE_BUILD_ORDER=(
-  mate-common
-  mate-doc-utils
-  mate-desktop
-  libmatekeyring
-  mate-keyring
-  libmatekbd
-  libmatewnck
-  libmateweather
-  mate-icon-theme
-  mate-dialogs
-  mate-file-manager
-  mate-polkit
-  mate-window-manager
-  mate-settings-daemon-gstreamer
-  mate-media-gstreamer
-  mate-settings-daemon-pulseaudio
-  mate-media-pulseaudio
-  mate-menus
-  mate-panel
-  mate-session-manager
-  mate-backgrounds
-  mate-themes
-  mate-notification-daemon
-  mate-image-viewer
-  mate-control-center
-  mate-screensaver
-  mate-file-archiver
-  mate-power-manager
-  mate-system-monitor
-  caja-dropbox
-  mate-applets
-  mate-calc
-  mate-character-map
-  mate-document-viewer
-  mate-file-manager-gksu
-  mate-file-manager-image-converter
-  mate-file-manager-open-terminal
-  mate-file-manager-sendto
-  mate-bluetooth
-  mate-file-manager-share
-  mate-icon-theme-faenza
-  mate-indicator-applet
-  mate-menu-editor
-  mate-netbook
-  mate-netspeed
-  mate-sensors-applet
-  mate-system-tools
-  mate-terminal
-  mate-text-editor
-  mate-user-share
-  mate-utils
-  python2-caja
+    mate-common
+    mate-doc-utils
+    mate-desktop
+    libmatekeyring
+    mate-keyring
+    libmatekbd
+    libmatewnck
+    libmateweather
+    mate-icon-theme
+    mate-dialogs
+    mate-file-manager
+    mate-polkit
+    mate-window-manager
+    mate-settings-daemon-gstreamer
+    mate-media-gstreamer
+    mate-settings-daemon-pulseaudio
+    mate-media-pulseaudio
+    mate-menus
+    mate-panel
+    mate-session-manager
+    mate-backgrounds
+    mate-themes
+    mate-notification-daemon
+    mate-image-viewer
+    mate-control-center
+    mate-screensaver
+    mate-file-archiver
+    mate-power-manager
+    mate-system-monitor
+    caja-dropbox
+    mate-applets
+    mate-calc
+    mate-character-map
+    mate-document-viewer
+    mate-file-manager-gksu
+    mate-file-manager-image-converter
+    mate-file-manager-open-terminal
+    mate-file-manager-sendto
+    mate-bluetooth
+    mate-file-manager-share
+    mate-icon-theme-faenza
+    mate-indicator-applet
+    mate-menu-editor
+    mate-netbook
+    mate-netspeed
+    mate-sensors-applet
+    mate-system-tools
+    mate-terminal
+    mate-text-editor
+    mate-user-share
+    mate-utils
+    python2-caja
 )
 
 BUILD_ORDER=( ${AUR_BUILD_ORDER[@]} ${MATE_BUILD_ORDER[@]} ${COMMUNITY_BUILD_ORDER[@]})
 BASEDIR=$(dirname $(readlink -f ${0}))
 MATE_VER=1.6
 
-# Show usgae information
+# Show usage information.
 function usage() {
     echo "$(basename ${0}) - MATE build tool for Arch Linux"
     echo
@@ -88,23 +88,23 @@ function usage() {
     echo "Options:"
     echo "-h  Shows this help message."
     echo "-t  Provide a task to run which can be one of:"
-    echo "  audit       Show which packages remain to be built."
-    echo "  build       Build MATE packages."
-    echo "  check       Check upstream for new source tarballs."
-    echo "  clean       Clean sources using 'make maintainer-clean' and remove 'src' directories."
-    echo "  delete      Delete Arch Linux 'pkg.tar.xz binary package files."
-    echo "  purge       Purge source tarballs, 'src' and 'pkg' directories."
-    echo "  repo        Create a package repository in '${HOME}/mate/'"
-    echo "  sync        'rsync' a repo to ${RSYNC_UPSTREAM}."
-    echo "  uninstall   Uninstall MATE packages and dependencies."
+    echo "      audit       Show which packages remain to be built."
+    echo "      build       Build MATE packages."
+    echo "      check       Check upstream for new source tarballs."
+    echo "      clean       Clean source directories using 'make maintainer-clean'."
+    echo "      delete      Delete Arch Linux 'pkg.tar.xz' binary package files."
+    echo "      purge       Purge source tarballs, 'src' and 'pkg' directories."
+    echo "      repo        Create a package repository in '${HOME}/mate/'"
+    echo "      sync        'rsync' a repo to ${RSYNC_UPSTREAM}."
+    echo "      uninstall   Uninstall MATE packages and dependencies."
     echo
-    echo "Each of the tasks above run automatically and operate over the entire package tree."
-    exit 1
+    echo "Each of the tasks above run automatically and operate over the entire"
+    echo "package tree."
 }
 
-# Make a .install file
+# Make an .install file.
 # OK, this is as ugly as hell but it works.
-# Skip past this section and look how nice everything else it ;-)
+# Skip past this section and look how nice everything else is ;-)
 function make_install_file() {
     local INSTALL_FILE="${1}"
     echo "post_install() {" > ${INSTALL_FILE}
@@ -160,7 +160,7 @@ function make_install_file() {
     echo "}" >> ${INSTALL_FILE}
 }
 
-# Determine is a .install file needs create, updating or deleting.
+# Determine is a .install file needs creation, updating or deletion.
 function update_install_file() {
     local PKG=${1}
     local INSTALL_REQUIRED=$((${INSTALL_SCHEMA} + ${INSTALL_MIME} + ${INSTALL_ICON} + ${INSTALL_DESKTOP}))
@@ -266,7 +266,7 @@ function tree_audit() {
     fi
 }
 
-# Build packages that are not at the current version
+# Build packages that are not at the current version.
 function tree_build() {
     local PKG=${1}
     cd ${PKG}
@@ -275,19 +275,19 @@ function tree_build() {
     local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
     local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
     local EXISTS=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
-    
+
     if [ "${PKG}" == "mate-settings-daemon-pulseaudio" ]; then
 		sudo pacman -Rsdd --noconfirm mate-settings-daemon-gstreamer
-		sudo pacman -Rsdd --noconfirm mate-media-gstreamer		
+		sudo pacman -Rsdd --noconfirm mate-media-gstreamer
 		sudo pacman -Rsdd --noconfirm mate-settings-daemon
 		sudo pacman -Rsdd --noconfirm mate-media
     elif [ "${PKG}" == "mate-settings-daemon-gstreamer" ]; then
 		sudo pacman -Rsdd --noconfirm mate-settings-daemon-pulseaudio
-		sudo pacman -Rsdd --noconfirm mate-media-pulseaudio				
+		sudo pacman -Rsdd --noconfirm mate-media-pulseaudio
 		sudo pacman -Rsdd --noconfirm mate-settings-daemon
-		sudo pacman -Rsdd --noconfirm mate-media		
+		sudo pacman -Rsdd --noconfirm mate-media
 	fi
-    
+
     if [ -z "${EXISTS}" ]; then
         echo " - Building ${PKG}"
 	if [ $(id -u) -eq 0 ]; then
@@ -308,23 +308,23 @@ function tree_build() {
     fi
 }
 
-# Check for new upstream releases
+# Check for new upstream releases.
 function tree_check() {
-    local PKG=${1}    
-    
+    local PKG=${1}
+
     # Account for version differences.
     if [ "${PKG}" == "caja-dropbox" ]; then
-		local CHECK_VER="1.4"
+        local CHECK_VER="1.4"
     else
-		local CHECK_VER="${MATE_VER}"
-	fi
-
-	# Skip duplicate packages.
-    if [ "${PKG}" == "mate-settings-daemon-gstreamer" ] || [ "${PKG}" == "mate-media-gstreamer" ]; then
-		return
+        local CHECK_VER="${MATE_VER}"
     fi
 
-	case ${PKG} in
+    # Skip duplicate packages.
+    if [ "${PKG}" == "mate-settings-daemon-gstreamer" ] || [ "${PKG}" == "mate-media-gstreamer" ]; then
+        return
+    fi
+
+    case ${PKG} in
         "python2-caja") UPSTREAM_PKG="python-caja";;
         "mate-settings-daemon-gstreamer") UPSTREAM_PKG="mate-settings-daemon";;
         "mate-settings-daemon-pulseaudio") UPSTREAM_PKG="mate-settings-daemon";;
@@ -356,14 +356,15 @@ function tree_check() {
     fi
 }
 
-# Clean the sources using `make maintainer-clean`
+# Clean the sources using `make maintainer-clean`.
 function tree_clean() {
     local PKG=${1}
     for SRC in ${PKG}/src/*
     do
         if [ -f ${SRC}/Makefile ]; then
             echo " - Cleaning ${SRC}"
-            make maintainer-clean 2>&1 /dev/null
+            cd ${SRC}
+            make maintainer-clean &> /dev/null
         fi
     done
 }
@@ -378,7 +379,7 @@ function tree_delete() {
     done
 }
 
-# Purge source tarballs, 'src' and 'pkg' directories.
+# Purge source tarballs, `src` and `pkg` directories.
 function tree_purge() {
     local PKG=${1}
     # Remove all source tarballs, don't bother checking versions just ditch them all.
@@ -400,7 +401,7 @@ function tree_purge() {
     fi
 }
 
-# Create a package repository
+# Create a package repository.
 function tree_repo() {
     echo "Action : repo"
     source /etc/makepkg.conf
@@ -423,7 +424,7 @@ function tree_repo() {
     repo-add -n ${HOME}/${MATE_VER}/${CARCH}/mate.db.tar.gz ${HOME}/${MATE_VER}/${CARCH}/*.pkg.tar.xz
 }
 
-# 'rsync' repo upstream.
+# `rsync` repo upstream.
 function tree_sync() {
     echo "Action : sync"
     source /etc/makepkg.conf
@@ -455,15 +456,15 @@ function tree_uninstall() {
 }
 
 function tree_run() {
-    local ACTION=${1}    
+    local ACTION=${1}
     echo "Action : ${ACTION}"
-    
+
     if [ "${ACTION}" == "check" ]; then
-		local ORDER=( ${MATE_BUILD_ORDER[@]} )
-	else
-		local ORDER=( ${BUILD_ORDER[@]} )
-	fi
-	
+        local ORDER=( ${MATE_BUILD_ORDER[@]} )
+    else
+        local ORDER=( ${BUILD_ORDER[@]} )
+    fi
+
     for PKG in ${ORDER[@]};
     do
         cd ${BASEDIR}
@@ -475,9 +476,9 @@ TASK=""
 OPTSTRING=ht:
 while getopts ${OPTSTRING} OPT; do
     case ${OPT} in
-        h) usage;;
+        h) usage; exit 0;;
         t) TASK=${OPTARG};;
-        *) usage
+        *) usage; exit 1;;
     esac
 done
 shift "$(( $OPTIND - 1 ))"
@@ -492,10 +493,9 @@ if [ "${TASK}" == "audit" ] ||
 elif [ "${TASK}" == "repo" ] || [ "${TASK}" == "sync" ] || [ "${TASK}" == "uninstall" ]; then
     tree_${TASK}
 else
-    echo "ERROR! You've asked me to do something I don't understand."
-    echo
     usage
+    exit 1
 fi
 
-# Clean up
+# Clean up.
 rm -f /tmp/*_SUMS 2>/dev/null
