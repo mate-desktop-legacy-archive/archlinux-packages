@@ -4,7 +4,7 @@
 
 pkgname=libmatewnck
 pkgver=1.6.1
-pkgrel=2
+pkgrel=3
 pkgdesc="Description: MATE Window Navigator Construction Kit. A library to use for writing pagers and task lists."
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -23,8 +23,7 @@ build() {
         --disable-static \
         --enable-gtk-doc \
 		--enable-startup-notification \
-		--enable-introspection \
-        --disable-schemas-install
+		--enable-introspection
     make
 }
 
