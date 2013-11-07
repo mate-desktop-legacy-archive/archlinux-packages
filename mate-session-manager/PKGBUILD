@@ -4,7 +4,7 @@
 
 pkgname=mate-session-manager
 pkgver=1.6.1
-pkgrel=4
+pkgrel=5
 pkgdesc="The MATE Session Handler"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -39,9 +39,7 @@ build() {
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
         --sysconfdir=/etc \
-        --localstatedir=/var \
-        --disable-upower \
-        --disable-introspection
+        --localstatedir=/var
     make
 }
 
