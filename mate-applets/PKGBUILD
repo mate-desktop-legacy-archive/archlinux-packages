@@ -4,7 +4,7 @@
 
 pkgname=mate-applets
 pkgver=1.6.1
-pkgrel=6
+pkgrel=7
 pkgdesc="Applets for MATE panel"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 url="http://mate-desktop.org"
@@ -20,12 +20,19 @@ options=('!emptydirs' '!libtool')
 groups=('mate-extras')
 replaces=('gnome-applets')
 conflicts=('gnome-applets')
-source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
-sha1sums=('520b064b45c9e0677ea5dea0f51698d3bc982371')
+source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz
+        f17654d853e603b1e4c6c22ffb1abbd6b364f4dc.diff)
+sha1sums=('520b064b45c9e0677ea5dea0f51698d3bc982371'
+          'bfd4136ef550af410b6ca4c7deebc7099d8addab')
 install=${pkgname}.install
 
 build() {
     cd ${srcdir}/${pkgname}-${pkgver}
+    
+    # battstat applet: ready for upower-1.0
+    # https://github.com/mate-desktop/mate-applets/pull/63
+    patch -p1 < ../../e934e91226e9a93956121c9c84ecf3664fcd68be.diff
+    
     PYTHON=/usr/bin/python2 ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
