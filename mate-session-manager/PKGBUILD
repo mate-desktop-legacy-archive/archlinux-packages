@@ -4,7 +4,7 @@
 
 pkgname=mate-session-manager
 pkgver=1.6.1
-pkgrel=6
+pkgrel=7
 pkgdesc="The MATE Session Handler"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -18,10 +18,12 @@ options=('!emptydirs' '!libtool')
 groups=('mate')
 source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz
         f0b5b1ab78879d64f80117415aacf029359afea5.diff
-        491b2c13b8df02512c47c101fb5bc2e769ad7273.diff)
+        491b2c13b8df02512c47c101fb5bc2e769ad7273.diff
+        c255dcfa.diff)
 sha1sums=('46188f6c02cc5978688af9d5db4be09f1b9199a5'
           '20fb99c29731d05191cd0029d0573db784b06ccf'
-          'c23e34609b50914515a31322ed3eb2dbd05e2dad')
+          'c23e34609b50914515a31322ed3eb2dbd05e2dad'
+          'e48e8af361328cc4cb8829bacb3ff935cae3bff9')
 install=${pkgname}.install
 
 build() {
@@ -33,7 +35,11 @@ build() {
     # upower: make upower optional
     # https://github.com/mate-desktop/mate-session-manager/issues/37
     # https://github.com/mate-desktop/mate-session-manager/pull/38
-    patch -p1 < ../../491b2c13b8df02512c47c101fb5bc2e769ad7273.diff
+    #patch -p1 < ../../491b2c13b8df02512c47c101fb5bc2e769ad7273.diff
+
+    # Enhanced patch
+    # http://paste.mate-desktop.org/view/c255dcfa
+    patch -p1 < ../../c255dcfa.diff
 
     # Recreate the build system because configure.ac was patched.
     autoreconf -fi
