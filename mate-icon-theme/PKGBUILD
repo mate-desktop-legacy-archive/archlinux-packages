@@ -4,7 +4,7 @@
 
 pkgname=mate-icon-theme
 pkgver=1.6.2
-pkgrel=2
+pkgrel=3
 pkgdesc="MATE icon theme"
 url="http://mate-desktop.org"
 arch=('any')
@@ -20,8 +20,7 @@ install=${pkgname}.install
 build() {
     cd ${srcdir}/${pkgname}-${pkgver}
     ./configure \
-        --prefix=/usr \
-        --enable-test-themes
+        --prefix=/usr
     make
 }
 
