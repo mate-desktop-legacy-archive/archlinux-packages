@@ -4,7 +4,7 @@
 
 pkgname=mate-session-manager
 pkgver=1.6.1
-pkgrel=5
+pkgrel=6
 pkgdesc="The MATE Session Handler"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -12,7 +12,7 @@ license=('GPL' 'LGPL')
 depends=('dbus' 'desktop-file-utils' 'gobject-introspection' 'gtk2' 'libice'
          'libsm' 'libxau' 'libxt' 'libxtst' 'mate-file-manager' 'mate-panel'
          'mate-polkit' 'mate-settings-daemon' 'mate-window-manager'
-         'startup-notification' 'systemd')
+         'pangox-compat' 'startup-notification' 'systemd')
 makedepends=('mate-common' 'perl-xml-parser' 'xmlto')
 options=('!emptydirs' '!libtool')
 groups=('mate')
@@ -35,11 +35,15 @@ build() {
     # https://github.com/mate-desktop/mate-session-manager/pull/38
     patch -p1 < ../../491b2c13b8df02512c47c101fb5bc2e769ad7273.diff
 
+    # Recreate the build system because configure.ac was patched.
+    autoreconf -fi
+
     ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
         --sysconfdir=/etc \
-        --localstatedir=/var
+        --localstatedir=/var \
+        --disable-upower
     make
 }
 
