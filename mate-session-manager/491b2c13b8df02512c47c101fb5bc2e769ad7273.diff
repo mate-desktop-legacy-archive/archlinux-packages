@@ -1,0 +1,278 @@
+diff --git a/configure.ac b/configure.ac
+index 88a669b..2d713b1 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -70,7 +70,6 @@ PKG_CHECK_MODULES(MATE_SESSION,
+         gio-2.0 >= $GIO_REQUIRED
+         gtk+-$GTK_API_VERSION >= $GTK_REQUIRED
+         dbus-glib-1 >= $DBUS_GLIB_REQUIRED
+-        upower-glib >= $UPOWER_REQUIRED
+ )
+ 
+ PKG_CHECK_MODULES(SESSION_PROPERTIES,
+@@ -128,6 +127,28 @@ AM_CONDITIONAL(HAVE_SYSTEMD, test "x$use_systemd" = "xyes")
+ AC_SUBST(HAVE_SYSTEMD)
+ 
+ dnl ====================================================================
++dnl UPOWER
++dnl ====================================================================
++
++AC_ARG_ENABLE(upower, AS_HELP_STRING([--enable-upower],[Add upower support for suspend/hibernate]), enable_upower=$enableval,
++				   enable_upower=yes)
++if test x$enable_upower != xno; then
++	PKG_CHECK_MODULES(UPOWER, upower-glib >= $UPOWER_REQUIRED, has_upower=yes, has_upower=no)
++	if test $has_upower = "no"; then
++		AC_CHECK_HEADER(libupower-glib/upower.h, has_upower=yes, has_upower=no)
++		if test $has_upower = "no"; then
++			AC_MSG_ERROR([Cannot fine UPOWER])
++		fi
++		AC_SUBST(UPOWER_CFLAGS)
++		AC_SUBST(UPOWER_LIBS)
++	fi
++fi
++AM_CONDITIONAL(HAVE_UPOWER, test x$enable_upower = xyes)
++if test x$enable_upower = xyes; then
++	AC_DEFINE(HAVE_UPOWER,1,[Use upower support for for suspend/hibernate])
++fi
++
++dnl ====================================================================
+ dnl X development libraries check
+ dnl ====================================================================
+ 
+@@ -385,6 +406,7 @@ echo "
+         GTK+ version:             ${with_gtk}
+         Default WM:               ${with_default_wm}
+         Systemd support:          ${use_systemd}
++        Upower support:           ${enable_upower}
+         IPv6 support:             ${have_full_ipv6}
+         Backtrace support:        ${have_backtrace}
+         XRender support:          ${have_xrender}
+diff --git a/mate-session/Makefile.am b/mate-session/Makefile.am
+index 2c73d63..9485fec 100644
+--- a/mate-session/Makefile.am
++++ b/mate-session/Makefile.am
+@@ -7,6 +7,7 @@ noinst_PROGRAMS = 		\
+ AM_CPPFLAGS =					\
+ 	$(MATE_SESSION_CFLAGS)		\
+ 	$(SYSTEMD_CFLAGS)			\
++	$(UPOWER_CFLAGS)			\
+ 	$(DISABLE_DEPRECATED_CFLAGS)
+ 
+ AM_CFLAGS = $(WARN_CFLAGS)
+@@ -78,6 +79,7 @@ mate_session_LDADD =				\
+ 	$(XEXT_LIBS)				\
+ 	$(MATE_SESSION_LIBS)			\
+ 	$(SYSTEMD_LIBS)				\
++	$(UPOWER_LIBS)				\
+ 	$(EXECINFO_LIBS)
+ 
+ libgsmutil_la_SOURCES =				\
+diff --git a/mate-session/gsm-logout-dialog.c b/mate-session/gsm-logout-dialog.c
+index 1a79875..3a6aba5 100644
+--- a/mate-session/gsm-logout-dialog.c
++++ b/mate-session/gsm-logout-dialog.c
+@@ -27,7 +27,9 @@
+ #include <glib/gi18n.h>
+ #include <gtk/gtk.h>
+ 
++#ifdef HAVE_UPOWER
+ #include <upower.h>
++#endif
+ 
+ #include "gsm-logout-dialog.h"
+ #ifdef HAVE_SYSTEMD
+@@ -52,8 +54,9 @@
+ struct _GsmLogoutDialogPrivate
+ {
+         GsmDialogLogoutType  type;
+-
++#ifdef HAVE_UPOWER
+         UpClient            *up_client;
++#endif
+ #ifdef HAVE_SYSTEMD
+         GsmSystemd          *systemd;
+ #endif
+@@ -147,9 +150,9 @@ enum {
+         gtk_window_set_skip_taskbar_hint (GTK_WINDOW (logout_dialog), TRUE);
+         gtk_window_set_keep_above (GTK_WINDOW (logout_dialog), TRUE);
+         gtk_window_stick (GTK_WINDOW (logout_dialog));
+-
++#ifdef HAVE_UPOWER
+         logout_dialog->priv->up_client = up_client_new ();
+-
++#endif
+ #ifdef HAVE_SYSTEMD
+         if (LOGIND_RUNNING())
+             logout_dialog->priv->systemd = gsm_get_systemd ();
+@@ -176,12 +179,12 @@ enum {
+                 g_source_remove (logout_dialog->priv->timeout_id);
+                 logout_dialog->priv->timeout_id = 0;
+         }
+-
++#ifdef HAVE_UPOWER
+         if (logout_dialog->priv->up_client) {
+                 g_object_unref (logout_dialog->priv->up_client);
+                 logout_dialog->priv->up_client = NULL;
+         }
+-
++#endif
+ #ifdef HAVE_SYSTEMD
+         if (logout_dialog->priv->systemd) {
+                 g_object_unref (logout_dialog->priv->systemd);
+@@ -204,10 +207,10 @@ enum {
+ #ifdef HAVE_SYSTEMD
+         if (LOGIND_RUNNING())
+             ret = gsm_systemd_can_suspend (logout_dialog->priv->systemd);
+-        else
+ #endif
++#ifdef HAVE_UPOWER
+         ret = up_client_get_can_suspend (logout_dialog->priv->up_client);
+-
++#endif
+         return ret;
+ }
+ 
+@@ -218,10 +221,10 @@ enum {
+ #ifdef HAVE_SYSTEMD
+         if (LOGIND_RUNNING())
+             ret = gsm_systemd_can_hibernate (logout_dialog->priv->systemd);
+-        else
+ #endif
++#ifdef HAVE_UPOWER
+         ret = up_client_get_can_hibernate (logout_dialog->priv->up_client);
+-
++#endif
+         return ret;
+ }
+ 
+diff --git a/mate-session/gsm-manager.c b/mate-session/gsm-manager.c
+index b4986ac..9a29f7b 100644
+--- a/mate-session/gsm-manager.c
++++ b/mate-session/gsm-manager.c
+@@ -38,7 +38,9 @@
+ #include <dbus/dbus-glib.h>
+ #include <dbus/dbus-glib-lowlevel.h>
+ 
++#ifdef HAVE_UPOWER
+ #include <upower.h>
++#endif
+ 
+ #include <gtk/gtk.h> /* for logout dialog */
+ #include <gio/gio.h> /* for gsettings */
+@@ -144,9 +146,10 @@ struct GsmManagerPrivate
+ 
+         DBusGProxy             *bus_proxy;
+         DBusGConnection        *connection;
+-
++#ifdef HAVE_UPOWER
+         /* Interface with other parts of the system */
+         UpClient               *up_client;
++#endif
+ };
+ 
+ enum {
+@@ -1105,10 +1108,11 @@ enum {
+ static void
+ manager_attempt_hibernate (GsmManager *manager)
+ {
++#ifdef HAVE_UPOWER
+         gboolean  can_hibernate;
+         GError   *error;
+         gboolean  ret;
+-
++#endif
+ #ifdef HAVE_SYSTEMD
+         if (LOGIND_RUNNING()) {
+ 
+@@ -1121,8 +1125,8 @@ enum {
+ 
+                 gsm_systemd_attempt_hibernate (systemd);
+         }
+-        else {
+ #endif
++#ifdef HAVE_UPOWER
+         can_hibernate = up_client_get_can_hibernate (manager->priv->up_client);
+         if (can_hibernate) {
+ 
+@@ -1137,18 +1141,17 @@ enum {
+                         g_error_free (error);
+                 }
+         }
+-#ifdef HAVE_SYSTEMD
+-        }
+ #endif
+ }
+ 
+ static void
+ manager_attempt_suspend (GsmManager *manager)
+ {
++#ifdef HAVE_UPOWER
+         gboolean  can_suspend;
+         GError   *error;
+         gboolean  ret;
+-
++#endif
+ #ifdef HAVE_SYSTEMD
+         if (LOGIND_RUNNING()) {
+ 
+@@ -1161,8 +1164,8 @@ enum {
+ 
+                 gsm_systemd_attempt_suspend (systemd);
+         }
+-        else {
+ #endif
++#ifdef HAVE_UPOWER
+         can_suspend = up_client_get_can_suspend (manager->priv->up_client);
+         if (can_suspend) {
+ 
+@@ -1177,8 +1180,6 @@ enum {
+                         g_error_free (error);
+                 }
+         }
+-#ifdef HAVE_SYSTEMD
+-        }
+ #endif
+ }
+ 
+@@ -2349,12 +2350,12 @@ enum {
+                 g_object_unref (manager->priv->settings_screensaver);
+                 manager->priv->settings_screensaver = NULL;
+         }
+-
++#ifdef HAVE_UPOWER
+         if (manager->priv->up_client != NULL) {
+                 g_object_unref (manager->priv->up_client);
+                 manager->priv->up_client = NULL;
+         }
+-
++#endif
+         G_OBJECT_CLASS (gsm_manager_parent_class)->dispose (object);
+ }
+ 
+@@ -2561,9 +2562,9 @@ enum {
+                           "status-changed",
+                           G_CALLBACK (on_presence_status_changed),
+                           manager);
+-
++#ifdef HAVE_UPOWER
+         manager->priv->up_client = up_client_new ();
+-
++#endif
+         g_signal_connect (manager->priv->settings_session,
+                           "changed",
+                           G_CALLBACK (on_gsettings_key_changed),
+@@ -3232,12 +3233,12 @@ enum {
+ #endif
+         gboolean can_suspend;
+         gboolean can_hibernate;
+-
++#ifdef HAVE_UPOWER
+         g_object_get (manager->priv->up_client,
+                       "can-suspend", &can_suspend,
+                       "can-hibernate", &can_hibernate,
+                       NULL);
+-
++#endif
+         g_debug ("GsmManager: CanShutdown called");
+ 
+         g_return_val_if_fail (GSM_IS_MANAGER (manager), FALSE);
