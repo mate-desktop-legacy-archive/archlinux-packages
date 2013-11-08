@@ -25,6 +25,9 @@ build() {
     cd ${srcdir}/${pkgname}-${pkgver}
     
     patch -Np1 -i ${srcdir}/patch.diff
+    
+    # Fix masking for area or window screenshots
+    # https://github.com/mate-desktop/mate-utils/pull/45
     patch -Np1 -i ${srcdir}/422504e251442ca9921c4218151cffb6548280e6.diff
     
     ./autogen.sh \
