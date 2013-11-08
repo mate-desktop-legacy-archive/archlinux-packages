@@ -3,7 +3,7 @@
 
 pkgname=mate-utils
 pkgver=1.6.0
-pkgrel=6
+pkgrel=7
 pkgdesc="Common MATE utilities for viewing disk usage, logs and fonts, taking screenshots, managing dictionaries and searching files"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -14,14 +14,19 @@ makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser' 'rarian')
 options=('!libtool' '!emptydirs')
 groups=('mate-extras')
 source=("http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz"
-		'patch.diff')
+		'patch.diff'
+        '422504e251442ca9921c4218151cffb6548280e6.diff')
 sha1sums=('a43b45cccffd6116c49475d7511cf58b219c0d72'
-          'f1eb654b90423ab5468edd57dc33f3f7f9c3f390')
+          'f1eb654b90423ab5468edd57dc33f3f7f9c3f390'
+          '71d8115a2044823936289c39bbaf32070d343f76')
 install=${pkgname}.install
 
 build() {
     cd ${srcdir}/${pkgname}-${pkgver}
+    
     patch -Np1 -i ${srcdir}/patch.diff
+    patch -Np1 -i ${srcdir}/422504e251442ca9921c4218151cffb6548280e6.diff
+    
     ./autogen.sh \
         --prefix=/usr \
 		--libexecdir=/usr/lib/${pkgname} \
