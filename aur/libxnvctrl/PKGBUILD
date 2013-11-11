@@ -3,12 +3,13 @@
 
 pkgname=libxnvctrl
 pkgver=325.15
-pkgrel=2
+pkgrel=3
 pkgdesc="NVIDIA X Ctrl library"
-arch=('i686' 'x86_64' 'armv6h' armv7h)
+arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 url="http://www.nvidia.com/"
 license=('GPL2')
 makedepends=('libxext')
+options=('staticlibs')
 source=(http://download.nvidia.com/XFree86/nvidia-settings/nvidia-settings-$pkgver.tar.bz2)
 sha1sums=('9e043554225920decd16707c8a27a661b74d90d1')
 
