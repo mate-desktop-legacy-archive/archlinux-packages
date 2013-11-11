@@ -271,25 +271,33 @@ function tree_aur() {
     local PKG=${1}
     cd ${PKG}
     
-    # Guess a category
-    if [[ "${PKG}" == *lib* ]] || [[ "${PKG}" == *python* ]]; then
-        local CAT="--category=lib"
-    elif [[ "${PKG}" == *mate* ]]; then
-        local CAT="--category=x11"
-    else 
-        local CAT=""
-    fi
+    local INSTALLED=$(pacman -Q `basename ${PKG}` 2>/dev/null | cut -f2 -d' ')
+    local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=')
+    local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
+    local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
+    local EXISTS=$(ls -1 *${PKGBUILD}*.src.tar.gz 2>/dev/null)
+        
+    if [ -z "${EXISTS}" ]; then
+        echo " - Burping ${PKG}"
+        # Guess a category
+        if [[ "${PKG}" == *lib* ]] || [[ "${PKG}" == *python* ]]; then
+            local CAT="--category=lib"
+        elif [[ "${PKG}" == *mate* ]]; then
+            local CAT="--category=x11"
+        else 
+            local CAT=""
+        fi
     
-    rm -f *.src.tar.gz
-	makepkg -Sfd --noconfirm --needed    
+        makepkg -Sfd --noconfirm --needed    
     
-    # Attempt an auto upload to the AUR. Requires /tmp/burp.sh
-    # https://github.com/falconindy/burp
-    if [ -f /tmp/burp.sh ]; then
-        source /tmp/burp.sh
-        burp --user=${BURP_USER} --password=${BURP_PASS} --keep-cookies --cookies=/tmp/burp.cookie --verbose ${CAT} `ls -1 *.src.tar.gz`
-        if [ $? -ne 0 ]; then
-            echo ${PKG} >> /tmp/aur_fails.txt
+        # Attempt an auto upload to the AUR. Requires /tmp/burp.sh
+        # https://github.com/falconindy/burp
+        if [ -f /tmp/burp.sh ]; then
+            source /tmp/burp.sh
+            burp --user=${BURP_USER} --password=${BURP_PASS} --keep-cookies --cookies=/tmp/burp.cookie --verbose ${CAT} `ls -1 *.src.tar.gz`
+            if [ $? -ne 0 ]; then
+                echo ${PKG} >> /tmp/aur_fails.txt
+            fi
         fi
     fi
 }
@@ -318,11 +326,12 @@ function tree_build() {
 
     if [ -z "${EXISTS}" ]; then
         echo " - Building ${PKG}"
-	if [ $(id -u) -eq 0 ]; then
-        makepkg -fs --noconfirm --needed --log --asroot
-	else
-		makepkg -fs --noconfirm --needed --log
-	fi
+        if [ $(id -u) -eq 0 ]; then
+            makepkg -fs --noconfirm --needed --log --asroot
+        else
+            makepkg -fs --noconfirm --needed --log
+        fi
+        
         if [ $? -ne 0 ]; then
             echo " - Failed to build ${PKG}. Stopping here."
             exit 1
