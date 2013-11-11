@@ -444,19 +444,19 @@ function tree_repo() {
     echo "Action : repo"
     source /etc/makepkg.conf
 
+    echo " - Cleaning repository."
     rm -rf ${HOME}/${MATE_VER}/${CARCH} 2>/dev/null
     mkdir -p ${HOME}/${MATE_VER}/${CARCH}
 
     for PKG in ${BUILD_ORDER[@]};
     do
         cd ${BASEDIR}/${PKG}
-        PKG=$(basename ${PKG})
         local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=')
         local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
         local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
         local NEWEST=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
         if [ -f ${NEWEST} ]; then
-            cp ${NEWEST} ${HOME}/${MATE_VER}/${CARCH}/
+            cp -v ${NEWEST} ${HOME}/${MATE_VER}/${CARCH}/
         fi
     done
     repo-add -n ${HOME}/${MATE_VER}/${CARCH}/mate.db.tar.gz ${HOME}/${MATE_VER}/${CARCH}/*.pkg.tar.xz
