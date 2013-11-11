@@ -470,7 +470,7 @@ function tree_sync() {
     local RSYNC_UPSTREAM="mate@mate.flexion.org::mate-${MATE_VER}"
 
     if [ -L ${HOME}/${MATE_VER}/${CARCH}/mate.db ]; then
-        rsync -av --progress ${HOME}/${MATE_VER}/ ${RSYNC_UPSTREAM}
+        rsync -av --delete --progress ${HOME}/${MATE_VER}/${CARCH}/ ${RSYNC_UPSTREAM}/${CARCH}/
     else
         echo "A valid 'pacman' repository was not detected. Run './${0} -t repo' first."
     fi
