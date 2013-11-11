@@ -4,8 +4,8 @@
 
 pkgname=mate-file-manager-sendto
 pkgver=1.6.0
-pkgrel=2
-pkgdesc="Context menu for sending files on MATE File Manager"
+pkgrel=3
+pkgdesc="A Caja extension for sending files."
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')

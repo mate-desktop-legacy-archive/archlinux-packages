@@ -4,8 +4,8 @@
 
 pkgname=mate-file-manager-image-converter
 pkgver=1.6.0
-pkgrel=3
-pkgdesc="An extension for opening terminals in arbitrary local paths"
+pkgrel=4
+pkgdesc="A Caja extension for simple image conversions."
 url="http://manny.cluecoder.org/packages/nautilus-open-terminal"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
