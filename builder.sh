@@ -266,6 +266,34 @@ function tree_audit() {
     fi
 }
 
+# Make 'src' packages and upload them to the AUR
+function tree_aur() {
+    local PKG=${1}
+    cd ${PKG}
+    
+    # Guess a category
+    if [[ "${PKG}" == *lib* ]] || [[ "${PKG}" == *python* ]]; then
+        local CAT="--category=lib"
+    elif [[ "${PKG}" == *mate* ]]; then
+        local CAT="--category=x11"
+    else 
+        local CAT=""
+    fi
+    
+    rm -f *.src.tar.gz
+	makepkg -Sfd --noconfirm --needed    
+    
+    # Attempt an auto upload to the AUR. Requires /tmp/burp.sh
+    # https://github.com/falconindy/burp
+    if [ -f /tmp/burp.sh ]; then
+        source /tmp/burp.sh
+        burp --user=${BURP_USER} --password=${BURP_PASS} --keep-cookies --cookies=/tmp/burp.cookie --verbose ${CAT} `ls -1 *.src.tar.gz`
+        if [ $? -ne 0 ]; then
+            echo ${PKG} >> /tmp/aur_fails.txt
+        fi
+    fi
+}
+
 # Build packages that are not at the current version.
 function tree_build() {
     local PKG=${1}
@@ -472,6 +500,8 @@ function tree_run() {
     done
 }
 
+rm -f /tmp/aur_fails.txt 2>/dev/null
+
 TASK=""
 OPTSTRING=ht:
 while getopts ${OPTSTRING} OPT; do
@@ -484,6 +514,7 @@ done
 shift "$(( $OPTIND - 1 ))"
 
 if [ "${TASK}" == "audit" ] ||
+   [ "${TASK}" == "aur" ] ||
    [ "${TASK}" == "build" ] ||
    [ "${TASK}" == "check" ] ||
    [ "${TASK}" == "clean" ] ||
