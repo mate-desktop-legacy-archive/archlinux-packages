@@ -89,6 +89,7 @@ function usage() {
     echo "-h  Shows this help message."
     echo "-t  Provide a task to run which can be one of:"
     echo "      audit       Show which packages remain to be built."
+    echo "      aur         Upload 'src' packages to the AUR."
     echo "      build       Build MATE packages."
     echo "      check       Check upstream for new source tarballs."
     echo "      clean       Clean source directories using 'make maintainer-clean'."
