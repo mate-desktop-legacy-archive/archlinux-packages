@@ -463,8 +463,10 @@ function tree_repo() {
     # Simulate 'makepkg --sign'
     KEY_TEST=`gpg --list-secret-key | grep FFEE1E5C`
     if [ $? -eq 0 ]; then
+	cd ${HOME}/${MATE_VER}/${CARCH}
         for XZ in *.xz
         do
+            echo " - Signing ${XZ}"
             gpg --detach-sign -u 0xFFEE1E5C ${XZ}
         done
     fi
