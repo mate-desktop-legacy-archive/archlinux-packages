@@ -459,7 +459,15 @@ function tree_repo() {
             cp -v ${NEWEST} ${HOME}/${MATE_VER}/${CARCH}/
         fi
     done
-    #gpg --detach-sign -u 0xFFEE1E5C
+
+    # Simulate 'makepkg --sign'
+    KEY_TEST=`gpg --list-secret-key | grep FFEE1E5C`
+    if [ $? -eq 0 ]; then
+        for XZ in *.xz
+        do
+            gpg --detach-sign -u 0xFFEE1E5C ${XZ}
+        done
+    fi
 
     repo-add --new --files ${HOME}/${MATE_VER}/${CARCH}/mate.db.tar.gz ${HOME}/${MATE_VER}/${CARCH}/*.pkg.tar.xz
 }
