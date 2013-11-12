@@ -347,6 +347,11 @@ function tree_build() {
         fi
     else
         if [ "${INSTALLED}" != "${PKGBUILD}" ]; then
+	    if [ $(id -u) -eq 0 ]; then
+            	makepkg -fs --noconfirm --needed --log --asroot --repackage ${PKGSIGN}
+            else
+                makepkg -fs --noconfirm --needed --log --repackage ${PKGSIGN}
+            fi
             sudo makepkg -i --noconfirm --asroot
         fi
     fi
