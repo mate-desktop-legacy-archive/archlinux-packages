@@ -327,16 +327,10 @@ function tree_build() {
 
     if [ -z "${EXISTS}" ]; then
         echo " - Building ${PKG}"
-        if [ -f ~/.gnupg/secring.gpg ]; then
-            echo " - Using signing key."
-            local PKGSIGN="--sign --key FFEE1E5C"
-        else
-            local PKGSIGN=""
-        fi
         if [ $(id -u) -eq 0 ]; then
-            makepkg -fs --noconfirm --needed --log --asroot ${PKGSIGN}
+            makepkg -fs --noconfirm --needed --log --asroot
         else
-            makepkg -fs --noconfirm --needed --log ${PKGSIGN}
+            makepkg -fs --noconfirm --needed --log
         fi
 
         if [ $? -ne 0 ]; then
@@ -347,12 +341,7 @@ function tree_build() {
         fi
     else
         if [ "${INSTALLED}" != "${PKGBUILD}" ]; then
-	    if [ $(id -u) -eq 0 ]; then
-            	makepkg -f --noconfirm --repackage --asroot ${PKGSIGN}
-            else
-                makepkg -f --noconfirm --repackage ${PKGSIGN}
-            fi
-            sudo makepkg -i --noconfirm --asroot
+	        sudo makepkg -i --noconfirm --asroot
         fi
     fi
 }
@@ -468,9 +457,10 @@ function tree_repo() {
         local NEWEST=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
         if [ -f ${NEWEST} ]; then
             cp -v ${NEWEST} ${HOME}/${MATE_VER}/${CARCH}/
-            cp -v ${NEWEST}.sig ${HOME}/${MATE_VER}/${CARCH}/
         fi
     done
+    #gpg --detach-sign -u 0xFFEE1E5C
+
     repo-add --new --files ${HOME}/${MATE_VER}/${CARCH}/mate.db.tar.gz ${HOME}/${MATE_VER}/${CARCH}/*.pkg.tar.xz
 }
 
@@ -534,10 +524,6 @@ while getopts ${OPTSTRING} OPT; do
     esac
 done
 shift "$(( $OPTIND - 1 ))"
-
-# Import the public key for the package signing key
-sudo pacman-key -r FFEE1E5C
-sudo pacman-key --lsign-key FFEE1E5C
 
 if [ "${TASK}" == "audit" ] ||
    [ "${TASK}" == "aur" ] ||
