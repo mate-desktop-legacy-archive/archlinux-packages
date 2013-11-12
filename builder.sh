@@ -348,9 +348,9 @@ function tree_build() {
     else
         if [ "${INSTALLED}" != "${PKGBUILD}" ]; then
 	    if [ $(id -u) -eq 0 ]; then
-            	makepkg -fs --noconfirm --needed --log --asroot --repackage ${PKGSIGN}
+            	makepkg -f --noconfirm --repackage --asroot ${PKGSIGN}
             else
-                makepkg -fs --noconfirm --needed --log --repackage ${PKGSIGN}
+                makepkg -f --noconfirm --repackage ${PKGSIGN}
             fi
             sudo makepkg -i --noconfirm --asroot
         fi
@@ -468,9 +468,10 @@ function tree_repo() {
         local NEWEST=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
         if [ -f ${NEWEST} ]; then
             cp -v ${NEWEST} ${HOME}/${MATE_VER}/${CARCH}/
+            cp -v ${NEWEST}.sig ${HOME}/${MATE_VER}/${CARCH}/
         fi
     done
-    repo-add -n ${HOME}/${MATE_VER}/${CARCH}/mate.db.tar.gz ${HOME}/${MATE_VER}/${CARCH}/*.pkg.tar.xz
+    repo-add --new --files ${HOME}/${MATE_VER}/${CARCH}/mate.db.tar.gz ${HOME}/${MATE_VER}/${CARCH}/*.pkg.tar.xz
 }
 
 # `rsync` repo upstream.
