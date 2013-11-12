@@ -531,6 +531,7 @@ shift "$(( $OPTIND - 1 ))"
 
 # Import the public key for the package signing key
 sudo pacman-key -r FFEE1E5C
+sudo pacman-key --lsign-key FFEE1E5C
 
 if [ "${TASK}" == "audit" ] ||
    [ "${TASK}" == "aur" ] ||
