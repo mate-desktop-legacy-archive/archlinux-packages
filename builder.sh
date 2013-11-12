@@ -271,13 +271,13 @@ function tree_audit() {
 function tree_aur() {
     local PKG=${1}
     cd ${PKG}
-    
+
     local INSTALLED=$(pacman -Q `basename ${PKG}` 2>/dev/null | cut -f2 -d' ')
     local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=')
     local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
     local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
     local EXISTS=$(ls -1 *${PKGBUILD}*.src.tar.gz 2>/dev/null)
-        
+
     if [ -z "${EXISTS}" ]; then
         echo " - Burping ${PKG}"
         # Guess a category
@@ -285,12 +285,12 @@ function tree_aur() {
             local CAT="--category=lib"
         elif [[ "${PKG}" == *mate* ]]; then
             local CAT="--category=x11"
-        else 
+        else
             local CAT=""
         fi
-    
-        makepkg -Sfd --noconfirm --needed    
-    
+
+        makepkg -Sfd --noconfirm --needed
+
         # Attempt an auto upload to the AUR. Requires /tmp/burp.sh
         # https://github.com/falconindy/burp
         if [ -f /tmp/burp.sh ]; then
@@ -314,25 +314,31 @@ function tree_build() {
     local EXISTS=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
 
     if [ "${PKG}" == "mate-settings-daemon-pulseaudio" ]; then
-		sudo pacman -Rsdd --noconfirm mate-settings-daemon-gstreamer
-		sudo pacman -Rsdd --noconfirm mate-media-gstreamer
-		sudo pacman -Rsdd --noconfirm mate-settings-daemon
-		sudo pacman -Rsdd --noconfirm mate-media
+        sudo pacman -Rsdd --noconfirm mate-settings-daemon-gstreamer
+        sudo pacman -Rsdd --noconfirm mate-media-gstreamer
+        sudo pacman -Rsdd --noconfirm mate-settings-daemon
+        sudo pacman -Rsdd --noconfirm mate-media
     elif [ "${PKG}" == "mate-settings-daemon-gstreamer" ]; then
-		sudo pacman -Rsdd --noconfirm mate-settings-daemon-pulseaudio
-		sudo pacman -Rsdd --noconfirm mate-media-pulseaudio
-		sudo pacman -Rsdd --noconfirm mate-settings-daemon
-		sudo pacman -Rsdd --noconfirm mate-media
-	fi
+        sudo pacman -Rsdd --noconfirm mate-settings-daemon-pulseaudio
+        sudo pacman -Rsdd --noconfirm mate-media-pulseaudio
+        sudo pacman -Rsdd --noconfirm mate-settings-daemon
+        sudo pacman -Rsdd --noconfirm mate-media
+    fi
 
     if [ -z "${EXISTS}" ]; then
         echo " - Building ${PKG}"
-        if [ $(id -u) -eq 0 ]; then
-            makepkg -fs --noconfirm --needed --log --asroot
+        if [ -f ~/.gnupg/secring.gpg ]; then
+            echo " - Using signing key."
+            local PKGSIGN="--sign --key FFEE1E5C"
         else
-            makepkg -fs --noconfirm --needed --log
+            local PKGSIGN=""
         fi
-        
+        if [ $(id -u) -eq 0 ]; then
+            makepkg -fs --noconfirm --needed --log --asroot ${PKGSIGN}
+        else
+            makepkg -fs --noconfirm --needed --log ${PKGSIGN}
+        fi
+
         if [ $? -ne 0 ]; then
             echo " - Failed to build ${PKG}. Stopping here."
             exit 1
@@ -381,7 +387,7 @@ function tree_check() {
         local UPSTREAM_TARBALL=$(grep -E ${UPSTREAM_PKG}-[0-9]. /tmp/${CHECK_VER}_SUMS | cut -c43- | tail -n1)
         local UPSTREAM_SHA1=$(grep -E ${UPSTREAM_PKG}-[0-9]. /tmp/${CHECK_VER}_SUMS | cut -c1-40 | tail -n1)
         local DOWNSTREAM_VER=$(grep -E ^pkgver ${PKG}/PKGBUILD | cut -f2 -d'=')
-        local DOWNSTREAM_TARBALL="${UPSTREAM_PKG}-${DOWNSTREAM_VER}.tar.xz"        
+        local DOWNSTREAM_TARBALL="${UPSTREAM_PKG}-${DOWNSTREAM_VER}.tar.xz"
         local DOWNSTREAM_SHA1=$(grep -E ^sha1 ${PKG}/PKGBUILD | cut -f2 -d"'")
         if [ "${UPSTREAM_TARBALL}" != "${DOWNSTREAM_TARBALL}" ]; then
             echo " +---> Upstream tarball differs : ${UPSTREAM_TARBALL}"
