@@ -78,7 +78,6 @@ MATE_BUILD_ORDER=(
 BUILD_ORDER=( ${AUR_BUILD_ORDER[@]} ${MATE_BUILD_ORDER[@]} ${COMMUNITY_BUILD_ORDER[@]})
 BASEDIR=$(dirname $(readlink -f ${0}))
 MATE_VER=1.6
-KEY_ID="FFEE1E5C"
 
 # Show usage information.
 function usage() {
@@ -330,7 +329,7 @@ function tree_build() {
         echo " - Building ${PKG}"
         if [ -f ~/.gnupg/secring.gpg ]; then
             echo " - Using signing key."
-            local PKGSIGN="--sign --key ${KEY_ID}"
+            local PKGSIGN="--sign --key FFEE1E5C"
         else
             local PKGSIGN=""
         fi
@@ -531,7 +530,7 @@ done
 shift "$(( $OPTIND - 1 ))"
 
 # Import the public key for the package signing key
-sudo pacman-key -r ${KEY_ID}
+sudo pacman-key -r FFEE1E5C
 
 if [ "${TASK}" == "audit" ] ||
    [ "${TASK}" == "aur" ] ||
