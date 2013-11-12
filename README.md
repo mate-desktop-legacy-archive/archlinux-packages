@@ -11,10 +11,9 @@ to the official MATE repository for Arch Linux.
 
 ## Installing MATE on Arch Linux
 
-The following references will assit you:
+The following will assist you:
 
   * <http://wiki.mate-desktop.org/archlinux_custom_repo>
-  * <https://wiki.archlinux.org/index.php/MATE>
 
 # Developing MATE packages for Arch Linux
 
