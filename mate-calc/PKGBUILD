@@ -5,7 +5,7 @@
 
 pkgname=mate-calc
 pkgver=1.7.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Calculator for the Mate desktop environment"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
