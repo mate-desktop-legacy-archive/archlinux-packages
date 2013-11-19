@@ -291,13 +291,15 @@ function tree_aur() {
 
         makepkg -Sfd --noconfirm --needed
 
-        # Attempt an auto upload to the AUR. Requires /tmp/burp.sh
+        # Attempt an auto upload to the AUR.
         # https://github.com/falconindy/burp
-        if [ -f /tmp/burp.sh ]; then
-            source /tmp/burp.sh
-            burp --user=${BURP_USER} --password=${BURP_PASS} --keep-cookies --cookies=/tmp/burp.cookie --verbose ${CAT} `ls -1 *.src.tar.gz`
-            if [ $? -ne 0 ]; then
-                echo ${PKG} >> /tmp/aur_fails.txt
+        if [ -f ${HOME}/.config/burp/burp.conf ]; then
+            grep flexiondotorg ${HOME}/.config/burp/burp.conf
+            if [ $? -eq 0 ]; then            
+                burp --verbose ${CAT} `ls -1 *${PKGBUILD}*.src.tar.gz`
+                if [ $? -ne 0 ]; then
+                    echo ${PKG} >> /tmp/aur_fails.txt
+                fi
             fi
         fi
     fi
@@ -341,7 +343,7 @@ function tree_build() {
         fi
     else
         if [ "${INSTALLED}" != "${PKGBUILD}" ]; then
-	        sudo makepkg -i --noconfirm --asroot
+            sudo makepkg -i --noconfirm --asroot
         fi
     fi
 }
