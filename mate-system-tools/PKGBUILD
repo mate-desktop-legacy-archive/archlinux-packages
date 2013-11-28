@@ -8,7 +8,7 @@ url="http://manny.cluecoder.org/packages/nautilus-open-terminal"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('caja' 'desktop-file-utils' 'gtk2' 'liboobs' 'mate-polkit'
-         'system-tools-backends')
+         'system-tools-backends' 'yelp')
 makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
 optdepends=('ntp: Automatic time syncronisation.'
             'system-config-printer: Add CUPS printer configuration tool.'
