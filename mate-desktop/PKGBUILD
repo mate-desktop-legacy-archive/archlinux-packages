@@ -10,20 +10,20 @@ url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=(GPL LGPL)
 depends=('dconf' 'desktop-file-utils' 'gtk2' 'hicolor-icon-theme'
-	     'libunique' 'python2' 'startup-notification' 'yelp-tools')
-makedepends=('mate-common' 'perl-xml-parser')
+	     'libunique' 'python2' 'startup-notification')
+makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
 optdepends=('lightdm-gtk2-greeter: A lightweight display manager')
 options=('!emptydirs' '!libtool')
 groups=('mate')
 source=(http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz)
-sha1sums=(''fd85ec43d378cf2811f924d5c783cfb76047fc0b )
+sha1sums=('fd85ec43d378cf2811f924d5c783cfb76047fc0b')
 install=${pkgname}.install
 
 build() {
     cd ${srcdir}/${pkgname}-${pkgver}
     PYTHON=/usr/bin/python2 ./configure \
         --prefix=/usr \
-        --disable-static \        
+        --disable-static \
         --disable-schemas-compile \
         --enable-gtk-doc
     make
@@ -32,6 +32,4 @@ build() {
 package() {
     cd ${srcdir}/${pkgname}-${pkgver}
     make DESTDIR=${pkgdir} install
-    # Prevent conflict errors
-    #mv ${pkgdir}/usr/share/omf ${pkgdir}/usr/share/mate-omf
 }
