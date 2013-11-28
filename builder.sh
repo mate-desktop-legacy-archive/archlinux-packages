@@ -306,12 +306,15 @@ function tree_build() {
     local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=')
     local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
     local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
+    
+    echo " - Looking for *${PKGBUILD}*.pkg.tar.xz"
     local HAS_PKG=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
-	if [ $? -eq 0 ]; then
-		echo " - ${PKG} is current."
+    local RET=$?
+	if [ ${RET} -eq 0 ]; then
+		echo " - ${PKG} is current : ${RET}"
 		local BUILD_PKG=0
 	else
-		echo " - ${PKG} needs building."
+		echo " - ${PKG} needs building : ${RET}"
 		local BUILD_PKG=1
 	fi        
 
@@ -346,7 +349,7 @@ function tree_build() {
             sudo makepkg -i --noconfirm --asroot
         fi
     fi
-	echo "Finished ${PKG}. Press a key to continue."
+	echo " - ${PKG} completed. Press a key to continue."
     read
 }
 
