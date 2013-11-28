@@ -14,7 +14,7 @@ makedepends=('mate-settings-daemon' 'mate-icon-theme' 'perl-xml-parser' 'yelp-to
 options=('!emptydirs' '!libtool')
 conflicts=("${_pkgname}-pulseaudio" 'mate-settings-daemon-pulseaudio')
 provides=("${_pkgname}")
-source=("${_pkgname}::git+https://github.com/mate-desktop/${_pkgname}.git")
+source=("${_pkgname}::git+https://github.com/mate-desktop/${_pkgname}.git"
         enable_deprecated.diff)
 sha1sums=('SKIP'
           'f0e38578aacacf9ee852b7a44a34908cc230b91f')

@@ -17,7 +17,7 @@ conflicts=("${_pkgname}-gstreamer" 'mate-settings-daemon-gstreamer')
 provides=("${_pkgname}")
 replaces=("${_pkgname}")
 source=("${_pkgname}::git+https://github.com/mate-desktop/${_pkgname}.git")
-sha1sums=('32730c0c5ca20d41f11390a154875a1220d9ba9c')
+sha1sums=('SKIP')
 install=${pkgname}.install
 
 pkgver() {
