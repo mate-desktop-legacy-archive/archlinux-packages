@@ -14,31 +14,38 @@ makedepends=('mate-settings-daemon' 'mate-icon-theme' 'perl-xml-parser' 'yelp-to
 options=('!emptydirs' '!libtool')
 conflicts=("${_pkgname}-pulseaudio" 'mate-settings-daemon-pulseaudio')
 provides=("${_pkgname}")
-source=(http://pub.mate-desktop.org/releases/1.7/${_pkgname}-${pkgver}.tar.xz
+source=("${_pkgname}::git+https://github.com/mate-desktop/${_pkgname}.git")
         enable_deprecated.diff)
-sha1sums=('32730c0c5ca20d41f11390a154875a1220d9ba9c'
+sha1sums=('SKIP'
           'f0e38578aacacf9ee852b7a44a34908cc230b91f')
 install=${pkgname}.install
 
+pkgver() {
+    cd ${srcdir}/${_pkgname}
+    echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
+}
+
 prepare() {
-    cd ${srcdir}/${_pkgname}-${pkgver}   
+    cd ${srcdir}/${_pkgname}
     patch -p1 < ../../enable_deprecated.diff gst-mixer/src/Makefile.am    
 }
 
 build() {
-	cd ${srcdir}/${_pkgname}-${pkgver}    
-    ./configure \
+	cd ${srcdir}/${_pkgname}
+	./autogen.sh \
         --prefix=/usr \
-        --libexecdir=/usr/lib/${_pkgname} \
         --sysconfdir=/etc \
-        --enable-polkit \
-        --enable-gstreamer \
-        --disable-pulse \
+        --libexecdir=/usr/lib/${_pkgname} \
+        --localstatedir=/var \
+        --enable-gstmix \
+        --enable-gst-mixer-applet \
+        --disable-pulseaudio \
+        --disable-scrollkeeper
         --disable-static
-    make
+    make        
 }
 
 package() {
-    cd ${srcdir}/${_pkgname}-${pkgver}
+    cd ${srcdir}/${_pkgname}
     make DESTDIR=${pkgdir} install
 }
