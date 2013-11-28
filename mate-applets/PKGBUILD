@@ -7,13 +7,14 @@ pkgdesc="Applets for MATE panel"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 url="http://mate-desktop.org"
 license=('GPL')
-depends=('avahi' 'dbus' 'gsettings-desktop-schemas' 'gstreamer0.10-base-plugins'
-         'gstreamer0.10-good-plugins' 'gtk2' 'gvfs' 'libgtop' 'libmateweather'
-         'libwnck' 'libnotify' 'liboobs' 'libsoup' 'libxklavier' 'libxt'
-         'mate-desktop' 'mate-icon-theme' 'mate-panel' 'mate-settings-daemon'
-         'polkit' 'pygtk' 'python2' 'python2-dbus' 'python2-gobject2'
-         'python2-notify' 'sharutils' 'system-tools-backends' 'upower')
-optdepends=('gucharmap: Unicode character map.')
+depends=('avahi' 'dbus' 'gsettings-desktop-schemas'
+         'gstreamer0.10-base-plugins' 'gstreamer0.10-good-plugins'
+         'gtk2' 'gucharmap' 'gvfs' 'libgtop' 'libmateweather' 'libwnck'
+         'libnotify' 'liboobs' 'libsoup' 'libxklavier' 'libxt'
+         'mate-desktop' 'mate-icon-theme' 'mate-panel'
+         'mate-settings-daemon' 'polkit' 'pygtk' 'python2' 'python2-dbus'
+         'python2-gobject2' 'python2-notify' 'sharutils'
+         'system-tools-backends' 'upower' 'yelp')
 makedepends=('docbook2x' 'docbook-xsl' 'mate-common' 'networkmanager' 'perl-xml-parser' 'yelp-tools')
 options=('!emptydirs' '!libtool')
 groups=('mate-extras')

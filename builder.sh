@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# TODO
-#  - Which packages depend 'yelp'
-
 AUR_BUILD_ORDER=(
     aur/libindicator
     aur/system-tools-backends
