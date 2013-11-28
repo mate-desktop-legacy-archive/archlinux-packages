@@ -303,7 +303,7 @@ function tree_build() {
     local PKG=${1}
     cd ${PKG}
     local INSTALLED=$(pacman -Q `basename ${PKG}` 2>/dev/null | cut -f2 -d' ')
-    local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=')
+    local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=' | head -n1)
     local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
     local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
     
