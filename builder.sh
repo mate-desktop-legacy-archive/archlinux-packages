@@ -309,12 +309,10 @@ function tree_build() {
     
     if [ -z "${PKGBUILD_VER}" ]; then
 		echo " - ${PKG} has no 'pkgver', needs building"
-		BUILD_PKG=1
+		local BUILD_PKG=1
     else    
 		echo " - Looking for *${PKGBUILD}*.pkg.tar.xz"
-		local HAS_PKG=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
-		local RET=$?
-		if [ ${RET} -eq 0 ]; then
+		if [ -f *${PKGBUILD}*.pkg.tar.xz ]; then
 			echo " - ${PKG} is current : ${RET}"
 			local BUILD_PKG=0
 		else
@@ -336,7 +334,6 @@ function tree_build() {
 	fi
 
     if [ ${BUILD_PKG} -eq 1 ]; then
-
         echo " - Building ${PKG}"
         if [ $(id -u) -eq 0 ]; then
             makepkg -fs --noconfirm --needed --log --asroot
