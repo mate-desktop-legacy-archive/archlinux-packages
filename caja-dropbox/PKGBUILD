@@ -13,7 +13,7 @@ pkgdesc="Dropbox for Linux - Caja extension"
 url="http://forums.dropbox.com/topic.php?id=21111"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('custom:CC-BY-ND-3' 'GPL')
-depends=('glib2' 'polkit' 'procps' 'pygtk' 'libnotify' 'mate-file-manager')
+depends=('caja' 'glib2' 'polkit' 'procps' 'pygtk' 'libnotify')
 makedepends=('mate-common' 'python2-docutils')
 optdepends=('dropbox: Dropbox support')
 options=('!emptydirs' '!libtool')
@@ -32,7 +32,7 @@ build() {
 
 package() {
     cd ${pkgname}-${pkgver}
-    make DESTDIR="${pkgdir}" install
+    make DESTDIR=${pkgdir} install
     install -Dm644 COPYING "${pkgdir}/usr/share/licenses/${pkgname}/COPYING"
     # Remove the cruft
     rm -f ${pkgdir}/usr/lib/caja/extensions-*/libcaja-dropbox.a

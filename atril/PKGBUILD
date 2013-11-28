@@ -1,0 +1,45 @@
+# Contributor: Martin Wimpress <code@flexion.org>
+
+pkgname=atril
+pkgver=
+pkgrel=1
+pkgdesc="Simply a document viewer"
+url="http://mate-desktop.org"
+arch=('i686' 'x86_64' 'armv6h' 'armv7h')
+license=('GPL')
+depends=('caja' 'dbus' 'desktop-file-utils' 'djvulibre' 'gobject-introspection'
+         'gtk2' 'libgxps' 'libsm' 'libspectre' 'mate-icon-theme'
+         'poppler-glib' 't1lib' 'texlive-bin' 'zlib')
+makedepends=('gtk-update-icon-cache' 'mate-common' 'perl-xml-parser' 'yelp-tools')
+options=('!emptydirs' '!libtool')
+groups=('mate-extras')
+source=("${pkgname%-*}::git+https://github.com/mate-desktop/${pkgname}.git")
+sha1sums=('SKIP')
+install=${pkgname}.install
+
+pkgver() {
+    cd ${srcdir}/${pkgname%-git}
+    echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
+}
+
+build() {
+    cd ${srcdir}/${pkgname%-git}
+    ./autogen.sh \
+        --prefix=/usr \
+        --libexecdir=/usr/lib/${pkgname} \
+        --enable-gtk-doc \
+        --enable-djvu \
+        --enable-dvi \
+        --enable-t1lib \
+        --enable-pixbuf \
+        --enable-comics \
+        --disable-introspection \
+        --disable-static \
+        --disable-scrollkeeper
+    make
+}
+
+package() {
+    cd ${srcdir}/${pkgname%-git}
+    make DESTDIR=${pkgdir} install    
+}

@@ -1,0 +1,35 @@
+# Contributor: Martin Wimpress <code@flexion.org>
+
+pkgname=caja-extensions
+pkgver=1.7.0
+pkgrel=1
+pkgdesc="Caja extensions."
+url="http://mate-desktop.org"
+arch=('i686' 'x86_64' 'armv6h' 'armv7h')
+license=('GPL')
+depends=('caja' 'dbus' 'gupnp' 'imagemagick' 'gtk2' 'samba')
+makedepends=('mate-common' 'perl-xml-parser')
+optdepends=('pidgin: Support for sending to instant messaging networks.'
+            'gajim: Support for sending to Jabber.'
+            'mate-bluetooth: Support for sending to bluetooth.')
+options=('!emptydirs' '!libtool')
+groups=('mate-extras')
+source=(http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz)
+sha1sums=('8a6fee2f2b5253f0069cc9567e5e12691c7178ae')
+install=${pkgname}.install
+
+build() {
+    cd ${srcdir}/${pkgname}-${pkgver}
+    PYTHON=/usr/bin/python2 ./autogen.sh \
+        --prefix=/usr \
+        --with-plugins=gajim,pidgin,removable-devices,upnp,emailclient
+    make
+}
+
+package() {
+    cd ${srcdir}/${pkgname}-${pkgver}
+    make DESTDIR=${pkgdir} install
+    rm -f ${pkgdir}/usr/lib/caja/extensions-2.0/libcaja-gksu.a
+    rm -f ${pkgdir}/usr/lib/caja/extensions-2.0/libcaja-open-terminal.a
+    rm -f ${pkgdir}/usr/lib/caja/extensions-*/libcaja-share.a
+}

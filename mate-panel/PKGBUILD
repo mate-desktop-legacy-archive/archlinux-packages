@@ -1,22 +1,20 @@
-# Contributor: Giovanni Ricciardi <kar98k.sniper@gmail.com>
-# Contributor: Xpander <xpander0@gmail.com>
 # Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-panel
-pkgver=1.6.1
-pkgrel=2
+pkgver=1.7.0
+pkgrel=1
 pkgdesc="The MATE Panel"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('avahi' 'dbus' 'dconf' 'desktop-file-utils' 'gobject-introspection' 'gtk2'
-         'libmatewnck' 'libcanberra' 'libice' 'libmateweather' 'librsvg' 'libsm'
+         'libwnck' 'libcanberra' 'libice' 'libmateweather' 'librsvg' 'libsm'
          'libsoup' 'libxau' 'mate-menus' 'mate-desktop' 'mate-polkit' 'python2')
-makedepends=('mate-common' 'mate-doc-utils' 'networkmanager' 'perl-xml-parser')
+makedepends=('mate-common' 'networkmanager' 'perl-xml-parser' 'yelp-tools')
 options=('!emptydirs' '!libtool')
 groups=('mate')
-source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
-sha1sums=('ccd8d01e14d12d09a9c807b98990c02868323c71')
+source=(http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz)
+sha1sums=('419aa17e6a00b4c51fa9621bf392d35e67529d38')
 install=${pkgname}.install
 
 build() {
@@ -34,5 +32,5 @@ build() {
 
 package() {
     cd ${srcdir}/${pkgname}-${pkgver}
-    make DESTDIR="${pkgdir}" install
+    make DESTDIR=${pkgdir} install
 }

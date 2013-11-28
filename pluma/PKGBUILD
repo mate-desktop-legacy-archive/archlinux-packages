@@ -1,20 +1,19 @@
-# Contributor: Giovanni Ricciardi <kar98k.sniper@gmail.com>
 # Contributor: Martin Wimpress <code@flexion.org>
 
-pkgname=mate-text-editor
-pkgver=1.6.0
-pkgrel=4
+pkgname=pluma
+pkgver=1.7.0
+pkgrel=1
 pkgdesc="A powerful text editor for MATE"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('desktop-file-utils' 'enchant' 'gtk2' 'gtksourceview2' 'iso-codes'
          'libsm' 'python2' 'python2-gobject2' 'pygtksourceview2')
-makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
+makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
 options=('!emptydirs' '!libtool')
 groups=('mate-extras')
-source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
-sha1sums=('47d6ff5655c92baac70719247d22e7aabce56f4f')
+source=(http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz)
+sha1sums=('49a0fec29728f5ffa36ab41415574d1e27f58536')
 install=${pkgname}.install
 
 build() {
@@ -29,5 +28,5 @@ build() {
 
 package() {
     cd ${srcdir}/${pkgname}-${pkgver}
-    make DESTDIR="${pkgdir}" install
+    make DESTDIR=${pkgdir} install
 }

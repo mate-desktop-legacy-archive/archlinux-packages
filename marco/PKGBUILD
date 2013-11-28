@@ -1,16 +1,17 @@
 # Contributor: Martin Wimpress <code@flexion.org>
 
-pkgname=mate-icon-theme-faenza
+pkgname=marco
 pkgver=
 pkgrel=1
-pkgdesc="Faenza icon theme for MATE"
+pkgdesc="A window manager for MATE"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
-license=('LGPL')
-depends=('hicolor-icon-theme' 'gtk2' 'librsvg')
-makedepends=('icon-naming-utils' 'mate-common')
-options=(!strip)
-groups=('mate-extras')
+license=('GPL')
+depends=('desktop-file-utils' 'gtk2' 'libcanberra' 'libgtop' 'libice'
+         'libsm' 'libxt' 'mate-dialogs' 'startup-notification')
+makedepends=('git' 'mate-common' 'perl-xml-parser' 'yelp-tools')
+options=('!emptydirs' '!libtool')
+groups=('mate')
 source=("${pkgname%-*}::git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')
 install=${pkgname}.install
@@ -22,13 +23,17 @@ pkgver() {
 
 build() {
     cd ${srcdir}/${pkgname%-git}
-    ./autogen.sh \
-        --prefix=/usr
+    ./configure \
+        --prefix=/usr \
+        --sysconfdir=/etc \
+        --localstatedir=/var \
+        --enable-startup-notification \
+        --disable-static \
+        --disable-scrollkeeper
     make
 }
 
 package() {
     cd ${srcdir}/${pkgname%-git}
     make DESTDIR=${pkgdir} install
-    rm -f ${pkgdir}/usr/share/icons/matefaenza/icon-theme.cache
 }

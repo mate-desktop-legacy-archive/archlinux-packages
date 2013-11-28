@@ -1,26 +1,29 @@
-# Contributor: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
-# Contributor: Xpander <xpander0@gmail.com>
 # Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-bluetooth
-pkgver=1.6.0
-pkgrel=3
+pkgver=
+pkgrel=1
 pkgdesc="A collection of Bluetooth utilities and modules for MATE"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('dbus' 'desktop-file-utils' 'gobject-introspection' 'gtk2'
-         'gvfs' 'libnotify' 'libunique' 'obexd-client' 'obex-data-server')
-makedepends=('mate-common' 'mate-doc-utils' 'mate-file-manager-sendto' 'perl-xml-parser')
+         'gvfs' 'libnotify' 'libunique' 'obex-data-server')
+makedepends=('mate-common' 'caja-extensions' 'perl-xml-parser' 'yelp-tools')
 optdepends=('mate-user-share: Enable sharing via bluetooth and other protocols.')
 options=('!emptydirs' '!libtool')
 groups=('mate-extras')
-source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
-sha1sums=('fc8810f16a1b70bd24dd329b505d932f5b672a56')
+source=("${pkgname%-*}::git+https://github.com/mate-desktop/${pkgname}.git")
+sha1sums=('SKIP')
 install=${pkgname}.install
 
+pkgver() {
+    cd ${srcdir}/${pkgname%-git}
+    echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
+}
+
 build() {
-	cd ${srcdir}/${pkgname}-${pkgver}
+	cd ${srcdir}/${pkgname%-git}
     ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
@@ -33,6 +36,6 @@ build() {
 }
 
 package() {
-    cd ${srcdir}/${pkgname}-${pkgver}
-    make DESTDIR="${pkgdir}" install
+    cd ${srcdir}/${pkgname%-git}
+    make DESTDIR=${pkgdir} install
 }

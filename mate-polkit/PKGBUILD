@@ -1,26 +1,24 @@
-# Contributor: Giovanni Ricciardi <kar98k.sniper@gmail.com>
-# Contributor: Xpander <xpander0@gmail.com>
 # Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-polkit
-pkgver=1.6.0
-pkgrel=2
+pkgver=1.7.1
+pkgrel=1
 pkgdesc="PolicyKit integration for the MATE desktop"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('LGPL')
-depends=('dbus' 'gobject-introspection' 'gtk2' 'polkit>=0.101')
+depends=('dbus' 'gobject-introspection' 'gtk2' 'polkit')
 makedepends=('mate-common' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
 groups=('mate')
-source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
-sha1sums=('50c3dcd931ef4c62d14ca0754d1ccb6ed7e617b5')
+source=(http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz)
+sha1sums=('130b11454b87fd94fecb15f7a0540bd6ba423da5')
 
 build() {
     cd ${srcdir}/${pkgname}-${pkgver}
     ./autogen.sh \
         --prefix=/usr \
-        --libexecdir=/usr/lib/polkit-mate \
+        --libexecdir=/usr/lib/${pkgname} \
         --sysconfdir=/etc \
         --localstatedir=/var \
         --disable-introspection \
@@ -30,5 +28,5 @@ build() {
 
 package() {
     cd ${srcdir}/${pkgname}-${pkgver}
-    make DESTDIR="${pkgdir}" install
+    make DESTDIR=${pkgdir} install
 }

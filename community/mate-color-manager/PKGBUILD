@@ -7,9 +7,9 @@ pkgdesc="Color management application for MATE."
 url="https://github.com/NiceandGently/${pkgname}"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('dbus' 'exiv2' 'gtk2' 'lcms2' 'libcanberra' 'libcups' 'libexif' 'libnotify' 'libtiff'
-         'libunique' 'mate-desktop' 'sane' 'vte')
-makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
+depends=('dbus' 'exiv2' 'gtk2' 'lcms2' 'libcanberra' 'libcups' 'libexif'
+         'libnotify' 'libtiff' 'libunique' 'mate-desktop' 'sane' 'vte')
+makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
 options=('!libtool' '!emptydirs')
 groups=('mate-extras-community')
 source=(https://github.com/NiceandGently/${pkgname}/archive/v${pkgver}.tar.gz)
@@ -18,7 +18,6 @@ install=${pkgname}.install
 
 build() {
     cd ${srcdir}/${pkgname}-${pkgver}
-
     ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
@@ -34,5 +33,5 @@ build() {
 
 package() {
     cd ${srcdir}/${pkgname}-${pkgver}
-    make DESTDIR="${pkgdir}" install
+    make DESTDIR=${pkgdir} install
 }

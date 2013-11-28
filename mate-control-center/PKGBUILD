@@ -1,28 +1,30 @@
-# Contributor: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
-# Contributor: Xpander <xpander0@gmail.com>
-# Contributor: hekel <hekel@archlinux.info>
 # Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-control-center
-pkgver=1.6.1
-pkgrel=2
+pkgver=
+pkgrel=1
 pkgdesc="The Control Center for MATE"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('dbus' 'dconf' 'desktop-file-utils' 'gsettings-desktop-schemas' 'gtk2'
          'mate-desktop' 'mate-icon-theme' 'mate-menus' 'mate-settings-daemon'
-         'mate-window-manager' 'libgtop' 'libmatekbd' 'libunique' 'librsvg'
-         'libxss' 'libxt' 'startup-notification')
-makedepends=('docbook2x' 'mate-common' 'mate-doc-utils' 'perl-xml-parser')
+         'marco' 'libgtop' 'libmatekbd' 'libunique' 'librsvg' 'libxss'
+         'libxt' 'startup-notification')
+makedepends=('docbook2x' 'mate-common' 'perl-xml-parser' 'yelp-tools')
 options=('!emptydirs' '!libtool')
 groups=('mate')
-source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
-sha1sums=('7908a1bdbbcce9d2b7a8604c83fdd30f2c19b106')
+source=("${pkgname%-*}::git+https://github.com/mate-desktop/${pkgname}.git")
+sha1sums=('SKIP')
 install=${pkgname}.install
 
+pkgver() {
+    cd ${srcdir}/${pkgname%-git}
+    echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
+}
+
 build() {
-    cd ${srcdir}/${pkgname}-${pkgver}
+    cd ${srcdir}/${pkgname%-git}
     ./configure \
         --prefix=/usr \
         --sysconfdir=/etc \
@@ -35,7 +37,7 @@ build() {
 }
 
 package() {
-    cd ${srcdir}/${pkgname}-${pkgver}
-    make DESTDIR="${pkgdir}" install
+    cd ${srcdir}/${pkgname%-git}
+    make DESTDIR=${pkgdir} install
     rm -f ${pkgdir}/usr/share/applications/mimeinfo.cache
 }

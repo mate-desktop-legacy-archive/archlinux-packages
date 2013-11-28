@@ -1,26 +1,25 @@
-# Contributor: Giovanni Ricciardi <kar98k.sniper@gmail.com>
-# Contributor: Xpander <xpander0@gmail.com>
 # Contributor: Martin Wimpress <code@flexion.org>
 
 _pkgname=mate-settings-daemon
 pkgname=${_pkgname}-pulseaudio
-pkgver=1.6.1
-pkgrel=6
+pkgver=1.7.0
+pkgrel=1
 pkgdesc="The MATE Settings daemon (pulseaudio)"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('dbus' 'dconf' 'fontconfig' 'gstreamer0.10-base-plugins' 'gtk2'
-         'libcanberra' 'libcanberra-gstreamer' 'libcanberra-pulse' 'libmatekbd' 'libnotify'
-         'libpulse' 'libxt' 'mate-desktop' 'mate-polkit' 'startup-notification')
+         'libcanberra' 'libcanberra-gstreamer' 'libcanberra-pulse'
+         'libmatekbd' 'libnotify' 'libpulse' 'libxt' 'mate-desktop'
+         'mate-polkit' 'startup-notification')
 makedepends=('mate-common' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
 groups=('mate')
 conflicts=("${_pkgname}-gstreamer" 'mate-media-gstreamer')
 provides=("${_pkgname}")
 replaces=("${_pkgname}")
-source=(http://pub.mate-desktop.org/releases/1.6/${_pkgname}-${pkgver}.tar.xz)
-sha1sums=('18c3af496e908d1033389e251ade560373897312')
+source=(http://pub.mate-desktop.org/releases/1.7/${_pkgname}-${pkgver}.tar.xz)
+sha1sums=('32730c0c5ca20d41f11390a154875a1220d9ba9c')
 install=${pkgname}.install
 
 build() {
@@ -38,5 +37,5 @@ build() {
 
 package() {
     cd ${srcdir}/${_pkgname}-${pkgver}
-    make DESTDIR="${pkgdir}" install
+    make DESTDIR=${pkgdir} install
 }

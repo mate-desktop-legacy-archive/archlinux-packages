@@ -1,11 +1,10 @@
-# Contributor: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
-# Contributor: Xpander <xpander0@gmail.com>
 # Contributor: Martin Wimpress <code@flexion.org>
 # Contributor: Piotr Gorski <sir_lucjan@bridgelinux.pl>
+# Contributor: Xpander <xpander0@gmail.com>
 
 pkgname=caja
 pkgver=1.7.0
-pkgrel=2
+pkgrel=1
 pkgdesc="The MATE shell and file manager"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -22,7 +21,7 @@ sha1sums=('6549f3950cc50b54be90097f86ee4dc68f5bab06 ')
 install=${pkgname}.install
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd ${srcdir}/${pkgname}-${pkgver}
     ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/caja \
@@ -34,6 +33,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
-    make DESTDIR="${pkgdir}" install
+    cd ${srcdir}/${pkgname}-${pkgver}
+    make DESTDIR=${pkgdir} install
 }

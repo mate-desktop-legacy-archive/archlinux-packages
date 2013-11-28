@@ -2,13 +2,14 @@
 
 pkgname=mate-mplayer
 pkgver=1.0.8
-pkgrel=1
+pkgrel=2
 pkgdesc="Mplayer GUI for MATE"
 url="https://github.com/NiceandGently/mate-nettool"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('curl' 'dbus-glib' 'desktop-file-utils' 'gmtk' 'gtk3' 'gvfs' 'libgpod' 'libnotify'
-         'libmusicbrainz3' 'mate-control-center' 'mate-file-manager' 'mencoder' 'mplayer' 'pulseaudio')
+depends=('caja' 'curl' 'dbus-glib' 'desktop-file-utils' 'gmtk' 'gtk3'
+         'gvfs' 'libgpod' 'libnotify' 'libmusicbrainz3'
+         'mate-control-center' 'mencoder' 'mplayer' 'pulseaudio')
 makedepends=('mate-common' 'perl-xml-parser')
 options=('!libtool' '!emptydirs')
 groups=('mate-extras-community')
@@ -25,5 +26,5 @@ build() {
 
 package() {
     cd ${srcdir}/${pkgname}-${pkgver}
-    make DESTDIR="${pkgdir}" install
+    make DESTDIR=${pkgdir} install
 }

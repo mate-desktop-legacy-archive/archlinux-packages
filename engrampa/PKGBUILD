@@ -1,15 +1,19 @@
 # Contributor: Martin Wimpress <code@flexion.org>
 
-pkgname=mate-utils
+pkgname=engrampa
 pkgver=
 pkgrel=1
-pkgdesc="Common MATE utilities for viewing disk usage, logs and fonts, taking screenshots, managing dictionaries and searching files"
+pkgdesc="Archive manipulator for MATE"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('desktop-file-utils' 'gtk2' 'libcanberra' 'libgtop' 'libsm'
-         'mate-panel' 'zlib')
-makedepends=('mate-common' 'perl-xml-parser' 'rarian' 'yelp-tools')
+depends=('bzip2' 'caja' 'desktop-file-utils' 'gtk2' 'gzip' 'tar')
+makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
+conflicts=('file-roller' 'file-roller2' 'mate-extract')
+optdepends=('unrar: for RAR uncompression'
+'zip: for ZIP archives' 'unzip: for ZIP archives'
+'p7zip: 7zip compression utility' 'arj: for ARJ archives'
+'unace: extraction tool for the proprietary ace archive format')
 options=('!libtool' '!emptydirs')
 groups=('mate-extras')
 source=("${pkgname%-*}::git+https://github.com/mate-desktop/${pkgname}.git")        
@@ -22,13 +26,13 @@ pkgver() {
 }
 
 build() {
-    cd ${srcdir}/${pkgname%-git}
+	cd ${srcdir}/${pkgname%-git}	
     ./autogen.sh \
         --prefix=/usr \
 		--libexecdir=/usr/lib/${pkgname} \
-        --sysconfdir=/etc \
-        --disable-static \
-		--disable-scrollkeeper
+		--disable-static \
+		--disable-scrollkeeper \
+		--disable-packagekit	
 	make
 }
 

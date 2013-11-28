@@ -1,18 +1,17 @@
-# Contributor: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
-# Contributor: Xpander <xpander0@gmail.com>
 # Contributor: Martin Wimpress <code@flexion.org>
 # Contributor: Piotr Gorski <sir_lucjan@bridgelinux.pl>
+# Contributor: Xpander <xpander0@gmail.com>
 
 pkgname=mate-desktop
 pkgver=1.7.1
-pkgrel=2
+pkgrel=1
 pkgdesc="Library with common API for various MATE modules"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=(GPL LGPL)
 depends=('desktop-file-utils' 'gtk2' 'hicolor-icon-theme' 'libunique' 'python2'
          'startup-notification')
-makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
+makedepends=('mate-common' 'perl-xml-parser')
 optdepends=('lightdm-gtk2-greeter: A lightweight display manager')
 options=('!emptydirs' '!libtool')
 groups=('mate')
@@ -33,7 +32,7 @@ build() {
 
 package() {
     cd ${srcdir}/${pkgname}-${pkgver}
-    make DESTDIR="${pkgdir}" install
+    make DESTDIR=${pkgdir} install
     # Prevent conflict errors
     #mv ${pkgdir}/usr/share/omf ${pkgdir}/usr/share/mate-omf
 }

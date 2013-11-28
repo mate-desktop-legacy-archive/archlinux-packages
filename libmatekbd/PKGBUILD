@@ -1,11 +1,10 @@
-# Contributor: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
-# Contributor: Xpander <xpander0@gmail.com>
 # Contributor: Martin Wimpress <code@flexion.org>
 # Contributor: Piotr Gorski <sir_lucjan@bridgelinux.pl>
+# Contributor: Xpander <xpander0@gmail.com>
 
 pkgname=libmatekbd
 pkgver=1.7.1
-pkgrel=2
+pkgrel=1
 pkgdesc="MATE keyboard library"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -28,5 +27,5 @@ build() {
 
 package() {
     cd ${srcdir}/${pkgname}-${pkgver}
-    make DESTDIR="${pkgdir}" install
+    make DESTDIR=${pkgdir} install
 }

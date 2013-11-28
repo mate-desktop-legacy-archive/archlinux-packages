@@ -1,7 +1,6 @@
-# Contributor: Giovanni Ricciardi <kar98k.sniper@gmail.com>
-# Contributor: Xpander <xpander0@gmail.com>
 # Contributor: Martin Wimpress <code@flexion.org>
 # Contributor: Piotr Gorski <sir_lucjan@bridgelinux.pl>
+# Contributor: Xpander <xpander0@gmail.com>
 
 _pkgname=mate-settings-daemon
 pkgname=${_pkgname}-gstreamer
@@ -18,12 +17,18 @@ makedepends=('mate-common' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
 conflicts=("${_pkgname}-pulseaudio" 'mate-media-pulseaudio')
 provides=("${_pkgname}")
-source=(http://pub.mate-desktop.org/releases/1.7/${_pkgname}-${pkgver}.tar.xz)
-sha1sums=('32730c0c5ca20d41f11390a154875a1220d9ba9c')
+source=(http://pub.mate-desktop.org/releases/1.7/${_pkgname}-${pkgver}.tar.xz
+        enable_deprecated.diff)
+sha1sums=('32730c0c5ca20d41f11390a154875a1220d9ba9c'
+          'f0e38578aacacf9ee852b7a44a34908cc230b91f')
 install=${pkgname}.install
 
 build() {
     cd ${srcdir}/${_pkgname}-${pkgver}
+    
+    # Enable deprecated
+    patch -p1 < ../../enable_deprecated.diff gst-mixer/src/Makefile.am    
+    
     ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/${_pkgname} \
@@ -37,6 +42,5 @@ build() {
 
 package() {
     cd ${srcdir}/${_pkgname}-${pkgver}
-    make DESTDIR="${pkgdir}" install
+    make DESTDIR=${pkgdir} install
 }
-

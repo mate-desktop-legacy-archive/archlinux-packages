@@ -1,7 +1,6 @@
-# Contributor: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
-# Contributor: Xpander <xpander0@gmail.com>
 # Contributor: Martin Wimpress <code@flexion.org>
 # Contributor: Piotr Gorski <sir_lucjan@bridgelinux.pl>
+# Contributor: Xpander <xpander0@gmail.com>
 
 pkgname=mate-dialogs
 pkgver=1.7.2
@@ -11,7 +10,7 @@ url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('LGPL')
 depends=('gtk2' 'libnotify')
-makedepends=('docbook-xml' 'mate-common' 'mate-doc-utils' 'perl-xml-parser')
+makedepends=('docbook-xml' 'mate-common' 'perl-xml-parser' 'yelp-tools')
 options=('!emptydirs' '!libtool')
 groups=('mate')
 conflicts=('zenity')
@@ -19,7 +18,6 @@ provides=('zenity')
 replaces=('zenity')
 source=(http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz)
 sha1sums=('adfa6c43b624c76f59125f6748a53b6fe433207a')
-
 
 build() {
     cd ${srcdir}/${pkgname}-${pkgver}
@@ -31,7 +29,7 @@ build() {
 
 package() {
     cd ${srcdir}/${pkgname}-${pkgver}
-    make DESTDIR="${pkgdir}" install
+    make DESTDIR=${pkgdir} install
     ln -s matedialog ${pkgdir}/usr/bin/zenity
 }
 

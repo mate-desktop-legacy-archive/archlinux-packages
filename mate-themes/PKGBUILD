@@ -1,4 +1,3 @@
-# Contributor: Giovanni Ricciardi <kar98k.sniper@gmail.com>
 # Contributor: Martin Wimpress <code@flexion.org>
 # Contributor: Piotr Gorski <sir_lucjan@bridgelinux.pl>
 
@@ -17,7 +16,6 @@ replaces=('gnome-themes')
 conflicts=('gnome-themes')
 source=(http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz)
 sha1sums=('d30744009b3090d1ce7e8cfba8293c58994a5a85')
-
 install=${pkgname}.install
 
 build() {
@@ -32,6 +30,5 @@ build() {
 
 package() {
     cd ${srcdir}/${pkgname}-${pkgver}
-    make DESTDIR="${pkgdir}" install
+    make DESTDIR=${pkgdir} install
 }
-

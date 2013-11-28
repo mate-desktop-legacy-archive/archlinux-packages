@@ -1,19 +1,18 @@
-# Contributor: Giovanni Ricciardi <kar98k.sniper@gmail.com>
 # Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-terminal
-pkgver=1.6.1
-pkgrel=3
+pkgver=1.7.0
+pkgrel=1
 pkgdesc="The MATE Terminal Emulator"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('dbus' 'dconf' 'desktop-file-utils' 'gtk2' 'libsm' 'vte')
-makedepends=('docbook2x' 'mate-common' 'mate-doc-utils' 'perl-xml-parser')
+makedepends=('docbook2x' 'mate-common' 'perl-xml-parser' 'yelp-tools')
 options=('!emptydirs' '!libtool')
 groups=('mate-extras')
-source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
-sha1sums=('dfb108867331c2b62a15bc0375629114bad381a6')
+source=(http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz)
+sha1sums=('d793a3778e73663154c81efda9cd9096fb4a639d')
 install=${pkgname}.install
 
 build() {
@@ -27,5 +26,5 @@ build() {
 
 package() {
     cd ${srcdir}/${pkgname}-${pkgver}
-    make DESTDIR="${pkgdir}" install
+    make DESTDIR=${pkgdir} install
 }

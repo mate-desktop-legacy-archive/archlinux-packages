@@ -1,14 +1,14 @@
 # Contributor: Martin Wimpress <code@flexion.org>
 
-pkgname=mate-sensors-applet
+pkgname=mozo
 pkgver=
 pkgrel=1
-pkgdesc="An applet for the MATE Panel to display readings from hardware sensors, including CPU temperature, fan speeds and voltage readings under Linux"
+pkgdesc="An powerfull text editor for MATE"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('dbus' 'gtk2' 'libatasmart' 'libnotify' 'libxnvctrl' 'lm_sensors' 'mate-panel' )
-makedepends=('docbook-xml' 'mate-common' 'perl-xml-parser' 'rarian' 'yelp-tools')
+depends=('desktop-file-utils' 'pygtk' 'python2' 'python2-gobject2')
+makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
 options=('!emptydirs' '!libtool')
 groups=('mate-extras')
 source=("${pkgname%-*}::git+https://github.com/mate-desktop/${pkgname}.git")        
@@ -22,15 +22,14 @@ pkgver() {
 
 build() {
     cd ${srcdir}/${pkgname%-git}
-    ./autogen.sh \
-        --prefix=/usr \
-        --libexecdir=/usr/lib/${pkgname} \
-        --disable-static \
-        --disable-scrollkeeper
-  make
+    PYTHON=/usr/bin/python2 ./autogen.sh \
+        --prefix=/usr
+    make
 }
 
 package() {
     cd ${srcdir}/${pkgname%-git}
     make DESTDIR=${pkgdir} install
 }
+
+

@@ -1,23 +1,28 @@
-# Contributor: Giovanni Ricciardi <kar98k.sniper@gmail.com>
 # Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-system-monitor
-pkgver=1.6.1
-pkgrel=3
+pkgver=
+pkgrel=1
 pkgdesc="A system monitor for MATE"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('dbus' 'glibmm' 'gtk2' 'gtkmm' 'libgtop' 'libmatewnck' 'librsvg' 'mate-icon-theme')
-makedepends=('docbook2x' 'mate-common' 'mate-doc-utils' 'perl-xml-parser')
+depends=('dbus' 'glibmm' 'gtk2' 'gtkmm' 'libgtop' 'libwnck' 'librsvg'
+         'mate-icon-theme')
+makedepends=('docbook2x' 'mate-common' 'perl-xml-parser' 'yelp-tools')
 options=('!emptydirs' '!libtool')
 groups=('mate')
-source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
-sha1sums=('84b6e8f3557bdadada026aeb349f6e9e90b59c6a')
+source=("${pkgname%-*}::git+https://github.com/mate-desktop/${pkgname}.git")        
+sha1sums=('SKIP')         
 install=${pkgname}.install
 
+pkgver() {
+    cd ${srcdir}/${pkgname%-git}
+    echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
+}
+
 build() {
-    cd ${srcdir}/${pkgname}-${pkgver}
+    cd ${srcdir}/${pkgname%-git}
     ./configure \
         --prefix=/usr \
 		--libexecdir=/usr/lib/${pkgname} \
@@ -29,6 +34,6 @@ build() {
 }
 
 package() {
-    cd ${srcdir}/${pkgname}-${pkgver}
-    make DESTDIR="${pkgdir}" install
+    cd ${srcdir}/${pkgname%-git}
+    make DESTDIR=${pkgdir} install
 }

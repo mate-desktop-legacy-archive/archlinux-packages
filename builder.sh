@@ -5,7 +5,7 @@ AUR_BUILD_ORDER=(
     aur/system-tools-backends
     aur/liboobs
     aur/libxnvctrl
-    aur/python2-exiv2
+    #aur/python2-exiv2
 )
 
 COMMUNITY_BUILD_ORDER=(
@@ -17,67 +17,60 @@ COMMUNITY_BUILD_ORDER=(
     community/mate-mplayer
     community/mate-nettool
     community/variety
-    community/mintmenu
+    #community/mintmenu
 )
 
-MATE_BUILD_ORDER=(
-    mate-common
-    mate-doc-utils
-    mate-desktop
-    libmatekeyring
-    mate-keyring
-    libmatekbd
-    libmatewnck
-    libmateweather
-    mate-icon-theme
-    mate-dialogs
-    mate-file-manager
-    mate-polkit
-    mate-window-manager
-    mate-settings-daemon-gstreamer
-    mate-media-gstreamer
-    mate-settings-daemon-pulseaudio
-    mate-media-pulseaudio
-    mate-menus
-    mate-panel
-    mate-session-manager
-    mate-backgrounds
-    mate-themes
-    mate-notification-daemon
-    mate-image-viewer
-    mate-control-center
-    mate-screensaver
-    mate-file-archiver
-    mate-power-manager
-    mate-system-monitor
-    caja-dropbox
-    mate-applets
-    mate-calc
-    mate-character-map
-    mate-document-viewer
-    mate-file-manager-gksu
-    mate-file-manager-image-converter
-    mate-file-manager-open-terminal
-    mate-file-manager-sendto
-    mate-bluetooth
-    mate-file-manager-share
-    mate-icon-theme-faenza
-    mate-indicator-applet
-    mate-menu-editor
-    mate-netbook
-    mate-netspeed
-    mate-sensors-applet
-    mate-system-tools
-    mate-terminal
-    mate-text-editor
-    mate-user-share
-    mate-utils
-    python2-caja
+# http://wiki.mate-desktop.org/status:1.8
+MATE_BUILD_ORDER=(	
+	mate-common
+	mate-desktop
+	libmatekbd
+	libmateweather
+	mate-icon-theme
+	mate-dialogs
+	caja
+	mate-polkit
+	marco
+	mate-settings-daemon-gstreamer
+	mate-settings-daemon-pulseaudio
+	mate-session-manager
+	mate-menus
+	mate-panel
+	mate-backgrounds
+	mate-themes
+	mate-notification-daemon
+	mate-control-center
+	mate-screensaver
+	engrampa
+	mate-media
+	mate-power-manager
+	mate-system-monitor	
+	atril
+	caja-dropbox
+	caja-extensions
+	mate-applets
+	mate-bluetooth
+	mate-calc
+	mucharmap
+	eom
+	mate-icon-theme-faenza
+	mate-indicator-applet
+	mozo
+	mate-netbook
+	mate-netspeed
+	mate-sensors-applet
+	mate-system-tools
+	mate-terminal
+	pluma
+	mate-user-share
+	mate-utils
+	python-caja
 )
 
 BUILD_ORDER=( ${AUR_BUILD_ORDER[@]} ${MATE_BUILD_ORDER[@]} ${COMMUNITY_BUILD_ORDER[@]})
+BUILD_ORDER=( ${AUR_BUILD_ORDER[@]} ${MATE_BUILD_ORDER[@]} )
 BASEDIR=$(dirname $(readlink -f ${0}))
-MATE_VER=1.6
+MATE_VER=1.7
 
 # Show usage information.
 function usage() {
@@ -89,6 +82,7 @@ function usage() {
     echo "-h  Shows this help message."
     echo "-t  Provide a task to run which can be one of:"
     echo "      audit       Show which packages remain to be built."
+    echo "      aur         Upload 'src' packages to the AUR."
     echo "      build       Build MATE packages."
     echo "      check       Check upstream for new source tarballs."
     echo "      clean       Clean source directories using 'make maintainer-clean'."
@@ -270,26 +264,36 @@ function tree_audit() {
 function tree_aur() {
     local PKG=${1}
     cd ${PKG}
-    
-    # Guess a category
-    if [[ "${PKG}" == *lib* ]] || [[ "${PKG}" == *python* ]]; then
-        local CAT="--category=lib"
-    elif [[ "${PKG}" == *mate* ]]; then
-        local CAT="--category=x11"
-    else 
-        local CAT=""
-    fi
-    
-    rm -f *.src.tar.gz
-	makepkg -Sfd --noconfirm --needed    
-    
-    # Attempt an auto upload to the AUR. Requires /tmp/burp.sh
-    # https://github.com/falconindy/burp
-    if [ -f /tmp/burp.sh ]; then
-        source /tmp/burp.sh
-        burp --user=${BURP_USER} --password=${BURP_PASS} --keep-cookies --cookies=/tmp/burp.cookie --verbose ${CAT} `ls -1 *.src.tar.gz`
-        if [ $? -ne 0 ]; then
-            echo ${PKG} >> /tmp/aur_fails.txt
+
+    local INSTALLED=$(pacman -Q `basename ${PKG}` 2>/dev/null | cut -f2 -d' ')
+    local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=')
+    local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
+    local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
+    local EXISTS=$(ls -1 *${PKGBUILD}*.src.tar.gz 2>/dev/null)
+
+    if [ -z "${EXISTS}" ]; then
+        echo " - Burping ${PKG}"
+        # Guess a category
+        if [[ "${PKG}" == *lib* ]] || [[ "${PKG}" == *python* ]]; then
+            local CAT="--category=lib"
+        elif [[ "${PKG}" == *mate* ]]; then
+            local CAT="--category=x11"
+        else
+            local CAT=""
+        fi
+
+        makepkg -Sfd --noconfirm --needed
+
+        # Attempt an auto upload to the AUR.
+        # https://github.com/falconindy/burp
+        if [ -f ${HOME}/.config/burp/burp.conf ]; then
+            grep flexiondotorg ${HOME}/.config/burp/burp.conf
+            if [ $? -eq 0 ]; then            
+                burp --verbose ${CAT} `ls -1 *${PKGBUILD}*.src.tar.gz`
+                if [ $? -ne 0 ]; then
+                    echo ${PKG} >> /tmp/aur_fails.txt
+                fi
+            fi
         fi
     fi
 }
@@ -305,24 +309,25 @@ function tree_build() {
     local EXISTS=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
 
     if [ "${PKG}" == "mate-settings-daemon-pulseaudio" ]; then
-		sudo pacman -Rsdd --noconfirm mate-settings-daemon-gstreamer
-		sudo pacman -Rsdd --noconfirm mate-media-gstreamer
-		sudo pacman -Rsdd --noconfirm mate-settings-daemon
-		sudo pacman -Rsdd --noconfirm mate-media
+        sudo pacman -Rsdd --noconfirm mate-settings-daemon-gstreamer
+        sudo pacman -Rsdd --noconfirm mate-media-gstreamer
+        sudo pacman -Rsdd --noconfirm mate-settings-daemon
+        sudo pacman -Rsdd --noconfirm mate-media
     elif [ "${PKG}" == "mate-settings-daemon-gstreamer" ]; then
-		sudo pacman -Rsdd --noconfirm mate-settings-daemon-pulseaudio
-		sudo pacman -Rsdd --noconfirm mate-media-pulseaudio
-		sudo pacman -Rsdd --noconfirm mate-settings-daemon
-		sudo pacman -Rsdd --noconfirm mate-media
-	fi
+        sudo pacman -Rsdd --noconfirm mate-settings-daemon-pulseaudio
+        sudo pacman -Rsdd --noconfirm mate-media-pulseaudio
+        sudo pacman -Rsdd --noconfirm mate-settings-daemon
+        sudo pacman -Rsdd --noconfirm mate-media
+    fi
 
     if [ -z "${EXISTS}" ]; then
         echo " - Building ${PKG}"
-	if [ $(id -u) -eq 0 ]; then
-        makepkg -fs --noconfirm --needed --log --asroot
-	else
-		makepkg -fs --noconfirm --needed --log
-	fi
+        if [ $(id -u) -eq 0 ]; then
+            makepkg -fs --noconfirm --needed --log --asroot
+        else
+            makepkg -fs --noconfirm --needed --log
+        fi
+
         if [ $? -ne 0 ]; then
             echo " - Failed to build ${PKG}. Stopping here."
             exit 1
@@ -371,7 +376,7 @@ function tree_check() {
         local UPSTREAM_TARBALL=$(grep -E ${UPSTREAM_PKG}-[0-9]. /tmp/${CHECK_VER}_SUMS | cut -c43- | tail -n1)
         local UPSTREAM_SHA1=$(grep -E ${UPSTREAM_PKG}-[0-9]. /tmp/${CHECK_VER}_SUMS | cut -c1-40 | tail -n1)
         local DOWNSTREAM_VER=$(grep -E ^pkgver ${PKG}/PKGBUILD | cut -f2 -d'=')
-        local DOWNSTREAM_TARBALL="${UPSTREAM_PKG}-${DOWNSTREAM_VER}.tar.xz"        
+        local DOWNSTREAM_TARBALL="${UPSTREAM_PKG}-${DOWNSTREAM_VER}.tar.xz"
         local DOWNSTREAM_SHA1=$(grep -E ^sha1 ${PKG}/PKGBUILD | cut -f2 -d"'")
         if [ "${UPSTREAM_TARBALL}" != "${DOWNSTREAM_TARBALL}" ]; then
             echo " +---> Upstream tarball differs : ${UPSTREAM_TARBALL}"
@@ -434,22 +439,34 @@ function tree_repo() {
     echo "Action : repo"
     source /etc/makepkg.conf
 
+    echo " - Cleaning repository."
     rm -rf ${HOME}/${MATE_VER}/${CARCH} 2>/dev/null
     mkdir -p ${HOME}/${MATE_VER}/${CARCH}
 
     for PKG in ${BUILD_ORDER[@]};
     do
         cd ${BASEDIR}/${PKG}
-        PKG=$(basename ${PKG})
         local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=')
         local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
         local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
         local NEWEST=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
         if [ -f ${NEWEST} ]; then
-            cp ${NEWEST} ${HOME}/${MATE_VER}/${CARCH}/
+            cp -v ${NEWEST} ${HOME}/${MATE_VER}/${CARCH}/
         fi
     done
-    repo-add -n ${HOME}/${MATE_VER}/${CARCH}/mate.db.tar.gz ${HOME}/${MATE_VER}/${CARCH}/*.pkg.tar.xz
+
+    # Simulate 'makepkg --sign'
+    KEY_TEST=`gpg --list-secret-key | grep FFEE1E5C`
+    if [ $? -eq 0 ]; then
+	cd ${HOME}/${MATE_VER}/${CARCH}
+        for XZ in *.xz
+        do
+            echo " - Signing ${XZ}"
+            gpg --detach-sign -u 0xFFEE1E5C ${XZ}
+        done
+    fi
+
+    repo-add --new --files ${HOME}/${MATE_VER}/${CARCH}/mate.db.tar.gz ${HOME}/${MATE_VER}/${CARCH}/*.pkg.tar.xz
 }
 
 # `rsync` repo upstream.
@@ -461,7 +478,7 @@ function tree_sync() {
     local RSYNC_UPSTREAM="mate@mate.flexion.org::mate-${MATE_VER}"
 
     if [ -L ${HOME}/${MATE_VER}/${CARCH}/mate.db ]; then
-        rsync -av --progress ${HOME}/${MATE_VER}/ ${RSYNC_UPSTREAM}
+        rsync -av --delete --progress ${HOME}/${MATE_VER}/${CARCH}/ ${RSYNC_UPSTREAM}/${CARCH}/
     else
         echo "A valid 'pacman' repository was not detected. Run './${0} -t repo' first."
     fi
