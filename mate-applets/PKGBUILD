@@ -2,7 +2,7 @@
 
 pkgname=mate-applets
 pkgver=
-pkgrel=2
+pkgrel=1
 pkgdesc="Applets for MATE panel"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 url="http://mate-desktop.org"

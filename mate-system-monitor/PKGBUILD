@@ -23,7 +23,7 @@ pkgver() {
 
 build() {
     cd ${srcdir}/${pkgname}
-    ./configure \
+    ./autogen.sh \
         --prefix=/usr \
 		--libexecdir=/usr/lib/${pkgname} \
 		--localstatedir=/var \

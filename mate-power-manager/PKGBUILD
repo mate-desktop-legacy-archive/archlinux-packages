@@ -7,8 +7,8 @@ pkgdesc="Session daemon that makes it easy to manage your laptop or desktop syst
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('avahi' 'dbus' 'desktop-file-utils' 'gnome-keyring' 'gtk2'
-         'libcanberra' 'libgcrypt' 'libnotify' 'libunique'
+depends=('avahi' 'dbus' 'desktop-file-utils' 'gtk2' 'libcanberra'
+         'libgcrypt' 'libgnome-keyring' 'libnotify' 'libunique'
          'mate-notification-daemon' 'mate-panel' 'upower')
 makedepends=('docbook2x' 'docbook-xml' 'mate-common' 'perl-xml-parser' 'xmlto' 'yelp-tools')
 options=('!emptydirs')
