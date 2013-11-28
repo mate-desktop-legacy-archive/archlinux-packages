@@ -26,8 +26,8 @@ pkgver() {
 }
 
 prepare() {
-	cd ${srcdir}/${pkgname}-${pkgver}
-	patch -Np1 -i ${srcdir}/01-fix.diff
+    cd ${srcdir}/${pkgname}
+    patch -Np1 -i ${srcdir}/01-fix.diff
 }
 
 build() {
