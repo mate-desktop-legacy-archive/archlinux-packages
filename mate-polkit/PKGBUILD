@@ -16,7 +16,7 @@ sha1sums=('130b11454b87fd94fecb15f7a0540bd6ba423da5')
 
 build() {
     cd ${srcdir}/${pkgname}-${pkgver}
-    ./autogen.sh \
+    ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
         --sysconfdir=/etc \
