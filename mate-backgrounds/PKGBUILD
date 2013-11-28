@@ -11,7 +11,7 @@ depends=('glib2')
 makedepends=('mate-common' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
 groups=('mate')
-source=("${pkgname%-*}::git+https://github.com/mate-desktop/${pkgname}.git")
+source=("${pkgname%-git*}::git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')
 
 pkgver() {
