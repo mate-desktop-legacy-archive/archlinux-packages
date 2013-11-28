@@ -318,18 +318,19 @@ function tree_build() {
 		local BUILD_PKG=1
 	fi        
 
+	if [ "${PKG}" == "mate-settings-daemon-pulseaudio" ]; then
+		sudo pacman -Rsdd --noconfirm mate-settings-daemon-gstreamer
+		sudo pacman -Rsdd --noconfirm mate-media-gstreamer
+		sudo pacman -Rsdd --noconfirm mate-settings-daemon
+		sudo pacman -Rsdd --noconfirm mate-media
+	elif [ "${PKG}" == "mate-settings-daemon-gstreamer" ]; then
+		sudo pacman -Rsdd --noconfirm mate-settings-daemon-pulseaudio
+		sudo pacman -Rsdd --noconfirm mate-media-pulseaudio
+		sudo pacman -Rsdd --noconfirm mate-settings-daemon
+		sudo pacman -Rsdd --noconfirm mate-media
+	fi    
+
     if [ ${BUILD_PKG} -eq 1 ]; then
-		if [ "${PKG}" == "mate-settings-daemon-pulseaudio" ]; then
-			sudo pacman -Rsdd --noconfirm mate-settings-daemon-gstreamer
-			sudo pacman -Rsdd --noconfirm mate-media-gstreamer
-			sudo pacman -Rsdd --noconfirm mate-settings-daemon
-			sudo pacman -Rsdd --noconfirm mate-media
-		elif [ "${PKG}" == "mate-settings-daemon-gstreamer" ]; then
-			sudo pacman -Rsdd --noconfirm mate-settings-daemon-pulseaudio
-			sudo pacman -Rsdd --noconfirm mate-media-pulseaudio
-			sudo pacman -Rsdd --noconfirm mate-settings-daemon
-			sudo pacman -Rsdd --noconfirm mate-media
-		fi    
 
         echo " - Building ${PKG}"
         if [ $(id -u) -eq 0 ]; then
@@ -349,8 +350,8 @@ function tree_build() {
             sudo makepkg -i --noconfirm --asroot
         fi
     fi
-	echo " - ${PKG} completed. Press a key to continue."
-    read
+	#echo " - ${PKG} completed. Press a key to continue."
+    #read
 }
 
 # Check for new upstream releases.
