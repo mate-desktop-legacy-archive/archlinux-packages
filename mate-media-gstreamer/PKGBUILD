@@ -1,21 +1,18 @@
 # Contributor: Martin Wimpress <code@flexion.org>
-# Contributor: Piotr Gorski <sir_lucjan@bridgelinux.pl>
-# Contributor: Xpander <xpander0@gmail.com>
 
-_pkgname=mate-settings-daemon
+_pkgname=mate-media
 pkgname=${_pkgname}-gstreamer
 pkgver=1.7.0
 pkgrel=1
-pkgdesc="The MATE Settings daemon (GStreamer)"
+pkgdesc="MATE Media Tools (GStreamer)"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('dbus' 'dconf' 'fontconfig' 'gstreamer0.10-base-plugins' 'gtk2'
-         'libcanberra' 'libcanberra-gstreamer' 'libmatekbd' 'libnotify'
-         'libxt' 'mate-desktop' 'mate-polkit' 'startup-notification')
-makedepends=('mate-common' 'perl-xml-parser')
+depends=('desktop-file-utils' 'gstreamer0.10-base-plugins' 'libnotify'
+         'mate-panel' 'mate-settings-daemon-gstreamer')
+makedepends=('mate-settings-daemon' 'mate-icon-theme' 'perl-xml-parser' 'yelp-tools')
 options=('!emptydirs' '!libtool')
-conflicts=("${_pkgname}-pulseaudio" 'mate-media-pulseaudio')
+conflicts=("${_pkgname}-pulseaudio" 'mate-settings-daemon-pulseaudio')
 provides=("${_pkgname}")
 source=(http://pub.mate-desktop.org/releases/1.7/${_pkgname}-${pkgver}.tar.xz
         enable_deprecated.diff)
