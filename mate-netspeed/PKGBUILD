@@ -24,8 +24,7 @@ build() {
     ./autogen.sh \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
-        --disable-static \
-        --disable-scrollkeeper
+        --disable-static
     make
 }
 

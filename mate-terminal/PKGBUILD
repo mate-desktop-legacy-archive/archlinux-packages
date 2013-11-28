@@ -2,7 +2,7 @@
 
 pkgname=mate-terminal
 pkgver=1.7.0
-pkgrel=1
+pkgrel=2
 pkgdesc="The MATE Terminal Emulator"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -16,12 +16,11 @@ sha1sums=('d793a3778e73663154c81efda9cd9096fb4a639d')
 install=${pkgname}.install
 
 build() {
-	cd ${srcdir}/${pkgname}-${pkgver}
+    cd ${srcdir}/${pkgname}-${pkgver}
     ./configure \
         --prefix=/usr \
-        --disable-static \
-		--disable-scrollkeeper
-	make
+        --disable-static
+    make
 }
 
 package() {

@@ -24,16 +24,14 @@ pkgver() {
 
 build() {
     cd ${srcdir}/${pkgname}
-    
     ./autogen.sh \
         --prefix=/usr \
-		--libexecdir=/usr/lib/${pkgname} \
+        --libexecdir=/usr/lib/${pkgname} \
         --sysconfdir=/etc \
-		--localstatedir=/var \
-		--sbindir=/usr/bin \
-		--enable-applets \
-		--enable-unique \
-		--disable-scrollkeeper
+        --localstatedir=/var \
+        --sbindir=/usr/bin \
+        --enable-applets \
+        --enable-unique
     make
 }
 

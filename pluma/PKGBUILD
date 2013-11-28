@@ -2,7 +2,7 @@
 
 pkgname=pluma
 pkgver=1.7.0
-pkgrel=1
+pkgrel=2
 pkgdesc="A powerful text editor for MATE"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -21,8 +21,7 @@ build() {
     PYTHON=/usr/bin/python2 ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib \
-        --enable-python \
-        --disable-scrollkeeper
+        --enable-python        
     make
 }
 

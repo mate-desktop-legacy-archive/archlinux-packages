@@ -31,7 +31,6 @@ build() {
         --sbindir=/usr/bin \
         --localstatedir=/var \
         --disable-static \
-        --disable-scrollkeeper \
         --disable-update-mimedb
     make
 }

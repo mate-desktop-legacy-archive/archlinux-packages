@@ -3,7 +3,7 @@
 _pkgname=mate-media
 pkgname=${_pkgname}-gstreamer
 pkgver=1.7.0
-pkgrel=1
+pkgrel=2
 pkgdesc="MATE Media Tools (GStreamer)"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -31,8 +31,8 @@ prepare() {
 }
 
 build() {
-	cd ${srcdir}/${_pkgname}
-	./autogen.sh \
+    cd ${srcdir}/${_pkgname}
+    ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
         --libexecdir=/usr/lib/${_pkgname} \
@@ -40,8 +40,7 @@ build() {
         --enable-gstmix \
         --enable-gst-mixer-applet \
         --disable-pulseaudio \
-        --disable-static \
-        --disable-scrollkeeper
+        --disable-static
     make
 }
 

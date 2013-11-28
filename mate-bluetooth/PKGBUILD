@@ -23,16 +23,15 @@ pkgver() {
 }
 
 build() {
-	cd ${srcdir}/${pkgname}
+    cd ${srcdir}/${pkgname}
     ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
-		--localstatedir=/var \
-		--disable-scrollkeeper \
-		--disable-desktop-update \
-		--disable-icon-update \
-		--disable-introspection
-	make
+        --localstatedir=/var \
+        --disable-desktop-update \
+        --disable-icon-update \
+        --disable-introspection
+    make
 }
 
 package() {

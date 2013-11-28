@@ -25,12 +25,11 @@ build() {
     cd ${srcdir}/${pkgname}
     ./autogen.sh \
         --prefix=/usr \
-		--libexecdir=/usr/lib/${pkgname} \
-		--localstatedir=/var \
-		--disable-static \
-		--disable-scrollkeeper
+        --libexecdir=/usr/lib/${pkgname} \
+        --localstatedir=/var \
+        --disable-static
     make clean
-	make
+    make
 }
 
 package() {

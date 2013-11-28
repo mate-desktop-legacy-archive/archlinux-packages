@@ -2,7 +2,6 @@
 
 # TODO
 #  - Which packages depend 'yelp'
-#  - Remove unrecogised options from aufigure/autogen.sh
 
 AUR_BUILD_ORDER=(
     aur/libindicator

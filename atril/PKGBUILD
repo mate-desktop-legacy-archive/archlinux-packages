@@ -34,8 +34,7 @@ build() {
         --enable-pixbuf \
         --enable-comics \
         --disable-introspection \
-        --disable-static \
-        --disable-scrollkeeper
+        --disable-static
     make
 }
 

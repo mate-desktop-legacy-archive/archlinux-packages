@@ -4,7 +4,7 @@
 
 pkgname=mate-dialogs
 pkgver=1.7.2
-pkgrel=2
+pkgrel=3
 pkgdesc="Display graphical dialog boxes from shell scripts"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -19,7 +19,7 @@ sha1sums=('adfa6c43b624c76f59125f6748a53b6fe433207a')
 build() {
     cd ${srcdir}/${pkgname}-${pkgver}
     ./autogen.sh \
-        --prefix=/usr        
+        --prefix=/usr
     make
 }
 

@@ -29,6 +29,8 @@ pkgver() {
 }
 
 prepare() {
+    # Remove this when https://github.com/mate-desktop/mate-applets/pull/66
+    # or https://github.com/mate-desktop/mate-applets/pull/65 are merged.
     cd ${srcdir}/${pkgname}
     sed -i 's/no-dist-gz/no-dist-gzip/g' configure.ac
 }
@@ -42,8 +44,7 @@ build() {
         --enable-polkit \
         --enable-networkmanager \
         --enable-ipv6 \
-        --disable-static \
-        --disable-scrollkeeper
+        --disable-static
     make
 }
 

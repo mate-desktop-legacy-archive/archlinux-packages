@@ -25,11 +25,10 @@ build() {
     cd ${srcdir}/${pkgname}
     ./autogen.sh \
         --prefix=/usr \
-		--libexecdir=/usr/lib/${pkgname} \
+        --libexecdir=/usr/lib/${pkgname} \
         --sysconfdir=/etc \
-        --disable-static \
-		--disable-scrollkeeper
-	make
+        --disable-static
+    make
 }
 
 package() {
