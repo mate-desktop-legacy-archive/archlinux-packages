@@ -38,8 +38,7 @@ MATE_BUILD_ORDER=(
 	caja-extensions
 	mate-applets
 	mate-bluetooth
-	mate-calc
-	mucharmap
+	mate-calc	
 	eom
 	mate-icon-theme-faenza
 	mate-indicator-applet
