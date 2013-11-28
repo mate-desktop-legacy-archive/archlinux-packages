@@ -30,7 +30,7 @@ pkgver() {
 
 prepare() {
     cd ${srcdir}/${pkgname}
-    sed -i 's:no-dist-g/no-dist-gzip/g' configure.ac
+    sed -i 's/no-dist-gz/no-dist-gzip/g' configure.ac
 }
 
 build() {
