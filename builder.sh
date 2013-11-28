@@ -14,7 +14,7 @@ AUR_BUILD_ORDER=(
 
 # http://wiki.mate-desktop.org/status:1.8
 #  - mucharmap is not in the build, source may need removing as gucharmap is prefered.
-MATE_BUILD_ORDER=(	
+MATE_BUILD_ORDER=(
 	mate-common
 	mate-desktop
 	libmatekbd
@@ -42,7 +42,7 @@ MATE_BUILD_ORDER=(
 	atril
 	caja-dropbox
 	caja-extensions
-	#mate-applets # configure.ac:8: error: option 'no-dist-gz' not recognized
+	mate-applets
 	mate-bluetooth
 	mate-calc
 	eom

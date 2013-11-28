@@ -13,7 +13,6 @@ depends=('dbus' 'desktop-file-utils' 'gtk2' 'exempi' 'lcms' 'libexif'
 makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
 options=('!emptydirs' '!libtool')
 groups=('mate')
-conflicts=('eog')
 source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git"
         '01-fix.diff')
 sha1sums=('SKIP'
@@ -26,6 +25,8 @@ pkgver() {
 }
 
 prepare() {
+    # This patch can be remove when https://github.com/mate-desktop/eom/pull/31
+    # is merged.
     cd ${srcdir}/${pkgname}
     patch -Np1 -i ${srcdir}/01-fix.diff
 }
