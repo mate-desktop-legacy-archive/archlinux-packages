@@ -307,16 +307,20 @@ function tree_build() {
     local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
     local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
     
-    echo " - Looking for *${PKGBUILD}*.pkg.tar.xz"
-    local HAS_PKG=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
-    local RET=$?
-	if [ ${RET} -eq 0 ]; then
-		echo " - ${PKG} is current : ${RET}"
-		local BUILD_PKG=0
-	else
-		echo " - ${PKG} needs building : ${RET}"
-		local BUILD_PKG=1
-	fi        
+    if [ -z "${PKGBUILD_VER}" ]; then
+		BUILD_PKG=1
+    else    
+		echo " - Looking for *${PKGBUILD}*.pkg.tar.xz"
+		local HAS_PKG=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
+		local RET=$?
+		if [ ${RET} -eq 0 ]; then
+			echo " - ${PKG} is current : ${RET}"
+			local BUILD_PKG=0
+		else
+			echo " - ${PKG} needs building : ${RET}"
+			local BUILD_PKG=1
+		fi        
+	fi
 
 	if [ "${PKG}" == "mate-settings-daemon-pulseaudio" ]; then
 		sudo pacman -Rsdd --noconfirm mate-settings-daemon-gstreamer
@@ -350,8 +354,8 @@ function tree_build() {
             sudo makepkg -i --noconfirm --asroot
         fi
     fi
-	#echo " - ${PKG} completed. Press a key to continue."
-    #read
+	echo " - ${PKG} completed. Press a key to continue."
+    read
 }
 
 # Check for new upstream releases.
