@@ -23,11 +23,8 @@ pkgver() {
 
 build() {
     cd ${srcdir}/${pkgname}
-
-    #Work around a problem where the .sgml fail to parse.
-    sed -e 's:@HAVE_DOCBOOK2MAN_TRUE@.*::' -i man/Makefile.in
-
-    ./configure \
+    
+    ./autogen.sh \
         --prefix=/usr \
 		--libexecdir=/usr/lib/${pkgname} \
         --sysconfdir=/etc \
