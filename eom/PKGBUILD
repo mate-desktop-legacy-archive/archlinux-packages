@@ -14,13 +14,20 @@ makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
 options=('!emptydirs' '!libtool')
 groups=('mate')
 conflicts=('eog')
-source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")
-sha1sums=('SKIP')
+source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git"
+        'https://github.com/mate-desktop/eom/commit/eaa7cd921ab30dcf38bb29e71fae22f3970515c0.diff')
+sha1sums=('SKIP'
+          'd1ad4e5cf0a5f7416d3fded7a1088b79c39b6ebf')
 install=${pkgname}.install
 
 pkgver() {
     cd ${srcdir}/${pkgname}
     echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
+}
+
+prepare() {
+	cd ${srcdir}/${pkgname}-${pkgver}
+	patch -Np1 -i ${srcdir}/eaa7cd921ab30dcf38bb29e71fae22f3970515c0.diff
 }
 
 build() {
