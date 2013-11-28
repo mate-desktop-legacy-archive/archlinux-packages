@@ -23,7 +23,7 @@ pkgver() {
 
 build() {
     cd ${srcdir}/${pkgname%-git}
-    ./configure \
+    ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
         --localstatedir=/var \
