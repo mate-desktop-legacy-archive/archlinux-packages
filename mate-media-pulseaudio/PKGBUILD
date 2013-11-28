@@ -37,7 +37,7 @@ build() {
 		--disable-gst-mixer-applet \
 		--disable-static \
 		--disable-scrollkeeper
-	make    
+	make
 }
 
 package() {
