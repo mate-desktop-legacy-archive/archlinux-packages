@@ -45,7 +45,7 @@ MATE_BUILD_ORDER=(
 	#mate-applets # configure.ac:8: error: option 'no-dist-gz' not recognized
 	mate-bluetooth
 	mate-calc	
-	eom
+	#eom # eom-thumbnail.c:34:46: fatal error: libmateui/mate-desktop-thumbnail.h: No such file or directory
 	mate-icon-theme-faenza
 	mate-indicator-applet
 	mozo
