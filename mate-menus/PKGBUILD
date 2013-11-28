@@ -16,7 +16,7 @@ sha1sums=('92f290bf6fc046f60fe8a264e0a89d05375def1c')
 
 build() {
     cd ${srcdir}/${pkgname}-${pkgver}
-    PYTHON=/usr/bin/python2 ./autogen.sh \
+    PYTHON=/usr/bin/python2 ./configure \
         --prefix=/usr \
         --sysconfdir=/etc \
         --localstatedir=/var \
