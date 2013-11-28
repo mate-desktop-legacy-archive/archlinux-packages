@@ -10,17 +10,17 @@ license=('GPL')
 depends=('gtk2' 'libfakekey' 'libwnck' 'libunique' 'mate-panel')
 makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
 options=('!emptydirs' '!libtool')
-source=("${pkgname%-*}::git+https://github.com/mate-desktop/${pkgname}.git")
+source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')
 install=${pkgname}.install
 
 pkgver() {
-    cd ${srcdir}/${pkgname%-git}
+    cd ${srcdir}/${pkgname}
     echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
 }
 
 build() {
-    cd ${srcdir}/${pkgname%-git}
+    cd ${srcdir}/${pkgname}
     ./autogen.sh \
         --prefix=/usr \
         --libexec=/usr/lib/${pkgname} \
@@ -30,6 +30,6 @@ build() {
 }
 
 package() {
-    cd ${srcdir}/${pkgname%-git}
+    cd ${srcdir}/${pkgname}
     make DESTDIR=${pkgdir} install
 }

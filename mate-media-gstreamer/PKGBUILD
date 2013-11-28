@@ -23,12 +23,13 @@ sha1sums=('32730c0c5ca20d41f11390a154875a1220d9ba9c'
           'f0e38578aacacf9ee852b7a44a34908cc230b91f')
 install=${pkgname}.install
 
-build() {
-    cd ${srcdir}/${_pkgname}-${pkgver}
-    
-    # Enable deprecated
+prepare() {
+    cd ${srcdir}/${_pkgname}-${pkgver}   
     patch -p1 < ../../enable_deprecated.diff gst-mixer/src/Makefile.am    
-    
+}
+
+build() {
+	cd ${srcdir}/${_pkgname}-${pkgver}    
     ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/${_pkgname} \

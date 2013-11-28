@@ -16,17 +16,17 @@ optdepends=('unrar: for RAR uncompression'
 'unace: extraction tool for the proprietary ace archive format')
 options=('!libtool' '!emptydirs')
 groups=('mate-extras')
-source=("${pkgname%-*}::git+https://github.com/mate-desktop/${pkgname}.git")        
+source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")        
 sha1sums=('SKIP')         
 install=${pkgname}.install
 
 pkgver() {
-    cd ${srcdir}/${pkgname%-git}
+    cd ${srcdir}/${pkgname}
     echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
 }
 
 build() {
-	cd ${srcdir}/${pkgname%-git}	
+	cd ${srcdir}/${pkgname}
     ./autogen.sh \
         --prefix=/usr \
 		--libexecdir=/usr/lib/${pkgname} \
@@ -37,6 +37,6 @@ build() {
 }
 
 package() {
-    cd ${srcdir}/${pkgname%-git}
+    cd ${srcdir}/${pkgname}
     make DESTDIR=${pkgdir} install
 }
