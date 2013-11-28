@@ -42,7 +42,7 @@ MATE_BUILD_ORDER=(
 	atril
 	caja-dropbox
 	caja-extensions
-	mate-applets
+	#mate-applets # configure.ac:8: error: option 'no-dist-gz' not recognized
 	mate-bluetooth
 	mate-calc	
 	eom
