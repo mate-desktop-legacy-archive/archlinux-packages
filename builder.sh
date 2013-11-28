@@ -306,12 +306,13 @@ function tree_build() {
     local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=')
     local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
     local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
-    local EXISTS=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
-        
-    if [ -z "${PKGBUILD_VER}" ]; then
-		local EXISTS=""
+    local HAS_PKG=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
+	if [ $? -eq 0 ]; then
+		local BUILD_PKG=0
+	else
+		local BUILD_PKG=1
 	fi
-
+    
     if [ "${PKG}" == "mate-settings-daemon-pulseaudio" ]; then
         sudo pacman -Rsdd --noconfirm mate-settings-daemon-gstreamer
         sudo pacman -Rsdd --noconfirm mate-media-gstreamer
@@ -324,7 +325,7 @@ function tree_build() {
         sudo pacman -Rsdd --noconfirm mate-media
     fi
 
-    if [ -z "${EXISTS}" ]; then
+    if [ ${BUILD_PKG} -eq 1 ]; then
         echo " - Building ${PKG}"
         if [ $(id -u) -eq 0 ]; then
             makepkg -fs --noconfirm --needed --log --asroot
