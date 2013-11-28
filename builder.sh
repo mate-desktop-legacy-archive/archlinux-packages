@@ -21,7 +21,9 @@ MATE_BUILD_ORDER=(
 	mate-polkit
 	marco
 	mate-settings-daemon-gstreamer
+	mate-media-gstreamer
 	mate-settings-daemon-pulseaudio
+	mate-media-pulseaudio
 	mate-session-manager
 	mate-menus
 	mate-panel
@@ -30,9 +32,7 @@ MATE_BUILD_ORDER=(
 	mate-notification-daemon
 	mate-control-center
 	mate-screensaver
-	engrampa
-	mate-media-gstreamer
-	mate-media-pulseaudio
+	engrampa		
 	mate-power-manager
 	mate-system-monitor	
 	atril
@@ -308,33 +308,28 @@ function tree_build() {
     local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
     local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
     
-#    if [ -z "${PKGBUILD_VER}" ]; then
-#		echo " - ${PKG} has no 'pkgver', needs building"
-#		local BUILD_PKG=1
-#    else    
-		echo " - Looking for *${PKGBUILD}*.pkg.tar.xz"
-		if [ -f *${PKGBUILD}*.pkg.tar.xz ]; then
-			echo " - ${PKG} is current"
-			local BUILD_PKG=0
-		else
-			echo " - ${PKG} needs building"
-			local BUILD_PKG=1
-		fi        
-#	fi	
+	echo " - Looking for *${PKGBUILD}*.pkg.tar.xz"
+	if [ -f *${PKGBUILD}*.pkg.tar.xz ]; then
+		echo " - ${PKG} is current"
+		local BUILD_PKG=0
+	else
+		echo " - ${PKG} needs building"
+		local BUILD_PKG=1
+	fi
 
-    if [ ${BUILD_PKG} -eq 1 ]; then
-		if [ "${PKG}" == "mate-settings-daemon-pulseaudio" ]; then
-			sudo pacman -Rsdd --noconfirm mate-settings-daemon-gstreamer
-			sudo pacman -Rsdd --noconfirm mate-media-gstreamer
-			sudo pacman -Rsdd --noconfirm mate-settings-daemon
-			sudo pacman -Rsdd --noconfirm mate-media
-		elif [ "${PKG}" == "mate-settings-daemon-gstreamer" ]; then
-			sudo pacman -Rsdd --noconfirm mate-settings-daemon-pulseaudio
-			sudo pacman -Rsdd --noconfirm mate-media-pulseaudio
-			sudo pacman -Rsdd --noconfirm mate-settings-daemon
-			sudo pacman -Rsdd --noconfirm mate-media
-		fi    
-        
+	if [ "${PKG}" == "mate-settings-daemon-pulseaudio" ]; then
+		sudo pacman -Rsdd --noconfirm mate-settings-daemon-gstreamer
+		sudo pacman -Rsdd --noconfirm mate-media-gstreamer
+		sudo pacman -Rsdd --noconfirm mate-settings-daemon
+		sudo pacman -Rsdd --noconfirm mate-media
+	elif [ "${PKG}" == "mate-settings-daemon-gstreamer" ]; then
+		sudo pacman -Rsdd --noconfirm mate-settings-daemon-pulseaudio
+		sudo pacman -Rsdd --noconfirm mate-media-pulseaudio
+		sudo pacman -Rsdd --noconfirm mate-settings-daemon
+		sudo pacman -Rsdd --noconfirm mate-media
+	fi    
+
+    if [ ${BUILD_PKG} -eq 1 ]; then        
         echo " - Building ${PKG}"
         if [ $(id -u) -eq 0 ]; then
             makepkg -fs --noconfirm --needed --log --asroot
