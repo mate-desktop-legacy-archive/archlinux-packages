@@ -10,7 +10,7 @@ license=('GPL')
 depends=('dbus' 'dconf' 'desktop-file-utils' 'gsettings-desktop-schemas' 'gtk2'
          'mate-desktop' 'mate-icon-theme' 'mate-menus' 'mate-settings-daemon'
          'marco' 'libgtop' 'libmatekbd' 'libunique' 'librsvg' 'libxss'
-         'libxt' 'startup-notification')
+         'libxt' 'startup-notification' 'yelp')
 makedepends=('docbook2x' 'mate-common' 'perl-xml-parser' 'yelp-tools')
 options=('!emptydirs' '!libtool')
 groups=('mate')

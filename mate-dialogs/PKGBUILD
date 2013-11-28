@@ -4,12 +4,12 @@
 
 pkgname=mate-dialogs
 pkgver=1.7.2
-pkgrel=3
+pkgrel=4
 pkgdesc="Display graphical dialog boxes from shell scripts"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('LGPL')
-depends=('gtk2' 'libnotify')
+depends=('gtk2' 'libnotify' 'yelp')
 makedepends=('docbook-xml' 'mate-common' 'perl-xml-parser' 'yelp-tools')
 options=('!emptydirs' '!libtool')
 groups=('mate')

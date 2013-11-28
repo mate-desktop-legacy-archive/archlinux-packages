@@ -8,7 +8,7 @@ url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('dbus' 'desktop-file-utils' 'gobject-introspection' 'gtk2'
-         'gvfs' 'libnotify' 'libunique' 'obex-data-server')
+         'gvfs' 'libnotify' 'libunique' 'obex-data-server' 'yelp')
 makedepends=('mate-common' 'caja-extensions' 'perl-xml-parser' 'yelp-tools')
 optdepends=('mate-user-share: Enable sharing via bluetooth and other protocols.')
 options=('!emptydirs' '!libtool')

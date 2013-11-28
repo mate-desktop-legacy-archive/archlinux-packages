@@ -9,7 +9,7 @@ arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('caja' 'dbus' 'desktop-file-utils' 'djvulibre' 'gobject-introspection'
          'gtk2' 'libgxps' 'libsm' 'libspectre' 'mate-icon-theme'
-         'poppler-glib' 't1lib' 'texlive-bin' 'zlib')
+         'poppler-glib' 't1lib' 'texlive-bin' 'yelp' 'zlib')
 makedepends=('gtk-update-icon-cache' 'mate-common' 'perl-xml-parser' 'yelp-tools')
 options=('!emptydirs' '!libtool')
 groups=('mate-extras')

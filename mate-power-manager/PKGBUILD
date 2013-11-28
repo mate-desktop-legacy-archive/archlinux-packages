@@ -9,7 +9,7 @@ arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('avahi' 'dbus' 'desktop-file-utils' 'gtk2' 'libcanberra'
          'libgcrypt' 'libgnome-keyring' 'libnotify' 'libunique'
-         'mate-notification-daemon' 'mate-panel' 'upower')
+         'mate-notification-daemon' 'mate-panel' 'upower' 'yelp')
 makedepends=('docbook2x' 'docbook-xml' 'mate-common' 'perl-xml-parser' 'xmlto' 'yelp-tools')
 options=('!emptydirs')
 groups=('mate')

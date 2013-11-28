@@ -9,7 +9,7 @@ arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('dbus' 'desktop-file-utils' 'gtk2' 'exempi' 'lcms' 'libexif'
          'libjpeg-turbo' 'mate-desktop' 'mate-icon-theme' 'pygtk' 'python2'
-         'python2-gobject2' 'startup-notification' 'zlib')
+         'python2-gobject2' 'startup-notification' 'yelp' 'zlib')
 makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
 options=('!emptydirs' '!libtool')
 groups=('mate')
