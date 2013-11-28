@@ -8,18 +8,6 @@ AUR_BUILD_ORDER=(
     #aur/python2-exiv2
 )
 
-COMMUNITY_BUILD_ORDER=(
-    community/mate-applet-lockkeys
-    community/mate-applet-softupd
-    community/mate-applet-streamer
-    community/mate-disk-utility
-    community/mate-color-manager
-    community/mate-mplayer
-    community/mate-nettool
-    community/variety
-    #community/mintmenu
-)
-
 # http://wiki.mate-desktop.org/status:1.8
 MATE_BUILD_ORDER=(	
 	mate-common
@@ -65,6 +53,18 @@ MATE_BUILD_ORDER=(
 	mate-user-share
 	mate-utils
 	python-caja
+)
+
+COMMUNITY_BUILD_ORDER=(
+    community/mate-applet-lockkeys
+    community/mate-applet-softupd
+    community/mate-applet-streamer
+    community/mate-disk-utility
+    community/mate-color-manager
+    community/mate-mplayer
+    community/mate-nettool
+    community/variety
+    #community/mintmenu
 )
 
 BUILD_ORDER=( ${AUR_BUILD_ORDER[@]} ${MATE_BUILD_ORDER[@]} ${COMMUNITY_BUILD_ORDER[@]})
