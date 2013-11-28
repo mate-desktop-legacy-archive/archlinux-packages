@@ -9,6 +9,7 @@ AUR_BUILD_ORDER=(
 )
 
 # http://wiki.mate-desktop.org/status:1.8
+#  - mucharmap is not in the build, source may need removing as gucharmap is prefered.
 MATE_BUILD_ORDER=(	
 	mate-common
 	mate-desktop
@@ -62,8 +63,8 @@ COMMUNITY_BUILD_ORDER=(
     community/mate-color-manager
     community/mate-mplayer
     community/mate-nettool
-    community/variety
-    #community/mintmenu
+    #community/variety
+    community/mintmenu
 )
 
 BUILD_ORDER=( ${AUR_BUILD_ORDER[@]} ${MATE_BUILD_ORDER[@]} ${COMMUNITY_BUILD_ORDER[@]})
@@ -306,6 +307,10 @@ function tree_build() {
     local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
     local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
     local EXISTS=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
+        
+    if [ -z "${PKGBUILD_VER}" ]; then
+		local EXISTS=""
+	fi
 
     if [ "${PKG}" == "mate-settings-daemon-pulseaudio" ]; then
         sudo pacman -Rsdd --noconfirm mate-settings-daemon-gstreamer
