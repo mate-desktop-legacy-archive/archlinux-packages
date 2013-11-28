@@ -18,12 +18,12 @@ source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')
 
 pkgver() {
-    cd ${srcdir}/${pkgname}
+    cd ${srcdir}/${_pkgname}
     echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
 }
 
 build() {
-    cd ${srcdir}/${pkgname}
+    cd ${srcdir}/${_pkgname}
     PYTHON=/usr/bin/python2 ./autogen.sh \
         --prefix=/usr \
         --disable-static
@@ -31,6 +31,6 @@ build() {
 }
 
 package() {
-    cd ${srcdir}/${pkgname}
+    cd ${srcdir}/${_pkgname}
     make DESTDIR=${pkgdir} install
 }

@@ -45,7 +45,7 @@ MATE_BUILD_ORDER=(
 	mate-icon-theme-faenza
 	mate-indicator-applet
 	mozo
-	mate-netbook
+	#mate-netbook # Requires migration to libwnck
 	mate-netspeed
 	mate-sensors-applet
 	mate-system-tools
@@ -348,8 +348,8 @@ function tree_build() {
             sudo makepkg -i --noconfirm --asroot
         fi
     fi
-	echo " - ${PKG} completed. Press a key to continue."
-    read
+	#echo " - ${PKG} completed. Press a key to continue."
+    #read
 }
 
 # Check for new upstream releases.

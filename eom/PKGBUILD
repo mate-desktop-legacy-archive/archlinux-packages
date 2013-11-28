@@ -25,7 +25,7 @@ pkgver() {
 
 build() {
     cd ${srcdir}/${pkgname}
-    PYTHON=/usr/bin/python2 ./configure \
+    PYTHON=/usr/bin/python2 ./autogen.sh \
         --prefix=/usr \
         --localstatedir=/var \
         --disable-scrollkeeper
