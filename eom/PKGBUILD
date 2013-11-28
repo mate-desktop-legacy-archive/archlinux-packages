@@ -15,9 +15,9 @@ options=('!emptydirs' '!libtool')
 groups=('mate')
 conflicts=('eog')
 source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git"
-        'https://github.com/mate-desktop/eom/commit/eaa7cd921ab30dcf38bb29e71fae22f3970515c0.diff')
+        '01-fix.diff')
 sha1sums=('SKIP'
-          'd1ad4e5cf0a5f7416d3fded7a1088b79c39b6ebf')
+          '8a976cfd7db19c7362df1d27a76e9d20472da733')
 install=${pkgname}.install
 
 pkgver() {
@@ -27,7 +27,7 @@ pkgver() {
 
 prepare() {
 	cd ${srcdir}/${pkgname}-${pkgver}
-	patch -Np1 -i ${srcdir}/eaa7cd921ab30dcf38bb29e71fae22f3970515c0.diff
+	patch -Np1 -i ${srcdir}/01-fix.diff
 }
 
 build() {

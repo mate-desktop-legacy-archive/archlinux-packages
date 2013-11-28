@@ -36,16 +36,16 @@ MATE_BUILD_ORDER=(
 	mate-notification-daemon
 	mate-control-center
 	mate-screensaver
-	engrampa		
+	engrampa
 	#mate-power-manager # Doesn't build
-	mate-system-monitor	
+	mate-system-monitor
 	atril
 	caja-dropbox
 	caja-extensions
 	#mate-applets # configure.ac:8: error: option 'no-dist-gz' not recognized
 	mate-bluetooth
-	mate-calc	
-	#eom # eom-thumbnail.c:34:46: fatal error: libmateui/mate-desktop-thumbnail.h: No such file or directory
+	mate-calc
+	eom
 	mate-icon-theme-faenza
 	mate-indicator-applet
 	mozo
@@ -57,7 +57,7 @@ MATE_BUILD_ORDER=(
 	pluma
 	mate-user-share
 	mate-utils
-	python-caja
+	python2-caja
 )
 
 COMMUNITY_BUILD_ORDER=(
