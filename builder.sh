@@ -307,33 +307,33 @@ function tree_build() {
     local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
     local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
     
-    if [ -z "${PKGBUILD_VER}" ]; then
-		echo " - ${PKG} has no 'pkgver', needs building"
-		local BUILD_PKG=1
-    else    
+#    if [ -z "${PKGBUILD_VER}" ]; then
+#		echo " - ${PKG} has no 'pkgver', needs building"
+#		local BUILD_PKG=1
+#    else    
 		echo " - Looking for *${PKGBUILD}*.pkg.tar.xz"
 		if [ -f *${PKGBUILD}*.pkg.tar.xz ]; then
-			echo " - ${PKG} is current : ${RET}"
+			echo " - ${PKG} is current"
 			local BUILD_PKG=0
 		else
-			echo " - ${PKG} needs building : ${RET}"
+			echo " - ${PKG} needs building"
 			local BUILD_PKG=1
 		fi        
-	fi
-
-	if [ "${PKG}" == "mate-settings-daemon-pulseaudio" ]; then
-		sudo pacman -Rsdd --noconfirm mate-settings-daemon-gstreamer
-		sudo pacman -Rsdd --noconfirm mate-media-gstreamer
-		sudo pacman -Rsdd --noconfirm mate-settings-daemon
-		sudo pacman -Rsdd --noconfirm mate-media
-	elif [ "${PKG}" == "mate-settings-daemon-gstreamer" ]; then
-		sudo pacman -Rsdd --noconfirm mate-settings-daemon-pulseaudio
-		sudo pacman -Rsdd --noconfirm mate-media-pulseaudio
-		sudo pacman -Rsdd --noconfirm mate-settings-daemon
-		sudo pacman -Rsdd --noconfirm mate-media
-	fi
+#	fi	
 
     if [ ${BUILD_PKG} -eq 1 ]; then
+		if [ "${PKG}" == "mate-settings-daemon-pulseaudio" ]; then
+			sudo pacman -Rsdd --noconfirm mate-settings-daemon-gstreamer
+			sudo pacman -Rsdd --noconfirm mate-media-gstreamer
+			sudo pacman -Rsdd --noconfirm mate-settings-daemon
+			sudo pacman -Rsdd --noconfirm mate-media
+		elif [ "${PKG}" == "mate-settings-daemon-gstreamer" ]; then
+			sudo pacman -Rsdd --noconfirm mate-settings-daemon-pulseaudio
+			sudo pacman -Rsdd --noconfirm mate-media-pulseaudio
+			sudo pacman -Rsdd --noconfirm mate-settings-daemon
+			sudo pacman -Rsdd --noconfirm mate-media
+		fi    
+        
         echo " - Building ${PKG}"
         if [ $(id -u) -eq 0 ]; then
             makepkg -fs --noconfirm --needed --log --asroot
