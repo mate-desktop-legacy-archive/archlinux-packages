@@ -344,6 +344,8 @@ function tree_build() {
             sudo makepkg -i --noconfirm --asroot
         fi
     fi
+	echo "Press a key to continue."
+    read
 }
 
 # Check for new upstream releases.
