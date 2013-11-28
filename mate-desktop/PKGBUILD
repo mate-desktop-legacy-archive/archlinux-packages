@@ -4,7 +4,7 @@
 
 pkgname=mate-desktop
 pkgver=1.7.1
-pkgrel=2
+pkgrel=3
 pkgdesc="Library with common API for various MATE modules"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -23,8 +23,7 @@ build() {
     cd ${srcdir}/${pkgname}-${pkgver}
     PYTHON=/usr/bin/python2 ./configure \
         --prefix=/usr \
-        --disable-static \
-        --disable-scrollkeeper \
+        --disable-static \        
         --disable-schemas-compile \
         --enable-gtk-doc
     make
