@@ -25,6 +25,7 @@ install=${pkgname}.install
 
 prepare() {
 	# These patches can probably be removed when a 1.7.1 tarball is released
+	cd ${srcdir}/${pkgname}-${pkgver}	
 	patch -Np1 -i ${srcdir}/a7a5e35d8a5418d9b9939f6de99367f72ded7b6d.diff
 	patch -Np1 -i ${srcdir}/603813e094a40707eb0d9e4238348c6bdf857993.diff
 	patch -Np1 -i ${srcdir}/1b401ff5fa2ca8e710986e61227389cedde10a05.diff
