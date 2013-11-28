@@ -25,7 +25,7 @@ pkgver() {
 
 build() {
     cd ${srcdir}/${pkgname}
-    ./configure \
+    ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
         --sbindir=/usr/bin \
