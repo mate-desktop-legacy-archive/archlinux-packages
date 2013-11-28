@@ -11,8 +11,8 @@ arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL' 'LGPL')
 depends=('caja' 'dbus' 'desktop-file-utils' 'gobject-introspection'
          'gtk2' 'libice' 'libsm' 'libxau' 'libxt' 'libxtst'  'marco'
-         'mate-panel' 'mate-polkit' 'mate-settings-daemon' 
-         'pangox-compat' 'startup-notification' 'systemd')
+         'mate-polkit' 'mate-settings-daemon' 'pangox-compat'
+         'startup-notification' 'systemd')
 makedepends=('mate-common' 'perl-xml-parser' 'xmlto')
 options=('!emptydirs' '!libtool')
 groups=('mate')
