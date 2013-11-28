@@ -39,9 +39,9 @@ build() {
         --localstatedir=/var \
         --enable-gstmix \
         --enable-gst-mixer-applet \
-        --disable-pulseaudio \
+        --disable-pulseaudio \        
+        --disable-static \
         --disable-scrollkeeper
-        --disable-static
     make        
 }
 
