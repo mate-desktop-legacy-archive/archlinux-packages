@@ -31,7 +31,8 @@ MATE_BUILD_ORDER=(
 	mate-control-center
 	mate-screensaver
 	engrampa
-	mate-media
+	mate-media-gstreamer
+	mate-media-pulseaudio
 	mate-power-manager
 	mate-system-monitor	
 	atril
