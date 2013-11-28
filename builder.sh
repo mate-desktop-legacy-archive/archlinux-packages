@@ -308,6 +308,7 @@ function tree_build() {
     local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
     
     if [ -z "${PKGBUILD_VER}" ]; then
+		echo " - ${PKG} has no 'pkgver', needs building"
 		BUILD_PKG=1
     else    
 		echo " - Looking for *${PKGBUILD}*.pkg.tar.xz"
@@ -332,7 +333,7 @@ function tree_build() {
 		sudo pacman -Rsdd --noconfirm mate-media-pulseaudio
 		sudo pacman -Rsdd --noconfirm mate-settings-daemon
 		sudo pacman -Rsdd --noconfirm mate-media
-	fi    
+	fi
 
     if [ ${BUILD_PKG} -eq 1 ]; then
 
