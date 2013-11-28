@@ -12,7 +12,7 @@ license=('GPL' 'LGPL')
 depends=('caja' 'dbus' 'desktop-file-utils' 'gobject-introspection'
          'gtk2' 'libice' 'libsm' 'libxau' 'libxt' 'libxtst'  'marco'
          'mate-polkit' 'mate-settings-daemon' 'pangox-compat'
-         'startup-notification' 'systemd')
+         'startup-notification' 'systemd' 'upower')
 makedepends=('mate-common' 'perl-xml-parser' 'xmlto')
 options=('!emptydirs' '!libtool')
 groups=('mate')
