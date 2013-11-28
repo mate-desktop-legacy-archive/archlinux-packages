@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# TODO
+#  - Which packages depend 'yelp'
+#  - Remove unrecogised options from aufigure/autogen.sh
+
 AUR_BUILD_ORDER=(
     aur/libindicator
     aur/system-tools-backends
@@ -33,7 +37,7 @@ MATE_BUILD_ORDER=(
 	mate-control-center
 	mate-screensaver
 	engrampa		
-	mate-power-manager
+	#mate-power-manager # Doesn't build
 	mate-system-monitor	
 	atril
 	caja-dropbox
