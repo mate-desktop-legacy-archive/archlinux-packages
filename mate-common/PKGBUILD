@@ -4,11 +4,12 @@
 
 pkgname=mate-common
 pkgver=1.7.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Common development macros for MATE"
 arch=('any')
 license=('GPL')
-depends=('autoconf' 'automake' 'libtool' 'gettext' 'intltool' 'pkg-config' 'gtk-doc')
+depends=('autoconf' 'automake' 'gettext' 'intltool' 'itstool' 'libtool'
+         'pkg-config' 'gtk-doc')
 options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
 source=(http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz)
