@@ -289,7 +289,11 @@ function tree_aur() {
             local CAT=""
         fi
 
-        makepkg -Sfd --noconfirm --needed
+        if [ $(id -u) -eq 0 ]; then
+            makepkg -Sfd --noconfirm --needed --assroot
+        else
+            makepkg -Sfd --noconfirm --needed
+        fi
 
         # Attempt an auto upload to the AUR.
         # https://github.com/falconindy/burp
