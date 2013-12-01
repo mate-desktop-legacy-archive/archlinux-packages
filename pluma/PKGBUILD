@@ -2,13 +2,13 @@
 
 pkgname=pluma
 pkgver=1.7.0
-pkgrel=3
+pkgrel=4
 pkgdesc="A powerful text editor for MATE"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('desktop-file-utils' 'enchant' 'gtk2' 'gtksourceview2'
-         'iso-codes' 'libsm' 'python2' 'python2-gobject2'
+depends=('caja' 'desktop-file-utils' 'enchant' 'gtk2' 'gtksourceview2'
+         'iso-codes' 'libsm' 'mate-desktop' 'python2' 'python2-gobject2'
          'pygtksourceview2' 'yelp')
 makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
 options=('!emptydirs' '!libtool')
