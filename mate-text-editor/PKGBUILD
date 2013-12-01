@@ -9,7 +9,7 @@ url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('desktop-file-utils' 'enchant' 'gtk2' 'gtksourceview2' 'iso-codes'
-         'libsm' 'mate-desktop' 'mate-filemanager' 'python2' 'python2-gobject2'
+         'libsm' 'mate-desktop' 'mate-file-manager' 'python2' 'python2-gobject2'
          'pygtksourceview2')
 makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
