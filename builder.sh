@@ -45,7 +45,7 @@ MATE_BUILD_ORDER=(
 	mate-icon-theme-faenza
 	mate-indicator-applet
 	mozo
-	#mate-netbook # Requires migration to libwnck
+	mate-netbook
 	mate-netspeed
 	mate-sensors-applet
 	mate-system-tools
@@ -283,7 +283,11 @@ function tree_aur() {
             local CAT=""
         fi
 
-        makepkg -Sfd --noconfirm --needed
+        if [ $(id -u) -eq 0 ]; then
+            makepkg -Sfd --noconfirm --needed --assroot
+        else
+            makepkg -Sfd --noconfirm --needed
+        fi
 
         # Attempt an auto upload to the AUR.
         # https://github.com/falconindy/burp
