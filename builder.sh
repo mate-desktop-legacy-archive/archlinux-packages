@@ -284,7 +284,7 @@ function tree_aur() {
         fi
 
         if [ $(id -u) -eq 0 ]; then
-            makepkg -Sfd --noconfirm --needed --assroot
+            makepkg -Sfd --noconfirm --needed --asroot
         else
             makepkg -Sfd --noconfirm --needed
         fi
