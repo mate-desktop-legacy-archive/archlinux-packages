@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-backgrounds
-pkgver=
+pkgver=1.6.9.31.718cbf6
 pkgrel=1
 pkgdesc="Background images and data for MATE"
 url="http://mate-desktop.org"

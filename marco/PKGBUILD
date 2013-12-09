@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=marco
-pkgver=
+pkgver=1.6.9.105.0403454
 pkgrel=1
 pkgdesc="A window manager for MATE"
 url="http://mate-desktop.org"

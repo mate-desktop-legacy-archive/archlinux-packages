@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-notification-daemon
-pkgver=
+pkgver=1.6.9.71.9f4203a
 pkgrel=1
 pkgdesc="Notification daemon for MATE"
 url="http://mate-desktop.org"

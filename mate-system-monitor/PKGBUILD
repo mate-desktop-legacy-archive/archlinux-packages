@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-system-monitor
-pkgver=
+pkgver=1.6.9.90.43414fe
 pkgrel=1
 pkgdesc="A system monitor for MATE"
 url="http://mate-desktop.org"

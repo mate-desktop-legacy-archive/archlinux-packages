@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=engrampa
-pkgver=
+pkgver=1.6.9.85.0e4df16
 pkgrel=1
 pkgdesc="Archive manipulator for MATE"
 url="http://mate-desktop.org"

@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-screensaver
-pkgver=
+pkgver=1.6.9.115.0460034
 pkgrel=1
 pkgdesc='Screensaver for MATE'
 url="http://mate-desktop.org"
