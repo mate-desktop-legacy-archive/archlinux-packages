@@ -1,4 +1,4 @@
-# Contributor: Martin Wimpress <code@flexion.org>
+# Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-color-manager
 pkgver=1.6.1
@@ -34,5 +34,5 @@ build() {
 
 package() {
     cd ${srcdir}/${pkgname}-${pkgver}
-    make DESTDIR="${pkgdir}" install
+    make DESTDIR=${pkgdir} install
 }

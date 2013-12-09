@@ -1,6 +1,6 @@
+# Maintainer : Martin Wimpress <code@flexion.org>
 # Contributor: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 # Contributor: Xpander <xpander0@gmail.com>
-# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-keyring
 pkgver=1.6.0
@@ -34,5 +34,5 @@ build() {
 
 package() {
     cd ${srcdir}/${pkgname}-${pkgver}
-    make DESTDIR="${pkgdir}" install
+    make DESTDIR=${pkgdir} install
 }

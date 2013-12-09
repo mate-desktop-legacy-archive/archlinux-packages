@@ -1,5 +1,5 @@
+# Maintainer : Martin Wimpress <code@flexion.org>
 # Contributor: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
-# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-system-tools
 pkgver=1.6.0
@@ -43,6 +43,6 @@ build() {
 
 package() {
     cd ${srcdir}/${pkgname}-${pkgver}
-    make DESTDIR="${pkgdir}" install
+    make DESTDIR=${pkgdir} install
     rm -f ${pkgdir}/usr/lib/caja/extensions-2.0/libcaja-gst-shares.a
 }

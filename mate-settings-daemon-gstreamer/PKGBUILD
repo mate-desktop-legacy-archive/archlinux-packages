@@ -1,6 +1,6 @@
+# Maintainer : Martin Wimpress <code@flexion.org>
 # Contributor: Giovanni Ricciardi <kar98k.sniper@gmail.com>
 # Contributor: Xpander <xpander0@gmail.com>
-# Contributor: Martin Wimpress <code@flexion.org>
 
 _pkgname=mate-settings-daemon
 pkgname=${_pkgname}-gstreamer
@@ -36,5 +36,5 @@ build() {
 
 package() {
     cd ${srcdir}/${_pkgname}-${pkgver}
-    make DESTDIR="${pkgdir}" install
+    make DESTDIR=${pkgdir} install
 }

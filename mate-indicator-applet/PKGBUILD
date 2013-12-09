@@ -1,5 +1,5 @@
+# Maintainer : Martin Wimpress <code@flexion.org>
 # Contributor: Xpander <xpander0@gmail.com>
-# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-indicator-applet
 pkgver=1.6.0
@@ -27,5 +27,5 @@ build() {
 
 package() {
     cd ${srcdir}/${pkgname}-${pkgver}
-    make DESTDIR="${pkgdir}" install
+    make DESTDIR=${pkgdir} install
 }

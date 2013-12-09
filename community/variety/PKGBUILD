@@ -1,6 +1,6 @@
+# Maintainer : Martin Wimpress <code@flexion.org>
 # Contributor: xzy3186 <xzy3186@gmail.com>
 # Contributor: willemw <willemw12@gmail.com>
-# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=variety
 pkgver=0.4.17
@@ -16,7 +16,7 @@ groups=('mate-extras-community')
 arch=('any')
 source=("https://launchpad.net/variety/trunk/${pkgver}/+download/${pkgname}_${pkgver}.tar.gz")
 md5sums=('077ac75c5d93d6b4c98c1a56477f40f2')
-install=$pkgname.install
+install=${pkgname}.install
 
 package() {
     cd ${srcdir}/${pkgname}

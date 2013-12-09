@@ -1,5 +1,5 @@
+# Maintainer : Martin Wimpress <code@flexion.org>
 # Contributor: Giovanni Ricciardi <kar98k.sniper@gmail.com>
-# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-screensaver
 pkgver=1.6.1
@@ -23,7 +23,7 @@ sha1sums=('3b4c0c1554fdf96def14efa8f9e100d29dc05984'
 install=${pkgname}.install
 
 build() {
-    cd $srcdir/${pkgname}-${pkgver}
+    cd ${srcdir}/${pkgname}-${pkgver}
     ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
@@ -39,5 +39,5 @@ build() {
 
 package() {
     cd ${srcdir}/${pkgname}-${pkgver}
-    make DESTDIR="${pkgdir}" install
+    make DESTDIR=${pkgdir} install
 }

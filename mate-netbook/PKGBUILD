@@ -1,5 +1,5 @@
+# Maintainer : Martin Wimpress <code@flexion.org>
 # Contributor: Xpander <xpander0@gmail.com>
-# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-netbook
 pkgver=1.6.0
@@ -27,7 +27,7 @@ build() {
 
 package() {
     cd ${srcdir}/${pkgname}-${pkgver}
-    make DESTDIR="${pkgdir}" install
+    make DESTDIR=${pkgdir} install
     # Fix startup delay
     # https://github.com/mate-desktop/mate-netbook/issues/6
     sed -i 's/X-MATE-Autostart-Phase/#X-MATE-Autostart-Phase/' ${pkgdir}/etc/xdg/autostart/mate-maximus-autostart.desktop

@@ -1,7 +1,7 @@
+# Maintainer : Martin Wimpress <code@flexion.org>
 # Contributor: twa022 <twa022 at gmail dot com>
 # Contributor: Giuseppe Borzi <gborzi _AT_ ieee _DOT_ org>
 # Contributor: ryooichi <ryooichi+arch AT gmail DOT com>
-# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mintmenu
 pkgver=5.4.9

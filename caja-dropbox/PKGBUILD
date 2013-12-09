@@ -1,10 +1,10 @@
+# Maintainer : Martin Wimpress <code@flexion.org>
 # Contributor: josephgbr <rafael.f.f1@gmail.com>
 # Contributor: cmorlok <christianmorlok@web.de>
 # Contributor: fazibear <fazibear@gmail.com>
 # Contributor: neuromante <lorenzo.nizzi.grifi@gmail.com>
 # Contributor: Gordin <9ordin @t gmail.com>
 # Contributor: Xpander <xpander0@gmail.com>
-# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=caja-dropbox
 pkgver=0.7.1
@@ -32,8 +32,8 @@ build() {
 
 package() {
     cd ${pkgname}-${pkgver}
-    make DESTDIR="${pkgdir}" install
-    install -Dm644 COPYING "${pkgdir}/usr/share/licenses/${pkgname}/COPYING"
+    make DESTDIR=${pkgdir} install
+    install -Dm644 COPYING ${pkgdir}/usr/share/licenses/${pkgname}/COPYING
     # Remove the cruft
     rm -f ${pkgdir}/usr/lib/caja/extensions-*/libcaja-dropbox.a
     rm -f ${pkgdir}/usr/bin/dropbox

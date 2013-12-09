@@ -31,5 +31,5 @@ package() {
   pkgdesc+=" (GTK+ 2 library)"
   depends=('gtk2')
   cd ${srcdir}/${pkgname}-${pkgver}
-  make DESTDIR="${pkgdir}" install
+  make DESTDIR=${pkgdir} install
 }

@@ -1,5 +1,5 @@
+# Maintainer : Martin Wimpress <code@flexion.org>
 # Contributor: Giovanni Ricciardi <kar98k.sniper@gmail.com>
-# Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-system-monitor
 pkgver=1.6.1
@@ -20,15 +20,15 @@ build() {
     cd ${srcdir}/${pkgname}-${pkgver}
     ./configure \
         --prefix=/usr \
-		--libexecdir=/usr/lib/${pkgname} \
-		--localstatedir=/var \
-		--disable-static \
-		--disable-scrollkeeper
+        --libexecdir=/usr/lib/${pkgname} \
+        --localstatedir=/var \
+        --disable-static \
+        --disable-scrollkeeper
     make clean
-	make
+    make
 }
 
 package() {
     cd ${srcdir}/${pkgname}-${pkgver}
-    make DESTDIR="${pkgdir}" install
+    make DESTDIR=${pkgdir} install
 }
