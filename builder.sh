@@ -90,6 +90,7 @@ function usage() {
     echo "      delete      Delete Arch Linux 'pkg.tar.xz' binary package files."
     echo "      purge       Purge source tarballs, 'src' and 'pkg' directories."
     echo "      repo        Create a package repository in '${HOME}/mate/'"
+    echo "      src         Create 'src' packages"
     echo "      sync        'rsync' a repo to ${RSYNC_UPSTREAM}."
     echo "      uninstall   Uninstall MATE packages and dependencies."
     echo
@@ -261,6 +262,39 @@ function tree_audit() {
     fi
 }
 
+# Build 'src' packages
+function tree_src() {
+    local PKG=${1}
+    cd ${PKG}
+    local INSTALLED=$(pacman -Q `basename ${PKG}` 2>/dev/null | cut -f2 -d' ')
+    local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=' | head -n1)
+    local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
+    local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
+
+    echo " - Looking for *${PKGBUILD}*.src.tar.xz"
+    if [ -f *${PKGBUILD}*.src.tar.xz ]; then
+        echo " - ${PKG} is current"
+        local BUILD_PKG=0
+    else
+        echo " - ${PKG} needs building"
+        local BUILD_PKG=1
+    fi
+
+    if [ ${BUILD_PKG} -eq 1 ]; then
+        echo " - Building ${PKG}"
+        if [ $(id -u) -eq 0 ]; then
+            makepkg -Sfd --noconfirm --needed --asroot
+        else
+            makepkg -Sfd --noconfirm --needed
+        fi
+
+        if [ $? -ne 0 ]; then
+            echo " - Failed to build ${PKG}. Stopping here."
+            exit 1
+        fi
+    fi
+}
+
 # Make 'src' packages and upload them to the AUR
 function tree_aur() {
     local PKG=${1}
@@ -333,7 +367,7 @@ function tree_build() {
 		sudo pacman -Rsdd --noconfirm mate-media
 	fi    
 
-    if [ ${BUILD_PKG} -eq 1 ]; then        
+    if [ ${BUILD_PKG} -eq 1 ]; then
         echo " - Building ${PKG}"
         if [ $(id -u) -eq 0 ]; then
             makepkg -fs --noconfirm --needed --log --asroot
@@ -551,7 +585,8 @@ if [ "${TASK}" == "audit" ] ||
    [ "${TASK}" == "check" ] ||
    [ "${TASK}" == "clean" ] ||
    [ "${TASK}" == "delete" ] ||
-   [ "${TASK}" == "purge" ]; then
+   [ "${TASK}" == "purge" ] ||
+   [ "${TASK}" == "src" ]; then
     tree_run ${TASK}
 elif [ "${TASK}" == "repo" ] || [ "${TASK}" == "sync" ] || [ "${TASK}" == "uninstall" ]; then
     tree_${TASK}
