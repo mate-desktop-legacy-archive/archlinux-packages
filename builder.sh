@@ -20,13 +20,13 @@ MATE_BUILD_ORDER=(
 	caja
 	mate-polkit
 	marco
-	mate-settings-daemon-gstreamer
+	mate-menus
+	mate-panel
+    mate-settings-daemon-gstreamer
 	mate-media-gstreamer
 	mate-settings-daemon-pulseaudio
 	mate-media-pulseaudio
 	mate-session-manager
-	mate-menus
-	mate-panel
 	mate-backgrounds
 	mate-themes
 	mate-notification-daemon
