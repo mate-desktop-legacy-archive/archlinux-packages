@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-system-tools
-pkgver=
+pkgver=1.6.9.48.8349af2
 pkgrel=1
 pkgdesc="An extension for opening terminals in arbitrary local paths"
 url="http://manny.cluecoder.org/packages/nautilus-open-terminal"

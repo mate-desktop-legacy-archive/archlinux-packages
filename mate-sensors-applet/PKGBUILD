@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-sensors-applet
-pkgver=
+pkgver=1.6.9.62.82a079a
 pkgrel=1
 pkgdesc="An applet for the MATE Panel to display readings from hardware sensors, including CPU temperature, fan speeds and voltage readings under Linux"
 url="http://mate-desktop.org"

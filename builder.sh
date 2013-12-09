@@ -5,7 +5,7 @@ AUR_BUILD_ORDER=(
     aur/system-tools-backends
     aur/liboobs
     aur/libxnvctrl
-    #aur/python2-exiv2
+    aur/python2-exiv2
 )
 
 # http://wiki.mate-desktop.org/status:1.8
@@ -22,7 +22,7 @@ MATE_BUILD_ORDER=(
 	marco
 	mate-menus
 	mate-panel
-    mate-settings-daemon-gstreamer
+    	mate-settings-daemon-gstreamer
 	mate-media-gstreamer
 	mate-settings-daemon-pulseaudio
 	mate-media-pulseaudio
@@ -33,7 +33,7 @@ MATE_BUILD_ORDER=(
 	mate-control-center
 	mate-screensaver
 	engrampa
-	#mate-power-manager # Doesn't build
+	#mate-power-manager # Won't build
 	mate-system-monitor
 	atril
 	caja-dropbox

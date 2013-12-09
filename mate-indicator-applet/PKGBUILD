@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-indicator-applet
-pkgver=
+pkgver=1.6.9.22.ea84e9c
 pkgrel=1
 pkgdesc="Indicator Applet for MATE"
 url="http://mate-desktop.org"
