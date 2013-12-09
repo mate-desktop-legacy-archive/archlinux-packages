@@ -1,4 +1,5 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
+# Contributor: hekel <hekel(at)archlinux.info>
 
 pkgname=engrampa
 pkgver=1.6.9.85.0e4df16
