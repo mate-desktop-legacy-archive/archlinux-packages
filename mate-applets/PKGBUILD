@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-applets
-pkgver=
+pkgver=1.6.9.167.9002923
 pkgrel=1
 pkgdesc="Applets for MATE panel"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -27,13 +27,6 @@ install=${pkgname}.install
 pkgver() {
     cd ${srcdir}/${pkgname}
     echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
-}
-
-prepare() {
-    # Remove this when https://github.com/mate-desktop/mate-applets/pull/66
-    # or https://github.com/mate-desktop/mate-applets/pull/65 are merged.
-    cd ${srcdir}/${pkgname}
-    sed -i 's/no-dist-gz/no-dist-gzip/g' configure.ac
 }
 
 build() {
