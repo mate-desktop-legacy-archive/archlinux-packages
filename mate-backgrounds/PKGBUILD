@@ -7,7 +7,6 @@ pkgdesc="Background images and data for MATE"
 url="http://mate-desktop.org"
 arch=('any')
 license=('GPL')
-depends=('glib2')
 makedepends=('mate-common' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
 groups=('mate')
@@ -20,13 +19,13 @@ pkgver() {
 }
 
 build() {
-	cd ${srcdir}/${pkgname}
-	./autogen.sh \
-		--prefix=/usr
-	make
+    cd ${srcdir}/${pkgname}
+    ./autogen.sh \
+        --prefix=/usr
+    make
 }
 
 package() {
-	cd ${srcdir}/${pkgname}
-	make DESTDIR=${pkgdir} install
+    cd ${srcdir}/${pkgname}
+    make DESTDIR=${pkgdir} install
 }

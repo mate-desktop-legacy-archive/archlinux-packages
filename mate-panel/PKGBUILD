@@ -2,14 +2,14 @@
 
 pkgname=mate-panel
 pkgver=1.7.0
-pkgrel=2
+pkgrel=3
 pkgdesc="The MATE Panel"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('avahi' 'dbus' 'dconf' 'desktop-file-utils'
+depends=('avahi' 'caja' 'dbus' 'dconf' 'desktop-file-utils'
          'gobject-introspection' 'gtk2' 'libwnck' 'libcanberra' 'libice'
-         'libmateweather' 'librsvg' 'libsm' 'libsoup' 'libxau'
+         'libmateweather' 'librsvg' 'libsm' 'libsoup' 'libxau' 'marco'
          'mate-menus' 'mate-desktop' 'mate-polkit' 'python2' 'yelp')
 makedepends=('mate-common' 'networkmanager' 'perl-xml-parser' 'yelp-tools')
 options=('!emptydirs' '!libtool')

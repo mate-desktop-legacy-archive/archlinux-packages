@@ -4,7 +4,7 @@
 
 pkgname=libmateweather
 pkgver=1.7.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Provides access to weather information from the Internet."
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -24,6 +24,7 @@ build() {
         --sysconfdir=/etc \
         --localstatedir=/var \
         --disable-static \
+        --enable-python \
         --enable-locations-compression
     make
 }

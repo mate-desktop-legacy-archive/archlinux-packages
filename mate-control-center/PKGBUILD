@@ -7,8 +7,8 @@ pkgdesc="The Control Center for MATE"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('dbus' 'dconf' 'desktop-file-utils' 'gsettings-desktop-schemas' 'gtk2'
-         'mate-desktop' 'mate-icon-theme' 'mate-menus' 'mate-settings-daemon'
+depends=('caja' 'dbus-glib' 'dconf' 'desktop-file-utils' 'gsettings-desktop-schemas'
+         'gtk2' 'mate-desktop' 'mate-icon-theme' 'mate-menus' 'mate-settings-daemon'
          'marco' 'libgtop' 'libmatekbd' 'libunique' 'librsvg' 'libxss'
          'libxt' 'startup-notification' 'yelp')
 makedepends=('docbook2x' 'mate-common' 'perl-xml-parser' 'yelp-tools')
