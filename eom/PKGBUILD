@@ -25,10 +25,7 @@ pkgver() {
 }
 
 prepare() {
-    # This patch can be remove when https://github.com/mate-desktop/eom/pull/31
-    # is merged.
-    cd ${srcdir}/${pkgname}
-    patch -Np1 -i ${srcdir}/01-fix.diff
+    :
 }
 
 build() {
