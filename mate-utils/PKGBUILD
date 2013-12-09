@@ -1,4 +1,4 @@
-# Contributor: Martin Wimpress <code@flexion.org>
+# Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-utils
 pkgver=
@@ -12,8 +12,8 @@ depends=('desktop-file-utils' 'gtk2' 'libcanberra' 'libgtop' 'libsm'
 makedepends=('mate-common' 'perl-xml-parser' 'rarian' 'yelp-tools')
 options=('!libtool' '!emptydirs')
 groups=('mate-extras')
-source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")        
-sha1sums=('SKIP')         
+source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")
+sha1sums=('SKIP')
 install=${pkgname}.install
 
 pkgver() {

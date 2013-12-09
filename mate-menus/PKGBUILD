@@ -1,4 +1,4 @@
-# Contributor: Martin Wimpress <code@flexion.org>
+# Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-menus
 pkgver=1.7.0
@@ -11,7 +11,7 @@ depends=('glib2' 'python2')
 makedepends=('gobject-introspection' 'mate-common' 'perl-xml-parser')
 options=('!emptydirs' '!libtool')
 groups=('mate')
-source=(http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz)	    
+source=(http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz)
 sha1sums=('92f290bf6fc046f60fe8a264e0a89d05375def1c')
 
 build() {

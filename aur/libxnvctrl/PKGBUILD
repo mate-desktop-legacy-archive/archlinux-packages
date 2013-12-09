@@ -10,7 +10,7 @@ url="http://www.nvidia.com/"
 license=('GPL2')
 makedepends=('libxext')
 options=('staticlibs')
-source=(http://download.nvidia.com/XFree86/nvidia-settings/nvidia-settings-$pkgver.tar.bz2)
+source=(http://download.nvidia.com/XFree86/nvidia-settings/nvidia-settings-${pkgver}.tar.bz2)
 sha1sums=('9e043554225920decd16707c8a27a661b74d90d1')
 
 build() {

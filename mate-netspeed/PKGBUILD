@@ -1,4 +1,4 @@
-# Contributor: Martin Wimpress <code@flexion.org>
+# Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-netspeed
 pkgver=
@@ -10,7 +10,7 @@ license=('GPL')
 depends=('gtk2' 'libgtop' 'mate-panel' 'wireless_tools' 'yelp')
 makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
 groups=('mate-extras')
-source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")        
+source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')
 install=${pkgname}.install
 

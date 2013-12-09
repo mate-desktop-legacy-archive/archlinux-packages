@@ -1,4 +1,4 @@
-# Contributor: Martin Wimpress <code@flexion.org>
+# Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-disk-utility
 pkgver=1.6.1
@@ -17,11 +17,11 @@ md5sums=('6354d83bb4c99fbbe27796fd939f43fe')
 install=${pkgname}.install
 
 build() {
-    cd ${srcdir}/${pkgname}-${pkgver}    
+    cd ${srcdir}/${pkgname}-${pkgver}
     ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
-        --libexecdir=/usr/lib/${pkgname} \        
+        --libexecdir=/usr/lib/${pkgname} \
         --disable-static \
         --disable-scrollkeeper
     make

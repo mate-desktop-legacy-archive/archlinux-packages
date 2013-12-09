@@ -10,7 +10,7 @@ arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 makedepends=('gtk2' 'pkg-config')
 options=(!libtool)
-source=(https://launchpad.net/${pkgname}/12.10/${pkgver}/+download/${pkgname}-${pkgver}.tar.gz)        
+source=(https://launchpad.net/${pkgname}/12.10/${pkgver}/+download/${pkgname}-${pkgver}.tar.gz)
 md5sums=('5fd4d6bab339fc9611078b64c44a85a8')
 
 build() {
@@ -31,5 +31,5 @@ package() {
   pkgdesc+=" (GTK+ 2 library)"
   depends=('gtk2')
   cd ${srcdir}/${pkgname}-${pkgver}
-  make DESTDIR="${pkgdir}" install
+  make DESTDIR=${pkgdir} install
 }

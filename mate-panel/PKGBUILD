@@ -1,4 +1,4 @@
-# Contributor: Martin Wimpress <code@flexion.org>
+# Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-panel
 pkgver=1.7.0
@@ -17,7 +17,7 @@ groups=('mate')
 source=(http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz
 		https://github.com/mate-desktop/mate-panel/commit/a7a5e35d8a5418d9b9939f6de99367f72ded7b6d.diff
 	    https://github.com/mate-desktop/mate-panel/commit/603813e094a40707eb0d9e4238348c6bdf857993.diff
-	    https://github.com/mate-desktop/mate-panel/commit/1b401ff5fa2ca8e710986e61227389cedde10a05.diff	    
+	    https://github.com/mate-desktop/mate-panel/commit/1b401ff5fa2ca8e710986e61227389cedde10a05.diff
 	    https://github.com/infirit/mate-panel/commit/27daac2e3469ec6620309b8bbcf947934874dd9d.diff)
 sha1sums=('419aa17e6a00b4c51fa9621bf392d35e67529d38'
           '1150ae4f83147529e8fb81d11eec72a3e1c8db8c'
@@ -29,7 +29,7 @@ install=${pkgname}.install
 prepare() {
 	# These patches can be removed when a 1.7.1 tarball is released or
 	# when this pakcage is migrated to gtk3.
-	cd ${srcdir}/${pkgname}-${pkgver}	
+	cd ${srcdir}/${pkgname}-${pkgver}
 	patch -Np1 -i ${srcdir}/a7a5e35d8a5418d9b9939f6de99367f72ded7b6d.diff
 	patch -Np1 -i ${srcdir}/603813e094a40707eb0d9e4238348c6bdf857993.diff
 	patch -Np1 -i ${srcdir}/1b401ff5fa2ca8e710986e61227389cedde10a05.diff
@@ -44,7 +44,7 @@ build() {
         --sysconfdir=/etc \
         --localstatedir=/var \
         --enable-introspection \
-        --disable-static        
+        --disable-static
     make
 }
 
