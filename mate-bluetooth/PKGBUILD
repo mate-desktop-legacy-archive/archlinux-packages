@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-bluetooth
-pkgver=
+pkgver=1.6.9.63.54e5688
 pkgrel=1
 pkgdesc="A collection of Bluetooth utilities and modules for MATE"
 url="http://mate-desktop.org"
