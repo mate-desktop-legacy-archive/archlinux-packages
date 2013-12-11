@@ -24,7 +24,7 @@ sha1sums=('46188f6c02cc5978688af9d5db4be09f1b9199a5'
           '4312495bcd12ca5a20f7d5442b7517902605534c')
 install=${pkgname}.install
 
-build() {
+prepare() {
     cd ${srcdir}/${pkgname}-${pkgver}
     # fix systemd-login1 support for hibernate/suspend
     # https://github.com/mate-desktop/mate-session-manager/commit/f0b5b1ab78879d64f80117415aacf029359afea5
@@ -36,7 +36,10 @@ build() {
 
     # Recreate the build system because configure.ac was patched.
     autoreconf -fi
+}
 
+build() {
+    cd ${srcdir}/${pkgname}-${pkgver}
     ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \

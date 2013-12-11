@@ -14,29 +14,33 @@ makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser' 'rarian')
 options=('!libtool' '!emptydirs')
 groups=('mate-extras')
 source=("http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz"
-		'patch.diff'
+        'patch.diff'
         '422504e251442ca9921c4218151cffb6548280e6.diff')
 sha1sums=('a43b45cccffd6116c49475d7511cf58b219c0d72'
           'f1eb654b90423ab5468edd57dc33f3f7f9c3f390'
           '71d8115a2044823936289c39bbaf32070d343f76')
 install=${pkgname}.install
 
-build() {
+prepare() {
     cd ${srcdir}/${pkgname}-${pkgver}
-    
+
+    # Fix save directory selection
     patch -Np1 -i ${srcdir}/patch.diff
-    
+
     # Fix masking for area or window screenshots
     # https://github.com/mate-desktop/mate-utils/pull/45
     patch -Np1 -i ${srcdir}/422504e251442ca9921c4218151cffb6548280e6.diff
-    
+}
+
+build() {
+    cd ${srcdir}/${pkgname}-${pkgver}
     ./autogen.sh \
         --prefix=/usr \
-		--libexecdir=/usr/lib/${pkgname} \
+        --libexecdir=/usr/lib/${pkgname} \
         --sysconfdir=/etc \
         --disable-static \
-		--disable-scrollkeeper
-	make
+        --disable-scrollkeeper
+    make
 }
 
 package() {

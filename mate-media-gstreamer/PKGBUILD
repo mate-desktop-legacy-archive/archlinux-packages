@@ -22,23 +22,25 @@ sha1sums=('06c3418dfe0be26e74b0e40aa92eea6260579a72'
           'f0e38578aacacf9ee852b7a44a34908cc230b91f')
 install=${pkgname}.install
 
-build() {
+prepare() {
     cd ${srcdir}/${_pkgname}-${pkgver}
-
     # Enable deprecated
     patch -p1 < ../../enable_deprecated.diff gst-mixer/src/Makefile.am
+}
 
-	./autogen.sh \
+build() {
+    cd ${srcdir}/${_pkgname}-${pkgver}
+    ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
-		--libexecdir=/usr/lib/${_pkgname} \
-		--localstatedir=/var \
-		--enable-gstmix \
-		--enable-gst-mixer-applet \
-		--disable-pulseaudio \
-		--disable-static \
-		--disable-scrollkeeper
-	make
+        --libexecdir=/usr/lib/${_pkgname} \
+        --localstatedir=/var \
+        --enable-gstmix \
+        --enable-gst-mixer-applet \
+        --disable-pulseaudio \
+        --disable-static \
+        --disable-scrollkeeper
+    make
 }
 
 package() {
