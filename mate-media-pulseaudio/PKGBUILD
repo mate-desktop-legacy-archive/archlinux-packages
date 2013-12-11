@@ -11,7 +11,7 @@ license=('GPL')
 depends=('desktop-file-utils' 'gstreamer0.10-base-plugins' 'libnotify'
          'mate-panel' 'mate-settings-daemon-pulseaudio' 'pulseaudio')
 makedepends=('mate-settings-daemon' 'mate-icon-theme' 'perl-xml-parser' 'yelp-tools')
-options=('!emptydirs' '!libtool')
+options=('!emptydirs')
 groups=('mate')
 conflicts=("${_pkgname}-gstreamer" 'mate-settings-daemon-gstreamer')
 provides=("${_pkgname}")
@@ -21,25 +21,25 @@ sha1sums=('SKIP')
 install=${pkgname}.install
 
 pkgver() {
-    cd ${srcdir}/${_pkgname}
+    cd "${srcdir}/${_pkgname}"
     echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
 }
 
 build() {
-    cd ${srcdir}/${_pkgname}
-	./autogen.sh \
-		--prefix=/usr \
-		--sysconfdir=/etc \
-		--libexecdir=/usr/lib/${_pkgname} \
-		--localstatedir=/var \
-		--enable-pulseaudio \
-		--disable-gstmix \
-		--disable-gst-mixer-applet \
-		--disable-static
-	make
+    cd "${srcdir}/${_pkgname}"
+    ./autogen.sh \
+        --prefix=/usr \
+        --sysconfdir=/etc \
+        --libexecdir=/usr/lib/${_pkgname} \
+        --localstatedir=/var \
+        --enable-pulseaudio \
+        --disable-gstmix \
+        --disable-gst-mixer-applet \
+        --disable-static
+    make
 }
 
 package() {
-    cd ${srcdir}/${_pkgname}
-    make DESTDIR=${pkgdir} install
+    cd "${srcdir}/${_pkgname}"
+    make DESTDIR="${pkgdir}" install
 }

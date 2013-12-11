@@ -10,7 +10,7 @@ arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('caja' 'pygtk' 'python2' 'python2-gobject')
 makedepends=('mate-common')
-options=('!emptydirs' '!libtool')
+options=('!emptydirs')
 groups=('mate-extras')
 replaces=('python-caja')
 provides=('python-caja')
@@ -18,12 +18,12 @@ source=("${pkgname}::git+https://github.com/mate-desktop/${_pkgname}.git")
 sha1sums=('SKIP')
 
 pkgver() {
-    cd ${srcdir}/${pkgname}
+    cd "${srcdir}/${pkgname}"
     echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
 }
 
 build() {
-    cd ${srcdir}/${pkgname}
+    cd "${srcdir}/${pkgname}"
     PYTHON=/usr/bin/python2 ./autogen.sh \
         --prefix=/usr \
         --disable-static
@@ -31,6 +31,6 @@ build() {
 }
 
 package() {
-    cd ${srcdir}/${pkgname}
-    make DESTDIR=${pkgdir} install
+    cd "${srcdir}/${pkgname}"
+    make DESTDIR="${pkgdir}" install
 }

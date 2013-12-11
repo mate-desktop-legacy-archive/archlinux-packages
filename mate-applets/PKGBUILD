@@ -16,7 +16,7 @@ depends=('avahi' 'dbus' 'gsettings-desktop-schemas'
          'python2-gobject2' 'python2-notify' 'sharutils'
          'system-tools-backends' 'upower' 'yelp')
 makedepends=('docbook2x' 'docbook-xsl' 'mate-common' 'networkmanager' 'perl-xml-parser' 'yelp-tools')
-options=('!emptydirs' '!libtool')
+options=('!emptydirs')
 groups=('mate-extras')
 replaces=('gnome-applets')
 conflicts=('gnome-applets')
@@ -25,12 +25,12 @@ sha1sums=('SKIP')
 install=${pkgname}.install
 
 pkgver() {
-    cd ${srcdir}/${pkgname}
+    cd "${srcdir}/${pkgname}"
     echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
 }
 
 build() {
-    cd ${srcdir}/${pkgname}
+    cd "${srcdir}/${pkgname}"
     PYTHON=/usr/bin/python2 ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
@@ -43,7 +43,7 @@ build() {
 }
 
 package() {
-    cd ${srcdir}/${pkgname}
-    make DESTDIR=${pkgdir} install
-    sed -i 's/env python/env python2/' ${pkgdir}/usr/lib/${pkgname}/invest-applet
+    cd "${srcdir}/${pkgname}"
+    make DESTDIR="${pkgdir}" install
+    sed -i 's/env python/env python2/' "${pkgdir}/usr/lib/${pkgname}/invest-applet"
 }

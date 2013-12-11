@@ -13,17 +13,16 @@ depends=('dconf' 'gtk2' 'hicolor-icon-theme' 'libunique' 'python2'
          'startup-notification' 'yelp')
 makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
 optdepends=('lightdm-gtk2-greeter: A lightweight display manager')
-options=('!emptydirs' '!libtool')
+options=('!emptydirs')
 groups=('mate')
-source=(http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz)
+source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
 sha1sums=('fd85ec43d378cf2811f924d5c783cfb76047fc0b')
 install=${pkgname}.install
 
 build() {
     # See the following for '--disable-desktop-docs' justification
-    #  - https://github.com/mate-desktop/mate-desktop/issues/68
-    
-    cd ${srcdir}/${pkgname}-${pkgver}
+    #  - https://github.com/mate-desktop/mate-desktop/issues/68    
+    cd "${srcdir}/${pkgname}-${pkgver}"
     PYTHON=/usr/bin/python2 ./configure \
         --prefix=/usr \
         --disable-static \
@@ -35,6 +34,6 @@ build() {
 }
 
 package() {
-    cd ${srcdir}/${pkgname}-${pkgver}
-    make DESTDIR=${pkgdir} install
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
 }

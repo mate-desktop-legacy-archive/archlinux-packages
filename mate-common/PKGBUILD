@@ -9,21 +9,25 @@ pkgdesc="Common development macros for MATE"
 arch=('any')
 license=('GPL')
 depends=('autoconf' 'automake' 'gettext' 'gtk-doc' 'intltool' 'libtool' 'pkg-config')
-options=('!emptydirs' '!libtool')
+options=('!emptydirs')
 url="http://mate-desktop.org"
-source=(http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz)
+source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
 sha1sums=('f42340bbc03d2072734e4e9919d0a36f1b97a4f9')
 
-build() {
-    cd ${srcdir}/${pkgname}-${pkgver}
+prepare() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
     # Bump automake version, when required.
     #sed -i "s/automake-1.14/automake-1.15 automake-1.14/g" ./macros/mate-autogen
+}
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
     ./autogen.sh \
         --prefix=/usr
     make
 }
 
 package() {
-    cd ${srcdir}/${pkgname}-${pkgver}
-    make DESTDIR=${pkgdir} install
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
 }

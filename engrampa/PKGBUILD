@@ -14,7 +14,7 @@ optdepends=('unrar: for RAR uncompression'
 'zip: for ZIP archives' 'unzip: for ZIP archives'
 'p7zip: 7zip compression utility' 'arj: for ARJ archives'
 'unace: extraction tool for the proprietary ace archive format')
-options=('!libtool' '!emptydirs')
+options=( '!emptydirs')
 groups=('mate-extras')
 source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git"
         fr-rpm-bsdtar.patch)
@@ -23,18 +23,18 @@ sha1sums=('SKIP'
 install=${pkgname}.install
 
 pkgver() {
-    cd ${srcdir}/${pkgname}
+    cd "${srcdir}/${pkgname}"
     echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
 }
 
 prepare() {
-    cd ${srcdir}/${pkgname}-${pkgver}
+    cd "${srcdir}/${pkgname}-${pkgver}"
     # This patch 'depends' on libarchive
-    patch -Np1 -i ${srcdir}/fr-rpm-bsdtar.patch
+    patch -Np1 -i "${srcdir}/fr-rpm-bsdtar.patch"
 }
 
 build() {
-    cd ${srcdir}/${pkgname}
+    cd "${srcdir}/${pkgname}"
     ./autogen.sh \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
@@ -45,6 +45,6 @@ build() {
 }
 
 package() {
-    cd ${srcdir}/${pkgname}
-    make DESTDIR=${pkgdir} install
+    cd "${srcdir}/${pkgname}"
+    make DESTDIR="${pkgdir}" install
 }

@@ -12,23 +12,23 @@ makedepends=('mate-common' 'perl-xml-parser')
 optdepends=('pidgin: Support for sending to instant messaging networks.'
             'gajim: Support for sending to Jabber.'
             'mate-bluetooth: Support for sending to bluetooth.')
-options=('!emptydirs' '!libtool')
+options=('!emptydirs')
 groups=('mate-extras')
-source=(http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz)
+source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
 sha1sums=('8a6fee2f2b5253f0069cc9567e5e12691c7178ae')
 install=${pkgname}.install
 
 build() {
-    cd ${srcdir}/${pkgname}-${pkgver}
+    cd "${srcdir}/${pkgname}-${pkgver}"
     PYTHON=/usr/bin/python2 ./configure \
         --prefix=/usr
     make
 }
 
 package() {
-    cd ${srcdir}/${pkgname}-${pkgver}
-    make DESTDIR=${pkgdir} install
-    rm -f ${pkgdir}/usr/lib/caja/extensions-2.0/libcaja-gksu.a
-    rm -f ${pkgdir}/usr/lib/caja/extensions-2.0/libcaja-open-terminal.a
-    rm -f ${pkgdir}/usr/lib/caja/extensions-*/libcaja-share.a
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
+    rm -f "${pkgdir}/usr/lib/caja/extensions-2.0/libcaja-gksu.a"
+    rm -f "${pkgdir}/usr/lib/caja/extensions-2.0/libcaja-open-terminal.a"
+    rm -f "${pkgdir}/usr/lib/caja/extensions-*/libcaja-share.a"
 }

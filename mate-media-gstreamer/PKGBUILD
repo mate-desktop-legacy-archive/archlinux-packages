@@ -11,7 +11,7 @@ license=('GPL')
 depends=('desktop-file-utils' 'gstreamer0.10-base-plugins' 'libnotify'
          'mate-panel' 'mate-settings-daemon-gstreamer' 'yelp')
 makedepends=('mate-settings-daemon' 'mate-icon-theme' 'perl-xml-parser' 'yelp-tools')
-options=('!emptydirs' '!libtool')
+options=('!emptydirs')
 conflicts=("${_pkgname}-pulseaudio" 'mate-settings-daemon-pulseaudio')
 provides=("${_pkgname}")
 source=("${_pkgname}::git+https://github.com/mate-desktop/${_pkgname}.git"
@@ -21,17 +21,17 @@ sha1sums=('SKIP'
 install=${pkgname}.install
 
 pkgver() {
-    cd ${srcdir}/${_pkgname}
+    cd "${srcdir}/${_pkgname}"
     echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
 }
 
 prepare() {
-    cd ${srcdir}/${_pkgname}
+    cd "${srcdir}/${_pkgname}"
     patch -p1 < ../../enable_deprecated.diff gst-mixer/src/Makefile.am
 }
 
 build() {
-    cd ${srcdir}/${_pkgname}
+    cd "${srcdir}/${_pkgname}"
     ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
@@ -45,6 +45,6 @@ build() {
 }
 
 package() {
-    cd ${srcdir}/${_pkgname}
-    make DESTDIR=${pkgdir} install
+    cd "${srcdir}/${_pkgname}"
+    make DESTDIR="${pkgdir}" install
 }

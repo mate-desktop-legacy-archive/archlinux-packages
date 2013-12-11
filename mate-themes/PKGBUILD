@@ -10,16 +10,16 @@ arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('gtk2' 'gtk-engines' 'gtk-engine-murrine' 'librsvg' 'mate-icon-theme')
 makedepends=('mate-common' 'icon-naming-utils' 'perl-xml-parser')
-options=('!emptydirs' '!libtool')
+options=('!emptydirs')
 groups=('mate')
 replaces=('gnome-themes')
 conflicts=('gnome-themes')
-source=(http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz)
+source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
 sha1sums=('d30744009b3090d1ce7e8cfba8293c58994a5a85')
 install=${pkgname}.install
 
 build() {
-    cd ${srcdir}/${pkgname}-${pkgver}
+    cd "${srcdir}/${pkgname}-${pkgver}"
     ./configure \
         --prefix=/usr \
         --enable-all-themes \
@@ -29,6 +29,6 @@ build() {
 }
 
 package() {
-    cd ${srcdir}/${pkgname}-${pkgver}
-    make DESTDIR=${pkgdir} install
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
 }

@@ -14,14 +14,14 @@ depends=('caja' 'dbus' 'desktop-file-utils' 'gobject-introspection' 'gtk2'
          'mate-settings-daemon' 'pangox-compat' 'startup-notification' 'systemd'
          'upower')
 makedepends=('mate-common' 'perl-xml-parser' 'xmlto')
-options=('!emptydirs' '!libtool')
+options=('!emptydirs')
 groups=('mate')
-source=(http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz)
+source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
 sha1sums=('c86bca622c4dbcf3dac56db7da9f7511c79d33f5')
 install=${pkgname}.install
 
 build() {
-    cd ${srcdir}/${pkgname}-${pkgver}
+    cd "${srcdir}/${pkgname}-${pkgver}"
     ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
@@ -31,6 +31,6 @@ build() {
 }
 
 package() {
-    cd ${srcdir}/${pkgname}-${pkgver}
-    make DESTDIR=${pkgdir} install
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
 }

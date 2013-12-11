@@ -9,7 +9,7 @@ arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL' 'LGPL')
 depends=('dconf' 'dbus-glib' 'gtk2' 'libcanberra' 'libwnck' 'libnotify')
 makedepends=('mate-common' 'perl-xml-parser')
-options=('!emptydirs' '!libtool')
+options=('!emptydirs')
 groups=('mate')
 provides=('notification-daemon')
 source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")
@@ -17,12 +17,12 @@ sha1sums=('SKIP')
 install=${pkgname}.install
 
 pkgver() {
-    cd ${srcdir}/${pkgname}
+    cd "${srcdir}/${pkgname}"
     echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
 }
 
 build() {
-    cd ${srcdir}/${pkgname}
+    cd "${srcdir}/${pkgname}"
     ./autogen.sh \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
@@ -31,6 +31,6 @@ build() {
 }
 
 package() {
-    cd ${srcdir}/${pkgname}
-    make DESTDIR=${pkgdir} install
+    cd "${srcdir}/${pkgname}"
+    make DESTDIR="${pkgdir}" install
 }

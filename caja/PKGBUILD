@@ -13,14 +13,14 @@ depends=('dbus' 'desktop-file-utils' 'exempi' 'gtk2' 'gvfs' 'libexif' 'libunique
          'libxt' 'mate-desktop' 'mate-icon-theme' 'startup-notification')
 makedepends=('gobject-introspection' 'mate-common' 'pangox-compat')
 optdepends=('gstreamer0.10-good-plugins: automatic media playback when mouseover')
-options=('!emptydirs' '!libtool')
+options=('!emptydirs')
 groups=('mate')
-source=(http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz)
+source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
 sha1sums=('6549f3950cc50b54be90097f86ee4dc68f5bab06 ')
 install=${pkgname}.install
 
 build() {
-    cd ${srcdir}/${pkgname}-${pkgver}
+    cd "${srcdir}/${pkgname}-${pkgver}"
     ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/caja \
@@ -32,6 +32,6 @@ build() {
 }
 
 package() {
-    cd ${srcdir}/${pkgname}-${pkgver}
-    make DESTDIR=${pkgdir} install
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
 }

@@ -11,19 +11,19 @@ depends=('dbus' 'desktop-file-utils' 'gobject-introspection' 'gtk2'
          'gvfs' 'libnotify' 'libunique' 'obex-data-server' 'yelp')
 makedepends=('mate-common' 'caja-extensions' 'perl-xml-parser' 'yelp-tools')
 optdepends=('mate-user-share: Enable sharing via bluetooth and other protocols.')
-options=('!emptydirs' '!libtool')
+options=('!emptydirs')
 groups=('mate-extras')
 source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')
 install=${pkgname}.install
 
 pkgver() {
-    cd ${srcdir}/${pkgname}
+    cd "${srcdir}/${pkgname}"
     echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
 }
 
 build() {
-    cd ${srcdir}/${pkgname}
+    cd "${srcdir}/${pkgname}"
     ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
@@ -35,6 +35,6 @@ build() {
 }
 
 package() {
-    cd ${srcdir}/${pkgname}
-    make DESTDIR=${pkgdir} install
+    cd "${srcdir}/${pkgname}"
+    make DESTDIR="${pkgdir}" install
 }

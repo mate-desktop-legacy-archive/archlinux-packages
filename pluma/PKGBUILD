@@ -11,14 +11,14 @@ depends=('caja' 'desktop-file-utils' 'enchant' 'gtk2' 'gtksourceview2'
          'iso-codes' 'libsm' 'mate-desktop' 'python2' 'python2-gobject2'
          'pygtksourceview2' 'yelp')
 makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
-options=('!emptydirs' '!libtool')
+options=('!emptydirs')
 groups=('mate-extras')
-source=(http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz)
+source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
 sha1sums=('49a0fec29728f5ffa36ab41415574d1e27f58536')
 install=${pkgname}.install
 
 build() {
-    cd ${srcdir}/${pkgname}-${pkgver}
+    cd "${srcdir}/${pkgname}-${pkgver}"
     PYTHON=/usr/bin/python2 ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib \
@@ -27,6 +27,6 @@ build() {
 }
 
 package() {
-    cd ${srcdir}/${pkgname}-${pkgver}
-    make DESTDIR=${pkgdir} install
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
 }

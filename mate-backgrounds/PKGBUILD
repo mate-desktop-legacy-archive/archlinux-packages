@@ -8,24 +8,24 @@ url="http://mate-desktop.org"
 arch=('any')
 license=('GPL')
 makedepends=('mate-common' 'perl-xml-parser')
-options=('!emptydirs' '!libtool')
+options=('!emptydirs')
 groups=('mate')
 source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')
 
 pkgver() {
-    cd ${srcdir}/${pkgname}
+    cd "${srcdir}/${pkgname}"
     echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
 }
 
 build() {
-    cd ${srcdir}/${pkgname}
+    cd "${srcdir}/${pkgname}"
     ./autogen.sh \
         --prefix=/usr
     make
 }
 
 package() {
-    cd ${srcdir}/${pkgname}
-    make DESTDIR=${pkgdir} install
+    cd "${srcdir}/${pkgname}"
+    make DESTDIR="${pkgdir}" install
 }

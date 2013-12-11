@@ -11,7 +11,7 @@ depends=('dbus-glib' 'desktop-file-utils' 'gtk2' 'exempi' 'lcms' 'libexif'
          'libjpeg-turbo' 'mate-desktop' 'mate-icon-theme' 'pygtk' 'python2'
          'python2-gobject2' 'startup-notification' 'yelp' 'zlib')
 makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
-options=('!emptydirs' '!libtool')
+options=('!emptydirs')
 groups=('mate')
 source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git"
         '01-fix.diff')
@@ -20,16 +20,12 @@ sha1sums=('SKIP'
 install=${pkgname}.install
 
 pkgver() {
-    cd ${srcdir}/${pkgname}
+    cd "${srcdir}/${pkgname}"
     echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
 }
 
-prepare() {
-    :
-}
-
 build() {
-    cd ${srcdir}/${pkgname}
+    cd "${srcdir}/${pkgname}"
     PYTHON=/usr/bin/python2 ./autogen.sh \
         --prefix=/usr \
         --localstatedir=/var
@@ -37,6 +33,6 @@ build() {
 }
 
 package() {
-    cd ${srcdir}/${pkgname}
-    make DESTDIR=${pkgdir} install
+    cd "${srcdir}/${pkgname}"
+    make DESTDIR="${pkgdir}" install
 }

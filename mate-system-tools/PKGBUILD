@@ -13,19 +13,18 @@ makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
 optdepends=('ntp: Automatic time syncronisation.'
             'system-config-printer: Add CUPS printer configuration tool.'
             'cups-pk-helper: A helper that makes system-config-printer use PolicyKit.')
-options=('!libtool')
 groups=('mate-extras')
 source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')
 install=${pkgname}.install
 
 pkgver() {
-    cd ${srcdir}/${pkgname}
+    cd "${srcdir}/${pkgname}"
     echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
 }
 
 build() {
-    cd ${srcdir}/${pkgname}
+    cd "${srcdir}/${pkgname}"
     ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc
@@ -33,7 +32,7 @@ build() {
 }
 
 package() {
-    cd ${srcdir}/${pkgname}
-    make DESTDIR=${pkgdir} install
-    rm -f ${pkgdir}/usr/lib/caja/extensions-2.0/libcaja-gst-shares.a
+    cd "${srcdir}/${pkgname}"
+    make DESTDIR="${pkgdir}" install
+    rm -f "${pkgdir}/usr/lib/caja/extensions-2.0/libcaja-gst-shares.a"
 }

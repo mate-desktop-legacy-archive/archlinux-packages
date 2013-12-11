@@ -12,15 +12,15 @@ depends=('dbus' 'dconf' 'fontconfig' 'gstreamer0.10-base-plugins' 'gtk2'
          'libcanberra' 'libcanberra-gstreamer' 'libmatekbd' 'libnotify'
          'libxt' 'mate-desktop' 'mate-polkit' 'startup-notification')
 makedepends=('mate-common' 'perl-xml-parser')
-options=('!emptydirs' '!libtool')
+options=('!emptydirs')
 conflicts=("${_pkgname}-pulseaudio" 'mate-media-pulseaudio')
 provides=("${_pkgname}")
-source=(http://pub.mate-desktop.org/releases/1.7/${_pkgname}-${pkgver}.tar.xz)
+source=("http://pub.mate-desktop.org/releases/1.7/${_pkgname}-${pkgver}.tar.xz")
 sha1sums=('32730c0c5ca20d41f11390a154875a1220d9ba9c')
 install=${pkgname}.install
 
 build() {
-    cd ${srcdir}/${_pkgname}-${pkgver}
+    cd "${srcdir}/${_pkgname}-${pkgver}"
     ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/${_pkgname} \
@@ -33,6 +33,6 @@ build() {
 }
 
 package() {
-    cd ${srcdir}/${_pkgname}-${pkgver}
-    make DESTDIR=${pkgdir} install
+    cd "${srcdir}/${_pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
 }
