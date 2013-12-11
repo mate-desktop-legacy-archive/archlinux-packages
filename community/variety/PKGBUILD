@@ -19,6 +19,6 @@ md5sums=('077ac75c5d93d6b4c98c1a56477f40f2')
 install=${pkgname}.install
 
 package() {
-    cd ${srcdir}/${pkgname}
-    python2 setup.py install --root=${pkgdir} --optimize=1
+    cd "${srcdir}/${pkgname}"
+    python2 setup.py install --root="${pkgdir}" --optimize=1
 }

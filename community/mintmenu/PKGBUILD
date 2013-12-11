@@ -20,9 +20,8 @@ source=("${url}/${pkgname}_${pkgver}.tar.gz")
 install=${pkgname}.install
 md5sums=('39826a17c8de746ad119208588be2ec2')
 
-
 build() {
-    cd ${srcdir}/${pkgname}
+    cd "${srcdir}/${pkgname}"
     rm -f usr/lib/linuxmint/mintMenu/*.py{c,o} usr/lib/linuxmint/mintMenu/plugins/*.py{c,o}
     for PY in $(find . -name '*.py'); do
         sed -ri 's:^#!/usr/bin/(env )?python$:&2:' "${PY}"
@@ -37,9 +36,9 @@ build() {
 }
 
 package() {
-    cd ${srcdir}/${pkgname}
-    cp -R usr ${pkgdir}
-    cd ${pkgdir}/usr/lib/linuxmint/mintMenu
+    cd "${srcdir}/${pkgname}"
+    cp -R usr "${pkgdir}"
+    cd "${pkgdir}/usr/lib/linuxmint/mintMenu"
     ./compile.py
 }
 
