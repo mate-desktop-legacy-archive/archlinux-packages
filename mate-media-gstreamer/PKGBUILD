@@ -13,23 +13,23 @@ license=('GPL')
 depends=('desktop-file-utils' 'gstreamer0.10-base-plugins' 'libnotify'
          'mate-panel' 'mate-settings-daemon-gstreamer')
 makedepends=('mate-doc-utils' 'mate-settings-daemon' 'mate-icon-theme' 'perl-xml-parser')
-options=('!emptydirs' '!libtool')
+options=('!emptydirs')
 conflicts=("${_pkgname}-pulseaudio" 'mate-settings-daemon-pulseaudio')
 provides=("${_pkgname}")
-source=(http://pub.mate-desktop.org/releases/1.6/${_pkgname}-${pkgver}.tar.xz
+source=("http://pub.mate-desktop.org/releases/1.6/${_pkgname}-${pkgver}.tar.xz"
         enable_deprecated.diff)
 sha1sums=('06c3418dfe0be26e74b0e40aa92eea6260579a72'
           'f0e38578aacacf9ee852b7a44a34908cc230b91f')
 install=${pkgname}.install
 
 prepare() {
-    cd ${srcdir}/${_pkgname}-${pkgver}
+    cd "${srcdir}/${_pkgname}-${pkgver}"
     # Enable deprecated
     patch -p1 < ../../enable_deprecated.diff gst-mixer/src/Makefile.am
 }
 
 build() {
-    cd ${srcdir}/${_pkgname}-${pkgver}
+    cd "${srcdir}/${_pkgname}-${pkgver}"
     ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
@@ -44,6 +44,6 @@ build() {
 }
 
 package() {
-    cd ${srcdir}/${_pkgname}-${pkgver}
-    make DESTDIR=${pkgdir} install
+    cd "${srcdir}/${_pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
 }

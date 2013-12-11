@@ -12,14 +12,14 @@ depends=('desktop-file-utils' 'enchant' 'gtk2' 'gtksourceview2' 'iso-codes'
          'libsm' 'mate-desktop' 'mate-file-manager' 'python2' 'python2-gobject2'
          'pygtksourceview2')
 makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
-options=('!emptydirs' '!libtool')
+options=('!emptydirs')
 groups=('mate-extras')
-source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
+source=("http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz")
 sha1sums=('47d6ff5655c92baac70719247d22e7aabce56f4f')
 install=${pkgname}.install
 
 build() {
-    cd ${srcdir}/${pkgname}-${pkgver}
+    cd "${srcdir}/${pkgname}-${pkgver}"
     PYTHON=/usr/bin/python2 ./autogen.sh \
         --prefix=/usr \
         --libexecdir=/usr/lib \
@@ -29,6 +29,6 @@ build() {
 }
 
 package() {
-    cd ${srcdir}/${pkgname}-${pkgver}
-    make DESTDIR=${pkgdir} install
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
 }

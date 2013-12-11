@@ -11,13 +11,13 @@ arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('LGPL')
 depends=('gtk2' 'libxres' 'startup-notification')
 makedepends=('gobject-introspection' 'mate-common' 'perl-xml-parser')
-options=('!emptydirs' '!libtool')
+options=('!emptydirs')
 groups=('mate')
-source=(http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz)
+source=("http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz")
 sha1sums=('10e2def928dd74529c49a624803187098ea2b0f6')
 
 build() {
-    cd ${srcdir}/${pkgname}-${pkgver}
+    cd "${srcdir}/${pkgname}-${pkgver}"
     ./configure \
         --prefix=/usr \
         --disable-static \
@@ -28,6 +28,6 @@ build() {
 }
 
 package() {
-    cd ${srcdir}/${pkgname}-${pkgver}
-    make DESTDIR=${pkgdir} install
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
 }
