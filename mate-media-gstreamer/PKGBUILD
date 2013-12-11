@@ -27,7 +27,7 @@ pkgver() {
 
 prepare() {
     cd ${srcdir}/${_pkgname}
-    patch -p1 < ../../enable_deprecated.diff gst-mixer/src/Makefile.am    
+    patch -p1 < ../../enable_deprecated.diff gst-mixer/src/Makefile.am
 }
 
 build() {
