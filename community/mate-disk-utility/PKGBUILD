@@ -17,7 +17,7 @@ md5sums=('6354d83bb4c99fbbe27796fd939f43fe')
 install=${pkgname}.install
 
 build() {
-    "cd ${srcdir}/${pkgname}-${pkgver}"
+    "cd ${srcdir}/v${pkgver}"
     ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
@@ -29,7 +29,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/v${pkgver}"
     make DESTDIR="${pkgdir}" install
     rm -f "${pkgdir}/usr/lib/"*.a
 }
