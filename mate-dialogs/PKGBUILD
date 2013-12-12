@@ -18,7 +18,7 @@ sha1sums=('64601ae71671911dbc83d1fab2a837da0b218cf9')
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-    ./configure
+    ./configure \
         --prefix=/usr \
         --disable-scrollkeeper
     make
