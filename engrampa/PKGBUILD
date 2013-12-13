@@ -3,7 +3,7 @@
 
 pkgname=engrampa
 pkgver=1.6.9.85.0e4df16
-pkgrel=2
+pkgrel=3
 pkgdesc="Archive manipulator for MATE"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -14,6 +14,9 @@ optdepends=('unrar: for RAR uncompression'
 'zip: for ZIP archives' 'unzip: for ZIP archives'
 'p7zip: 7zip compression utility' 'arj: for ARJ archives'
 'unace: extraction tool for the proprietary ace archive format')
+replaces=('mate-file-archiver')
+provides=('mate-file-archiver')
+conflicts=('mate-file-archiver')
 options=( '!emptydirs')
 groups=('mate-extras')
 source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git"
@@ -28,7 +31,7 @@ pkgver() {
 }
 
 prepare() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}"
     # This patch 'depends' on libarchive
     patch -Np1 -i "${srcdir}/fr-rpm-bsdtar.patch"
 }
