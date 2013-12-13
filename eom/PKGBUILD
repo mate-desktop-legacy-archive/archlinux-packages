@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=eom
-pkgver=1.6.9.91.49a08ab
+pkgver=1.6.9.93.7ba7e03
 pkgrel=1
 pkgdesc="An image viewing and cataloging program for MATE"
 url="http://mate-desktop.org"
@@ -11,6 +11,9 @@ depends=('dbus-glib' 'desktop-file-utils' 'gtk2' 'exempi' 'lcms' 'libexif'
          'libjpeg-turbo' 'mate-desktop' 'mate-icon-theme' 'pygtk' 'python2'
          'python2-gobject2' 'startup-notification' 'yelp' 'zlib')
 makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
+replaces=('mate-image-viewer')
+provides=('mate-image-viewer')
+conflicts=('mate-image-viewer')
 options=('!emptydirs')
 groups=('mate')
 source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git"
