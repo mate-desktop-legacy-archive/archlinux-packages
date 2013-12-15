@@ -2,7 +2,7 @@
 
 pkgname=caja-extensions
 pkgver=1.7.0
-pkgrel=3
+pkgrel=4
 pkgdesc="Caja extensions."
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -30,7 +30,4 @@ build() {
 package() {
     cd "${srcdir}/${pkgname}-${pkgver}"
     make DESTDIR="${pkgdir}" install
-    rm -f "${pkgdir}/usr/lib/caja/extensions-2.0/libcaja-gksu.a"
-    rm -f "${pkgdir}/usr/lib/caja/extensions-2.0/libcaja-open-terminal.a"
-    rm -f "${pkgdir}/usr/lib/caja/extensions-*/libcaja-share.a"
 }
