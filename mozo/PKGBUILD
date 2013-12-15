@@ -3,11 +3,11 @@
 pkgname=mozo
 pkgver=1.6.9.22.70fd5cb
 pkgrel=1
-pkgdesc="An powerfull text editor for MATE"
+pkgdesc="MATE menu editing tool"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('desktop-file-utils' 'pygtk' 'python2' 'python2-gobject2')
+depends=('mate-menus' 'pygtk' 'python2' 'python2-gobject2')
 makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
 replaces=('mate-menu-editor')
 provides=('mate-menu-editor')
