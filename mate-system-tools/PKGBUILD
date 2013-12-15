@@ -3,8 +3,8 @@
 pkgname=mate-system-tools
 pkgver=1.6.9.48.8349af2
 pkgrel=1
-pkgdesc="An extension for opening terminals in arbitrary local paths"
-url="http://manny.cluecoder.org/packages/nautilus-open-terminal"
+pkgdesc="Suite of tools for MATE to simplify configuring workstations."
+url="http://mate-desktop.org/"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('caja' 'desktop-file-utils' 'gtk2' 'liboobs' 'mate-polkit'
