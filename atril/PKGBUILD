@@ -11,6 +11,9 @@ depends=('caja' 'dbus' 'desktop-file-utils' 'djvulibre' 'gobject-introspection'
          'gtk2' 'libgxps' 'libsm' 'libspectre' 'mate-icon-theme'
          'poppler-glib' 't1lib' 'texlive-bin' 'yelp' 'zlib')
 makedepends=('gtk-update-icon-cache' 'mate-common' 'perl-xml-parser' 'yelp-tools')
+replaces=('mate-document-viewer')
+provides=('mate-document-viewer')
+conflicts=('mate-document-viewer')
 options=('!emptydirs')
 groups=('mate-extras')
 source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")
