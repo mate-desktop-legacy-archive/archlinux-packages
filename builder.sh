@@ -166,20 +166,23 @@ function tree_build() {
         if [ $? -ne 0 ]; then
             echo " - Failed to build ${PKG}. Stopping here."
             exit 1
+        else
+            local BASE_PACKAGE=$(basename ${PKG}-${PKGBUILD}-*.pkg.tar.xz)
+            cp -v ${BASE_PACKAGE} "${PACKAGE_REPO}"/
+            if [ $? -eq 0 ]; then
+                repo-add --new "${PACKAGE_REPO}/local.db.tar.gz" "${PACKAGE_REPO}"/*.pkg.tar.xz
+                TEST_LOCAL_REPO=$(egrep "^\[local\]$" /etc/pacman.conf)
+                if [ $? -ne 0 ]; then
+                    echo "ERROR! Local repository is not configured."
+                    echo "       Add the following to '/etc/pacman.conf'"
+                    echo "[local]"
+                    echo "SigLevel = Optional TrustAll"
+                    echo "Server = file://${PACKAGE_REPO}"
+                    exit 1
+                fi
+                sudo pacman -Sy
+            fi
         fi
-    else
-        cp *${PKGBUILD}*.pkg.tar.xz "${PACKAGE_REPO}"/
-        repo-add --new "${PACKAGE_REPO}/local.db.tar.gz" "${PACKAGE_REPO}"/*.pkg.tar.xz
-        TEST_LOCAL_REPO=$(egrep "^\[local\]$" /etc/pacman.conf)
-        if [ $? -ne 0 ]; then
-            echo "ERROR! Local repository is not configured."
-            echo "       Add the following to '/etc/pacman.conf'"
-            echo "[local]"
-            echo "SigLevel = Optional TrustAll"
-            echo "Server = file://${PACKAGE_REPO}"
-            exit 1
-        fi
-        sudo pacman -Sy
     fi
 }
 
