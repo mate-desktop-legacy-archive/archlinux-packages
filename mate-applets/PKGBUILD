@@ -36,9 +36,7 @@ prepare() {
     # - https://github.com/mate-desktop/mate-applets/pull/64
     patch -Np1 -i "${srcdir}/1e464e89fa0305266e72e3fce43f49e59b4a8ef8.diff"
     # Use python2
-    sed -i 's/env python/env python2/' "invest-applet/invest/chart.py"
-    sed -i 's/env python/env python2/' "invest-applet/invest/invest-applet.py"
-    sed -i 's/env python/env python2/' "invest-applet/invest/mate-invest-chart"
+    sed -i 's/env python/env python2/' "invest-applet/invest/{chart.py,invest-applet.py,mate-invest-chart}"
 }
 
 build() {

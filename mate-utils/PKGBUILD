@@ -12,7 +12,7 @@ depends=('gtk2' 'libcanberra' 'libgtop' 'libsm' 'mate-desktop' 'mate-panel'
          'zlib')
 makedepends=('mate-common' 'mate-doc-utils' 'mate-panel' 'perl-xml-parser'
              'rarian')
-optdepends=('mate-panel: The MATE Panel')
+optdepends=('mate-panel: Look up words in dictionaries from the panel')
 options=('!emptydirs')
 groups=('mate-extras')
 source=("http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz"
