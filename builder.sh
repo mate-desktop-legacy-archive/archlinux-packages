@@ -155,18 +155,6 @@ function tree_build() {
     local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
     local EXISTS=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
 
-    if [ "${PKG}" == "mate-settings-daemon-pulseaudio" ]; then
-        sudo pacman -Rsdd --noconfirm mate-settings-daemon-gstreamer
-        sudo pacman -Rsdd --noconfirm mate-media-gstreamer
-        sudo pacman -Rsdd --noconfirm mate-settings-daemon
-        sudo pacman -Rsdd --noconfirm mate-media
-    elif [ "${PKG}" == "mate-settings-daemon-gstreamer" ]; then
-        sudo pacman -Rsdd --noconfirm mate-settings-daemon-pulseaudio
-        sudo pacman -Rsdd --noconfirm mate-media-pulseaudio
-        sudo pacman -Rsdd --noconfirm mate-settings-daemon
-        sudo pacman -Rsdd --noconfirm mate-media
-    fi
-
     if [ -z "${EXISTS}" ]; then
         echo " - Building ${PKG}"
         if [ $(id -u) -eq 0 ]; then
@@ -179,20 +167,20 @@ function tree_build() {
             echo " - Failed to build ${PKG}. Stopping here."
             exit 1
         fi
+    else
+        cp *${PKGBUILD}*.pkg.tar.xz "${PACKAGE_REPO}"/
+        repo-add --new "${PACKAGE_REPO}/local.db.tar.gz" "${PACKAGE_REPO}"/*.pkg.tar.xz
+        TEST_LOCAL_REPO=$(egrep "^\[local\]$" /etc/pacman.conf)
+        if [ $? -ne 0 ]; then
+            echo "ERROR! Local repository is not configured."
+            echo "       Add the following to '/etc/pacman.conf'"
+            echo "[local]"
+            echo "SigLevel = Optional TrustAll"
+            echo "Server = file://${PACKAGE_REPO}"
+            exit 1
+        fi
+        sudo pacman -Sy
     fi
-
-    cp *${PKGBUILD}*.pkg.tar.xz "${PACKAGE_REPO}"/
-    repo-add --new "${PACKAGE_REPO}/local.db.tar.gz" "${PACKAGE_REPO}"/*.pkg.tar.xz
-    TEST_LOCAL_REPO=$(egrep "^\[local\]$" /etc/pacman.conf)
-    if [ $? -ne 0 ]; then
-        echo "ERROR! Local repository is not configured."
-        echo "       Add the following to '/etc/pacman.conf'"
-        echo "[local]"
-        echo "SigLevel = Optional TrustAll"
-        echo "Server = file://${PACKAGE_REPO}"
-        exit 1
-    fi
-    sudo pacman -Sy
 }
 
 # Check for new upstream releases.
