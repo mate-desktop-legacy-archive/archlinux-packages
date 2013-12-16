@@ -34,13 +34,13 @@ MATE_BUILD_ORDER=(
     mate-file-manager
     mate-polkit
     mate-window-manager
+    mate-session-manager
     mate-menus
     mate-panel
     mate-settings-daemon-gstreamer
     mate-media-gstreamer
     mate-settings-daemon-pulseaudio
     mate-media-pulseaudio
-    mate-session-manager
     mate-backgrounds
     mate-themes
     mate-notification-daemon
@@ -77,6 +77,7 @@ MATE_BUILD_ORDER=(
 
 BUILD_ORDER=( ${AUR_BUILD_ORDER[@]} ${MATE_BUILD_ORDER[@]} ${COMMUNITY_BUILD_ORDER[@]})
 BASEDIR=$(dirname $(readlink -f ${0}))
+PACKAGE_REPO="${HOME}/Packages"
 MATE_VER=1.6
 
 # Show usage information.
@@ -134,7 +135,7 @@ function tree_aur() {
         # https://github.com/falconindy/burp
         if [ -f ${HOME}/.config/burp/burp.conf ]; then
             grep flexiondotorg ${HOME}/.config/burp/burp.conf
-            if [ $? -eq 0 ]; then            
+            if [ $? -eq 0 ]; then
                 burp --verbose ${CAT} `ls -1 *${PKGBUILD}*.src.tar.gz`
                 if [ $? -ne 0 ]; then
                     echo ${PKG} >> /tmp/aur_fails.txt
@@ -178,11 +179,9 @@ function tree_build() {
             echo " - Failed to build ${PKG}. Stopping here."
             exit 1
         else
-            sudo makepkg -i --noconfirm --asroot
-        fi
-    else
-        if [ "${INSTALLED}" != "${PKGBUILD}" ]; then
-            sudo makepkg -i --noconfirm --asroot
+            sudo cp *${PKGBUILD}*.pkg.tar.xz "${PACKAGE_REPO}"/
+            sudo repo-add "${PACKAGE_REPO}/local.db.tar.gz" "${PACKAGE_REPO}"/*.pkg.tar.xz
+            sudo pacman -Syy
         fi
     fi
 }
@@ -375,6 +374,17 @@ while getopts ${OPTSTRING} OPT; do
     esac
 done
 shift "$(( $OPTIND - 1 ))"
+
+mkdir -p "${PACKAGE_REPO}"
+TEST_LOCAL_REPO=$(egrep "^\[local\]$" /etc/pacman.conf)
+if [ $? -ne 0 ]; then
+    echo "ERROR! Local repository is not configured."
+    echo "       Add the following to '/etc/pacman.conf'"
+    echo "[local]"
+    echo "SigLevel = Optional TrustAll"
+    echo "Server = file://${PACKAGE_REPO}"
+    exit 1
+fi
 
 if [ "${TASK}" == "aur" ] ||
    [ "${TASK}" == "build" ] ||
