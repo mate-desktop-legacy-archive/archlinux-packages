@@ -7,7 +7,7 @@ pkgdesc="A system monitor for MATE"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('dbus' 'glibmm' 'gtk2' 'gtkmm' 'libgtop' 'libwnck' 'librsvg'
+depends=('dconf' 'dbus' 'glibmm' 'gtk2' 'gtkmm' 'libgtop' 'libwnck' 'librsvg'
          'mate-icon-theme' 'yelp')
 makedepends=('docbook2x' 'mate-common' 'perl-xml-parser' 'yelp-tools')
 options=('!emptydirs')
@@ -28,7 +28,6 @@ build() {
         --libexecdir=/usr/lib/${pkgname} \
         --localstatedir=/var \
         --disable-static
-    make clean
     make
 }
 
