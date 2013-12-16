@@ -181,7 +181,6 @@ function tree_build() {
         fi
     fi
 
-    mkdir -p "${PACKAGE_REPO}"
     cp *${PKGBUILD}*.pkg.tar.xz "${PACKAGE_REPO}"/
     repo-add --new "${PACKAGE_REPO}/local.db.tar.gz" "${PACKAGE_REPO}"/*.pkg.tar.xz
     TEST_LOCAL_REPO=$(egrep "^\[local\]$" /etc/pacman.conf)
@@ -384,6 +383,10 @@ while getopts ${OPTSTRING} OPT; do
     esac
 done
 shift "$(( $OPTIND - 1 ))"
+
+if [ ! -d "${PACKAGE_REPO}" ]; then
+    mkdir -p "${PACKAGE_REPO}"
+fi
 
 if [ "${TASK}" == "aur" ] ||
    [ "${TASK}" == "build" ] ||
