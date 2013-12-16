@@ -158,43 +158,44 @@ function tree_build() {
     if [ "${PKG}" == "mate-settings-daemon-pulseaudio" ]; then
         sudo pacman -Rsdd --noconfirm mate-settings-daemon-gstreamer
         sudo pacman -Rsdd --noconfirm mate-media-gstreamer
-        sudo pacman -Rsdd --noconfirm mate-settings-daemon
-        sudo pacman -Rsdd --noconfirm mate-media
     elif [ "${PKG}" == "mate-settings-daemon-gstreamer" ]; then
         sudo pacman -Rsdd --noconfirm mate-settings-daemon-pulseaudio
         sudo pacman -Rsdd --noconfirm mate-media-pulseaudio
-        sudo pacman -Rsdd --noconfirm mate-settings-daemon
-        sudo pacman -Rsdd --noconfirm mate-media
     fi
 
     if [ -z "${EXISTS}" ]; then
         echo " - Building ${PKG}"
         if [ $(id -u) -eq 0 ]; then
             makepkg -fs --noconfirm --needed --log --asroot
+            local RET=$?
         else
             makepkg -fs --noconfirm --needed --log
+            local RET=$?
         fi
 
-        if [ $? -ne 0 ]; then
+        if [ ${RET} -ne 0 ]; then
             echo " - Failed to build ${PKG}. Stopping here."
             exit 1
+        else
+            local BASE_PACKAGE=$(basename ${PKG}-${PKGBUILD}-*.pkg.tar.xz)
+            cp -v ${BASE_PACKAGE} "${PACKAGE_REPO}"/
+            if [ $? -eq 0 ]; then
+                repo-add --new "${PACKAGE_REPO}/local.db.tar.gz" "${PACKAGE_REPO}"/*.pkg.tar.xz
+                TEST_LOCAL_REPO=$(egrep "^\[local\]$" /etc/pacman.conf)
+                if [ $? -ne 0 ]; then
+                    echo "ERROR! Local repository is not configured."
+                    echo "       Add the following to '/etc/pacman.conf'"
+                    echo "[local]"
+                    echo "SigLevel = Optional TrustAll"
+                    echo "Server = file://${PACKAGE_REPO}"
+                    exit 1
+                fi
+                sudo pacman -Sy
+            else
+                echo " - Failed to copy ${PKG} to local repository. Stopping here."
+                exit 1
+            fi
         fi
-    fi
-    
-    local BASE_PACKAGE=$(basename ${PKG}-${PKGBUILD}-*.pkg.tar.xz)
-    cp -v ${BASE_PACKAGE} "${PACKAGE_REPO}"/
-    if [ $? -eq 0 ]; then
-        repo-add --new "${PACKAGE_REPO}/local.db.tar.gz" "${PACKAGE_REPO}"/*.pkg.tar.xz
-        TEST_LOCAL_REPO=$(egrep "^\[local\]$" /etc/pacman.conf)
-        if [ $? -ne 0 ]; then
-            echo "ERROR! Local repository is not configured."
-            echo "       Add the following to '/etc/pacman.conf'"
-            echo "[local]"
-            echo "SigLevel = Optional TrustAll"
-            echo "Server = file://${PACKAGE_REPO}"
-            exit 1
-        fi
-        sudo pacman -Sy
     fi
 }
 
@@ -205,6 +206,8 @@ function tree_check() {
     # Account for version differences.
     if [ "${PKG}" == "caja-dropbox" ]; then
         local CHECK_VER="1.4"
+    elif [ "${PKG}" == "mate-themes" ]; then
+            local CHECK_VER="1.7"
     else
         local CHECK_VER="${MATE_VER}"
     fi
