@@ -178,9 +178,9 @@ function tree_build() {
             exit 1
         else
             local BASE_PACKAGE=$(basename ${PKG}-${PKGBUILD}-*.pkg.tar.xz)
-            cp -v ${BASE_PACKAGE} "${PACKAGE_REPO}"/
+            cp ${BASE_PACKAGE} "${PACKAGE_REPO}"/
             if [ $? -eq 0 ]; then
-                repo-add --new "${PACKAGE_REPO}/local.db.tar.gz" "${PACKAGE_REPO}"/*.pkg.tar.xz
+                repo-add --new "${PACKAGE_REPO}/local.db.tar.gz" "${PACKAGE_REPO}"/${BASE_PACKAGE}
                 TEST_LOCAL_REPO=$(egrep "^\[local\]$" /etc/pacman.conf)
                 if [ $? -ne 0 ]; then
                     echo "ERROR! Local repository is not configured."
