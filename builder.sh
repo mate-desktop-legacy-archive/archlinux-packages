@@ -34,12 +34,12 @@ MATE_BUILD_ORDER=(
     mate-file-manager
     mate-polkit
     mate-window-manager
+    mate-settings-daemon-gstreamer
+    mate-settings-daemon-pulseaudio
     mate-session-manager
     mate-menus
     mate-panel
-    mate-settings-daemon-gstreamer
     mate-media-gstreamer
-    mate-settings-daemon-pulseaudio
     mate-media-pulseaudio
     mate-backgrounds
     mate-themes
