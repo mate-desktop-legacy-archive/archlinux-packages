@@ -155,7 +155,6 @@ function tree_build() {
     local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
     local EXISTS=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
 
-
     if [ -z "${EXISTS}" ]; then
         if [ "${PKG}" == "mate-settings-daemon-pulseaudio" ]; then
             sudo pacman -Rsdd --noconfirm mate-settings-daemon-gstreamer
@@ -208,7 +207,7 @@ function tree_check() {
     if [ "${PKG}" == "caja-dropbox" ]; then
         local CHECK_VER="1.4"
     elif [ "${PKG}" == "mate-themes" ]; then
-            local CHECK_VER="1.7"
+        local CHECK_VER="1.7"
     else
         local CHECK_VER="${MATE_VER}"
     fi
