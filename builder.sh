@@ -179,22 +179,21 @@ function tree_build() {
             echo " - Failed to build ${PKG}. Stopping here."
             exit 1
         fi
-
-        mkdir -p "${PACKAGE_REPO}"
-        TEST_LOCAL_REPO=$(egrep "^\[local\]$" /etc/pacman.conf)
-        if [ $? -ne 0 ]; then
-            echo "ERROR! Local repository is not configured."
-            echo "       Add the following to '/etc/pacman.conf'"
-            echo "[local]"
-            echo "SigLevel = Optional TrustAll"
-            echo "Server = file://${PACKAGE_REPO}"
-            exit 1
-        fi
-
-        cp *${PKGBUILD}*.pkg.tar.xz "${PACKAGE_REPO}"/
-        repo-add "${PACKAGE_REPO}/local.db.tar.gz" "${PACKAGE_REPO}"/*.pkg.tar.xz
-        sudo pacman -Sy
     fi
+
+    mkdir -p "${PACKAGE_REPO}"
+    cp *${PKGBUILD}*.pkg.tar.xz "${PACKAGE_REPO}"/
+    repo-add --new "${PACKAGE_REPO}/local.db.tar.gz" "${PACKAGE_REPO}"/*.pkg.tar.xz
+    TEST_LOCAL_REPO=$(egrep "^\[local\]$" /etc/pacman.conf)
+    if [ $? -ne 0 ]; then
+        echo "ERROR! Local repository is not configured."
+        echo "       Add the following to '/etc/pacman.conf'"
+        echo "[local]"
+        echo "SigLevel = Optional TrustAll"
+        echo "Server = file://${PACKAGE_REPO}"
+        exit 1
+    fi
+    sudo pacman -Sy
 }
 
 # Check for new upstream releases.
