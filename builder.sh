@@ -11,49 +11,49 @@ AUR_BUILD_ORDER=(
 # http://wiki.mate-desktop.org/status:1.8
 #  - mucharmap is not in the build, source may need removing as gucharmap is prefered.
 MATE_BUILD_ORDER=(
-	mate-common
-	mate-desktop
-	libmatekbd
-	libmateweather
-	mate-icon-theme
-	mate-dialogs
-	caja
-	mate-polkit
-	marco
-	mate-menus
-	mate-panel
-    	mate-settings-daemon-gstreamer
-	mate-media-gstreamer
-	mate-settings-daemon-pulseaudio
-	mate-media-pulseaudio
-	mate-session-manager
-	mate-backgrounds
-	mate-themes
-	mate-notification-daemon
-	mate-control-center
-	mate-screensaver
-	engrampa
-	#mate-power-manager # Won't build
-	mate-system-monitor
-	atril
-	caja-dropbox
-	caja-extensions
-	mate-applets
-	mate-bluetooth
-	mate-calc
-	eom
-	mate-icon-theme-faenza
-	mate-indicator-applet
-	mozo
-	mate-netbook
-	mate-netspeed
-	mate-sensors-applet
-	mate-system-tools
-	mate-terminal
-	pluma
-	mate-user-share
-	mate-utils
-	python2-caja
+    mate-common
+    mate-desktop
+    libmatekbd
+    libmateweather
+    mate-icon-theme
+    mate-dialogs
+    caja
+    mate-polkit
+    marco
+    mate-menus
+    mate-panel
+    mate-settings-daemon-gstreamer
+    mate-media-gstreamer
+    mate-settings-daemon-pulseaudio
+    mate-media-pulseaudio
+    mate-session-manager
+    mate-backgrounds
+    mate-themes
+    mate-notification-daemon
+    mate-control-center
+    mate-screensaver
+    engrampa
+    #mate-power-manager # Won't build
+    mate-system-monitor
+    atril
+    caja-dropbox
+    caja-extensions
+    mate-applets
+    mate-bluetooth
+    mate-calc
+    eom
+    mate-icon-theme-faenza
+    mate-indicator-applet
+    mozo
+    mate-netbook
+    mate-netspeed
+    mate-sensors-applet
+    mate-system-tools
+    mate-terminal
+    pluma
+    mate-user-share
+    mate-utils
+    python2-caja
 )
 
 COMMUNITY_BUILD_ORDER=(
@@ -69,8 +69,8 @@ COMMUNITY_BUILD_ORDER=(
 )
 
 BUILD_ORDER=( ${AUR_BUILD_ORDER[@]} ${MATE_BUILD_ORDER[@]} ${COMMUNITY_BUILD_ORDER[@]})
-BUILD_ORDER=( ${AUR_BUILD_ORDER[@]} ${MATE_BUILD_ORDER[@]} )
 BASEDIR=$(dirname $(readlink -f ${0}))
+PACKAGE_REPO="${HOME}/Packages"
 MATE_VER=1.7
 
 # Show usage information.
@@ -82,7 +82,6 @@ function usage() {
     echo "Options:"
     echo "-h  Shows this help message."
     echo "-t  Provide a task to run which can be one of:"
-    echo "      audit       Show which packages remain to be built."
     echo "      aur         Upload 'src' packages to the AUR."
     echo "      build       Build MATE packages."
     echo "      check       Check upstream for new source tarballs."
@@ -96,170 +95,6 @@ function usage() {
     echo
     echo "Each of the tasks above run automatically and operate over the entire"
     echo "package tree."
-}
-
-# Make an .install file.
-# OK, this is as ugly as hell but it works.
-# Skip past this section and look how nice everything else is ;-)
-function make_install_file() {
-    local INSTALL_FILE="${1}"
-    echo "post_install() {" > ${INSTALL_FILE}
-    if [ ${INSTALL_SCHEMA} -eq 1 ]; then
-        echo "    glib-compile-schemas /usr/share/glib-2.0/schemas/" >> ${INSTALL_FILE}
-    fi
-    if [ ${INSTALL_MIME} -eq 1 ]; then
-        echo "    update-mime-database /usr/share/mime/ > /dev/null" >> ${INSTALL_FILE}
-    fi
-    if [ ${INSTALL_ICON} -eq 1 ]; then
-        for ICON_DIR in ${ICON_ARRAY[@]}; do
-            echo "    gtk-update-icon-cache -q -t -f /usr/share/icons/${ICON_DIR}" >> ${INSTALL_FILE}
-        done
-    fi
-    if [ ${INSTALL_DESKTOP} -eq 1 ]; then
-        echo "    update-desktop-database -q" >> ${INSTALL_FILE}
-    fi
-    echo "}" >> ${INSTALL_FILE}
-    echo >> ${INSTALL_FILE}
-    echo "pre_upgrade() {" >> ${INSTALL_FILE}
-    echo "    pre_remove" >> ${INSTALL_FILE}
-    echo "}" >> ${INSTALL_FILE}
-    echo >> ${INSTALL_FILE}
-    echo "post_upgrade() {" >> ${INSTALL_FILE}
-    echo "    post_install" >> ${INSTALL_FILE}
-    echo "}" >> ${INSTALL_FILE}
-    echo >> ${INSTALL_FILE}
-    echo "pre_remove() {" >> ${INSTALL_FILE}
-    if [ ${INSTALL_SCHEMA} -eq 1 ]; then
-        echo "    glib-compile-schemas /usr/share/glib-2.0/schemas/" >> ${INSTALL_FILE}
-    else
-        echo "    :" >> ${INSTALL_FILE}
-    fi
-    echo "}" >> ${INSTALL_FILE}
-    echo >> ${INSTALL_FILE}
-    echo "post_remove() {" >> ${INSTALL_FILE}
-    local PASS=$((${INSTALL_MIME} + ${INSTALL_ICON} + ${INSTALL_DESKTOP}))
-    if [ ${PASS} -eq 0 ]; then
-        echo "    :" >> ${INSTALL_FILE}
-    else
-        if [ ${INSTALL_MIME} -eq 1 ]; then
-            echo "    update-mime-database /usr/share/mime/ > /dev/null" >> ${INSTALL_FILE}
-        fi
-        if [ ${INSTALL_ICON} -eq 1 ]; then
-            for ICON_DIR in ${ICON_ARRAY[@]}; do
-                echo "    gtk-update-icon-cache -q -t -f /usr/share/icons/${ICON_DIR}" >> ${INSTALL_FILE}
-            done
-        fi
-        if [ ${INSTALL_DESKTOP} -eq 1 ]; then
-            echo "    update-desktop-database -q" >> ${INSTALL_FILE}
-        fi
-    fi
-    echo "}" >> ${INSTALL_FILE}
-}
-
-# Determine is a .install file needs creation, updating or deletion.
-function update_install_file() {
-    local PKG=${1}
-    local INSTALL_REQUIRED=$((${INSTALL_SCHEMA} + ${INSTALL_MIME} + ${INSTALL_ICON} + ${INSTALL_DESKTOP}))
-    if [ ${INSTALL_REQUIRED} -ge 1 ]; then
-        local INSTALL_FILE=`basename ${PKG}`.install
-
-        if [ -f ${INSTALL_FILE} ]; then
-            echo "    Generating /tmp/${INSTALL_FILE}"
-            make_install_file /tmp/${INSTALL_FILE}
-            NEW_SUM=$(md5sum /tmp/${INSTALL_FILE} | cut -d' ' -f1)
-            CUR_SUM=$(md5sum ${INSTALL_FILE} | cut -d' ' -f1)
-            if [ "${NEW_SUM}" != "${CUR_SUM}" ]; then
-                echo "    Review /tmp/${INSTALL_FILE} as it differs."
-            else
-                echo "    Files are identical, removing /tmp/${INSTALL_FILE}"
-                rm -f /tmp/${INSTALL_FILE}
-            fi
-        else
-            echo "    Creating ${INSTALL_FILE}"
-            make_install_file ${INSTALL_FILE}
-        fi
-
-        local TEST_INSTALL=$(grep -E ^install= PKGBUILD)
-        if [ $? -ne 0 ]; then
-            echo "    Missing 'install=${INSTALL_FILE}' in PKGBUILD."
-        fi
-    else
-        if [ -f *.install ]; then
-            echo "    Detected a custom '.install' file, please review it."
-        fi
-    fi
-}
-
-# Show packages that are not yet built.
-function tree_audit() {
-    local PKG=${1}
-    cd ${PKG}
-    local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=')
-    local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
-    local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
-    local EXISTS=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
-    echo " - ${PKG}"
-    if [ -z "${EXISTS}" ]; then
-        echo "    Requires building."
-    elif [ -d pkg ]; then
-        INSTALL_SCHEMA=0
-        INSTALL_ICON=0
-        INSTALL_MIME=0
-        INSTALL_DESKTOP=0
-        local FIND_A=$(find pkg/ -name *.a)
-        if [ -n "${FIND_A}" ]; then
-            echo "    Contains .a files, delete them via 'package()' in PKGBUILD."
-            echo "    ${FIND_A}"
-        fi
-        local FIND_LA=$(find pkg/ -name *.la)
-        if [ -n "${FIND_LA}" ]; then
-            echo "    Contains .la files, add '!libtool' to 'options' in PKGBUILD."
-            echo "    ${FIND_LA}"
-        fi
-        if [ -d pkg/*/usr/sbin ]; then
-            echo "    Detected '/usr/sbin' add '--sbindir=/usr/bin' to 'build()' in PKGBUILD."
-        fi
-        if [ -d pkg/*/usr/libexec ]; then
-            echo "    Detected '/usr/libexec' add '--libexecdir=/usr/lib/${pkgname}' to 'build()' in PKGBUILD."
-        fi
-        if [ -d pkg/*/usr/share/glib-2.0/schemas ]; then
-            echo "    Contains glib-2.0 schemas, '.install' will auto-update."
-            INSTALL_SCHEMA=1
-        fi
-        if [ -d pkg/*/usr/share/icons ]; then
-            echo "    Contains icons, '.install' will auto-update."
-            declare -a ICON_ARRAY=()
-            for ICON in pkg/*/usr/share/icons/*
-            do
-                if [ -d ${ICON} ]; then
-                    ICON_NAME=`basename ${ICON}`
-                    ICON_ARRAY=("${ICON_ARRAY[@]}" "${ICON_NAME}")
-                fi
-            done
-            INSTALL_ICON=1
-        fi
-        if [ -d pkg/*/usr/share/mime ]; then
-            echo -n "    Contains MIME types, "
-            local TEST_MIME=$(grep shared-mime-info PKGBUILD)
-            if [ $? -eq 0 ]; then
-                echo "no action required."
-            else
-                echo "add 'shared-mime-info' to PKGBUILD 'depends'."
-            fi
-            INSTALL_MIME=1
-        fi
-        if [ -d pkg/*/usr/share/applications ]; then
-            echo -n "    Contains .desktop files, "
-            local TEST_DESKTOP=$(grep desktop-file-utils PKGBUILD)
-            if [ $? -eq 0 ]; then
-                echo "no action required."
-            else
-                echo "add 'desktop-file-utils' to PKGBUILD 'depends'."
-            fi
-            INSTALL_DESKTOP=1
-        fi
-        update_install_file ${PKG}
-    fi
 }
 
 # Build 'src' packages
@@ -346,48 +181,58 @@ function tree_build() {
     local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
     local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
     
-	echo " - Looking for *${PKGBUILD}*.pkg.tar.xz"
-	if [ -f *${PKGBUILD}*.pkg.tar.xz ]; then
-		echo " - ${PKG} is current"
-		local BUILD_PKG=0
-	else
-		echo " - ${PKG} needs building"
-		local BUILD_PKG=1
-	fi
-
-	if [ "${PKG}" == "mate-settings-daemon-pulseaudio" ]; then
-		sudo pacman -Rsdd --noconfirm mate-settings-daemon-gstreamer
-		sudo pacman -Rsdd --noconfirm mate-media-gstreamer
-		sudo pacman -Rsdd --noconfirm mate-settings-daemon
-		sudo pacman -Rsdd --noconfirm mate-media
-	elif [ "${PKG}" == "mate-settings-daemon-gstreamer" ]; then
-		sudo pacman -Rsdd --noconfirm mate-settings-daemon-pulseaudio
-		sudo pacman -Rsdd --noconfirm mate-media-pulseaudio
-		sudo pacman -Rsdd --noconfirm mate-settings-daemon
-		sudo pacman -Rsdd --noconfirm mate-media
-	fi    
+    echo " - Looking for *${PKGBUILD}*.pkg.tar.xz"
+    if [ -f *${PKGBUILD}*.pkg.tar.xz ]; then
+        echo " - ${PKG} is current"
+        local BUILD_PKG=0
+    else
+        echo " - ${PKG} needs building"
+        local BUILD_PKG=1
+    fi
 
     if [ ${BUILD_PKG} -eq 1 ]; then
+
+        if [ "${PKG}" == "mate-settings-daemon-pulseaudio" ]; then
+            sudo pacman -Rsdd --noconfirm mate-settings-daemon-gstreamer
+            sudo pacman -Rsdd --noconfirm mate-media-gstreamer
+        elif [ "${PKG}" == "mate-settings-daemon-gstreamer" ]; then
+            sudo pacman -Rsdd --noconfirm mate-settings-daemon-pulseaudio
+            sudo pacman -Rsdd --noconfirm mate-media-pulseaudio
+        fi
+
         echo " - Building ${PKG}"
         if [ $(id -u) -eq 0 ]; then
             makepkg -fs --noconfirm --needed --log --asroot
+            local RET=$?
         else
             makepkg -fs --noconfirm --needed --log
+            local RET=$?
         fi
 
-        if [ $? -ne 0 ]; then
+        if [ ${RET} -ne 0 ]; then
             echo " - Failed to build ${PKG}. Stopping here."
             exit 1
         else
-            sudo makepkg -i --noconfirm --asroot
-        fi
-    else
-        if [ "${INSTALLED}" != "${PKGBUILD}" ]; then
-            sudo makepkg -i --noconfirm --asroot
+            local BASE_PACKAGE=$(basename ${PKG}-${PKGBUILD}-*.pkg.tar.xz)
+            cp ${BASE_PACKAGE} "${PACKAGE_REPO}"/
+            if [ $? -eq 0 ]; then
+                repo-add --new "${PACKAGE_REPO}/local.db.tar.gz" "${PACKAGE_REPO}"/${BASE_PACKAGE}
+                TEST_LOCAL_REPO=$(egrep "^\[local\]$" /etc/pacman.conf)
+                if [ $? -ne 0 ]; then
+                    echo "ERROR! Local repository is not configured."
+                    echo "       Add the following to '/etc/pacman.conf'"
+                    echo "[local]"
+                    echo "SigLevel = Optional TrustAll"
+                    echo "Server = file://${PACKAGE_REPO}"
+                    exit 1
+                fi
+                sudo pacman -Sy
+            else
+                echo " - Failed to copy ${PKG} to local repository. Stopping here."
+                exit 1
+            fi
         fi
     fi
-	#echo " - ${PKG} completed. Press a key to continue."
-    #read
 }
 
 # Check for new upstream releases.
@@ -579,8 +424,11 @@ while getopts ${OPTSTRING} OPT; do
 done
 shift "$(( $OPTIND - 1 ))"
 
-if [ "${TASK}" == "audit" ] ||
-   [ "${TASK}" == "aur" ] ||
+if [ ! -d "${PACKAGE_REPO}" ]; then
+    mkdir -p "${PACKAGE_REPO}"
+fi
+
+if [ "${TASK}" == "aur" ] ||
    [ "${TASK}" == "build" ] ||
    [ "${TASK}" == "check" ] ||
    [ "${TASK}" == "clean" ] ||

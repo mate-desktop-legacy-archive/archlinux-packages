@@ -146,12 +146,7 @@ started, but the magic incantation is:
 
 The above will automatically build every package in the tree, or just
 build those packages that have newer PKGBUILDs that are currently
-unbuilt. You can also audit the build status using:
-
-    ./builder.sh -t audit
-
-This will provide lots of useful information about each package in the
-tree and also automatically create updated `.install` files in `/tmp`.
+unbuilt. 
 
 ### Build and Package logs
 

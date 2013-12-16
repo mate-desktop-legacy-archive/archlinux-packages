@@ -24,9 +24,7 @@ pkgver() {
 prepare() {
     cd "${srcdir}/${pkgname}"
     # Use python2
-    sed -i 's/env python/env python2/' "invest-applet/invest/chart.py"
-    sed -i 's/env python/env python2/' "invest-applet/invest/invest-applet.py"
-    sed -i 's/env python/env python2/' "invest-applet/invest/mate-invest-chart"
+    sed -i 's/env python/env python2/' invest-applet/invest/{chart.py,invest-applet.py,mate-invest-chart}
 }
 
 build() {
