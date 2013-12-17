@@ -181,14 +181,16 @@ function tree_build() {
             cp ${BASE_PACKAGE} "${PACKAGE_REPO}"/
             if [ $? -eq 0 ]; then
                 repo-add --new "${PACKAGE_REPO}/local.db.tar.gz" "${PACKAGE_REPO}"/${BASE_PACKAGE}
-                TEST_LOCAL_REPO=$(egrep "^\[local\]$" /etc/pacman.conf)
+                LOCAL_REPO_PRESENT=$(egrep "^\[local\]$" /etc/pacman.conf)
                 if [ $? -ne 0 ]; then
-                    echo "ERROR! Local repository is not configured."
-                    echo "       Add the following to '/etc/pacman.conf'"
-                    echo "[local]"
-                    echo "SigLevel = Optional TrustAll"
-                    echo "Server = file://${PACKAGE_REPO}"
-                    exit 1
+                    echo " - WARNING! Local repository is not configured, updating '/etc/pacman.conf' now."
+                    echo "[local]" | sudo tee -a /etc/pacman.conf
+                    echo "SigLevel = Optional TrustAll" | sudo tee -a /etc/pacman.conf
+                    echo "Server = file://${PACKAGE_REPO}" | sudo tee -a /etc/pacman.conf
+                    if [ $? -ne 0 ]; then
+                        echo " - ERROR! Updating '/etc/pacman.conf' failed. Stopping here."
+                        exit 1
+                    fi
                 fi
                 sudo pacman -Sy
             else
