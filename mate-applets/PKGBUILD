@@ -2,13 +2,12 @@
 
 pkgname=mate-applets
 pkgver=1.6.9.167.9002923
-pkgrel=2
+pkgrel=1
 pkgdesc="Applets for MATE panel"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 url="http://mate-desktop.org"
 license=('GPL')
-depends=('gucharmap' 'mate-panel' 'pytnon2-dbus' 'python2-gobject'
-         'upower' 'yelp')
+depends=('gucharmap' 'mate-panel' 'python2-dbus' 'python2-gobject' 'upower' 'yelp')
 makedepends=('docbook2x' 'docbook-xsl' 'mate-common' 'networkmanager' 'perl-xml-parser' 'yelp-tools')
 options=('!emptydirs')
 groups=('mate-extras')
