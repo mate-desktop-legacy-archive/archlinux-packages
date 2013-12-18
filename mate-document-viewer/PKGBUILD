@@ -20,7 +20,7 @@ optdepends=('djvulibre: DjVu support'
             'texlive-bin: DVI support'
             'unrar: cbr compressed comic books')
 options=('!emptydirs')
-groups=('mate-extras')
+groups=('mate-extra')
 source=("http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz")
 sha1sums=('5b3d1643b7945d56214ec13dc38cb641dfb688e1')
 install=${pkgname}.install

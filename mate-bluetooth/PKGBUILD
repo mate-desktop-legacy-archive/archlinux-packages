@@ -4,7 +4,7 @@
 
 pkgname=mate-bluetooth
 pkgver=1.6.0
-pkgrel=4
+pkgrel=5
 pkgdesc="A collection of Bluetooth utilities and modules for MATE"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -14,7 +14,7 @@ depends=('dbus' 'desktop-file-utils' 'gobject-introspection' 'gtk2'
 makedepends=('mate-common' 'mate-doc-utils' 'mate-file-manager-sendto' 'perl-xml-parser')
 optdepends=('mate-user-share: Enable sharing via bluetooth and other protocols.')
 options=('!emptydirs')
-groups=('mate-extras')
+groups=('mate-extra')
 source=("http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz")
 sha1sums=('fc8810f16a1b70bd24dd329b505d932f5b672a56')
 install=${pkgname}.install

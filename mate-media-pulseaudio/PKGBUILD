@@ -5,7 +5,7 @@
 _pkgname=mate-media
 pkgname=${_pkgname}-pulseaudio
 pkgver=1.6.0
-pkgrel=5
+pkgrel=6
 pkgdesc="MATE Media Tools (pulseaudio)"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -14,7 +14,7 @@ depends=('libcanberra-pulse' 'libunique' 'mate-desktop' 'mate-window-manager'
          'pulseaudio')
 makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
 options=('!emptydirs')
-groups=('mate-extras')
+groups=('mate-extra')
 conflicts=("${_pkgname}-gstreamer" 'mate-settings-daemon-gstreamer')
 provides=("${_pkgname}")
 replaces=("${_pkgname}")
