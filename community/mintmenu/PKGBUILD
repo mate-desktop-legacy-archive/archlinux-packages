@@ -5,17 +5,16 @@
 
 pkgname=mintmenu
 pkgver=5.4.9
-pkgrel=4
+pkgrel=5
 pkgdesc="Linux Mint Menu for MATE"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 url="http://packages.linuxmint.com/pool/main/m/mintmenu"
 license=('GPL')
-depends=('gksu' 'mate-panel>=1.6.0' 'python2-gobject'
-         'python2-xdg' 'python2-keybinder2' 'python2-xlib' 'xdg-utils')
+depends=('gksu' 'mate-panel' 'python2-gobject' 'python2-xdg' 'python2-keybinder2'
+         'python2-xlib' 'xdg-utils')
 optdepends=('mate-menu-editor: for editing the gnome menu'
             'gnome-packagekit: package manager button'
             'mate-screensaver: lock screen button')
-groups=('mate-extras-community')
 source=("${url}/${pkgname}_${pkgver}.tar.gz")
 install=${pkgname}.install
 md5sums=('39826a17c8de746ad119208588be2ec2')
@@ -41,4 +40,3 @@ package() {
     cd "${pkgdir}/usr/lib/linuxmint/mintMenu"
     ./compile.py
 }
-
