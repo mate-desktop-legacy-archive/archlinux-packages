@@ -12,7 +12,7 @@ depends=('apache' 'caja' 'dbus' 'desktop-file-utils' 'gtk2' 'libcanberra'
          'obex-data-server')
 makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
 options=('!emptydirs')
-groups=('mate-extras')
+groups=('mate-extra')
 source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')
 install=${pkgname}.install

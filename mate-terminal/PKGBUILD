@@ -2,7 +2,7 @@
 
 pkgname=mate-terminal
 pkgver=1.7.0
-pkgrel=5
+pkgrel=6
 pkgdesc="The MATE Terminal Emulator"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -10,7 +10,7 @@ license=('GPL')
 depends=('dbus' 'dconf' 'gtk2' 'libsm' 'mate-desktop' 'vte' 'yelp')
 makedepends=('docbook2x' 'mate-common' 'perl-xml-parser' 'yelp-tools')
 options=('!emptydirs')
-groups=('mate-extras')
+groups=('mate-extra')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
 sha1sums=('d793a3778e73663154c81efda9cd9096fb4a639d')
 install=${pkgname}.install

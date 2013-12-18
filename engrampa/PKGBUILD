@@ -3,7 +3,7 @@
 
 pkgname=engrampa
 pkgver=1.6.9.85.0e4df16
-pkgrel=3
+pkgrel=1
 pkgdesc="Archive manipulator for MATE"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -18,7 +18,7 @@ replaces=('mate-file-archiver')
 provides=('mate-file-archiver')
 conflicts=('mate-file-archiver')
 options=( '!emptydirs')
-groups=('mate-extras')
+groups=('mate-extra')
 source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git"
         fr-rpm-bsdtar.patch)
 sha1sums=('SKIP'

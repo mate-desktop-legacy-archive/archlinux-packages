@@ -12,7 +12,7 @@ depends=('dconf' 'gtk2' 'liboobs' 'mate-polkit' 'system-tools-backends'
 makedepends=('caja' 'mate-common' 'perl-xml-parser' 'yelp-tools')
 optdepends=('ntp: Automatic time synchronisation.'
             'mate-file-manager: provides Caja Shares extension')
-groups=('mate-extras')
+groups=('mate-extra')
 source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')
 install=${pkgname}.install

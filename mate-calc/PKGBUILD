@@ -4,7 +4,7 @@
 
 pkgname=mate-calc
 pkgver=1.7.0
-pkgrel=2
+pkgrel=3
 pkgdesc="Calculator for the Mate desktop environment"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -12,7 +12,7 @@ license=('LGPL' 'GPL')
 depends=('gtk2' 'yelp')
 makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
 options=('!emptydirs')
-groups=('mate-extras')
+groups=('mate-extra')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
 sha1sums=('36944008b3e662b8f32602a6fdfe9f0d371053e3')
 install=${pkgname}.install
