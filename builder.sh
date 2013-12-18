@@ -166,20 +166,16 @@ function tree_build() {
             echo " - Failed to build ${PKG}. Stopping here."
             exit 1
         else
-            if [ "${PKG}" == "mate-settings-daemon" ]; then
-                sudo pacman -U mate-settings-daemon-pulseaudio-${PKGBUILD}*.pkg.tar.xz
-            elif [ "${PKG}" == "mate-media" ]; then
-                sudo pacman -U mate-media-pulseaudio-${PKGBUILD}*.pkg.tar.xz                
+            if [ "${PKG}" == "mate-settings-daemon" ] || [ "${PKG}" == "mate-media" ]; then
+                sudo pacman -U --noconfirm ${PKG}-pulseaudio-${PKGBUILD}*.pkg.tar.xz
             else
                 sudo makepkg -i --noconfirm --asroot
             fi
         fi
     else
         if [ "${INSTALLED}" != "${PKGBUILD}" ]; then
-            if [ "${PKG}" == "mate-settings-daemon" ]; then
-                sudo pacman -U mate-settings-daemon-pulseaudio-${PKGBUILD}*.pkg.tar.xz
-            elif [ "${PKG}" == "mate-media" ]; then
-                sudo pacman -U mate-media-pulseaudio-${PKGBUILD}*.pkg.tar.xz                
+            if [ "${PKG}" == "mate-settings-daemon" ] || [ "${PKG}" == "mate-media" ]; then
+                sudo pacman -U --noconfirm ${PKG}-pulseaudio-${PKGBUILD}*.pkg.tar.xz
             else
                 sudo makepkg -i --noconfirm --asroot
             fi
