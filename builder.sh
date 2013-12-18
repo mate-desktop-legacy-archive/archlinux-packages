@@ -309,9 +309,10 @@ function tree_repo() {
         local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
         local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
         local NEWEST=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
-        if [ -f ${NEWEST} ]; then
-            cp -v ${NEWEST} ${HOME}/${MATE_VER}/${CARCH}/
-        fi
+        for FILE in $(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
+        do
+            cp -v ${FILE} ${HOME}/${MATE_VER}/${CARCH}/
+        done
     done
 
     # Simulate 'makepkg --sign'
