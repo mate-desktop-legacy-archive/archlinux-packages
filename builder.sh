@@ -352,6 +352,10 @@ function tree_uninstall() {
     for PKG in ${BUILD_ORDER[@]};
     do
         PKG=$(basename ${PKG})
+        if [ "${PKG}" == "mate-settings-daemon" ] || [ "${PKG}" == "mate-media" ]; then
+            PKG="${PKG}-pulseaudio"
+        fi
+        
         if [ -n "$(echo ${INSTALLED_PKGS} | grep ${PKG})" ]; then
             UNINSTALL_PKGS="${UNINSTALL_PKGS} ${PKG}"
         fi
