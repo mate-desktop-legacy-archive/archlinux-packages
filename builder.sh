@@ -85,6 +85,7 @@ function usage() {
     echo "      check       Check upstream for new source tarballs."
     echo "      clean       Clean source directories using 'make maintainer-clean'."
     echo "      delete      Delete Arch Linux 'pkg.tar.xz' binary package files."
+    echo "      namcap      Run 'namcap' against all the packages."
     echo "      purge       Purge source tarballs, 'src' and 'pkg' directories."
     echo "      repo        Create a package repository in '${HOME}/mate/'"
     echo "      src         Create 'src' packages"
@@ -188,14 +189,6 @@ function tree_build() {
         local BUILD_PKG=1
     fi
 
-    if [ "${PKG}" == "mate-settings-daemon-pulseaudio" ] || [ "${PKG}" == "mate-media-pulseaudio" ]; then
-        sudo pacman -Rsdd --noconfirm mate-settings-daemon-gstreamer
-        sudo pacman -Rsdd --noconfirm mate-media-gstreamer
-    elif [ "${PKG}" == "mate-settings-daemon-gstreamer" ] || [ "${PKG}" == "mate-media-gstreamer" ]; then
-        sudo pacman -Rsdd --noconfirm mate-settings-daemon-pulseaudio
-        sudo pacman -Rsdd --noconfirm mate-media-pulseaudio
-    fi
-
     if [ ${BUILD_PKG} -eq 1 ]; then
         echo " - Building ${PKG}"
         if [ $(id -u) -eq 0 ]; then
@@ -210,11 +203,15 @@ function tree_build() {
             echo " - Failed to build ${PKG}. Stopping here."
             exit 1
         else
-            sudo makepkg -i --noconfirm --asroot
+            if [ "${PKG}" != "mate-settings-daemon-gstreamer" ] && [ "${PKG}" != "mate-media-gstreamer" ]; then
+                sudo makepkg -i --noconfirm --asroot
+            fi
         fi
     else
         if [ "${INSTALLED}" != "${PKGBUILD}" ]; then
-            sudo makepkg -i --noconfirm --asroot
+            if [ "${PKG}" != "mate-settings-daemon-gstreamer" ] && [ "${PKG}" != "mate-media-gstreamer" ]; then
+                sudo makepkg -i --noconfirm --asroot
+            fi
         fi
     fi
 }
