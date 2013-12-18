@@ -4,7 +4,7 @@
 
 pkgname=libmateweather
 pkgver=1.7.0
-pkgrel=3
+pkgrel=4
 pkgdesc="Provides access to weather information from the Internet."
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -12,7 +12,6 @@ license=('LGPL')
 depends=('dconf' 'gtk2' 'libsoup' 'pygtk' 'python2-gobject2')
 makedepends=('mate-common' 'perl-xml-parser')
 options=('!emptydirs')
-groups=('mate')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
 sha1sums=('927dfc5ed3c20e93469aa6c1ce55800f40e24d0d')
 install=${pkgname}.install
