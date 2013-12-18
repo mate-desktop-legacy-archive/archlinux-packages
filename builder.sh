@@ -76,7 +76,6 @@ MATE_BUILD_ORDER=(
 
 BUILD_ORDER=( ${AUR_BUILD_ORDER[@]} ${MATE_BUILD_ORDER[@]} ${COMMUNITY_BUILD_ORDER[@]})
 BASEDIR=$(dirname $(readlink -f ${0}))
-PACKAGE_REPO="${HOME}/Packages"
 MATE_VER=1.6
 
 # Show usage information.
@@ -176,26 +175,11 @@ function tree_build() {
             echo " - Failed to build ${PKG}. Stopping here."
             exit 1
         else
-            local BASE_PACKAGE=$(basename ${PKG}-${PKGBUILD}-*.pkg.tar.xz)
-            cp ${BASE_PACKAGE} "${PACKAGE_REPO}"/
-            if [ $? -eq 0 ]; then
-                repo-add --new "${PACKAGE_REPO}/local.db.tar.gz" "${PACKAGE_REPO}"/${BASE_PACKAGE}
-                LOCAL_REPO_PRESENT=$(egrep "^\[local\]$" /etc/pacman.conf)
-                if [ $? -ne 0 ]; then
-                    echo " - WARNING! Local repository is not configured, updating '/etc/pacman.conf' now."
-                    echo "[local]" | sudo tee -a /etc/pacman.conf
-                    echo "SigLevel = Optional TrustAll" | sudo tee -a /etc/pacman.conf
-                    echo "Server = file://${PACKAGE_REPO}" | sudo tee -a /etc/pacman.conf
-                    if [ $? -ne 0 ]; then
-                        echo " - ERROR! Updating '/etc/pacman.conf' failed. Stopping here."
-                        exit 1
-                    fi
-                fi
-                sudo pacman -Sy
-            else
-                echo " - Failed to copy ${PKG} to local repository. Stopping here."
-                exit 1
-            fi
+            sudo makepkg -i --noconfirm --asroot
+        fi
+    else
+        if [ "${INSTALLED}" != "${PKGBUILD}" ]; then
+            sudo makepkg -i --noconfirm --asroot
         fi
     fi
 }
@@ -397,10 +381,6 @@ while getopts ${OPTSTRING} OPT; do
     esac
 done
 shift "$(( $OPTIND - 1 ))"
-
-if [ ! -d "${PACKAGE_REPO}" ]; then
-    mkdir -p "${PACKAGE_REPO}"
-fi
 
 if [ "${TASK}" == "aur" ] ||
    [ "${TASK}" == "build" ] ||
