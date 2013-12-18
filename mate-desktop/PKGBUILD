@@ -10,9 +10,10 @@ url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=(GPL LGPL)
 depends=('dconf' 'gtk2' 'hicolor-icon-theme' 'libunique' 'python2'
-         'startup-notification' 'yelp')
+         'startup-notification')
 makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
-optdepends=('lightdm-gtk2-greeter: A lightweight display manager')
+optdepends=('lightdm-gtk2-greeter: A lightweight display manager'
+            'yelp: for reading MATE help documents')
 options=('!emptydirs')
 groups=('mate')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")

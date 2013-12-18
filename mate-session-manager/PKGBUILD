@@ -9,8 +9,8 @@ pkgdesc="The MATE Session Handler"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL' 'LGPL')
-depends=('dbus-glib' 'gtk2' 'libsm' 'libxtst' 'mate-desktop'
-         'mate-polkit' 'mate-settings-daemon' 'upower')
+depends=('dbus-glib' 'gtk2' 'libsm' 'libxtst' 'mate-desktop' 'mate-polkit'
+         'mate-settings-daemon' 'upower')
 makedepends=('mate-common' 'perl-xml-parser' 'xmlto')
 options=('!emptydirs')
 groups=('mate')

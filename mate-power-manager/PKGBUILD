@@ -8,10 +8,11 @@ url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('dbus-glib' 'dconf' 'libcanberra' 'libgnome-keyring' 'libnotify'
-         'libunique' 'upower' 'yelp')
+         'libunique' 'upower')
 makedepends=('docbook2x' 'docbook-xml' 'mate-common' 'perl-xml-parser'
              'xmlto' 'yelp-tools')
-optdepends=('mate-panel: Set brightness and inhibit power management from the panel')
+optdepends=('mate-panel: Set brightness and inhibit power management from the panel'
+            'yelp: for reading MATE help documents')
 options=('!emptydirs')
 groups=('mate-extra')
 source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")

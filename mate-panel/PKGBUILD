@@ -7,12 +7,12 @@ pkgdesc="The MATE Panel"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('caja' 'dbus-glib' 'dconf' 'gtk2' 'libwnck' 'libcanberra'
-         'libice' 'libmateweather' 'librsvg' 'libsm' 'libsoup' 'libxau'
-         'marco' 'mate-menus' 'mate-desktop' 'mate-session-manager'
-         'yelp')
+depends=('caja' 'dbus-glib' 'dconf' 'gtk2' 'libwnck' 'libcanberra' 'libice'
+         'libmateweather' 'librsvg' 'libsm' 'libsoup' 'libxau' 'marco'
+         'mate-menus' 'mate-desktop' 'mate-session-manager')
 makedepends=('gobject-introspection' 'mate-common' 'networkmanager'
              'perl-xml-parser' 'yelp-tools')
+optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
 groups=('mate')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz"

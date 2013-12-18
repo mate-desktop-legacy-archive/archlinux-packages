@@ -9,8 +9,9 @@ arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('caja' 'desktop-file-utils' 'enchant' 'gtk2' 'gtksourceview2'
          'iso-codes' 'libsm' 'mate-desktop' 'python2' 'python2-gobject2'
-         'pygtksourceview2' 'yelp')
+         'pygtksourceview2')
 makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
+optdepends=('yelp: for reading MATE help documents')
 replaces=('mate-text-editor')
 provides=('mate-text-editor')
 conflicts=('mate-text-editor')

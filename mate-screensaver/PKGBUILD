@@ -10,7 +10,8 @@ license=('GPL')
 depends=('dbus-glib' 'libmatekbd' 'libnotify' 'libxss' 'mate-desktop'
          'mate-menus' 'mate-session-manager')
 makedepends=('mate-common' 'perl-xml-parser' 'xmlto' 'yelp-tools')
-optdepends=('mate-power-manager: Add power management support.')
+optdepends=('mate-power-manager: Add power management support.'
+            'yelp: for reading MATE help documents')
 options=('!emptydirs')
 groups=('mate-extra')
 source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")

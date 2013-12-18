@@ -8,8 +8,9 @@ url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('dconf' 'dbus' 'glibmm' 'gtk2' 'gtkmm' 'libgtop' 'libwnck' 'librsvg'
-         'mate-icon-theme' 'yelp')
+         'mate-icon-theme')
 makedepends=('docbook2x' 'mate-common' 'perl-xml-parser' 'yelp-tools')
+optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
 groups=('mate-extra')
 source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")

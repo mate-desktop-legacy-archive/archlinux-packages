@@ -8,7 +8,7 @@ url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 depends=('dconf' 'dbus' 'desktop-file-utils' 'gtk2' 'libsm' 'libspectre'
-         'mate-icon-theme' 'poppler-glib' 'yelp' 'zlib')
+         'mate-icon-theme' 'poppler-glib' 'zlib')
 makedepends=('caja' 'djvulibre' 'gobject-introspection' 'libgxps' 'mate-common'
              'perl-xml-parser' 'texlive-bin' 'yelp-tools')
 optdepends=('caja: Document Properties extension'
@@ -16,7 +16,8 @@ optdepends=('caja: Document Properties extension'
             'libgxps: XPS support'
             'p7zip: cbz and cb7 compressed comic books'
             'texlive-bin: DVI support'
-            'unrar: cbr compressed comic books')
+            'unrar: cbr compressed comic books'
+            'yelp: for reading MATE help documents')
 replaces=('mate-document-viewer')
 provides=('mate-document-viewer')
 conflicts=('mate-document-viewer')
