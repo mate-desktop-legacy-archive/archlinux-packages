@@ -29,14 +29,14 @@ install=${pkgname}.install
 
 prepare() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-    
+
     # Corrent the invest icon name
     patch -Np1 -i "${srcdir}/48ca1a9f1638fa5321af4785a36c3adef46268b2.diff"
-    
+
     # Upate yahoo finance http address
     # - https://github.com/mate-desktop/mate-applets/pull/61
     patch -Np1 -i "${srcdir}/302344d247784c10ab688f71b6c8e1b8638bf35d.diff"
-    
+
     # battstat applet: ready for upower-1.0
     # - https://github.com/mate-desktop/mate-applets/pull/63
     # - https://github.com/mate-desktop/mate-applets/pull/64
