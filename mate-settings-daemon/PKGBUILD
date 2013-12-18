@@ -3,14 +3,13 @@
 pkgbase=mate-settings-daemon
 pkgname=("${pkgbase}-pulseaudio" "${pkgbase}-gstreamer")
 pkgver=1.6.2
-pkgrel=2
+pkgrel=3
 pkgdesc="The MATE Settings daemon"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
 makedepends=('mate-common' 'perl-xml-parser')
 options=('!emptydirs')
-groups=('mate')
 source=("http://pub.mate-desktop.org/releases/1.6/${pkgbase}-${pkgver}.tar.xz")
 sha1sums=('76c50bddcffd6b0415b058c828784bcd11c034ee')
 install=${pkgbase}.install
@@ -45,6 +44,7 @@ build() {
 }
 
 package_mate-settings-daemon-pulseaudio() {
+    groups=('mate')
     pkgdesc="The MATE Settings daemon (pulseaudio)"
     depends=('dbus-glib' 'dconf' 'fontconfig' 'gtk2' 'libcanberra-pulse'
             'libmatekbd' 'libnotify' 'libxt' 'mate-desktop' 'nss' 'polkit'
