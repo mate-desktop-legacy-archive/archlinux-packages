@@ -1,0 +1,75 @@
+# Maintainer : Martin Wimpress <code@flexion.org>
+
+pkgbase=mate-media
+pkgname=("${pkgbase}-pulseaudio" "${pkgbase}-gstreamer")
+pkgver=1.6.0
+pkgrel=7
+url="http://mate-desktop.org"
+arch=('i686' 'x86_64' 'armv6h' 'armv7h')
+license=('GPL')
+options=('!emptydirs')
+groups=('mate-extra')
+source=("http://pub.mate-desktop.org/releases/1.6/${pkgbase}-${pkgver}.tar.xz"
+        enable_deprecated.diff)
+sha1sums=('06c3418dfe0be26e74b0e40aa92eea6260579a72'
+          'f0e38578aacacf9ee852b7a44a34908cc230b91f')
+
+build() {
+    cd "${srcdir}"
+    cp -a ${pkgbase}-${pkgver}{,-gstreamer}
+    
+    # build for pulseaudio
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    ./autogen.sh \
+        --prefix=/usr \
+        --sysconfdir=/etc \
+        --libexecdir=/usr/lib/${pkgbase} \
+        --localstatedir=/var \
+        --enable-pulseaudio \
+        --disable-gstmix \
+        --disable-gst-mixer-applet \
+        --disable-static \
+        --disable-scrollkeeper
+    make
+    
+    # build for gstreamer
+    cd "${srcdir}/${pkgbase}-${pkgver}-gstreamer"
+    patch -p1 < ../../enable_deprecated.diff gst-mixer/src/Makefile.am
+    ./autogen.sh \
+        --prefix=/usr \
+        --sysconfdir=/etc \
+        --libexecdir=/usr/lib/${pkgbase} \
+        --localstatedir=/var \
+        --enable-gstmix \
+        --enable-gst-mixer-applet \
+        --disable-pulseaudio \
+        --disable-static \
+        --disable-scrollkeeper
+    make
+}
+
+package_mate-media-pulseaudio() {
+    pkgdesc="MATE Media Tools (pulseaudio)"
+    depends=('libcanberra-pulse' 'libunique' 'mate-desktop' 'mate-window-manager'
+             'pulseaudio')
+    makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
+    conflicts=("${pkgbase}-gstreamer" 'mate-settings-daemon-gstreamer')
+    provides=("${pkgbase}")
+    replaces=("${pkgbase}")
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
+}
+
+package_mate-media-gstreamer() {
+    pkgdesc="MATE Media Tools (GStreamer)"
+    depends=('gstreamer0.10-base-plugins' 'gtk2' 'libcanberra' 'mate-desktop'
+             'mate-window-manager')
+    makedepends=('mate-common' 'mate-doc-utils' 'mate-panel'
+                 'mate-settings-daemon-gstreamer' 'perl-xml-parser')
+    optdepends=('mate-panel: Volume control for the panel')
+    conflicts=("${pkgbase}-pulseaudio" 'mate-settings-daemon-pulseaudio')
+    provides=("${pkgbase}")    
+    install=${pkgbase}-gstreamer.install
+    cd "${srcdir}/${pkgbase}-${pkgver}-gstreamer"
+    make DESTDIR="${pkgdir}" install
+}
