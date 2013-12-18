@@ -50,9 +50,9 @@ MATE_BUILD_ORDER=(
     mate-power-manager
     mate-system-monitor
     caja-dropbox
+    mate-character-map
     mate-applets
     mate-calc
-    mate-character-map
     mate-document-viewer
     mate-file-manager-gksu
     mate-file-manager-image-converter
@@ -153,14 +153,6 @@ function tree_build() {
     local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
     local EXISTS=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
 
-    if [ "${PKG}" == "mate-settings-daemon-pulseaudio" ] || [ "${PKG}" == "mate-media-pulseaudio" ]; then
-        sudo pacman -Rsdd --noconfirm mate-settings-daemon-gstreamer
-        sudo pacman -Rsdd --noconfirm mate-media-gstreamer
-    elif [ "${PKG}" == "mate-settings-daemon-gstreamer" ] || [ "${PKG}" == "mate-media-gstreamer" ]; then
-        sudo pacman -Rsdd --noconfirm mate-settings-daemon-pulseaudio
-        sudo pacman -Rsdd --noconfirm mate-media-pulseaudio
-    fi
-
     if [ -z "${EXISTS}" ]; then
         echo " - Building ${PKG}"
         if [ $(id -u) -eq 0 ]; then
@@ -175,11 +167,15 @@ function tree_build() {
             echo " - Failed to build ${PKG}. Stopping here."
             exit 1
         else
-            sudo makepkg -i --noconfirm --asroot
+            if [ "${PKG}" != "mate-settings-daemon-gstreamer" ] && [ "${PKG}" != "mate-media-gstreamer" ]; then
+                sudo makepkg -i --noconfirm --asroot
+            fi
         fi
     else
         if [ "${INSTALLED}" != "${PKGBUILD}" ]; then
-            sudo makepkg -i --noconfirm --asroot
+            if [ "${PKG}" != "mate-settings-daemon-gstreamer" ] && [ "${PKG}" != "mate-media-gstreamer" ]; then
+                sudo makepkg -i --noconfirm --asroot
+            fi
         fi
     fi
 }
@@ -299,13 +295,13 @@ function tree_purge() {
 # Create a package repository.
 function tree_repo() {
     echo "Action : repo"
-    
+
     # The following package are not suitable for [community] so don't add them
     # to the repo.
     if [ "${PKG}" == "caja-dropbox" ] || [ "${PKG}" == "libindicator" ] || [ "${PKG}" == "mate-indicator-applet" ] ; then
         return
-    fi    
-    
+    fi
+
     source /etc/makepkg.conf
 
     echo " - Cleaning repository."
