@@ -5,7 +5,7 @@
 pkgname=variety
 pkgver=0.4.17
 pkgrel=5
-pkgdesc='Variety changes the wallpaper on a regular interval using user-specified or automatically downloaded images.'
+pkgdesc='Changes the wallpaper on a regular interval using user-specified or automatically downloaded images.'
 url="http://peterlevi.com/variety/"
 license=('GPL3')
 depends=('gtk3' 'imagemagick' 'libnotify' 'libwebkit' 'python2' 'python2-exiv2'
