@@ -153,15 +153,15 @@ function tree_build() {
     local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
     local EXISTS=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
 
-    if [ -z "${EXISTS}" ]; then
-        if [ "${PKG}" == "mate-settings-daemon-pulseaudio" ]; then
-            sudo pacman -Rsdd --noconfirm mate-settings-daemon-gstreamer
-            sudo pacman -Rsdd --noconfirm mate-media-gstreamer
-        elif [ "${PKG}" == "mate-settings-daemon-gstreamer" ]; then
-            sudo pacman -Rsdd --noconfirm mate-settings-daemon-pulseaudio
-            sudo pacman -Rsdd --noconfirm mate-media-pulseaudio
-        fi
+    if [ "${PKG}" == "mate-settings-daemon-pulseaudio" ]; then
+        sudo pacman -Rsdd --noconfirm mate-settings-daemon-gstreamer
+        sudo pacman -Rsdd --noconfirm mate-media-gstreamer
+    elif [ "${PKG}" == "mate-settings-daemon-gstreamer" ]; then
+        sudo pacman -Rsdd --noconfirm mate-settings-daemon-pulseaudio
+        sudo pacman -Rsdd --noconfirm mate-media-pulseaudio
+    fi
 
+    if [ -z "${EXISTS}" ]; then
         echo " - Building ${PKG}"
         if [ $(id -u) -eq 0 ]; then
             makepkg -fs --noconfirm --needed --log --asroot
@@ -255,6 +255,23 @@ function tree_delete() {
         echo " - Deleting ${PACKAGE}"
         rm -f ${PACKAGE}
     done
+}
+
+# Check the PKGBUILD and pkg.tar.xz (if it exists) with namcap.
+function tree_namcap() {
+    local PKG=${1}
+    cd ${PKG}
+
+    local INSTALLED=$(pacman -Q `basename ${PKG}` 2>/dev/null | cut -f2 -d' ')
+    local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=')
+    local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
+    local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
+    local EXISTS=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
+
+    namcap PKGBUILD
+    if [ -z "${EXISTS}" ]; then
+        namcap `ls -1 *${PKGBUILD}*.pkg.tar.xz`
+    fi
 }
 
 # Purge source tarballs, `src` and `pkg` directories.
@@ -387,6 +404,7 @@ if [ "${TASK}" == "aur" ] ||
    [ "${TASK}" == "check" ] ||
    [ "${TASK}" == "clean" ] ||
    [ "${TASK}" == "delete" ] ||
+   [ "${TASK}" == "namcap" ] ||
    [ "${TASK}" == "purge" ]; then
     tree_run ${TASK}
 elif [ "${TASK}" == "repo" ] || [ "${TASK}" == "sync" ] || [ "${TASK}" == "uninstall" ]; then
