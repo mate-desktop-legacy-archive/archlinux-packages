@@ -10,7 +10,7 @@ license=('GPL')
 depends=('gst-plugins-base' 'gtk2' 'libnotify' 'mate-panel' 'sqlite')
 makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
 source=("http://www.zavedil.com/wp-content/uploads/2013/11/${pkgname}-${pkgver}.tar.gz")
-md5sums=('21f08c9f8607d310394af106977c7e4a')
+md5sums=('fe4b5f7ac531536471e66df9bd4ece2a')
 install=${pkgname}.install
 
 build() {
