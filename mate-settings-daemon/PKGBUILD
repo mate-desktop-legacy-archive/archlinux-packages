@@ -3,12 +3,12 @@
 pkgbase=mate-settings-daemon
 pkgname=("${pkgbase}-pulseaudio" "${pkgbase}-gstreamer")
 pkgver=1.6.2
-pkgrel=3
+pkgrel=4
 pkgdesc="The MATE Settings daemon"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-makedepends=('mate-common' 'perl-xml-parser')
+makedepends=('gstreamer0.10-base' 'mate-common' 'perl-xml-parser')
 options=('!emptydirs')
 source=("http://pub.mate-desktop.org/releases/1.6/${pkgbase}-${pkgver}.tar.xz")
 sha1sums=('76c50bddcffd6b0415b058c828784bcd11c034ee')
