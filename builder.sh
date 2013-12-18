@@ -92,6 +92,7 @@ function usage() {
     echo "      check       Check upstream for new source tarballs."
     echo "      clean       Clean source directories using 'make maintainer-clean'."
     echo "      delete      Delete Arch Linux 'pkg.tar.xz' binary package files."
+    echo "      namcap      Run 'namcap' against all the packages."
     echo "      purge       Purge source tarballs, 'src' and 'pkg' directories."
     echo "      repo        Create a package repository in '${HOME}/mate/'"
     echo "      sync        'rsync' a repo to ${RSYNC_UPSTREAM}."
