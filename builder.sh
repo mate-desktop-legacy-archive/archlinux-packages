@@ -308,7 +308,6 @@ function tree_repo() {
         local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=')
         local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
         local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
-        local NEWEST=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
         for FILE in $(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
         do
             cp -v ${FILE} ${HOME}/${MATE_VER}/${CARCH}/
