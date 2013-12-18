@@ -7,6 +7,8 @@ pkgrel=7
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
+makedepends=('mate-common' 'mate-doc-utils' 'mate-panel'
+             'mate-settings-daemon-gstreamer' 'perl-xml-parser')
 options=('!emptydirs')
 groups=('mate-extra')
 source=("http://pub.mate-desktop.org/releases/1.6/${pkgbase}-${pkgver}.tar.xz"
@@ -52,7 +54,6 @@ package_mate-media-pulseaudio() {
     pkgdesc="MATE Media Tools (pulseaudio)"
     depends=('libcanberra-pulse' 'libunique' 'mate-desktop' 'mate-window-manager'
              'pulseaudio')
-    makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
     conflicts=("${pkgbase}-gstreamer" 'mate-settings-daemon-gstreamer')
     provides=("${pkgbase}")
     replaces=("${pkgbase}")
@@ -64,8 +65,6 @@ package_mate-media-gstreamer() {
     pkgdesc="MATE Media Tools (GStreamer)"
     depends=('gstreamer0.10-base-plugins' 'gtk2' 'libcanberra' 'mate-desktop'
              'mate-window-manager')
-    makedepends=('mate-common' 'mate-doc-utils' 'mate-panel'
-                 'mate-settings-daemon-gstreamer' 'perl-xml-parser')
     optdepends=('mate-panel: Volume control for the panel')
     conflicts=("${pkgbase}-pulseaudio" 'mate-settings-daemon-pulseaudio')
     provides=("${pkgbase}")    
