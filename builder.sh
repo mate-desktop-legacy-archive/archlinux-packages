@@ -4,7 +4,6 @@ AUR_BUILD_ORDER=(
     aur/libindicator
     aur/system-tools-backends
     aur/liboobs
-    aur/libxnvctrl
     aur/python2-exiv2
 )
 
