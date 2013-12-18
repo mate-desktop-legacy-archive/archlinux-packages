@@ -7,8 +7,8 @@ pkgdesc="A window manager for MATE"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('desktop-file-utils' 'gtk2' 'libcanberra' 'libgtop' 'libice'
-         'libsm' 'libxt' 'mate-desktop' 'mate-dialogs' 'startup-notification' 'yelp')
+depends=('gtk2' 'libcanberra' 'libgtop' 'libice' 'libsm' 'libxt' 'mate-desktop'
+         'mate-dialogs' 'startup-notification' 'yelp')
 makedepends=('git' 'mate-common' 'perl-xml-parser' 'yelp-tools')
 replaces=('mate-window-manager')
 provides=('mate-window-manager')

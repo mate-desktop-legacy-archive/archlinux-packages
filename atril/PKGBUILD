@@ -7,10 +7,16 @@ pkgdesc="Simply a document viewer"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('caja' 'dbus' 'desktop-file-utils' 'djvulibre' 'gobject-introspection'
-         'gtk2' 'libgxps' 'libsm' 'libspectre' 'mate-icon-theme'
-         'poppler-glib' 't1lib' 'texlive-bin' 'yelp' 'zlib')
-makedepends=('gtk-update-icon-cache' 'mate-common' 'perl-xml-parser' 'yelp-tools')
+depends=('dconf' 'dbus' 'desktop-file-utils' 'gtk2' 'libsm' 'libspectre'
+         'mate-icon-theme' 'poppler-glib' 'yelp' 'zlib')
+makedepends=('caja' 'djvulibre' 'gobject-introspection' 'libgxps' 'mate-common'
+             'perl-xml-parser' 'texlive-bin' 'yelp-tools')
+optdepends=('caja: Document Properties extension'
+            'djvulibre: DjVu support'
+            'libgxps: XPS support'
+            'p7zip: cbz and cb7 compressed comic books'
+            'texlive-bin: DVI support'
+            'unrar: cbr compressed comic books')
 replaces=('mate-document-viewer')
 provides=('mate-document-viewer')
 conflicts=('mate-document-viewer')
@@ -36,7 +42,7 @@ build() {
         --enable-t1lib \
         --enable-pixbuf \
         --enable-comics \
-        --disable-introspection \
+        --enable-introspection \
         --disable-static
     make
 }

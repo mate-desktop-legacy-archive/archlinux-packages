@@ -7,12 +7,11 @@ pkgdesc="Suite of tools for MATE to simplify configuring workstations."
 url="http://mate-desktop.org/"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('caja' 'desktop-file-utils' 'gtk2' 'liboobs' 'mate-polkit'
-         'system-tools-backends' 'yelp')
-makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
-optdepends=('ntp: Automatic time syncronisation.'
-            'system-config-printer: Add CUPS printer configuration tool.'
-            'cups-pk-helper: A helper that makes system-config-printer use PolicyKit.')
+depends=('dconf' 'gtk2' 'liboobs' 'mate-polkit' 'system-tools-backends'
+         'wireless_tools' 'yelp')
+makedepends=('caja' 'mate-common' 'perl-xml-parser' 'yelp-tools')
+optdepends=('ntp: Automatic time synchronisation.'
+            'mate-file-manager: provides Caja Shares extension')
 groups=('mate-extras')
 source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')
