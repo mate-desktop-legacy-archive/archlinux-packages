@@ -13,7 +13,7 @@ makedepends=('docbook2x' 'docbook-xml' 'mate-common' 'perl-xml-parser'
              'xmlto' 'yelp-tools')
 optdepends=('mate-panel: Set brightness and inhibit power management from the panel')
 options=('!emptydirs')
-groups=('mate')
+groups=('mate-extras')
 source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')
 install=${pkgname}.install

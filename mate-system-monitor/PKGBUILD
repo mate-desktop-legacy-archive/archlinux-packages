@@ -11,7 +11,7 @@ depends=('dconf' 'dbus' 'glibmm' 'gtk2' 'gtkmm' 'libgtop' 'libwnck' 'librsvg'
          'mate-icon-theme' 'yelp')
 makedepends=('docbook2x' 'mate-common' 'perl-xml-parser' 'yelp-tools')
 options=('!emptydirs')
-groups=('mate')
+groups=('mate-extras')
 source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')
 install=${pkgname}.install
