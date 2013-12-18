@@ -12,7 +12,7 @@ depends=('apache' 'dconf' 'libunique' 'mod_dnssd')
 makedepends=('libcanberra' 'libnotify' 'mate-common' 'mate-doc-utils'
              'mate-file-manager' 'perl-xml-parser')
 options=('!emptydirs')
-groups=('mate-extras')
+groups=('mate-extra')
 install=${pkgname}.install
 source=("http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz"
         "make-bluetooth-optional.patch")
