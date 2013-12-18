@@ -3,19 +3,17 @@
 
 pkgname=libindicator
 pkgver=12.10.1
-pkgrel=1
+pkgrel=2
 pkgdesc="A set of symbols and convience functions that all indicators would like to use"
 url="https://launchpad.net/libindicator"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-makedepends=('gtk2' 'pkg-config')
-options=(!libtool)
-source=(https://launchpad.net/${pkgname}/12.10/${pkgver}/+download/${pkgname}-${pkgver}.tar.gz)
+makedepends=('gtk2')
+source=("https://launchpad.net/${pkgname}/12.10/${pkgver}/+download/${pkgname}-${pkgver}.tar.gz")
 md5sums=('5fd4d6bab339fc9611078b64c44a85a8')
 
 build() {
-    cd ${srcdir}/${pkgname}-${pkgver}
-
+    cd "${srcdir}/${pkgname}-${pkgver}"
     ./configure \
         --prefix=/usr \
         --sysconfdir=/etc \
@@ -28,8 +26,8 @@ build() {
 }
 
 package() {
-  pkgdesc+=" (GTK+ 2 library)"
-  depends=('gtk2')
-  cd ${srcdir}/${pkgname}-${pkgver}
-  make DESTDIR=${pkgdir} install
+    pkgdesc+=" (GTK+ 2 library)"
+    depends=('gtk2')
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
 }

@@ -332,6 +332,13 @@ function tree_purge() {
 # Create a package repository.
 function tree_repo() {
     echo "Action : repo"
+    
+    # The following package are not suitable for [community] so don't add them
+    # to the repo.
+    if [ "${PKG}" == "libindicator" ] || [ "${PKG}" == "mate-indicator-applet" ] ; then
+        return
+    fi
+    
     source /etc/makepkg.conf
 
     echo " - Cleaning repository."
@@ -353,7 +360,7 @@ function tree_repo() {
     # Simulate 'makepkg --sign'
     KEY_TEST=`gpg --list-secret-key | grep FFEE1E5C`
     if [ $? -eq 0 ]; then
-	cd ${HOME}/${MATE_VER}/${CARCH}
+    cd ${HOME}/${MATE_VER}/${CARCH}
         for XZ in *.xz
         do
             echo " - Signing ${XZ}"
