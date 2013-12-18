@@ -2,7 +2,7 @@
 
 pkgname=mate-mplayer
 pkgver=1.0.8
-pkgrel=2
+pkgrel=3
 pkgdesc="Mplayer GUI for MATE"
 url="https://github.com/NiceandGently/mate-nettool"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
@@ -12,7 +12,6 @@ depends=('caja' 'curl' 'dbus-glib' 'desktop-file-utils' 'gmtk' 'gtk3'
          'mate-control-center' 'mencoder' 'mplayer' 'pulseaudio')
 makedepends=('mate-common' 'perl-xml-parser')
 options=('!emptydirs')
-groups=('mate-extras-community')
 source=("https://github.com/NiceandGently/${pkgname}/archive/v${pkgver}.tar.gz")
 md5sums=('05a5571f9ffc8493a0814065b78faa11')
 install=${pkgname}.install

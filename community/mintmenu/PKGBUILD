@@ -5,7 +5,7 @@
 
 pkgname=mintmenu
 pkgver=5.4.9
-pkgrel=5
+pkgrel=6
 pkgdesc="Linux Mint Menu for MATE"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 url="http://packages.linuxmint.com/pool/main/m/mintmenu"
@@ -15,7 +15,6 @@ depends=('gksu' 'mate-panel' 'python2-gobject' 'python2-xdg'
 optdepends=('mozo: for editing the MATE menu'
             'gnome-packagekit: package manager button'
             'mate-screensaver: lock screen button')
-groups=('mate-extras-community')
 source=("${url}/${pkgname}_${pkgver}.tar.gz")
 install=${pkgname}.install
 md5sums=('39826a17c8de746ad119208588be2ec2')
