@@ -196,10 +196,11 @@ function tree_check() {
         local CHECK_VER="${MATE_VER}"
     fi
 
-    case ${PKG} in
-        "python2-caja") UPSTREAM_PKG="python-caja";;
-        *) UPSTREAM_PKG="${PKG}"
-    esac
+    if [ "${PKG}" == "python2-caja" ]; then
+        UPSTREAM_PKG="python-caja"
+    else
+        UPSTREAM_PKG="${PKG}"
+    fi
 
     if [ ! -f /tmp/${CHECK_VER}_SUMS ]; then
         echo " - Downloading MATE ${CHECK_VER} SHA1SUMS"
