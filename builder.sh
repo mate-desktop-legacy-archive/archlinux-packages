@@ -19,13 +19,11 @@ MATE_BUILD_ORDER=(
     caja
     mate-polkit
     marco
+    mate-settings-daemon
+    mate-session-manager
     mate-menus
     mate-panel
-    mate-settings-daemon-gstreamer
-    mate-media-gstreamer
-    mate-settings-daemon-pulseaudio
-    mate-media-pulseaudio
-    mate-session-manager
+    mate-media
     mate-backgrounds
     mate-themes
     mate-notification-daemon
@@ -203,13 +201,17 @@ function tree_build() {
             echo " - Failed to build ${PKG}. Stopping here."
             exit 1
         else
-            if [ "${PKG}" != "mate-settings-daemon-gstreamer" ] && [ "${PKG}" != "mate-media-gstreamer" ]; then
+            if [ "${PKG}" == "mate-settings-daemon" ] || [ "${PKG}" == "mate-media" ]; then
+                sudo pacman -U --noconfirm ${PKG}-pulseaudio-${PKGBUILD}*.pkg.tar.xz
+            else
                 sudo makepkg -i --noconfirm --asroot
             fi
         fi
     else
         if [ "${INSTALLED}" != "${PKGBUILD}" ]; then
-            if [ "${PKG}" != "mate-settings-daemon-gstreamer" ] && [ "${PKG}" != "mate-media-gstreamer" ]; then
+            if [ "${PKG}" == "mate-settings-daemon" ] || [ "${PKG}" == "mate-media" ]; then
+                sudo pacman -U --noconfirm ${PKG}-pulseaudio-${PKGBUILD}*.pkg.tar.xz
+            else
                 sudo makepkg -i --noconfirm --asroot
             fi
         fi
@@ -227,19 +229,11 @@ function tree_check() {
         local CHECK_VER="${MATE_VER}"
     fi
 
-    # Skip duplicate packages.
-    if [ "${PKG}" == "mate-settings-daemon-gstreamer" ] || [ "${PKG}" == "mate-media-gstreamer" ]; then
-        return
+    if [ "${PKG}" == "python2-caja" ]; then
+        UPSTREAM_PKG="python-caja"
+    else
+        UPSTREAM_PKG="${PKG}"
     fi
-
-    case ${PKG} in
-        "python2-caja") UPSTREAM_PKG="python-caja";;
-        "mate-settings-daemon-gstreamer") UPSTREAM_PKG="mate-settings-daemon";;
-        "mate-settings-daemon-pulseaudio") UPSTREAM_PKG="mate-settings-daemon";;
-        "mate-media-gstreamer") UPSTREAM_PKG="mate-media";;
-        "mate-media-pulseaudio") UPSTREAM_PKG="mate-media";;
-        *) UPSTREAM_PKG="${PKG}"
-    esac
 
     if [ ! -f /tmp/${CHECK_VER}_SUMS ]; then
         echo " - Downloading MATE ${CHECK_VER} SHA1SUMS"
@@ -392,6 +386,10 @@ function tree_uninstall() {
     for PKG in ${BUILD_ORDER[@]};
     do
         PKG=$(basename ${PKG})
+        if [ "${PKG}" == "mate-settings-daemon" ] || [ "${PKG}" == "mate-media" ]; then
+            PKG="${PKG}-pulseaudio"
+        fi
+
         if [ -n "$(echo ${INSTALLED_PKGS} | grep ${PKG})" ]; then
             UNINSTALL_PKGS="${UNINSTALL_PKGS} ${PKG}"
         fi
