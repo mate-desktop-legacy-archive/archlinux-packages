@@ -30,9 +30,9 @@ build() {
         --prefix=/usr \
         --sysconfdir=/etc \
         --localstatedir=/var \
+        --enable-introspection \
         --disable-desktop-update \
-        --disable-icon-update \
-        --disable-introspection
+        --disable-icon-update
     make
 }
 
