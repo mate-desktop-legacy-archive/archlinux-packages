@@ -7,7 +7,7 @@ pkgname=mintmenu
 pkgver=5.4.9
 pkgrel=5
 pkgdesc="Linux Mint Menu for MATE"
-arch=('i686' 'x86_64' 'armv6h' 'armv7h')
+arch=('any')
 url="http://packages.linuxmint.com/pool/main/m/mintmenu"
 license=('GPL')
 depends=('gksu' 'mate-panel' 'python2-gobject' 'python2-xdg' 'python2-keybinder2'
@@ -22,7 +22,7 @@ md5sums=('39826a17c8de746ad119208588be2ec2')
 build() {
     cd "${srcdir}/${pkgname}"
     rm -f usr/lib/linuxmint/mintMenu/*.py{c,o} usr/lib/linuxmint/mintMenu/plugins/*.py{c,o}
-    for PY in $(find . -name '*.py'); do
+    for PY in $(find . -name '*.py') usr/bin/mintmenu; do
         sed -ri 's:^#!/usr/bin/(env )?python$:&2:' "${PY}"
     done
 
