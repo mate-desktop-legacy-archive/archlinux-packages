@@ -2,14 +2,14 @@
 
 pkgname=mate-disk-utility
 pkgver=1.6.1
-pkgrel=3
+pkgrel=2
 pkgdesc="Disk management application for MATE."
 url="https://github.com/NiceandGently/mate-disk-utility"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('avahi' 'caja' 'dbus' 'gtk2' 'gobject-introspection'
-         'libatasmart' 'libnotify' 'libunique' 'udisks')
-makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
+depends=('avahi' 'dbus' 'gtk2' 'libatasmart' 'libmatekeyring' 'libnotify' 'libunique'
+         'mate-file-manager' 'udisks')
+makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
 options=('!emptydirs')
 source=("https://github.com/NiceandGently/${pkgname}/archive/v${pkgver}.tar.gz")
 md5sums=('6354d83bb4c99fbbe27796fd939f43fe')
@@ -21,6 +21,7 @@ build() {
         --prefix=/usr \
         --sysconfdir=/etc \
         --libexecdir=/usr/lib/${pkgname} \
+        --enable-mate-keyring \
         --disable-static \
         --disable-scrollkeeper
     make

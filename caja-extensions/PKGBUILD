@@ -2,12 +2,12 @@
 
 pkgname=caja-extensions
 pkgver=1.7.0
-pkgrel=5
+pkgrel=6
 pkgdesc="Caja extensions."
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 license=('GPL')
-depends=('caja' 'dbus' 'gupnp' 'imagemagick' 'gtk2' 'samba')
+depends=('caja' 'dbus-glib' 'gupnp' 'imagemagick' 'gtk2' 'samba')
 makedepends=('mate-common' 'perl-xml-parser')
 optdepends=('pidgin: Support for sending to instant messaging networks.'
             'gajim: Support for sending to Jabber.'
