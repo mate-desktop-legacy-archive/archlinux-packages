@@ -17,7 +17,7 @@ install=${pkgname}.install
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-    ./autogen.sh \
+    ./configure \
         --prefix=/usr \
         --libexec=/usr/lib/${pkgname} \
         --sysconfdir=/etc \
