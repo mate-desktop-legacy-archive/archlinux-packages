@@ -17,7 +17,7 @@ sha1sums=('7905527e9f4f0edeae15c8a6c444c53b45f260bf')
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-    ./autogen.sh \
+    ./configure \
         --prefix=/usr
     make
 }
