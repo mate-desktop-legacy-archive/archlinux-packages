@@ -23,6 +23,7 @@ install=${pkgname}.install
 prepare() {
     cd "${srcdir}/${pkgname}-${pkgver}"
     patch -Np1 -i "${srcdir}/pluma_gettext_fix.diff"
+    autoreconf -fi
 }
 
 build() {
