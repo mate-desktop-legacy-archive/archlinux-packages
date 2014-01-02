@@ -5,7 +5,7 @@ pkgver=1.0.8
 pkgrel=3
 pkgdesc="Mplayer GUI for MATE"
 url="https://github.com/NiceandGently/mate-nettool"
-arch=('i686' 'x86_64' 'armv6h' 'armv7h')
+arch=('i686' 'x86_64')
 license=('GPL')
 depends=('caja' 'curl' 'dbus-glib' 'desktop-file-utils' 'gmtk' 'gtk3'
          'gvfs' 'libgpod' 'libnotify' 'libmusicbrainz3'

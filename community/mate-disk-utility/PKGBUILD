@@ -5,7 +5,7 @@ pkgver=1.6.1
 pkgrel=2
 pkgdesc="Disk management application for MATE."
 url="https://github.com/NiceandGently/mate-disk-utility"
-arch=('i686' 'x86_64' 'armv6h' 'armv7h')
+arch=('i686' 'x86_64')
 license=('GPL')
 depends=('avahi' 'dbus' 'gtk2' 'libatasmart' 'libmatekeyring' 'libnotify' 'libunique'
          'mate-file-manager' 'udisks')

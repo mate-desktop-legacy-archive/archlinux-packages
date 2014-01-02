@@ -5,7 +5,7 @@ pkgver=1.6.9.158.922d0e0
 pkgrel=1
 pkgdesc="The Control Center for MATE"
 url="http://mate-desktop.org"
-arch=('i686' 'x86_64' 'armv6h' 'armv7h')
+arch=('i686' 'x86_64')
 license=('GPL')
 depends=('caja' 'dbus-glib' 'dconf' 'desktop-file-utils' 'gsettings-desktop-schemas'
          'gtk2' 'mate-desktop' 'mate-icon-theme' 'mate-menus' 'mate-settings-daemon'

@@ -5,7 +5,7 @@ pkgver=1.7.0
 pkgrel=4
 pkgdesc="The MATE Panel"
 url="http://mate-desktop.org"
-arch=('i686' 'x86_64' 'armv6h' 'armv7h')
+arch=('i686' 'x86_64')
 license=('GPL')
 depends=('caja' 'dbus-glib' 'dconf' 'gtk2' 'libwnck' 'libcanberra' 'libice'
          'libmateweather' 'librsvg' 'libsm' 'libsoup' 'libxau' 'marco'

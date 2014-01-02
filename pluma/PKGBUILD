@@ -5,7 +5,7 @@ pkgver=1.7.0
 pkgrel=6
 pkgdesc="A powerful text editor for MATE"
 url="http://mate-desktop.org"
-arch=('i686' 'x86_64' 'armv6h' 'armv7h')
+arch=('i686' 'x86_64')
 license=('GPL')
 depends=('caja' 'desktop-file-utils' 'enchant' 'gtk2' 'gtksourceview2'
          'iso-codes' 'libsm' 'mate-desktop' 'python2' 'python2-gobject2'

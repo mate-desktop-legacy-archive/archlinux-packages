@@ -7,7 +7,7 @@ pkgver=1.7.0
 pkgrel=2
 pkgdesc="The MATE Session Handler"
 url="http://mate-desktop.org"
-arch=('i686' 'x86_64' 'armv6h' 'armv7h')
+arch=('i686' 'x86_64')
 license=('GPL' 'LGPL')
 depends=('dbus-glib' 'gtk2' 'libsm' 'libxtst' 'mate-desktop' 'mate-polkit'
          'mate-settings-daemon' 'upower')

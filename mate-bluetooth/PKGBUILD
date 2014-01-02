@@ -5,7 +5,7 @@ pkgver=1.6.9.63.54e5688
 pkgrel=1
 pkgdesc="A collection of Bluetooth utilities and modules for MATE"
 url="http://mate-desktop.org"
-arch=('i686' 'x86_64' 'armv6h' 'armv7h')
+arch=('i686' 'x86_64')
 license=('GPL')
 depends=('dbus' 'desktop-file-utils' 'gtk2' 'gvfs' 'libnotify' 'libunique'
          'obex-data-server')

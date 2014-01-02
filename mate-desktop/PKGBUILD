@@ -7,7 +7,7 @@ pkgver=1.7.1
 pkgrel=7
 pkgdesc="Library with common API for various MATE modules"
 url="http://mate-desktop.org"
-arch=('i686' 'x86_64' 'armv6h' 'armv7h')
+arch=('i686' 'x86_64')
 license=(GPL LGPL)
 depends=('dconf' 'gtk2' 'hicolor-icon-theme' 'libunique' 'python2'
          'startup-notification')

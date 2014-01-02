@@ -5,7 +5,7 @@ pkgname=("${pkgbase}-pulseaudio" "${pkgbase}-gstreamer")
 pkgver=1.6.9.85.68915ba
 pkgrel=1
 url="http://mate-desktop.org"
-arch=('i686' 'x86_64' 'armv6h' 'armv7h')
+arch=('i686' 'x86_64')
 license=('GPL')
 depends=('gstreamer0.10-base-plugins' 'gtk2' 'libcanberra-pulse' 'libunique'
          'marco' 'mate-desktop' 'pulseaudio')
