@@ -14,16 +14,8 @@ makedepends=('libcanberra' 'libnotify' 'mate-common' 'mate-doc-utils'
 options=('!emptydirs')
 groups=('mate-extra')
 install=${pkgname}.install
-source=("http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz"
-        "make-bluetooth-optional.patch")
-sha1sums=('83f161dee79ea0ae4345c54a5b1339f673f68e8f'
-          '886d06a6cd0c5158b93a72c82d05b11481d25142')
-
-prepare() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
-    # Make bluetooth optional
-    patch -Np1 -i "${srcdir}/make-bluetooth-optional.patch"
-}
+source=("http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz")
+sha1sums=('83f161dee79ea0ae4345c54a5b1339f673f68e8f')
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
