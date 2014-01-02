@@ -14,8 +14,16 @@ makedepends=('libcanberra' 'libnotify' 'mate-common' 'mate-doc-utils'
 options=('!emptydirs')
 groups=('mate-extra')
 install=${pkgname}.install
-source=("http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('83f161dee79ea0ae4345c54a5b1339f673f68e8f')
+source=("http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz"
+        "https://github.com/NiceandGently/mate-user-share/commit/906172bb95b10dd064d0b0fde0d0510434d34b96.diff")
+sha1sums=('83f161dee79ea0ae4345c54a5b1339f673f68e8f'
+          'ffa10ae69f5edf08d605418182f3c5bc975eb3cf')
+
+prepare() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    # do not use download dir for incoming bluetooth downloads if mate-bluetooth isn't installed
+    patch -Np1 -i "${srcdir}/906172bb95b10dd064d0b0fde0d0510434d34b96.diff"
+}
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
