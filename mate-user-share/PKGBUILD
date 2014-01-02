@@ -2,11 +2,11 @@
 # Contributor: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-user-share
-pkgver=1.6.0
-pkgrel=3
+pkgver=1.6.1
+pkgrel=1
 pkgdesc="User level public file sharing via WebDAV or ObexFTP."
 url="http://mate-desktop.org"
-arch=('i686' 'x86_64' 'armv6h' 'armv7h')
+arch=('i686' 'x86_64')
 license=('GPL')
 depends=('apache' 'dconf' 'libunique' 'mod_dnssd')
 makedepends=('libcanberra' 'libnotify' 'mate-common' 'mate-doc-utils'
@@ -16,7 +16,7 @@ groups=('mate-extra')
 install=${pkgname}.install
 source=("http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz"
         "make-bluetooth-optional.patch")
-sha1sums=('03f5731a29bc53a9ff6882d33b2a45d0270e48e1'
+sha1sums=('83f161dee79ea0ae4345c54a5b1339f673f68e8f'
           '886d06a6cd0c5158b93a72c82d05b11481d25142')
 
 prepare() {

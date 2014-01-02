@@ -8,7 +8,7 @@ pkgver=1.6.3
 pkgrel=3
 pkgdesc="Session daemon that makes it easy to manage your laptop or desktop system for Mate Desktop"
 url="http://mate-desktop.org"
-arch=('i686' 'x86_64' 'armv6h' 'armv7h')
+arch=('i686' 'x86_64')
 license=('GPL')
 depends=('dbus-glib' 'dconf' 'libcanberra' 'libmatekeyring' 'libnotify'
          'libunique' 'upower')

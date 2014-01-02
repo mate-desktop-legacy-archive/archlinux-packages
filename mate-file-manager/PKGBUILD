@@ -7,7 +7,7 @@ pkgver=1.6.3
 pkgrel=1
 pkgdesc="The MATE shell and file manager"
 url="http://mate-desktop.org"
-arch=('i686' 'x86_64' 'armv6h' 'armv7h')
+arch=('i686' 'x86_64')
 license=('GPL')
 depends=('dbus' 'desktop-file-utils' 'exempi' 'gtk2' 'gvfs' 'libexif'
          'libunique' 'libxt' 'mate-desktop' 'mate-icon-theme' 'startup-notification')

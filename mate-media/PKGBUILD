@@ -2,10 +2,10 @@
 
 pkgbase=mate-media
 pkgname=("${pkgbase}-pulseaudio" "${pkgbase}-gstreamer")
-pkgver=1.6.0
-pkgrel=10
+pkgver=1.6.1
+pkgrel=1
 url="http://mate-desktop.org"
-arch=('i686' 'x86_64' 'armv6h' 'armv7h')
+arch=('i686' 'x86_64')
 license=('GPL')
 depends=('gstreamer0.10-base-plugins' 'gtk2' 'libcanberra-pulse' 'libunique'
          'mate-desktop' 'mate-window-manager' 'pulseaudio')
@@ -14,7 +14,7 @@ makedepends=('mate-common' 'mate-doc-utils' 'mate-panel'
 options=('!emptydirs')
 source=("http://pub.mate-desktop.org/releases/1.6/${pkgbase}-${pkgver}.tar.xz"
         enable_deprecated.diff)
-sha1sums=('06c3418dfe0be26e74b0e40aa92eea6260579a72'
+sha1sums=('39acbf670a384325b5f68487e62bb1bdddb7d68f'
           'f0e38578aacacf9ee852b7a44a34908cc230b91f')
 
 build() {

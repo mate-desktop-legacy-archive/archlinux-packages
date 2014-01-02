@@ -6,7 +6,7 @@ pkgver=1.6.1
 pkgrel=6
 pkgdesc='Screensaver for MATE'
 url="http://mate-desktop.org"
-arch=('i686' 'x86_64' 'armv6h' 'armv7h')
+arch=('i686' 'x86_64')
 license=('GPL')
 depends=('dbus-glib' 'libmatekbd' 'libnotify' 'libxss' 'mate-desktop'
          'mate-menus' 'mate-session-manager')

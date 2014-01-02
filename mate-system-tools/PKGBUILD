@@ -6,7 +6,7 @@ pkgver=1.6.0
 pkgrel=8
 pkgdesc="Suite of tools for MATE to simplify configuring workstations."
 url="http://mate-desktop.org/"
-arch=('i686' 'x86_64' 'armv6h' 'armv7h')
+arch=('i686' 'x86_64')
 license=('GPL')
 depends=('dconf' 'gtk2' 'liboobs' 'mate-polkit' 'system-tools-backends'
          'wireless_tools')

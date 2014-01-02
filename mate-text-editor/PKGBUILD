@@ -2,11 +2,11 @@
 # Contributor: Giovanni Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-text-editor
-pkgver=1.6.0
-pkgrel=6
+pkgver=1.6.1
+pkgrel=1
 pkgdesc="A powerful text editor for MATE"
 url="http://mate-desktop.org"
-arch=('i686' 'x86_64' 'armv6h' 'armv7h')
+arch=('i686' 'x86_64')
 license=('GPL')
 depends=('desktop-file-utils' 'enchant' 'gtk2' 'gtksourceview2' 'iso-codes'
          'libsm' 'mate-desktop' 'mate-file-manager' 'python2' 'python2-gobject2'
@@ -15,7 +15,7 @@ makedepends=('mate-common' 'mate-doc-utils' 'perl-xml-parser')
 options=('!emptydirs')
 groups=('mate-extra')
 source=("http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('47d6ff5655c92baac70719247d22e7aabce56f4f')
+sha1sums=('47ec9a2ff713e67167b5c60e496ce0017ee293f0')
 install=${pkgname}.install
 
 build() {
