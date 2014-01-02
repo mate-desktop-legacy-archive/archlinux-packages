@@ -18,7 +18,7 @@ sha1sums=('43afbbb0a9e4c1295bdd0f788ad7effd776dccf2')
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-    ./autogen.sh \
+    ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/polkit-mate \
         --sysconfdir=/etc \
