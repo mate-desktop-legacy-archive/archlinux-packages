@@ -12,10 +12,8 @@ depends=('gstreamer0.10-base-plugins' 'gtk2' 'libcanberra-pulse' 'libunique'
 makedepends=('mate-common' 'mate-doc-utils' 'mate-panel'
              'mate-settings-daemon-gstreamer' 'perl-xml-parser')
 options=('!emptydirs')
-source=("http://pub.mate-desktop.org/releases/1.6/${pkgbase}-${pkgver}.tar.xz"
-        enable_deprecated.diff)
-sha1sums=('39acbf670a384325b5f68487e62bb1bdddb7d68f'
-          'f0e38578aacacf9ee852b7a44a34908cc230b91f')
+source=("http://pub.mate-desktop.org/releases/1.6/${pkgbase}-${pkgver}.tar.xz")
+sha1sums=('39acbf670a384325b5f68487e62bb1bdddb7d68f')
 
 build() {
     cd "${srcdir}"
@@ -37,7 +35,6 @@ build() {
     
     # build for gstreamer
     cd "${srcdir}/${pkgbase}-${pkgver}-gstreamer"
-    patch -p1 < ../../enable_deprecated.diff gst-mixer/src/Makefile.am
     ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
@@ -45,6 +42,7 @@ build() {
         --localstatedir=/var \
         --enable-gstmix \
         --enable-gst-mixer-applet \
+        --enable-deprecated \
         --disable-pulseaudio \
         --disable-static \
         --disable-scrollkeeper
