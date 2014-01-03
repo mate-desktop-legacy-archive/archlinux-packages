@@ -4,7 +4,7 @@
 
 pkgname=mate-keyring
 pkgver=1.6.1
-pkgrel=1
+pkgrel=2
 pkgdesc="MATE Password Management daemon"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
@@ -21,6 +21,8 @@ prepare() {
     cd "${srcdir}/${pkgname}-${pkgver}"
     # Prevent gck conflict with gnome gcr lib
     sed -e 's/DOC_MODULE=gck/DOC_MODULE=mate-gck/' -i docs/reference/gck/Makefile.am
+    autoreconf -fi
+    intltoolize -c -f
 }
 
 build() {
