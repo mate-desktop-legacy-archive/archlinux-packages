@@ -261,9 +261,7 @@ function tree_namcap() {
     local EXISTS=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
 
     namcap PKGBUILD
-    if [ -z "${EXISTS}" ]; then
-        namcap `ls -1 *${PKGBUILD}*.pkg.tar.xz`
-    fi
+    namcap `ls -1 *${PKGBUILD}*.pkg.tar.xz`
 }
 
 # Purge source tarballs, `src` and `pkg` directories.
