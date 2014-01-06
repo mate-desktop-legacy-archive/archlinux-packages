@@ -104,6 +104,12 @@ function usage() {
 # Make 'src' packages and upload them to the AUR
 function tree_aur() {
     local PKG=${1}
+
+    # The following packages are not suitable for the AUR so don't add them.
+    if [ "${PKG}" == "mate-bluetooth" ]; then
+        return
+    fi
+
     cd ${PKG}
 
     local INSTALLED=$(pacman -Q `basename ${PKG}` 2>/dev/null | cut -f2 -d' ')
@@ -290,7 +296,7 @@ function tree_purge() {
 function tree_repo() {
     echo "Action : repo"
 
-    # The following package are not suitable for [community] so don't add them
+    # The following packages are not suitable for [community] so don't add them
     # to the repo.
     if [ "${PKG}" == "caja-dropbox" ] || [ "${PKG}" == "libindicator" ] || [ "${PKG}" == "mate-bluetooth" ] || [ "${PKG}" == "mate-indicator-applet" ] ; then
         return
