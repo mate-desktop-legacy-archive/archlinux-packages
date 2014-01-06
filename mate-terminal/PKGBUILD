@@ -2,8 +2,8 @@
 # Contributor: Giovanni Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-terminal
-pkgver=1.6.1
-pkgrel=6
+pkgver=1.6.2
+pkgrel=1
 pkgdesc="The MATE Terminal Emulator"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
@@ -13,7 +13,7 @@ makedepends=('docbook2x' 'mate-common' 'mate-doc-utils' 'perl-xml-parser')
 options=('!emptydirs')
 groups=('mate-extra')
 source=("http://pub.mate-desktop.org/releases/1.6/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('dfb108867331c2b62a15bc0375629114bad381a6')
+sha1sums=('951c006c5ee31da0d0da1ebad4d1e6648fe0e41b')
 install=${pkgname}.install
 
 build() {
