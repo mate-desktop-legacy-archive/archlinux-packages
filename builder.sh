@@ -296,12 +296,6 @@ function tree_purge() {
 function tree_repo() {
     echo "Action : repo"
 
-    # The following packages are not suitable for [community] so don't add them
-    # to the repo.
-    if [ "${PKG}" == "caja-dropbox" ] || [ "${PKG}" == "libindicator" ] || [ "${PKG}" == "mate-bluetooth" ] || [ "${PKG}" == "mate-indicator-applet" ] ; then
-        return
-    fi
-
     source /etc/makepkg.conf
 
     echo " - Cleaning repository."
@@ -310,6 +304,11 @@ function tree_repo() {
 
     for PKG in ${BUILD_ORDER[@]};
     do
+        # The following packages are not suitable for [community] so don't add them
+        # to the repo.
+        if [ "${PKG}" == "caja-dropbox" ] || [ "${PKG}" == "aur/libindicator" ] || [ "${PKG}" == "mate-bluetooth" ] || [ "${PKG}" == "mate-indicator-applet" ] ; then
+            continue
+        fi    
         cd ${BASEDIR}/${PKG}
         local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=')
         local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
