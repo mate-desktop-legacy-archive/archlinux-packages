@@ -292,7 +292,7 @@ function tree_repo() {
 
     # The following package are not suitable for [community] so don't add them
     # to the repo.
-    if [ "${PKG}" == "caja-dropbox" ] || [ "${PKG}" == "libindicator" ] || [ "${PKG}" == "mate-indicator-applet" ] ; then
+    if [ "${PKG}" == "caja-dropbox" ] || [ "${PKG}" == "libindicator" ] || [ "${PKG}" == "mate-bluetooth" ] || [ "${PKG}" == "mate-indicator-applet" ] ; then
         return
     fi
 
