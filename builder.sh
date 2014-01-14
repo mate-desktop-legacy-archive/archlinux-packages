@@ -17,7 +17,6 @@ COMMUNITY_BUILD_ORDER=(
     community/mate-mplayer
     community/mate-nettool
     community/variety
-    community/mintmenu
 )
 
 MATE_BUILD_ORDER=(
