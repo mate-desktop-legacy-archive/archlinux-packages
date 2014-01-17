@@ -1,14 +1,6 @@
 #!/usr/bin/env bash
 
-COMMUNITY_BUILD_ORDER=(
-    community/mate-disk-utility
-    community/mate-color-manager
-    community/mate-mplayer
-    community/mate-nettool
-    community/variety
-)
-
-MATE_BUILD_ORDER=(
+BUILD_ORDER=(
     mate-common
     mate-doc-utils
     mate-desktop
@@ -60,7 +52,6 @@ MATE_BUILD_ORDER=(
     python2-caja
 )
 
-BUILD_ORDER=( ${MATE_BUILD_ORDER[@]} ${COMMUNITY_BUILD_ORDER[@]})
 BASEDIR=$(dirname $(readlink -f ${0}))
 MATE_VER=1.6
 
