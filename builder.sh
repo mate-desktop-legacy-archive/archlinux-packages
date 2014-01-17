@@ -346,13 +346,7 @@ function tree_run() {
     local ACTION=${1}
     echo "Action : ${ACTION}"
 
-    if [ "${ACTION}" == "check" ]; then
-        local ORDER=( ${MATE_BUILD_ORDER[@]} )
-    else
-        local ORDER=( ${BUILD_ORDER[@]} )
-    fi
-
-    for PKG in ${ORDER[@]};
+    for PKG in ${BUILD_ORDER[@]};
     do
         cd ${BASEDIR}
         tree_${ACTION} ${PKG}
