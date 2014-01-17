@@ -56,67 +56,13 @@ function usage() {
     echo "Options:"
     echo "-h  Shows this help message."
     echo "-t  Provide a task to run which can be one of:"
-    echo "      aur         Upload 'src' packages to the AUR."
     echo "      build       Build MATE packages."
     echo "      check       Check upstream for new source tarballs."
-    echo "      clean       Clean source directories using 'make maintainer-clean'."
-    echo "      delete      Delete Arch Linux 'pkg.tar.xz' binary package files."
-    echo "      namcap      Run 'namcap' against all the packages."
-    echo "      purge       Purge source tarballs, 'src' and 'pkg' directories."
     echo "      repo        Create a package repository in '${HOME}/mate/'"
     echo "      sync        'rsync' a repo to ${RSYNC_UPSTREAM}."
-    echo "      uninstall   Uninstall MATE packages and dependencies."
     echo
     echo "Each of the tasks above run automatically and operate over the entire"
     echo "package tree."
-}
-
-# Make 'src' packages and upload them to the AUR
-function tree_aur() {
-    local PKG=${1}
-
-    # The following packages are not suitable for the AUR so don't add them.
-    if [ "${PKG}" == "mate-bluetooth" ]; then
-        return
-    fi
-
-    cd ${PKG}
-
-    local INSTALLED=$(pacman -Q `basename ${PKG}` 2>/dev/null | cut -f2 -d' ')
-    local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=')
-    local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
-    local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
-    local EXISTS=$(ls -1 *${PKGBUILD}*.src.tar.gz 2>/dev/null)
-
-    if [ -z "${EXISTS}" ]; then
-        echo " - Burping ${PKG}"
-        # Guess a category
-        if [[ "${PKG}" == *lib* ]] || [[ "${PKG}" == *python* ]]; then
-            local CAT="--category=lib"
-        elif [[ "${PKG}" == *mate* ]]; then
-            local CAT="--category=x11"
-        else
-            local CAT=""
-        fi
-
-        if [ $(id -u) -eq 0 ]; then
-            makepkg -Sfd --noconfirm --needed --asroot
-        else
-            makepkg -Sfd --noconfirm --needed
-        fi
-
-        # Attempt an auto upload to the AUR.
-        # https://github.com/falconindy/burp
-        if [ -f ${HOME}/.config/burp/burp.conf ]; then
-            grep flexiondotorg ${HOME}/.config/burp/burp.conf
-            if [ $? -eq 0 ]; then
-                burp --verbose ${CAT} `ls -1 *${PKGBUILD}*.src.tar.gz`
-                if [ $? -ne 0 ]; then
-                    echo ${PKG} >> /tmp/aur_fails.txt
-                fi
-            fi
-        fi
-    fi
 }
 
 # Build packages that are not at the current version.
@@ -204,68 +150,6 @@ function tree_check() {
     fi
 }
 
-# Clean the sources using `make maintainer-clean`.
-function tree_clean() {
-    local PKG=${1}
-    for SRC in ${PKG}/src/*
-    do
-        if [ -f ${SRC}/Makefile ]; then
-            echo " - Cleaning ${SRC}"
-            cd ${SRC}
-            make maintainer-clean &> /dev/null
-        fi
-    done
-}
-
-# Delete all binary package files.
-function tree_delete() {
-    local PKG=${1}
-    for PACKAGE in ${PKG}/*.pkg.tar.xz
-    do
-        echo " - Deleting ${PACKAGE}"
-        rm -f ${PACKAGE}
-    done
-}
-
-# Check the PKGBUILD and pkg.tar.xz (if it exists) with namcap.
-function tree_namcap() {
-    local PKG=${1}
-    cd ${PKG}
-
-    local INSTALLED=$(pacman -Q `basename ${PKG}` 2>/dev/null | cut -f2 -d' ')
-    local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=')
-    local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
-    local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
-    local EXISTS=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
-
-    namcap PKGBUILD
-    if [ -z "${EXISTS}" ]; then
-        namcap `ls -1 *${PKGBUILD}*.pkg.tar.xz`
-    fi
-}
-
-# Purge source tarballs, `src` and `pkg` directories.
-function tree_purge() {
-    local PKG=${1}
-    # Remove all source tarballs, don't bother checking versions just ditch them all.
-    for TARBALL in ${PKG}/*.tar.{b,g,x}z*
-    do
-        if [ -f ${TARBALL} ] && [[ "${TARBALL}" != *pkg* ]]; then
-            echo " - Deleting ${TARBALL}"
-            rm -f ${TARBALL}
-        fi
-    done
-    # Remove 'src' and 'pkg' directories created by `makepkg`.
-    if [ -d ${PKG}/src ]; then
-        echo " - Deleting ${PKG}/src"
-        rm -rf ${PKG}/src
-    fi
-    if [ -d ${PKG}/pkg ]; then
-        echo " - Deleting ${PKG}/pkg"
-        rm -rf ${PKG}/pkg
-    fi
-}
-
 # Create a package repository.
 function tree_repo() {
     echo "Action : repo"
@@ -293,17 +177,6 @@ function tree_repo() {
         done
     done
 
-    # Simulate 'makepkg --sign'
-    KEY_TEST=`gpg --list-secret-key | grep FFEE1E5C`
-    if [ $? -eq 0 ]; then
-    cd ${HOME}/${MATE_VER}/${CARCH}
-        for XZ in *.xz
-        do
-            echo " - Signing ${XZ}"
-            gpg --detach-sign -u 0xFFEE1E5C ${XZ}
-        done
-    fi
-
     repo-add --new --files ${HOME}/${MATE_VER}/${CARCH}/mate.db.tar.gz ${HOME}/${MATE_VER}/${CARCH}/*.pkg.tar.xz
 }
 
@@ -320,26 +193,6 @@ function tree_sync() {
     else
         echo "A valid 'pacman' repository was not detected. Run './${0} -t repo' first."
     fi
-}
-
-# Uninstall MATE packages and orphans from the system.
-function tree_uninstall() {
-    echo "Action : uninstall"
-    local INSTALLED_PKGS=$(pacman -Qq)
-    local UNINSTALL_PKGS=""
-    cd ${BASEDIR}
-    for PKG in ${BUILD_ORDER[@]};
-    do
-        PKG=$(basename ${PKG})
-        if [ "${PKG}" == "mate-settings-daemon" ] || [ "${PKG}" == "mate-media" ]; then
-            PKG="${PKG}-pulseaudio"
-        fi
-
-        if [ -n "$(echo ${INSTALLED_PKGS} | grep ${PKG})" ]; then
-            UNINSTALL_PKGS="${UNINSTALL_PKGS} ${PKG}"
-        fi
-    done
-    sudo pacman -Rs --noconfirm ${UNINSTALL_PKGS}
 }
 
 function tree_run() {
@@ -366,15 +219,10 @@ while getopts ${OPTSTRING} OPT; do
 done
 shift "$(( $OPTIND - 1 ))"
 
-if [ "${TASK}" == "aur" ] ||
-   [ "${TASK}" == "build" ] ||
-   [ "${TASK}" == "check" ] ||
-   [ "${TASK}" == "clean" ] ||
-   [ "${TASK}" == "delete" ] ||
-   [ "${TASK}" == "namcap" ] ||
-   [ "${TASK}" == "purge" ]; then
+if [ "${TASK}" == "build" ] ||
+   [ "${TASK}" == "check" ]; then
     tree_run ${TASK}
-elif [ "${TASK}" == "repo" ] || [ "${TASK}" == "sync" ] || [ "${TASK}" == "uninstall" ]; then
+elif [ "${TASK}" == "repo" ] || [ "${TASK}" == "sync" ]; then
     tree_${TASK}
 else
     usage
