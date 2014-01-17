@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-screensaver
-pkgver=1.6.9.115.0460034
+pkgver=1.7.0
 pkgrel=1
 pkgdesc='Screensaver for MATE'
 url="http://mate-desktop.org"
@@ -15,13 +15,8 @@ optdepends=('mate-power-manager: Add power management support.'
 options=('!emptydirs')
 groups=('mate-extra')
 source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")
-sha1sums=('SKIP')
+sha1sums=('16f24b396ba4c1a5ef095ece7d5098ce3cc29701')
 install=${pkgname}.install
-
-pkgver() {
-    cd "${srcdir}/${pkgname}"
-    echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
-}
 
 build() {
     cd "${srcdir}/${pkgname}"

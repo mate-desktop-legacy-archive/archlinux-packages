@@ -1,8 +1,8 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-session-manager
-pkgver=1.7.0
-pkgrel=2
+pkgver=1.7.1
+pkgrel=1
 pkgdesc="The MATE Session Handler"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
@@ -13,7 +13,7 @@ makedepends=('mate-common' 'perl-xml-parser' 'xmlto')
 options=('!emptydirs')
 groups=('mate')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('c86bca622c4dbcf3dac56db7da9f7511c79d33f5')
+sha1sums=('9642cfc2d3fb6db1ae5f58842b9566fe5b7eb713')
 install=${pkgname}.install
 
 build() {

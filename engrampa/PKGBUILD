@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=engrampa
-pkgver=1.6.9.85.0e4df16
+pkgver=1.7.0
 pkgrel=1
 pkgdesc="Archive manipulator for MATE"
 url="http://mate-desktop.org"
@@ -21,14 +21,9 @@ options=( '!emptydirs')
 groups=('mate-extra')
 source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git"
         fr-rpm-bsdtar.patch)
-sha1sums=('SKIP'
+sha1sums=('b00fbb212c14103ace663da45a6566481ea4699f'
           '219b05a979bf6f249aaae27964f02345fd81168d')
 install=${pkgname}.install
-
-pkgver() {
-    cd "${srcdir}/${pkgname}"
-    echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
-}
 
 prepare() {
     cd "${srcdir}/${pkgname}"

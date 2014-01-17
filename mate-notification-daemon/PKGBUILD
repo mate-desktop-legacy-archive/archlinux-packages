@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-notification-daemon
-pkgver=1.6.9.71.9f4203a
+pkgver=1.7.0
 pkgrel=1
 pkgdesc="Notification daemon for MATE"
 url="http://mate-desktop.org"
@@ -13,13 +13,8 @@ options=('!emptydirs')
 groups=('mate')
 provides=('notification-daemon')
 source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")
-sha1sums=('SKIP')
+sha1sums=('7640d4c78b1d0b6ed5afc28a9d9cce231fcbb816')
 install=${pkgname}.install
-
-pkgver() {
-    cd "${srcdir}/${pkgname}"
-    echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
-}
 
 build() {
     cd "${srcdir}/${pkgname}"
