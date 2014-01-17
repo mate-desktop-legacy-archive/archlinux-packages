@@ -48,10 +48,7 @@ MATE_BUILD_ORDER=(
     mozo
     mate-netbook
     mate-netspeed
-    libxnvctrl
     mate-sensors-applet
-    system-tools-backends
-    liboobs
     mate-system-tools
     mate-terminal
     pluma
