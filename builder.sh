@@ -1,5 +1,36 @@
 #!/usr/bin/env bash
 
+TEST_DEVTOOLS=$(pacman -Qq devtools 2>/dev/null)
+if [ $? -ne 0 ]; then
+    echo "ERROR! You must install 'devtools'."
+    exit 1
+fi
+
+TEST_DEVTOOLS=$(pacman -Qq darkhttpd 2>/dev/null)
+if [ $? -ne 0 ]; then
+    echo "ERROR! You must install 'darkhttpd'."
+    exit 1
+fi
+
+#<City-busz> here is the documentation: https://wiki.archlinux.org/index.php/DeveloperWiki:Building_in_a_Clean_Chroot#Handling_Major_Rebuilds
+#<City-busz> but I recommend you to setup a [mate-unstable] repository, and create a mate-unstable-x86_64-build script to handle rebuilds for MATE
+#<City-busz> it can be easily done:
+#<City-busz> 1. create symlink from mate-unstable-x86_64-build and mate-unstable-i686-build to archbuild
+#<City-busz> 2. Create custom pacman config file /usr/share/devtools/pacman-mate-unstable.conf that includes your custom [mate-unstable] repo
+#<City-busz> 3. Then create a symlink from mate-unstablepkg to commitpkg, and use the 'mate-unstablepkg -s yourserver.flexion.org' to upload the packages to your server, or just use a custom script to do this if you want to put the packages directly into your custom repository
+#<flexiondotorg> The chroots using [mate-unstable] so therefore the repository must be accessible to the chroot by some means
+#<flexiondotorg> This must exclude local filesystem outside the chroot.
+#<City-busz> you are right
+
+ln -s /usr/bin/archbuild /usr/local/bin/mate-unstable-i686-build 2>/dev/null
+ln -s /usr/bin/archbuild /usr/local/bin/mate-unstable-x86_64-build 2>/dev/null
+rm /usr/local/bin/mate-unstablepkg 2>/dev/null
+cp /usr/share/devtools/pacman-extra.conf /usr/share/devtools/pacman-mate-unstable.conf
+echo "[mate-unstable]"                >> /usr/share/devtools/pacman-mate-unstable.conf
+echo "SigLevel = Optional TrustAll"   >> /usr/share/devtools/pacman-mate-unstable.conf
+echo "Server = http://localhost:8088" >> /usr/share/devtools/pacman-mate-unstable.conf
+
+
 # http://wiki.mate-desktop.org/status:1.8
 BUILD_ORDER=(
     mate-common
@@ -73,45 +104,26 @@ function tree_build() {
     local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=' | head -n1)
     local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
     local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
-    
-    echo " - Looking for *${PKGBUILD}*.pkg.tar.xz"
-    if [ -f *${PKGBUILD}*.pkg.tar.xz ]; then
-        echo " - ${PKG} is current"
-        local BUILD_PKG=0
-    else
-        echo " - ${PKG} needs building"
-        local BUILD_PKG=1
-    fi
 
-    if [ ${BUILD_PKG} -eq 1 ]; then
-        echo " - Building ${PKG}"
-        if [ $(id -u) -eq 0 ]; then
-            makepkg -fs --noconfirm --needed --log --asroot
-            local RET=$?
-        else
-            makepkg -fs --noconfirm --needed --log
-            local RET=$?
-        fi
-
-        if [ ${RET} -ne 0 ]; then
-            echo " - Failed to build ${PKG}. Stopping here."
-            exit 1
-        else
-            if [ "${PKG}" == "mate-settings-daemon" ] || [ "${PKG}" == "mate-media" ]; then
-                sudo pacman -U --noconfirm ${PKG}-pulseaudio-${PKGBUILD}*.pkg.tar.xz
-            else
-                sudo makepkg -i --noconfirm --asroot
+    for CHROOT_ARCH in i686 x86_64
+    do
+        echo " - Looking for *${PKGBUILD}*.pkg.tar.xz"
+        if [ ! -f *${PKGBUILD}-${CHROOT_ARCH}.pkg.tar.xz ] && [ ! -f *${PKGBUILD}-any.pkg.tar.xz ]; then
+            echo " - Building ${PKG}"
+            mate-unstable-${CHROOT_ARCH}-build
+            if [ $? -ne 0 ]; then
+                echo " - Failed to build ${PKG} for ${CHROOT_ARCH}. Stopping here."
+                kill -9 ${DARKHTTPD_PID}
+                exit 1
             fi
+        else
+            echo " - ${PKG} is current"
         fi
-    else
-        if [ "${INSTALLED}" != "${PKGBUILD}" ]; then
-            if [ "${PKG}" == "mate-settings-daemon" ] || [ "${PKG}" == "mate-media" ]; then
-                sudo pacman -U --noconfirm ${PKG}-pulseaudio-${PKGBUILD}*.pkg.tar.xz
-            else
-                sudo makepkg -i --noconfirm --asroot
-            fi
-        fi
-    fi
+    done
+    cp *${PKGBUILD}*.pkg.tar.xz /var/local/mate-unstable/
+    repo-add --new /var/local/mate-unstable/mate-unstable.db.tar.gz /var/local/mate-unstable/*.pkg.tar.xz
+    #kill -9 ${DARKHTTPD_PID}
+    #exit
 }
 
 # Check for new upstream releases.
@@ -166,7 +178,7 @@ function tree_repo() {
         # to the repo.
         if [ "${PKG}" == "mate-bluetooth" ] || [ "${PKG}" == "mate-indicator-applet" ] ; then
             continue
-        fi    
+        fi
         cd ${BASEDIR}/${PKG}
         local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=')
         local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
@@ -199,14 +211,17 @@ function tree_run() {
     local ACTION=${1}
     echo "Action : ${ACTION}"
 
+    mkdir -p /var/local/mate-unstable
+    repo-add --new /var/local/mate-unstable/mate-unstable.db.tar.gz /var/local/mate-unstable/*.pkg.tar.xz
+    darkhttpd /var/local/mate-unstable/ --port 8088 &
+    DARKHTTPD_PID=$!
     for PKG in ${BUILD_ORDER[@]};
     do
         cd ${BASEDIR}
         tree_${ACTION} ${PKG}
     done
+    kill -9 ${DARKHTTPD_PID}
 }
-
-rm -f /tmp/aur_fails.txt 2>/dev/null
 
 TASK=""
 OPTSTRING=ht:
