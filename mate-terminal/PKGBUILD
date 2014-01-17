@@ -20,6 +20,7 @@ build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
     ./configure \
         --prefix=/usr \
+        --with-gtk=2.0 \
         --disable-static
     make
 }

@@ -1,5 +1,4 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
-# Contributor: hekel <hekel(at)archlinux.info>
 
 pkgname=engrampa
 pkgver=1.6.9.85.0e4df16
@@ -42,6 +41,7 @@ build() {
     ./autogen.sh \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
+        --with-gtk=2.0 \
         --disable-static \
         --disable-scrollkeeper \
         --disable-packagekit

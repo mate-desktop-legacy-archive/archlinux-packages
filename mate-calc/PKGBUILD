@@ -1,6 +1,4 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
-# Contributor: Piotr Gorski <sir_lucjan@bridgelinux.pl>
-# Contributor: Xpander <xpander0@gmail.com>
 
 pkgname=mate-calc
 pkgver=1.7.0
@@ -20,7 +18,8 @@ install=${pkgname}.install
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
     ./autogen.sh \
-        --prefix=/usr
+        --prefix=/usr \
+        --with-gtk=2.0
     make
 }
 

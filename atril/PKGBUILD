@@ -37,6 +37,7 @@ build() {
     ./autogen.sh \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
+        --with-gtk=2.0 \
         --enable-gtk-doc \
         --enable-djvu \
         --enable-dvi \

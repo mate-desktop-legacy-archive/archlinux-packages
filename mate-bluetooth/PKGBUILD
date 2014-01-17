@@ -30,6 +30,7 @@ build() {
         --prefix=/usr \
         --sysconfdir=/etc \
         --localstatedir=/var \
+        --with-gtk=2.0 \
         --enable-introspection \
         --disable-desktop-update \
         --disable-icon-update

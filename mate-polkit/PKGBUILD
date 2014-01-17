@@ -21,6 +21,7 @@ build() {
         --libexecdir=/usr/lib/polkit-mate \
         --sysconfdir=/etc \
         --localstatedir=/var \
+        --with-gtk=2.0 \
         --enable-introspection \
         --disable-static
     make

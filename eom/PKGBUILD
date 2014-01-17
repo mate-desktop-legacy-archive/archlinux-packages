@@ -32,7 +32,8 @@ build() {
     cd "${srcdir}/${pkgname}"
     PYTHON=/usr/bin/python2 ./autogen.sh \
         --prefix=/usr \
-        --localstatedir=/var
+        --localstatedir=/var \
+        --with-gtk=2.0
     make
 }
 

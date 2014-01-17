@@ -26,6 +26,7 @@ build() {
         --prefix=/usr \
         --libexec=/usr/lib/${pkgname} \
         --sysconfdir=/etc \
+        --with-gtk=2.0 \
         --disable-static
     make
 }

@@ -19,6 +19,7 @@ build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
     ./configure \
         --prefix=/usr \
+        --with-gtk=2.0 \
         --enable-all-themes \
         --enable-test-themes \
         --disable-placeholders

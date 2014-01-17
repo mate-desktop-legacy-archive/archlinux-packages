@@ -27,7 +27,8 @@ build() {
     cd "${srcdir}/${pkgname}"
     ./autogen.sh \
         --prefix=/usr \
-        --sysconfdir=/etc
+        --sysconfdir=/etc \
+        --with-gtk=2.0
     make
 }
 

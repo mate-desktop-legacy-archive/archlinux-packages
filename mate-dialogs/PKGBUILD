@@ -1,6 +1,4 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
-# Contributor: Piotr Gorski <sir_lucjan@bridgelinux.pl>
-# Contributor: Xpander <xpander0@gmail.com>
 
 pkgname=mate-dialogs
 pkgver=1.7.2
@@ -20,7 +18,8 @@ sha1sums=('adfa6c43b624c76f59125f6748a53b6fe433207a')
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
     ./configure \
-        --prefix=/usr
+        --prefix=/usr \
+        --with-gtk=2.0
     make
 }
 

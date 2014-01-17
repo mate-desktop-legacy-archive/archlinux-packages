@@ -1,6 +1,4 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
-# Contributor: Piotr Gorski <sir_lucjan@bridgelinux.pl>
-# Contributor: Xpander <xpander0@gmail.com>
 
 pkgname=mate-session-manager
 pkgver=1.7.0
@@ -24,7 +22,8 @@ build() {
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
         --sysconfdir=/etc \
-        --localstatedir=/var
+        --localstatedir=/var \
+        --with-gtk=2.0
     make
 }
 

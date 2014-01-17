@@ -1,6 +1,4 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
-# Contributor: Piotr Gorski <sir_lucjan@bridgelinux.pl>
-# Contributor: Xpander <xpander0@gmail.com>
 
 pkgname=libmatekbd
 pkgver=1.7.1
@@ -20,6 +18,7 @@ build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
     ./configure \
         --prefix=/usr \
+        --with-gtk=2.0 \
         --disable-static
     make
 }

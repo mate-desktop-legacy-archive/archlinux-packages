@@ -1,6 +1,4 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
-# Contributor: Piotr Gorski <sir_lucjan@bridgelinux.pl>
-# Contributor: Xpander <xpander0@gmail.com>
 
 pkgname=libmateweather
 pkgver=1.7.0
@@ -22,6 +20,7 @@ build() {
         --prefix=/usr \
         --sysconfdir=/etc \
         --localstatedir=/var \
+        --with-gtk=2.0 \
         --disable-static \
         --enable-python \
         --enable-locations-compression

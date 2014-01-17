@@ -23,7 +23,8 @@ install=${pkgname}.install
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
     PYTHON=/usr/bin/python2 ./configure \
-        --prefix=/usr
+        --prefix=/usr \
+        --with-gtk=2.0
     make
 }
 

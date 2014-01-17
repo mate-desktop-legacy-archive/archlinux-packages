@@ -25,6 +25,7 @@ build() {
     ./autogen.sh \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
+        --with-gtk=2.0 \
         --disable-static
     make
 }

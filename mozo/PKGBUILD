@@ -27,7 +27,8 @@ pkgver() {
 build() {
     cd "${srcdir}/${pkgname}"
     PYTHON=/usr/bin/python2 ./autogen.sh \
-        --prefix=/usr
+        --prefix=/usr \
+        --with-gtk=2.0
     make
 }
 
