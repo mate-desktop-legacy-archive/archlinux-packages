@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-AUR_BUILD_ORDER=(
-    aur/python2-exiv2
-)
-
 COMMUNITY_BUILD_ORDER=(
     community/mate-disk-utility
     community/mate-color-manager
@@ -64,7 +60,7 @@ MATE_BUILD_ORDER=(
     python2-caja
 )
 
-BUILD_ORDER=( ${AUR_BUILD_ORDER[@]} ${MATE_BUILD_ORDER[@]} ${COMMUNITY_BUILD_ORDER[@]})
+BUILD_ORDER=( ${MATE_BUILD_ORDER[@]} ${COMMUNITY_BUILD_ORDER[@]})
 BASEDIR=$(dirname $(readlink -f ${0}))
 MATE_VER=1.6
 
