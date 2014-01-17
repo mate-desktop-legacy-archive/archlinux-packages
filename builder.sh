@@ -55,10 +55,7 @@ MATE_BUILD_ORDER=(
     mate-menu-editor
     mate-netbook
     mate-netspeed
-    libxnvctrl
     mate-sensors-applet
-    system-tools-backends
-    liboobs
     mate-system-tools
     mate-terminal
     mate-text-editor
