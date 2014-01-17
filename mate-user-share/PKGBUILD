@@ -1,14 +1,14 @@
+# $Id: PKGBUILD 104311 2014-01-17 12:14:45Z flexiondotorg $
 # Maintainer : Martin Wimpress <code@flexion.org>
-# Contributor: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-user-share
 pkgver=1.6.1
-pkgrel=3
+pkgrel=6
 pkgdesc="User level public file sharing via WebDAV."
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('apache' 'dconf' 'libunique' 'mod_dnssd')
+depends=('apache' 'dbus-glib' 'dconf' 'libunique' 'mod_dnssd')
 makedepends=('libcanberra' 'libnotify' 'mate-common' 'mate-doc-utils'
              'mate-file-manager' 'perl-xml-parser')
 options=('!emptydirs')

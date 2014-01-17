@@ -1,17 +1,10 @@
 #!/usr/bin/env bash
 
 AUR_BUILD_ORDER=(
-    aur/libindicator
-    aur/system-tools-backends
-    aur/liboobs
-    aur/libxnvctrl
     aur/python2-exiv2
 )
 
 COMMUNITY_BUILD_ORDER=(
-    community/mate-applet-lockkeys
-    community/mate-applet-softupd
-    community/mate-applet-streamer
     community/mate-disk-utility
     community/mate-color-manager
     community/mate-mplayer
@@ -47,7 +40,6 @@ MATE_BUILD_ORDER=(
     mate-file-archiver
     mate-power-manager
     mate-system-monitor
-    caja-dropbox
     mate-character-map
     mate-applets
     mate-calc
@@ -56,14 +48,17 @@ MATE_BUILD_ORDER=(
     mate-file-manager-image-converter
     mate-file-manager-open-terminal
     mate-file-manager-sendto
-    mate-bluetooth
+    #mate-bluetooth                          #Maintained in AUR
     mate-file-manager-share
     mate-icon-theme-faenza
-    mate-indicator-applet
+    #mate-indicator-applet                   #Maintained in AUR
     mate-menu-editor
     mate-netbook
     mate-netspeed
+    libxnvctrl
     mate-sensors-applet
+    system-tools-backends
+    liboobs
     mate-system-tools
     mate-terminal
     mate-text-editor
@@ -194,9 +189,7 @@ function tree_check() {
     local PKG=${1}
 
     # Account for version differences.
-    if [ "${PKG}" == "caja-dropbox" ]; then
-        local CHECK_VER="1.4"
-    elif [ "${PKG}" == "mate-themes" ]; then
+	if [ "${PKG}" == "mate-themes" ]; then
         local CHECK_VER="1.7"
     else
         local CHECK_VER="${MATE_VER}"
@@ -266,7 +259,9 @@ function tree_namcap() {
     local EXISTS=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
 
     namcap PKGBUILD
-    namcap `ls -1 *${PKGBUILD}*.pkg.tar.xz`
+    if [ -z "${EXISTS}" ]; then
+        namcap `ls -1 *${PKGBUILD}*.pkg.tar.xz`
+    fi
 }
 
 # Purge source tarballs, `src` and `pkg` directories.
@@ -305,7 +300,7 @@ function tree_repo() {
     do
         # The following packages are not suitable for [community] so don't add them
         # to the repo.
-        if [ "${PKG}" == "caja-dropbox" ] || [ "${PKG}" == "aur/libindicator" ] || [ "${PKG}" == "mate-bluetooth" ] || [ "${PKG}" == "mate-indicator-applet" ] ; then
+        if [ "${PKG}" == "mate-bluetooth" ] || [ "${PKG}" == "mate-indicator-applet" ] ; then
             continue
         fi    
         cd ${BASEDIR}/${PKG}
@@ -359,7 +354,7 @@ function tree_uninstall() {
         if [ "${PKG}" == "mate-settings-daemon" ] || [ "${PKG}" == "mate-media" ]; then
             PKG="${PKG}-pulseaudio"
         fi
-        
+
         if [ -n "$(echo ${INSTALLED_PKGS} | grep ${PKG})" ]; then
             UNINSTALL_PKGS="${UNINSTALL_PKGS} ${PKG}"
         fi
