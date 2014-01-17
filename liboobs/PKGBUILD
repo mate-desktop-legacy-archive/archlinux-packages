@@ -1,5 +1,4 @@
-# Maintainer: 謝致邦 <yeking@red54.com>
-# Contributor: Martin Wimpress <code@flexion.org>
+# Maintainer: Martin Wimpress <code@flexion.org>
 
 pkgname=liboobs
 pkgver=3.0.0

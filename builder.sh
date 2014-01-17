@@ -1,11 +1,15 @@
 #!/usr/bin/env bash
 
 AUR_BUILD_ORDER=(
-    aur/libindicator
-    aur/system-tools-backends
-    aur/liboobs
-    aur/libxnvctrl
     aur/python2-exiv2
+)
+
+COMMUNITY_BUILD_ORDER=(
+    community/mate-disk-utility
+    community/mate-color-manager
+    community/mate-mplayer
+    community/mate-nettool
+    community/variety
 )
 
 # http://wiki.mate-desktop.org/status:1.8
@@ -34,36 +38,26 @@ MATE_BUILD_ORDER=(
     #mate-power-manager # Won't build
     mate-system-monitor
     atril
-    caja-dropbox
     caja-extensions
     mate-applets
     mate-bluetooth
     mate-calc
     eom
     mate-icon-theme-faenza
-    mate-indicator-applet
+    #mate-indicator-applet              # For the AUR
     mozo
     mate-netbook
     mate-netspeed
+    libxnvctrl
     mate-sensors-applet
+    system-tools-backends
+    liboobs
     mate-system-tools
     mate-terminal
     pluma
     mate-user-share
     mate-utils
     python2-caja
-)
-
-COMMUNITY_BUILD_ORDER=(
-    community/mate-applet-lockkeys
-    community/mate-applet-softupd
-    community/mate-applet-streamer
-    community/mate-disk-utility
-    community/mate-color-manager
-    community/mate-mplayer
-    community/mate-nettool
-    community/variety
-    community/mintmenu
 )
 
 BUILD_ORDER=( ${AUR_BUILD_ORDER[@]} ${MATE_BUILD_ORDER[@]} ${COMMUNITY_BUILD_ORDER[@]})
@@ -87,7 +81,6 @@ function usage() {
     echo "      namcap      Run 'namcap' against all the packages."
     echo "      purge       Purge source tarballs, 'src' and 'pkg' directories."
     echo "      repo        Create a package repository in '${HOME}/mate/'"
-    echo "      src         Create 'src' packages"
     echo "      sync        'rsync' a repo to ${RSYNC_UPSTREAM}."
     echo "      uninstall   Uninstall MATE packages and dependencies."
     echo
@@ -95,42 +88,15 @@ function usage() {
     echo "package tree."
 }
 
-# Build 'src' packages
-function tree_src() {
-    local PKG=${1}
-    cd ${PKG}
-    local INSTALLED=$(pacman -Q `basename ${PKG}` 2>/dev/null | cut -f2 -d' ')
-    local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=' | head -n1)
-    local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
-    local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
-
-    echo " - Looking for *${PKGBUILD}*.src.tar.xz"
-    if [ -f *${PKGBUILD}*.src.tar.xz ]; then
-        echo " - ${PKG} is current"
-        local BUILD_PKG=0
-    else
-        echo " - ${PKG} needs building"
-        local BUILD_PKG=1
-    fi
-
-    if [ ${BUILD_PKG} -eq 1 ]; then
-        echo " - Building ${PKG}"
-        if [ $(id -u) -eq 0 ]; then
-            makepkg -Sfd --noconfirm --needed --asroot
-        else
-            makepkg -Sfd --noconfirm --needed
-        fi
-
-        if [ $? -ne 0 ]; then
-            echo " - Failed to build ${PKG}. Stopping here."
-            exit 1
-        fi
-    fi
-}
-
 # Make 'src' packages and upload them to the AUR
 function tree_aur() {
     local PKG=${1}
+
+    # The following packages are not suitable for the AUR so don't add them.
+    if [ "${PKG}" == "mate-bluetooth" ]; then
+        return
+    fi
+
     cd ${PKG}
 
     local INSTALLED=$(pacman -Q `basename ${PKG}` 2>/dev/null | cut -f2 -d' ')
@@ -160,7 +126,7 @@ function tree_aur() {
         # https://github.com/falconindy/burp
         if [ -f ${HOME}/.config/burp/burp.conf ]; then
             grep flexiondotorg ${HOME}/.config/burp/burp.conf
-            if [ $? -eq 0 ]; then            
+            if [ $? -eq 0 ]; then
                 burp --verbose ${CAT} `ls -1 *${PKGBUILD}*.src.tar.gz`
                 if [ $? -ne 0 ]; then
                     echo ${PKG} >> /tmp/aur_fails.txt
@@ -224,11 +190,7 @@ function tree_check() {
     local PKG=${1}
 
     # Account for version differences.
-    if [ "${PKG}" == "caja-dropbox" ]; then
-        local CHECK_VER="1.4"
-    else
-        local CHECK_VER="${MATE_VER}"
-    fi
+    local CHECK_VER="${MATE_VER}"
 
     if [ "${PKG}" == "python2-caja" ]; then
         UPSTREAM_PKG="python-caja"
@@ -324,13 +286,7 @@ function tree_purge() {
 # Create a package repository.
 function tree_repo() {
     echo "Action : repo"
-    
-    # The following package are not suitable for [community] so don't add them
-    # to the repo.
-    if [ "${PKG}" == "caja-dropbox" ] || [ "${PKG}" == "libindicator" ] || [ "${PKG}" == "mate-indicator-applet" ] ; then
-        return
-    fi
-    
+
     source /etc/makepkg.conf
 
     echo " - Cleaning repository."
@@ -339,14 +295,19 @@ function tree_repo() {
 
     for PKG in ${BUILD_ORDER[@]};
     do
+        # The following packages are not suitable for [community] so don't add them
+        # to the repo.
+        if [ "${PKG}" == "mate-bluetooth" ] || [ "${PKG}" == "mate-indicator-applet" ] ; then
+            continue
+        fi    
         cd ${BASEDIR}/${PKG}
         local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=')
         local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
         local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
-        local NEWEST=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
-        if [ -f ${NEWEST} ]; then
-            cp -v ${NEWEST} ${HOME}/${MATE_VER}/${CARCH}/
-        fi
+        for FILE in $(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
+        do
+            cp -v ${FILE} ${HOME}/${MATE_VER}/${CARCH}/
+        done
     done
 
     # Simulate 'makepkg --sign'
@@ -434,8 +395,7 @@ if [ "${TASK}" == "aur" ] ||
    [ "${TASK}" == "clean" ] ||
    [ "${TASK}" == "delete" ] ||
    [ "${TASK}" == "namcap" ] ||
-   [ "${TASK}" == "purge" ] ||
-   [ "${TASK}" == "src" ]; then
+   [ "${TASK}" == "purge" ]; then
     tree_run ${TASK}
 elif [ "${TASK}" == "repo" ] || [ "${TASK}" == "sync" ] || [ "${TASK}" == "uninstall" ]; then
     tree_${TASK}

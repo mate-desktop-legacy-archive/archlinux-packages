@@ -1,6 +1,7 @@
-# Maintainer : Ionut Biru <ibiru@archlinux.org>
+# Maintainer : Martin Wimpress <code@flexion.org>
+# Contributor: Ionut Biru <ibiru@archlinux.org>
 # Contributor: Hugo Doria <hugo@archlinux.org>
-# Contributor: Martin Wimpress <code@flexion.org>
+
 
 pkgname=system-tools-backends
 pkgver=2.10.2
