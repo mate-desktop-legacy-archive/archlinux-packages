@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 # http://wiki.mate-desktop.org/status:1.8
-#  - mucharmap is not in the build, source may need removing as gucharmap is prefered.
 BUILD_ORDER=(
     mate-common
     mate-desktop
@@ -23,7 +22,7 @@ BUILD_ORDER=(
     mate-control-center
     mate-screensaver
     engrampa
-    #mate-power-manager # Won't build
+    mate-power-manager
     mate-system-monitor
     atril
     caja-extensions
