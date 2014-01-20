@@ -92,15 +92,16 @@ function config_builder() {
     sed -i s'/gnome/mate/' /usr/share/devtools/pacman-mate-unstable.conf
     sed -i '0,/Include = \/etc\/pacman\.d\/mirrorlist/s///' /usr/share/devtools/pacman-mate-unstable.conf
     echo "SigLevel = Optional TrustAll"   >  /tmp/mate-unstable.conf
-    echo "Server = http://localhost:8088" >> /tmp/mate-unstable.conf
+    echo 'Server = http://localhost:8088/$arch' >> /tmp/mate-unstable.conf
     sed -i '/\[mate-unstable\]/r /tmp/mate-unstable.conf' /usr/share/devtools/pacman-mate-unstable.conf    
 }
 
 function repo_update() {
-    if [ ! -d /var/local/mate-unstable ]; then
-        mkdir -p /var/local/mate-unstable
+    local CHROOT_PLAT="${1}"
+    if [ ! -d /var/local/mate-unstable/${CHROOT_PLAT} ]; then
+        mkdir -p /var/local/mate-unstable/${CHROOT_PLAT}
     fi
-    repo-add --new /var/local/mate-unstable/mate-unstable.db.tar.gz /var/local/mate-unstable/*.pkg.tar.xz
+    repo-add -q --nocolor --new /var/local/mate-unstable/${CHROOT_PLAT}/mate-unstable.db.tar.gz /var/local/mate-unstable/${CHROOT_PLAT}/*.pkg.tar.xz 2>/dev/null
 }
 
 function httpd_stop() {
@@ -132,22 +133,31 @@ function tree_build() {
 
     for CHROOT_ARCH in i686 x86_64
     do
-        echo " - Looking for *${PKGBUILD}*.pkg.tar.xz"
-        if [ ! -f *${PKGBUILD}-${CHROOT_ARCH}.pkg.tar.xz ] && [ ! -f *${PKGBUILD}-any.pkg.tar.xz ]; then
-            echo " - Building ${PKG}"
-            mate-unstable-${CHROOT_ARCH}-build
+        # Always create a new chroot when building 'mate-common'
+        if [ "${PKG}" == "mate-common" ]; then
+            mate-unstable-${CHROOT_ARCH}-build -c
             if [ $? -ne 0 ]; then
                 echo " - Failed to build ${PKG} for ${CHROOT_ARCH}. Stopping here."
-                kill -9 ${DARKHTTPD_PID}
+                httpd_stop
                 exit 1
             fi
-            cp *.pkg.tar.xz /var/local/mate-unstable/
-            repo_update
+            cp *.pkg.tar.xz /var/local/mate-unstable/${CHROOT_ARCH}/
+            repo_update "${CHROOT_ARCH}"
         else
-            # Newer package in tree than in the repo. Copy it over.
-            if [ ! -f /var/local/mate-unstable/*${PKGBUILD}*.pkg.tar.xz ]; then
-                cp *.pkg.tar.xz /var/local/mate-unstable/
-                repo_update
+            if [ ! -f ${PKG}*${PKGBUILD}-${CHROOT_ARCH}.pkg.tar.xz ] && [ ! -f ${PKG}*${PKGBUILD}-any.pkg.tar.xz ]; then
+                echo " - Building ${PKG}"
+                mate-unstable-${CHROOT_ARCH}-build
+                if [ $? -ne 0 ]; then
+                    echo " - Failed to build ${PKG} for ${CHROOT_ARCH}. Stopping here."
+                    httpd_stop
+                    exit 1
+                fi
+                cp *.pkg.tar.xz /var/local/mate-unstable/${CHROOT_ARCH}/
+                repo_update "${CHROOT_ARCH}"
+            else
+                # Newer package in tree than in the repo. Copy it over.
+                cp *.pkg.tar.xz /var/local/mate-unstable/${CHROOT_ARCH}/
+                repo_update "${CHROOT_ARCH}"
             fi
         fi
     done
@@ -189,49 +199,12 @@ function tree_check() {
     fi
 }
 
-# Create a package repository.
-function tree_repo() {
-    echo "Action : repo"
-
-    source /etc/makepkg.conf
-
-    echo " - Cleaning repository."
-    rm -rf ${HOME}/${MATE_VER}/${CARCH} 2>/dev/null
-    mkdir -p ${HOME}/${MATE_VER}/${CARCH}
-
-    for PKG in ${BUILD_ORDER[@]};
-    do
-        # The following packages are not suitable for [community] so don't add them
-        # to the repo.
-        if [ "${PKG}" == "mate-bluetooth" ] || [ "${PKG}" == "mate-indicator-applet" ] ; then
-            continue
-        fi
-        cd ${BASEDIR}/${PKG}
-        local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=')
-        local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
-        local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
-        for FILE in $(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
-        do
-            cp -v ${FILE} ${HOME}/${MATE_VER}/${CARCH}/
-        done
-    done
-
-    repo-add --new --files ${HOME}/${MATE_VER}/${CARCH}/mate.db.tar.gz ${HOME}/${MATE_VER}/${CARCH}/*.pkg.tar.xz
-}
-
 # `rsync` repo upstream.
 function tree_sync() {
     echo "Action : sync"
-    source /etc/makepkg.conf
-
     # Modify this accordingly.
     local RSYNC_UPSTREAM="mate@mate.flexion.org::mate-${MATE_VER}"
-
-    if [ -L ${HOME}/${MATE_VER}/${CARCH}/mate.db ]; then
-        rsync -av --delete --progress ${HOME}/${MATE_VER}/${CARCH}/ ${RSYNC_UPSTREAM}/${CARCH}/
-    else
-        echo "A valid 'pacman' repository was not detected. Run './${0} -t repo' first."
-    fi
+    rsync -av --delete --progress /var/local/mate-unstable/ ${RSYNC_UPSTREAM}/
 }
 
 function tree_run() {
@@ -239,7 +212,8 @@ function tree_run() {
     echo "Action : ${ACTION}"
 
     config_builder
-    repo_update
+    repo_update i686
+    repo_update x86_64
     httpd_start
     
     for PKG in ${BUILD_ORDER[@]};
@@ -265,7 +239,7 @@ shift "$(( $OPTIND - 1 ))"
 if [ "${TASK}" == "build" ] ||
    [ "${TASK}" == "check" ]; then
     tree_run ${TASK}
-elif [ "${TASK}" == "repo" ] || [ "${TASK}" == "sync" ]; then
+elif [ "${TASK}" == "sync" ]; then
     tree_${TASK}
 else
     usage
