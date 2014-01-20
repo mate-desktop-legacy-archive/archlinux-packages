@@ -12,27 +12,10 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-#<City-busz> here is the documentation: https://wiki.archlinux.org/index.php/DeveloperWiki:Building_in_a_Clean_Chroot#Handling_Major_Rebuilds
-#<City-busz> but I recommend you to setup a [mate-unstable] repository, and create a mate-unstable-x86_64-build script to handle rebuilds for MATE
-#<City-busz> it can be easily done:
-#<City-busz> 1. create symlink from mate-unstable-x86_64-build and mate-unstable-i686-build to archbuild
-#<City-busz> 2. Create custom pacman config file /usr/share/devtools/pacman-mate-unstable.conf that includes your custom [mate-unstable] repo
-#<City-busz> 3. Then create a symlink from mate-unstablepkg to commitpkg, and use the 'mate-unstablepkg -s yourserver.flexion.org' to upload the packages to your server, or just use a custom script to do this if you want to put the packages directly into your custom repository
-#<flexiondotorg> The chroots using [mate-unstable] so therefore the repository must be accessible to the chroot by some means
-#<flexiondotorg> This must exclude local filesystem outside the chroot.
-#<City-busz> you are right
-
-ln -s /usr/bin/archbuild /usr/local/bin/mate-unstable-i686-build 2>/dev/null
-ln -s /usr/bin/archbuild /usr/local/bin/mate-unstable-x86_64-build 2>/dev/null
-rm /usr/local/bin/mate-unstablepkg 2>/dev/null
-
-# Augment /usr/share/devtools/pacman-gnome-unstable.conf
-cp /usr/share/devtools/pacman-gnome-unstable.conf /usr/share/devtools/pacman-mate-unstable.conf
-sed -i s'/gnome/mate/' /usr/share/devtools/pacman-mate-unstable.conf
-sed -i '0,/Include = \/etc\/pacman\.d\/mirrorlist/s///' /usr/share/devtools/pacman-mate-unstable.conf
-echo "SigLevel = Optional TrustAll"   >  /tmp/mate-unstable.conf
-echo "Server = http://localhost:8088" >> /tmp/mate-unstable.conf
-sed -i '/\[mate-unstable\]/r /tmp/mate-unstable.conf' /usr/share/devtools/pacman-mate-unstable.conf
+if [ $(id -u) != "0" ]; then
+    echo "ERROR! You must be 'root'."
+    exit 1
+fi
 
 # http://wiki.mate-desktop.org/status:1.8
 BUILD_ORDER=(
@@ -61,7 +44,7 @@ BUILD_ORDER=(
     atril
     caja-extensions
     mate-applets
-    mate-bluetooth
+    #mate-bluetooth                     # Not yet supported
     mate-calc
     eom
     mate-icon-theme-faenza
@@ -99,6 +82,45 @@ function usage() {
     echo "package tree."
 }
 
+function config_builder() {
+    ln -s /usr/bin/archbuild /usr/local/bin/mate-unstable-i686-build 2>/dev/null
+    ln -s /usr/bin/archbuild /usr/local/bin/mate-unstable-x86_64-build 2>/dev/null
+    rm /usr/local/bin/mate-unstablepkg 2>/dev/null
+
+    # Augment /usr/share/devtools/pacman-gnome-unstable.conf
+    cp /usr/share/devtools/pacman-gnome-unstable.conf /usr/share/devtools/pacman-mate-unstable.conf
+    sed -i s'/gnome/mate/' /usr/share/devtools/pacman-mate-unstable.conf
+    sed -i '0,/Include = \/etc\/pacman\.d\/mirrorlist/s///' /usr/share/devtools/pacman-mate-unstable.conf
+    echo "SigLevel = Optional TrustAll"   >  /tmp/mate-unstable.conf
+    echo "Server = http://localhost:8088" >> /tmp/mate-unstable.conf
+    sed -i '/\[mate-unstable\]/r /tmp/mate-unstable.conf' /usr/share/devtools/pacman-mate-unstable.conf    
+}
+
+function repo_update() {
+    if [ ! -d /var/local/mate-unstable ]; then
+        mkdir -p /var/local/mate-unstable
+    fi
+    repo-add --new /var/local/mate-unstable/mate-unstable.db.tar.gz /var/local/mate-unstable/*.pkg.tar.xz
+}
+
+function httpd_stop() {
+    if [ -f /tmp/mate-unstable-darkhttpd.pid ]; then
+        local DARK_PID=`cat /tmp/mate-unstable-darkhttpd.pid`
+        kill -9 ${DARK_PID}
+        rm /tmp/mate-unstable-darkhttpd.pid
+    else
+        killall darkhttpd
+    fi
+}
+
+function httpd_start() {
+    if [ -f /tmp/mate-unstable-darkhttpd.pid ]; then
+        httpd_stop
+    fi
+    rm /tmp/mate-unstable-http.log 2>/dev/null
+    darkhttpd /var/local/mate-unstable/ --port 8088 --daemon --log /tmp/mate-unstable-darkhttpd.log --pidfile /tmp/mate-unstable-darkhttpd.pid
+}
+
 # Build packages that are not at the current version.
 function tree_build() {
     local PKG=${1}
@@ -120,14 +142,15 @@ function tree_build() {
                 exit 1
             fi
             cp *.pkg.tar.xz /var/local/mate-unstable/
-            repo-add --new /var/local/mate-unstable/mate-unstable.db.tar.gz /var/local/mate-unstable/*.pkg.tar.xz
+            repo_update
         else
-            echo " - ${PKG} is current"
+            # Newer package in tree than in the repo. Copy it over.
+            if [ ! -f /var/local/mate-unstable/*${PKGBUILD}*.pkg.tar.xz ]; then
+                cp *.pkg.tar.xz /var/local/mate-unstable/
+                repo_update
+            fi
         fi
     done
-    
-    #kill -9 ${DARKHTTPD_PID}
-    #exit
 }
 
 # Check for new upstream releases.
@@ -215,19 +238,17 @@ function tree_run() {
     local ACTION=${1}
     echo "Action : ${ACTION}"
 
-    mkdir -p /var/local/mate-unstable
-    repo-add --new /var/local/mate-unstable/mate-unstable.db.tar.gz /var/local/mate-unstable/*.pkg.tar.xz
-    rm /tmp/mate-unstable-http.log 2>/dev/null
-    darkhttpd /var/local/mate-unstable/ --port 8088 --daemon --log /tmp/mate-unstable-darkhttpd.log --pidfile /tmp/mate-unstable-darkhttpd.pid
+    config_builder
+    repo_update
+    httpd_start
     
     for PKG in ${BUILD_ORDER[@]};
     do
         cd ${BASEDIR}
         tree_${ACTION} ${PKG}
     done
-    local DARK_PID=`cat /tmp/mate-unstable-darkhttpd.pid`
-    kill -9 ${DARK_PID}
-    rm /tmp/mate-unstable-darkhttpd.pid
+    
+    httpd_stop
 }
 
 TASK=""

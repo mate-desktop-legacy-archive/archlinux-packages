@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-power-manager
-pkgver=1.6.9.167.751286f
+pkgver=1.7.0
 pkgrel=1
 pkgdesc="Session daemon that makes it easy to manage your laptop or desktop system for Mate Desktop"
 url="http://mate-desktop.org"
@@ -15,17 +15,12 @@ optdepends=('mate-panel: Set brightness and inhibit power management from the pa
             'yelp: for reading MATE help documents')
 options=('!emptydirs')
 groups=('mate-extra')
-source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")
-sha1sums=('SKIP')
+source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
+sha1sums=('570afc23e921ca084d3a1f6c2e2abeb4c4403d41')
 install=${pkgname}.install
 
-pkgver() {
-    cd "${srcdir}/${pkgname}"
-    echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
-}
-
 build() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     ./autogen.sh \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
@@ -38,6 +33,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     make DESTDIR="${pkgdir}" install
 }
