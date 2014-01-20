@@ -135,31 +135,22 @@ function tree_build() {
     do
         # Always create a new chroot when building 'mate-common'
         if [ "${PKG}" == "mate-common" ]; then
-            mate-unstable-${CHROOT_ARCH}-build -c
+            local FLAGS="-c"
+        else
+            local FLAGS=""
+        fi
+
+        if [ ! -f ${PKG}*${PKGBUILD}-${CHROOT_ARCH}.pkg.tar.xz ] && [ ! -f ${PKG}*${PKGBUILD}-any.pkg.tar.xz ]; then
+            echo " - Building ${PKG}"
+            mate-unstable-${CHROOT_ARCH}-build ${FLAGS}
             if [ $? -ne 0 ]; then
                 echo " - Failed to build ${PKG} for ${CHROOT_ARCH}. Stopping here."
                 httpd_stop
                 exit 1
             fi
-            cp *.pkg.tar.xz /var/local/mate-unstable/${CHROOT_ARCH}/
-            repo_update "${CHROOT_ARCH}"
-        else
-            if [ ! -f ${PKG}*${PKGBUILD}-${CHROOT_ARCH}.pkg.tar.xz ] && [ ! -f ${PKG}*${PKGBUILD}-any.pkg.tar.xz ]; then
-                echo " - Building ${PKG}"
-                mate-unstable-${CHROOT_ARCH}-build
-                if [ $? -ne 0 ]; then
-                    echo " - Failed to build ${PKG} for ${CHROOT_ARCH}. Stopping here."
-                    httpd_stop
-                    exit 1
-                fi
-                cp *.pkg.tar.xz /var/local/mate-unstable/${CHROOT_ARCH}/
-                repo_update "${CHROOT_ARCH}"
-            else
-                # Newer package in tree than in the repo. Copy it over.
-                cp *.pkg.tar.xz /var/local/mate-unstable/${CHROOT_ARCH}/
-                repo_update "${CHROOT_ARCH}"
-            fi
         fi
+        cp *.pkg.tar.xz /var/local/mate-unstable/${CHROOT_ARCH}/
+        repo_update "${CHROOT_ARCH}"
     done
 }
 
