@@ -96,6 +96,15 @@ function config_builder() {
     sed -i '/\[mate-unstable\]/r /tmp/mate-unstable.conf' /usr/share/devtools/pacman-mate-unstable.conf    
 }
 
+function repo_init() {
+    rm -rf /var/local/mate-unstable
+    for INIT_ARCH in i686 x86_64
+    do
+        mkdir -p /var/local/mate-unstable/${INIT_ARCH}
+        repo-add -q --nocolor --new /var/local/mate-unstable/${INIT_ARCH}/mate-unstable.db.tar.gz /var/local/mate-unstable/${INIT_ARCH}/*.pkg.tar.xz 2>/dev/null
+    done
+}
+
 function repo_update() {
     local CHROOT_PLAT="${1}"
     if [ ! -d /var/local/mate-unstable/${CHROOT_PLAT} ]; then
@@ -135,20 +144,25 @@ function tree_build() {
     do
         # Always create a new chroot when building 'mate-common'
         if [ "${PKG}" == "mate-common" ]; then
-            local FLAGS="-c"
-        else
-            local FLAGS=""
-        fi
-
-        if [ ! -f ${PKG}*${PKGBUILD}-${CHROOT_ARCH}.pkg.tar.xz ] && [ ! -f ${PKG}*${PKGBUILD}-any.pkg.tar.xz ]; then
             echo " - Building ${PKG}"
-            mate-unstable-${CHROOT_ARCH}-build ${FLAGS}
+            mate-unstable-${CHROOT_ARCH}-build -c
             if [ $? -ne 0 ]; then
                 echo " - Failed to build ${PKG} for ${CHROOT_ARCH}. Stopping here."
                 httpd_stop
                 exit 1
             fi
+        else
+            if [ ! -f ${PKG}*${PKGBUILD}-${CHROOT_ARCH}.pkg.tar.xz ] && [ ! -f ${PKG}*${PKGBUILD}-any.pkg.tar.xz ]; then
+                echo " - Building ${PKG}"
+                mate-unstable-${CHROOT_ARCH}-build
+                if [ $? -ne 0 ]; then
+                    echo " - Failed to build ${PKG} for ${CHROOT_ARCH}. Stopping here."
+                    httpd_stop
+                    exit 1
+                fi
+            fi
         fi
+        echo " - Rebuilding [mate-unstable] for ${CHROOT_ARCH} because ${PKG} was added."
         cp *.pkg.tar.xz /var/local/mate-unstable/${CHROOT_ARCH}/
         repo_update "${CHROOT_ARCH}"
     done
@@ -195,7 +209,7 @@ function tree_sync() {
     echo "Action : sync"
     # Modify this accordingly.
     local RSYNC_UPSTREAM="mate@mate.flexion.org::mate-${MATE_VER}"
-    rsync -av --delete --progress /var/local/mate-unstable/ ${RSYNC_UPSTREAM}/
+    rsync -av --delete --progress /var/local/mate-unstable/ "${RSYNC_UPSTREAM}/"
 }
 
 function tree_run() {
@@ -203,8 +217,7 @@ function tree_run() {
     echo "Action : ${ACTION}"
 
     config_builder
-    repo_update i686
-    repo_update x86_64
+    repo_init
     httpd_start
     
     for PKG in ${BUILD_ORDER[@]};
