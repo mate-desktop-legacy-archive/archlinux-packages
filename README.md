@@ -33,16 +33,27 @@ please file it in the relevant MATE desktop repository issue tracker.
 # Migrating to MATE 1.8
 
 These notes describe the package removals and changes that will be required
-by the Arch Linux packager when the tranisition to MATE 1.8 happens.
+by the Arch Linux packager during tranisition to MATE 1.8 happens.
 
-  * Remove `mate-document-viewer` and replace with `atril`.
-  * Remove `mate-file-manager` and replace with `caja`.
-  * Remove <insert all caja extensions here> and replace with `caja-extensions`.
-  * Remove `mate-file-archiver` and replace with `engrampa`.
-  * Remove `mate-image-viewer` and replace with `eom`.
-  * Remove `mate-window-manager` and replace with `marco`.
-  * Remove `mate-menu-editor` and replace with `mozo`.
-  * Remove `mate-test-editor` and replace with `pluma`.
+  * Replace `mate-document-viewer` with `atril`.
+  * Replace `mate-file-manager` with `caja`.
+  * Replace the following with `caja-extensions`.
+    * `mate-file-manager-gksu`
+    * `mate-file-manager-image-converter`
+    * `mate-file-manager-open-terminal`
+    * `mate-file-manager-sendto`
+    * `mate-file-manager-share`
+  * Replace `mate-file-archiver` with `engrampa`.
+  * Replace `mate-image-viewer` with `eom`.
+  * Replace `mate-window-manager` with `marco`.
+  * Replace `mate-menu-editor` with `mozo`.
+  * Replace `mate-test-editor` with `pluma`.
   * Remove `mate-character-map` as MATE 1.8 uses `gucharmap`.
   * Remove `mate-keyring` as MATE 1.8 uses `gnome-keyring`.
   * Remove `libmatekeyring` as MATE 1.8 uses `libsecret`.
+  * Remove `mate-doc-utils` as MATE 1.8 uses `yelp-tools`.
+  * Remove `libmatewnck` as MATE 1.8 uses `libwnck`.  
+
+For more details:
+
+  * <http://wiki.mate-desktop.org/status:1.8>
