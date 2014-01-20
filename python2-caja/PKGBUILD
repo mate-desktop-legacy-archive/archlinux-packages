@@ -3,7 +3,7 @@
 pkgname=python2-caja
 _pkgname=python-caja
 pkgver=1.7.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Python binding for Caja, to allow Caja property page and menu item extensions to be written in Python."
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
@@ -14,7 +14,7 @@ options=('!emptydirs')
 replaces=('python-caja')
 provides=('python-caja')
 source=("${pkgname}::git+https://github.com/mate-desktop/${_pkgname}.git")
-sha1sums=('025654cf7bf3bbe6c5833c4e28a33531772b829e')
+sha1sums=('3c958ebaa541f70934af1a0fe00984b428021fd2')
 
 build() {
     cd "${srcdir}/${pkgname}"

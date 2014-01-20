@@ -9,7 +9,7 @@ arch=('i686' 'x86_64')
 license=('GPL')
 depends=('gstreamer0.10-base-plugins' 'gtk2' 'libcanberra-pulse' 'libunique'
          'marco' 'mate-desktop' 'pulseaudio')
-makedepends=('mate-common' 'mate-doc-utils' 'mate-panel'
+makedepends=('git' 'mate-common' 'mate-doc-utils' 'mate-panel'
              'mate-settings-daemon-gstreamer' 'perl-xml-parser' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
@@ -62,7 +62,7 @@ package_mate-media-pulseaudio() {
     conflicts=("${pkgbase}-gstreamer" 'mate-settings-daemon-gstreamer')
     provides=("${pkgbase}")
     replaces=("${pkgbase}")
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}"
     make DESTDIR="${pkgdir}" install
 }
 
@@ -74,6 +74,6 @@ package_mate-media-gstreamer() {
     conflicts=("${pkgbase}-pulseaudio" 'mate-settings-daemon-pulseaudio')
     provides=("${pkgbase}")    
     install=${pkgbase}-gstreamer.install
-    cd "${srcdir}/${pkgbase}-${pkgver}-gstreamer"
+    cd "${srcdir}/${pkgbase}-gstreamer"
     make DESTDIR="${pkgdir}" install
 }

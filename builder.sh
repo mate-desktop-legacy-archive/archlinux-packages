@@ -25,11 +25,14 @@ fi
 ln -s /usr/bin/archbuild /usr/local/bin/mate-unstable-i686-build 2>/dev/null
 ln -s /usr/bin/archbuild /usr/local/bin/mate-unstable-x86_64-build 2>/dev/null
 rm /usr/local/bin/mate-unstablepkg 2>/dev/null
-cp /usr/share/devtools/pacman-extra.conf /usr/share/devtools/pacman-mate-unstable.conf
-echo "[mate-unstable]"                >> /usr/share/devtools/pacman-mate-unstable.conf
-echo "SigLevel = Optional TrustAll"   >> /usr/share/devtools/pacman-mate-unstable.conf
-echo "Server = http://localhost:8088" >> /usr/share/devtools/pacman-mate-unstable.conf
 
+# Augment /usr/share/devtools/pacman-gnome-unstable.conf
+cp /usr/share/devtools/pacman-gnome-unstable.conf /usr/share/devtools/pacman-mate-unstable.conf
+sed -i s'/gnome/mate/' /usr/share/devtools/pacman-mate-unstable.conf
+sed -i '0,/Include = \/etc\/pacman\.d\/mirrorlist/s///' /usr/share/devtools/pacman-mate-unstable.conf
+echo "SigLevel = Optional TrustAll"   >  /tmp/mate-unstable.conf
+echo "Server = http://localhost:8088" >> /tmp/mate-unstable.conf
+sed -i '/\[mate-unstable\]/r /tmp/mate-unstable.conf' /usr/share/devtools/pacman-mate-unstable.conf
 
 # http://wiki.mate-desktop.org/status:1.8
 BUILD_ORDER=(
@@ -116,12 +119,13 @@ function tree_build() {
                 kill -9 ${DARKHTTPD_PID}
                 exit 1
             fi
+            cp *.pkg.tar.xz /var/local/mate-unstable/
+            repo-add --new /var/local/mate-unstable/mate-unstable.db.tar.gz /var/local/mate-unstable/*.pkg.tar.xz
         else
             echo " - ${PKG} is current"
         fi
     done
-    cp *${PKGBUILD}*.pkg.tar.xz /var/local/mate-unstable/
-    repo-add --new /var/local/mate-unstable/mate-unstable.db.tar.gz /var/local/mate-unstable/*.pkg.tar.xz
+    
     #kill -9 ${DARKHTTPD_PID}
     #exit
 }
@@ -213,14 +217,16 @@ function tree_run() {
 
     mkdir -p /var/local/mate-unstable
     repo-add --new /var/local/mate-unstable/mate-unstable.db.tar.gz /var/local/mate-unstable/*.pkg.tar.xz
-    darkhttpd /var/local/mate-unstable/ --port 8088 &
-    DARKHTTPD_PID=$!
+    rm /tmp/mate-unstable-http.log 2>/dev/null
+    darkhttpd /var/local/mate-unstable/ --port 8088 --daemon --log /tmp/mate-unstable-darkhttpd.log --pidfile /tmp/mate-unstable-darkhttpd.pid
+    
     for PKG in ${BUILD_ORDER[@]};
     do
         cd ${BASEDIR}
         tree_${ACTION} ${PKG}
     done
-    kill -9 ${DARKHTTPD_PID}
+    kill -9 `cat /tmp/mate-unstable-darkhttpd.pid`
+    rm /tmp/mate-unstable-darkhttpd.pid
 }
 
 TASK=""

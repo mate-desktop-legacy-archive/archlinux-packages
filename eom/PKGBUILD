@@ -10,7 +10,7 @@ license=('GPL')
 depends=('dbus-glib' 'desktop-file-utils' 'gtk2' 'exempi' 'lcms' 'libexif'
          'libjpeg-turbo' 'mate-desktop' 'mate-icon-theme' 'pygtk' 'python2'
          'python2-gobject2' 'startup-notification' 'zlib')
-makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
+makedepends=('git' 'mate-common' 'perl-xml-parser' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 replaces=('mate-image-viewer')
 provides=('mate-image-viewer')

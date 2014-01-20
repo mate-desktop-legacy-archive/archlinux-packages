@@ -1,8 +1,8 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-menus
-pkgver=1.7.0
-pkgrel=2
+pkgver=1.7.1
+pkgrel=1
 pkgdesc="MATE menu specifications"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
@@ -12,7 +12,7 @@ makedepends=('gobject-introspection' 'mate-common' 'perl-xml-parser')
 options=('!emptydirs')
 groups=('mate')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('92f290bf6fc046f60fe8a264e0a89d05375def1c')
+sha1sums=('16dd9af404f0e6ee4f2b7200c29d306f8eb7722c')
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"

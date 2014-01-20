@@ -8,7 +8,7 @@ url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
 depends=('desktop-file-utils' 'gtk2' 'libcanberra' 'libgtop' 'libsm' 'zlib')
-makedepends=('mate-common' 'mate-panel' 'perl-xml-parser' 'rarian' 'yelp-tools')
+makedepends=('git' 'mate-common' 'mate-panel' 'perl-xml-parser' 'rarian' 'yelp-tools')
 optdepends=('mate-panel: Look up words in dictionaries from the panel'
             'yelp: for reading MATE help documents')
 options=('!emptydirs')

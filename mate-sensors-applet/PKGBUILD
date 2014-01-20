@@ -9,7 +9,7 @@ arch=('i686' 'x86_64')
 license=('GPL')
 depends=('dbus' 'gtk2' 'libatasmart' 'libnotify' 'libxnvctrl' 'lm_sensors'
          'mate-panel' 'yelp')
-makedepends=('docbook-xml' 'mate-common' 'perl-xml-parser' 'rarian' 'yelp-tools')
+makedepends=('docbook-xml' 'git' 'mate-common' 'perl-xml-parser' 'rarian' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
 groups=('mate-extra')

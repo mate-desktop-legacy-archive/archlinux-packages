@@ -11,7 +11,7 @@ depends=('caja' 'dbus-glib' 'dconf' 'desktop-file-utils' 'gsettings-desktop-sche
          'gtk2' 'mate-desktop' 'mate-icon-theme' 'mate-menus' 'mate-settings-daemon'
          'marco' 'libgtop' 'libmatekbd' 'libunique' 'librsvg' 'libxss'
          'libxt' 'startup-notification')
-makedepends=('docbook2x' 'mate-common' 'perl-xml-parser' 'yelp-tools')
+makedepends=('docbook2x' 'git' 'mate-common' 'perl-xml-parser' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
 groups=('mate')

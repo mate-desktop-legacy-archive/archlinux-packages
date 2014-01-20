@@ -9,7 +9,7 @@ arch=('i686' 'x86_64')
 license=('GPL')
 depends=('dconf' 'dbus' 'desktop-file-utils' 'gtk2' 'libsm' 'libspectre'
          'mate-icon-theme' 'poppler-glib' 'zlib')
-makedepends=('caja' 'djvulibre' 'gobject-introspection' 'libgxps' 'mate-common'
+makedepends=('caja' 'djvulibre' 'git' 'gobject-introspection' 'libgxps' 'mate-common'
              'perl-xml-parser' 'texlive-bin' 'yelp-tools')
 optdepends=('caja: Document Properties extension'
             'djvulibre: DjVu support'

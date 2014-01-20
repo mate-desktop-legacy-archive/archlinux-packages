@@ -9,7 +9,7 @@ arch=('i686' 'x86_64')
 license=('GPL')
 depends=('dbus' 'desktop-file-utils' 'gtk2' 'gvfs' 'libnotify' 'libunique'
          'obex-data-server')
-makedepends=('gobject-introspection' 'mate-common' 'caja-extensions'
+makedepends=('git' 'gobject-introspection' 'mate-common' 'caja-extensions'
              'perl-xml-parser' 'yelp-tools')
 optdepends=('mate-user-share: Enable sharing via bluetooth and other protocols.'
             'yelp: for reading MATE help documents')

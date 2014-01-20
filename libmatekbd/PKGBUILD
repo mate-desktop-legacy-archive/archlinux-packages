@@ -1,8 +1,8 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=libmatekbd
-pkgver=1.7.1
-pkgrel=3
+pkgver=1.7.2
+pkgrel=1
 pkgdesc="MATE keyboard library"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
@@ -11,7 +11,7 @@ depends=('dconf' 'gtk2' 'iso-codes' 'libxklavier')
 makedepends=('mate-common' 'perl-xml-parser')
 options=('!emptydirs')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('f1611ba217dd755af26ce1f9ab6cfb58efb8f525')
+sha1sums=('9dbf7779f65809af61bf544ee7e342df88ced911')
 install=${pkgname}.install
 
 build() {

@@ -9,7 +9,7 @@ arch=('i686' 'x86_64')
 license=('GPL')
 depends=('apache' 'caja' 'dbus-glib' 'dconf' 'libunique' 'mate-bluetooth' 'mod_dnssd'
          'obex-data-server')
-makedepends=('libcanberra' 'libnotify''mate-common' 'perl-xml-parser' 'yelp-tools')
+makedepends=('git' 'libcanberra' 'libnotify''mate-common' 'perl-xml-parser' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
 groups=('mate-extra')
