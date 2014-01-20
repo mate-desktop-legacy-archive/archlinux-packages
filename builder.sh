@@ -225,7 +225,8 @@ function tree_run() {
         cd ${BASEDIR}
         tree_${ACTION} ${PKG}
     done
-    kill -9 `cat /tmp/mate-unstable-darkhttpd.pid`
+    local DARK_PID=`cat /tmp/mate-unstable-darkhttpd.pid`
+    kill -9 ${DARK_PID}
     rm /tmp/mate-unstable-darkhttpd.pid
 }
 
