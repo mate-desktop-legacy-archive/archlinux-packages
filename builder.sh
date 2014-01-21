@@ -56,7 +56,7 @@ BUILD_ORDER=(
     mate-system-tools
     mate-terminal
     pluma
-    #mate-user-share                    # Build fails
+    mate-user-share
     mate-utils
     python2-caja
 )
