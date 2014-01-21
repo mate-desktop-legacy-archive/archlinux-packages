@@ -223,7 +223,8 @@ function tree_sync() {
     echo "Action : sync"
     # Modify this accordingly.
     local RSYNC_UPSTREAM="mate@mate.flexion.org::mate-${MATE_VER}"
-    rsync -av --delete --progress /var/local/mate-unstable/ "${RSYNC_UPSTREAM}/"
+    chown -R 1000:100 ${REPODIR}
+    rsync -av --delete --progress ${REPODIR}/ "${RSYNC_UPSTREAM}/"
 }
 
 function tree_run() {
