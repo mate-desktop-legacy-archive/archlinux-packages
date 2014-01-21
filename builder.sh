@@ -97,11 +97,12 @@ function config_builder() {
 }
 
 function repo_init() {
-    rm -rf /var/local/mate-unstable
+    # Remove any existing repositories and create empty ones.
+    rm -rf /var/local/mate-unstable/*
     for INIT_ARCH in i686 x86_64
     do
         mkdir -p /var/local/mate-unstable/${INIT_ARCH}
-        repo-add -q --nocolor --new /var/local/mate-unstable/${INIT_ARCH}/mate-unstable.db.tar.gz /var/local/mate-unstable/${INIT_ARCH}/*.pkg.tar.xz 2>/dev/null
+        touch /var/local/mate-unstable/${INIT_ARCH}/mate-unstable.db
     done
 }
 
@@ -142,28 +143,18 @@ function tree_build() {
 
     for CHROOT_ARCH in i686 x86_64
     do
-        # Always create a new chroot when building 'mate-common'
-        if [ "${PKG}" == "mate-common" ]; then
+        if [ ! -f ${PKG}*${PKGBUILD}-${CHROOT_ARCH}.pkg.tar.xz ] && [ ! -f ${PKG}*${PKGBUILD}-any.pkg.tar.xz ]; then
             echo " - Building ${PKG}"
-            mate-unstable-${CHROOT_ARCH}-build -c
+            mate-unstable-${CHROOT_ARCH}-build
             if [ $? -ne 0 ]; then
                 echo " - Failed to build ${PKG} for ${CHROOT_ARCH}. Stopping here."
                 httpd_stop
                 exit 1
             fi
-        else
-            if [ ! -f ${PKG}*${PKGBUILD}-${CHROOT_ARCH}.pkg.tar.xz ] && [ ! -f ${PKG}*${PKGBUILD}-any.pkg.tar.xz ]; then
-                echo " - Building ${PKG}"
-                mate-unstable-${CHROOT_ARCH}-build
-                if [ $? -ne 0 ]; then
-                    echo " - Failed to build ${PKG} for ${CHROOT_ARCH}. Stopping here."
-                    httpd_stop
-                    exit 1
-                fi
-            fi
         fi
         echo " - Rebuilding [mate-unstable] for ${CHROOT_ARCH} because ${PKG} was added."
-        cp *.pkg.tar.xz /var/local/mate-unstable/${CHROOT_ARCH}/
+        cp -a ${PKG}*${CHROOT_ARCH}.pkg.tar.xz /var/local/mate-unstable/${CHROOT_ARCH}/ 2>/dev/null
+        cp -a ${PKG}*any.pkg.tar.xz /var/local/mate-unstable/${CHROOT_ARCH}/ 2>/dev/null
         repo_update "${CHROOT_ARCH}"
     done
 }
