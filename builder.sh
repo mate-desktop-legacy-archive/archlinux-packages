@@ -1,5 +1,22 @@
 #!/usr/bin/env bash
 
+TEST_DEVTOOLS=$(pacman -Qq devtools 2>/dev/null)
+if [ $? -ne 0 ]; then
+    echo "ERROR! You must install 'devtools'."
+    exit 1
+fi
+
+TEST_DEVTOOLS=$(pacman -Qq darkhttpd 2>/dev/null)
+if [ $? -ne 0 ]; then
+    echo "ERROR! You must install 'darkhttpd'."
+    exit 1
+fi
+
+if [ $(id -u) != "0" ]; then
+    echo "ERROR! You must be 'root'."
+    exit 1
+fi
+
 BUILD_ORDER=(
     mate-common
     mate-doc-utils
@@ -52,8 +69,10 @@ BUILD_ORDER=(
     python2-caja
 )
 
-BASEDIR=$(dirname $(readlink -f ${0}))
 MATE_VER=1.6
+BASEDIR=$(dirname $(readlink -f ${0}))
+REPODIR="/var/local/mate-unstable/${MATE_VER}"
+
 
 # Show usage information.
 function usage() {
@@ -73,45 +92,105 @@ function usage() {
     echo "package tree."
 }
 
+function config_builder() {
+    ln -s /usr/bin/archbuild /usr/local/bin/mate-unstable-i686-build 2>/dev/null
+    ln -s /usr/bin/archbuild /usr/local/bin/mate-unstable-x86_64-build 2>/dev/null
+    rm /usr/local/bin/mate-unstablepkg 2>/dev/null
+
+    # Augment /usr/share/devtools/pacman-extra.conf
+    cp /usr/share/devtools/pacman-extra.conf /usr/share/devtools/pacman-mate-unstable.conf
+    sed -i s'/#\[testing\]/\[mate-unstable\]/' /usr/share/devtools/pacman-mate-unstable.conf
+    sed -i '0,/#Include = \/etc\/pacman\.d\/mirrorlist/s///' /usr/share/devtools/pacman-mate-unstable.conf
+    echo "SigLevel = Optional TrustAll"   >  /tmp/mate-unstable.conf
+    echo 'Server = http://localhost:8088/'${MATE_VER}'/$arch' >> /tmp/mate-unstable.conf
+    sed -i '/\[mate-unstable\]/r /tmp/mate-unstable.conf' /usr/share/devtools/pacman-mate-unstable.conf
+}
+
+function repo_init() {
+    # Remove any existing repositories and create empty ones.
+    rm -rf /var/local/mate-unstable/*
+    for INIT_ARCH in i686 x86_64
+    do
+        mkdir -p ${REPODIR}/${INIT_ARCH}
+        touch ${REPODIR}/${INIT_ARCH}/mate-unstable.db
+    done
+}
+
+function repo_update() {
+    local CHROOT_PLAT="${1}"
+    if [ ! -d ${REPODIR}/${CHROOT_PLAT} ]; then
+        mkdir -p ${REPODIR}/${CHROOT_PLAT}
+    fi
+    repo-add -q --nocolor --new ${REPODIR}/${CHROOT_PLAT}/mate-unstable.db.tar.gz ${REPODIR}/${CHROOT_PLAT}/*.pkg.tar.xz 2>/dev/null
+}
+
+function httpd_stop() {
+    if [ -f /tmp/mate-unstable-darkhttpd.pid ]; then
+        local DARK_PID=`cat /tmp/mate-unstable-darkhttpd.pid`
+        kill -9 ${DARK_PID}
+        rm /tmp/mate-unstable-darkhttpd.pid
+    else
+        killall darkhttpd
+    fi
+}
+
+function httpd_start() {
+    if [ -f /tmp/mate-unstable-darkhttpd.pid ]; then
+        httpd_stop
+    fi
+    rm /tmp/mate-unstable-http.log 2>/dev/null
+    darkhttpd /var/local/mate-unstable/ --port 8088 --daemon --log /tmp/mate-unstable-darkhttpd.log --pidfile /tmp/mate-unstable-darkhttpd.pid
+}
+
 # Build packages that are not at the current version.
 function tree_build() {
     local PKG=${1}
     cd ${PKG}
     local INSTALLED=$(pacman -Q `basename ${PKG}` 2>/dev/null | cut -f2 -d' ')
-    local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=')
+    local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=' | head -n1)
     local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
-    local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
-    local EXISTS=$(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
-
-    if [ -z "${EXISTS}" ]; then
-        echo " - Building ${PKG}"
-        if [ $(id -u) -eq 0 ]; then
-            makepkg -fs --noconfirm --needed --log --asroot
-            local RET=$?
-        else
-            makepkg -fs --noconfirm --needed --log
-            local RET=$?
-        fi
-
-        if [ ${RET} -ne 0 ]; then
-            echo " - Failed to build ${PKG}. Stopping here."
-            exit 1
-        else
-            if [ "${PKG}" == "mate-settings-daemon" ] || [ "${PKG}" == "mate-media" ]; then
-                sudo pacman -U --noconfirm ${PKG}-pulseaudio-${PKGBUILD}*.pkg.tar.xz
-            else
-                sudo makepkg -i --noconfirm --asroot
-            fi
-        fi
+    local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}    
+    local TEST_ANY=$(grep "^arch=" PKGBUILD | grep any)
+    if [ -n "${TEST_ANY}" ]; then
+        local CHROOT_ARCHS=(i686)
     else
-        if [ "${INSTALLED}" != "${PKGBUILD}" ]; then
-            if [ "${PKG}" == "mate-settings-daemon" ] || [ "${PKG}" == "mate-media" ]; then
-                sudo pacman -U --noconfirm ${PKG}-pulseaudio-${PKGBUILD}*.pkg.tar.xz
-            else
-                sudo makepkg -i --noconfirm --asroot
-            fi
-        fi
+        local CHROOT_ARCHS=(i686 x86_64)
     fi
+
+    for CHROOT_ARCH in ${CHROOT_ARCHS[@]};
+    do
+        if [ -n "${TEST_ANY}" ]; then
+            EXIST=$(ls -1 ${PKG}*-${PKGBUILD}-any.pkg.tar.xz 2>/dev/null)
+            local RET=$?
+        else
+            EXIST=$(ls -1 ${PKG}*-${PKGBUILD}-${CHROOT_ARCH}.pkg.tar.xz 2>/dev/null)
+            local RET=$?
+        fi
+        
+        if [ ${RET} -ne 0 ]; then
+            echo " - Building ${PKG}"
+            mate-unstable-${CHROOT_ARCH}-build
+            if [ $? -ne 0 ]; then
+                echo " - Failed to build ${PKG} for ${CHROOT_ARCH}. Stopping here."
+                httpd_stop
+                exit 1
+            fi
+        else
+            echo " - ${PKG} is current"
+        fi
+        
+        if [ -n "${TEST_ANY}" ]; then
+            cp -a ${PKG}*-any.pkg.tar.xz ${REPODIR}/i686/ 2>/dev/null
+            cp -a ${PKG}*-any.pkg.tar.xz ${REPODIR}/x86_64/ 2>/dev/null
+            echo " - Rebuilding [mate-unstable] for i686 and x86_64 with ${PKG}."
+            repo_update i686
+            repo_update x86_64
+        else
+            cp -a ${PKG}*-${CHROOT_ARCH}.pkg.tar.xz ${REPODIR}/${CHROOT_ARCH}/ 2>/dev/null
+            echo " - Rebuilding [mate-unstable] for ${CHROOT_ARCH} with ${PKG}."
+            repo_update ${CHROOT_ARCH}
+        fi
+    done
 }
 
 # Check for new upstream releases.
@@ -138,8 +217,8 @@ function tree_check() {
     echo " - Checking ${UPSTREAM_PKG}"
     IS_UPSTREAM=$(grep -E ${UPSTREAM_PKG}-[0-9]. /tmp/${CHECK_VER}_SUMS)
     if [ -n "${IS_UPSTREAM}" ]; then
-        local UPSTREAM_TARBALL=$(grep -E ${UPSTREAM_PKG}-[0-9]. /tmp/${CHECK_VER}_SUMS | cut -c43- | tail -n1)
-        local UPSTREAM_SHA1=$(grep -E ${UPSTREAM_PKG}-[0-9]. /tmp/${CHECK_VER}_SUMS | cut -c1-40 | tail -n1)
+        local UPSTREAM_TARBALL=$(grep [0-9a-f]\ .${UPSTREAM_PKG}\-[0-9] /tmp/${CHECK_VER}_SUMS | cut -c43- | tail -n1)
+        local UPSTREAM_SHA1=$(grep [0-9a-f]\ .${UPSTREAM_PKG}\-[0-9] /tmp/${CHECK_VER}_SUMS | cut -c1-40 | tail -n1)
         local DOWNSTREAM_VER=$(grep -E ^pkgver ${PKG}/PKGBUILD | cut -f2 -d'=')
         local DOWNSTREAM_TARBALL="${UPSTREAM_PKG}-${DOWNSTREAM_VER}.tar.xz"
         local DOWNSTREAM_SHA1=$(grep -E ^sha1 ${PKG}/PKGBUILD | cut -f2 -d"'")
@@ -154,63 +233,31 @@ function tree_check() {
     fi
 }
 
-# Create a package repository.
-function tree_repo() {
-    echo "Action : repo"
-
-    source /etc/makepkg.conf
-
-    echo " - Cleaning repository."
-    rm -rf ${HOME}/${MATE_VER}/${CARCH} 2>/dev/null
-    mkdir -p ${HOME}/${MATE_VER}/${CARCH}
-
-    for PKG in ${BUILD_ORDER[@]};
-    do
-        # The following packages are not suitable for [community] so don't add them
-        # to the repo.
-        if [ "${PKG}" == "mate-bluetooth" ] || [ "${PKG}" == "mate-indicator-applet" ] ; then
-            continue
-        fi    
-        cd ${BASEDIR}/${PKG}
-        local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=')
-        local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
-        local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
-        for FILE in $(ls -1 *${PKGBUILD}*.pkg.tar.xz 2>/dev/null)
-        do
-            cp -v ${FILE} ${HOME}/${MATE_VER}/${CARCH}/
-        done
-    done
-
-    repo-add --new --files ${HOME}/${MATE_VER}/${CARCH}/mate.db.tar.gz ${HOME}/${MATE_VER}/${CARCH}/*.pkg.tar.xz
-}
-
 # `rsync` repo upstream.
 function tree_sync() {
     echo "Action : sync"
-    source /etc/makepkg.conf
-
     # Modify this accordingly.
     local RSYNC_UPSTREAM="mate@mate.flexion.org::mate-${MATE_VER}"
-
-    if [ -L ${HOME}/${MATE_VER}/${CARCH}/mate.db ]; then
-        rsync -av --delete --progress ${HOME}/${MATE_VER}/${CARCH}/ ${RSYNC_UPSTREAM}/${CARCH}/
-    else
-        echo "A valid 'pacman' repository was not detected. Run './${0} -t repo' first."
-    fi
+    chown -R 1000:100 ${REPODIR}
+    rsync -av --delete --progress ${REPODIR}/ "${RSYNC_UPSTREAM}/"
 }
 
 function tree_run() {
     local ACTION=${1}
     echo "Action : ${ACTION}"
 
+    config_builder
+    repo_init
+    httpd_start
+    
     for PKG in ${BUILD_ORDER[@]};
     do
         cd ${BASEDIR}
         tree_${ACTION} ${PKG}
     done
+    
+    httpd_stop
 }
-
-rm -f /tmp/aur_fails.txt 2>/dev/null
 
 TASK=""
 OPTSTRING=ht:
@@ -226,7 +273,7 @@ shift "$(( $OPTIND - 1 ))"
 if [ "${TASK}" == "build" ] ||
    [ "${TASK}" == "check" ]; then
     tree_run ${TASK}
-elif [ "${TASK}" == "repo" ] || [ "${TASK}" == "sync" ]; then
+elif [ "${TASK}" == "sync" ]; then
     tree_${TASK}
 else
     usage
