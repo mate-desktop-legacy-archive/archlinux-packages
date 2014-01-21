@@ -56,13 +56,15 @@ BUILD_ORDER=(
     mate-system-tools
     mate-terminal
     pluma
-    mate-user-share
+    #mate-user-share                    # Build fails
     mate-utils
     python2-caja
 )
 
-BASEDIR=$(dirname $(readlink -f ${0}))
 MATE_VER=1.7
+BASEDIR=$(dirname $(readlink -f ${0}))
+REPODIR="/var/local/mate-unstable/${MATE_VER}"
+
 
 # Show usage information.
 function usage() {
@@ -87,13 +89,13 @@ function config_builder() {
     ln -s /usr/bin/archbuild /usr/local/bin/mate-unstable-x86_64-build 2>/dev/null
     rm /usr/local/bin/mate-unstablepkg 2>/dev/null
 
-    # Augment /usr/share/devtools/pacman-gnome-unstable.conf
-    cp /usr/share/devtools/pacman-gnome-unstable.conf /usr/share/devtools/pacman-mate-unstable.conf
-    sed -i s'/gnome/mate/' /usr/share/devtools/pacman-mate-unstable.conf
-    sed -i '0,/Include = \/etc\/pacman\.d\/mirrorlist/s///' /usr/share/devtools/pacman-mate-unstable.conf
+    # Augment /usr/share/devtools/pacman-extra.conf
+    cp /usr/share/devtools/pacman-extra.conf /usr/share/devtools/pacman-mate-unstable.conf
+    sed -i s'/#\[testing\]/\[mate-unstable\]/' /usr/share/devtools/pacman-mate-unstable.conf
+    sed -i '0,/#Include = \/etc\/pacman\.d\/mirrorlist/s///' /usr/share/devtools/pacman-mate-unstable.conf
     echo "SigLevel = Optional TrustAll"   >  /tmp/mate-unstable.conf
-    echo 'Server = http://localhost:8088/$arch' >> /tmp/mate-unstable.conf
-    sed -i '/\[mate-unstable\]/r /tmp/mate-unstable.conf' /usr/share/devtools/pacman-mate-unstable.conf    
+    echo 'Server = http://localhost:8088/'${MATE_VER}'/$arch' >> /tmp/mate-unstable.conf
+    sed -i '/\[mate-unstable\]/r /tmp/mate-unstable.conf' /usr/share/devtools/pacman-mate-unstable.conf
 }
 
 function repo_init() {
@@ -101,17 +103,17 @@ function repo_init() {
     rm -rf /var/local/mate-unstable/*
     for INIT_ARCH in i686 x86_64
     do
-        mkdir -p /var/local/mate-unstable/${INIT_ARCH}
-        touch /var/local/mate-unstable/${INIT_ARCH}/mate-unstable.db
+        mkdir -p ${REPODIR}/${INIT_ARCH}
+        touch ${REPODIR}/${INIT_ARCH}/mate-unstable.db
     done
 }
 
 function repo_update() {
     local CHROOT_PLAT="${1}"
-    if [ ! -d /var/local/mate-unstable/${CHROOT_PLAT} ]; then
-        mkdir -p /var/local/mate-unstable/${CHROOT_PLAT}
+    if [ ! -d ${REPODIR}/${CHROOT_PLAT} ]; then
+        mkdir -p ${REPODIR}/${CHROOT_PLAT}
     fi
-    repo-add -q --nocolor --new /var/local/mate-unstable/${CHROOT_PLAT}/mate-unstable.db.tar.gz /var/local/mate-unstable/${CHROOT_PLAT}/*.pkg.tar.xz 2>/dev/null
+    repo-add -q --nocolor --new ${REPODIR}/${CHROOT_PLAT}/mate-unstable.db.tar.gz ${REPODIR}/${CHROOT_PLAT}/*.pkg.tar.xz 2>/dev/null
 }
 
 function httpd_stop() {
@@ -139,11 +141,25 @@ function tree_build() {
     local INSTALLED=$(pacman -Q `basename ${PKG}` 2>/dev/null | cut -f2 -d' ')
     local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=' | head -n1)
     local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
-    local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
+    local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}    
+    local TEST_ANY=$(grep "^arch=" PKGBUILD | grep any)
+    if [ -n "${TEST_ANY}" ]; then
+        local CHROOT_ARCHS=(i686)
+    else
+        local CHROOT_ARCHS=(i686 x86_64)
+    fi
 
-    for CHROOT_ARCH in i686 x86_64
+    for CHROOT_ARCH in ${CHROOT_ARCHS[@]};
     do
-        if [ ! -f ${PKG}*${PKGBUILD}-${CHROOT_ARCH}.pkg.tar.xz ] && [ ! -f ${PKG}*${PKGBUILD}-any.pkg.tar.xz ]; then
+        if [ -n "${TEST_ANY}" ]; then
+            EXIST=$(ls -1 ${PKG}*-${PKGBUILD}-any.pkg.tar.xz 2>/dev/null)
+            local RET=$?
+        else
+            EXIST=$(ls -1 ${PKG}*-${PKGBUILD}-${CHROOT_ARCH}.pkg.tar.xz 2>/dev/null)
+            local RET=$?
+        fi
+        
+        if [ ${RET} -ne 0 ]; then
             echo " - Building ${PKG}"
             mate-unstable-${CHROOT_ARCH}-build
             if [ $? -ne 0 ]; then
@@ -151,11 +167,21 @@ function tree_build() {
                 httpd_stop
                 exit 1
             fi
+        else
+            echo " - ${PKG} is current"
         fi
-        echo " - Rebuilding [mate-unstable] for ${CHROOT_ARCH} because ${PKG} was added."
-        cp -a ${PKG}*${CHROOT_ARCH}.pkg.tar.xz /var/local/mate-unstable/${CHROOT_ARCH}/ 2>/dev/null
-        cp -a ${PKG}*any.pkg.tar.xz /var/local/mate-unstable/${CHROOT_ARCH}/ 2>/dev/null
-        repo_update "${CHROOT_ARCH}"
+        
+        if [ -n "${TEST_ANY}" ]; then
+            cp -a ${PKG}*-any.pkg.tar.xz ${REPODIR}/i686/ 2>/dev/null
+            cp -a ${PKG}*-any.pkg.tar.xz ${REPODIR}/x86_64/ 2>/dev/null
+            echo " - Rebuilding [mate-unstable] for i686 and x86_64 with ${PKG}."
+            repo_update i686
+            repo_update x86_64
+        else
+            cp -a ${PKG}*-${CHROOT_ARCH}.pkg.tar.xz ${REPODIR}/${CHROOT_ARCH}/ 2>/dev/null
+            echo " - Rebuilding [mate-unstable] for ${CHROOT_ARCH} with ${PKG}."
+            repo_update ${CHROOT_ARCH}
+        fi
     done
 }
 
@@ -163,24 +189,21 @@ function tree_build() {
 function tree_check() {
     local PKG=${1}
 
-    # Account for version differences.
-    local CHECK_VER="${MATE_VER}"
-
     if [ "${PKG}" == "python2-caja" ]; then
         UPSTREAM_PKG="python-caja"
     else
         UPSTREAM_PKG="${PKG}"
     fi
 
-    if [ ! -f /tmp/${CHECK_VER}_SUMS ]; then
-        echo " - Downloading MATE ${CHECK_VER} SHA1SUMS"
-        wget -c -q http://pub.mate-desktop.org/releases/${CHECK_VER}/SHA1SUMS -O /tmp/${CHECK_VER}_SUMS
+    if [ ! -f /tmp/${MATE_VER}_SUMS ]; then
+        echo " - Downloading MATE ${MATE_VER} SHA1SUMS"
+        wget -c -q http://pub.mate-desktop.org/releases/${MATE_VER}/SHA1SUMS -O /tmp/${MATE_VER}_SUMS
     fi
     echo " - Checking ${UPSTREAM_PKG}"
-    IS_UPSTREAM=$(grep -E ${UPSTREAM_PKG}-[0-9]. /tmp/${CHECK_VER}_SUMS)
+    IS_UPSTREAM=$(grep -E ${UPSTREAM_PKG}-[0-9]. /tmp/${MATE_VER}_SUMS)
     if [ -n "${IS_UPSTREAM}" ]; then
-        local UPSTREAM_TARBALL=$(grep -E ${UPSTREAM_PKG}-[0-9]. /tmp/${CHECK_VER}_SUMS | cut -c43- | tail -n1)
-        local UPSTREAM_SHA1=$(grep -E ${UPSTREAM_PKG}-[0-9]. /tmp/${CHECK_VER}_SUMS | cut -c1-40 | tail -n1)
+        local UPSTREAM_TARBALL=$(grep [0-9a-f]\ .${UPSTREAM_PKG}\-[0-9] /tmp/${MATE_VER}_SUMS | cut -c43- | tail -n1)
+        local UPSTREAM_SHA1=$(grep [0-9a-f]\ .${UPSTREAM_PKG}\-[0-9] /tmp/${MATE_VER}_SUMS | cut -c1-40 | tail -n1)
         local DOWNSTREAM_VER=$(grep -E ^pkgver ${PKG}/PKGBUILD | cut -f2 -d'=')
         local DOWNSTREAM_TARBALL="${UPSTREAM_PKG}-${DOWNSTREAM_VER}.tar.xz"
         local DOWNSTREAM_SHA1=$(grep -E ^sha1 ${PKG}/PKGBUILD | cut -f2 -d"'")
