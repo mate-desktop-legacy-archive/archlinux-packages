@@ -14,13 +14,13 @@ optdepends=('mate-power-manager: Add power management support.'
             'yelp: for reading MATE help documents')
 options=('!emptydirs')
 groups=('mate-extra')
-source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")
+source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
 sha1sums=('16f24b396ba4c1a5ef095ece7d5098ce3cc29701')
 install=${pkgname}.install
 
 build() {
-    cd "${srcdir}/${pkgname}"
-    ./autogen.sh \
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
         --sysconfdir=/etc \
@@ -34,6 +34,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     make DESTDIR="${pkgdir}" install
 }

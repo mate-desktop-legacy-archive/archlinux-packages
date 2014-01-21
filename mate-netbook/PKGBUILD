@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-netbook
-pkgver=1.6.9.37.3418016
+pkgver=1.6.9.41.73b9047
 pkgrel=1
 pkgdesc="A simple window management tool."
 url="http://mate-desktop.org"

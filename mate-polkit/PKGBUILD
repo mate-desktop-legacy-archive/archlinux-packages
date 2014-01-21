@@ -2,7 +2,7 @@
 
 pkgname=mate-polkit
 pkgver=1.7.1
-pkgrel=2
+pkgrel=3
 pkgdesc="PolicyKit integration for the MATE desktop"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
@@ -18,7 +18,7 @@ build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
     ./configure \
         --prefix=/usr \
-        --libexecdir=/usr/lib/polkit-mate \
+        --libexecdir=/usr/lib/${pkgname} \
         --sysconfdir=/etc \
         --localstatedir=/var \
         --with-gtk=2.0 \

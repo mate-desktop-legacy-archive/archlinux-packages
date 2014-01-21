@@ -13,13 +13,13 @@ makedepends=('docbook2x' 'mate-common' 'perl-xml-parser' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
 groups=('mate-extra')
-source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")
+source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
 sha1sums=('b2af86193f222726927de822781a5e1b20991c20')
 install=${pkgname}.install
 
 build() {
-    cd "${srcdir}/${pkgname}"
-    ./autogen.sh \
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
         --localstatedir=/var \
@@ -29,6 +29,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     make DESTDIR="${pkgdir}" install
 }

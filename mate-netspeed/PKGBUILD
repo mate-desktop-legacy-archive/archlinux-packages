@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-netspeed
-pkgver=1.6.9.64.ddc873f
+pkgver=1.6.9.69.e004d16
 pkgrel=1
 pkgdesc="A MATE applet that shows how much traffic occurs on a specified network device."
 url="http://mate-desktop.org"

@@ -7,21 +7,26 @@ pkgdesc="Session daemon that makes it easy to manage your laptop or desktop syst
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('dbus-glib' 'dconf' 'libcanberra' 'libgnome-keyring' 'libnotify'
-         'libunique' 'upower')
+depends=('dbus-glib' 'dconf' 'libcanberra' 'libgnome-keyring' 'libnotify' 
+         'libunique' 'mate-panel' 'upower')
 makedepends=('docbook2x' 'docbook-xml' 'mate-common' 'perl-xml-parser'
              'xmlto' 'yelp-tools')
-optdepends=('mate-panel: Set brightness and inhibit power management from the panel'
-            'yelp: for reading MATE help documents')
+optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
 groups=('mate-extra')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
 sha1sums=('570afc23e921ca084d3a1f6c2e2abeb4c4403d41')
 install=${pkgname}.install
 
+prepare() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    #Work around a problem where the .sgml fail to parse.
+    sed -e 's:@HAVE_DOCBOOK2MAN_TRUE@.*::' -i man/Makefile.in
+}
+
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-    ./autogen.sh \
+    ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
         --sysconfdir=/etc \

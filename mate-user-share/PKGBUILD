@@ -7,8 +7,8 @@ pkgdesc="User level public file sharing via WebDAV or ObexFTP."
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('apache' 'caja' 'dbus-glib' 'dconf' 'libunique' 'mate-bluetooth' 'mod_dnssd'
-         'obex-data-server')
+depends=('apache' 'caja' 'dbus-glib' 'dconf' 'libunique' 'mod_dnssd')
+         #'mate-bluetooth' 'obex-data-server')
 makedepends=('git' 'libcanberra' 'libnotify''mate-common' 'perl-xml-parser' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
@@ -29,7 +29,8 @@ build() {
         --libexec=/usr/lib/${pkgname} \
         --sysconfdir=/etc \
         --disable-static \
-        --disable-scrollkeeper
+        --disable-scrollkeeper \
+        --disable-bluetooth
     make
 }
 

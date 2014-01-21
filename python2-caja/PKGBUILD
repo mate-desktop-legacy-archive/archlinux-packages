@@ -13,18 +13,23 @@ makedepends=('mate-common')
 options=('!emptydirs')
 replaces=('python-caja')
 provides=('python-caja')
-source=("${pkgname}::git+https://github.com/mate-desktop/${_pkgname}.git")
+source=("http://pub.mate-desktop.org/releases/1.7/${_pkgname}-${pkgver}.tar.xz")
 sha1sums=('3c958ebaa541f70934af1a0fe00984b428021fd2')
 
+prepare() {
+    cd "${srcdir}/${_pkgname}-${pkgver}"
+    sed -i 's/python-config/python2-config/' configure
+}
+
 build() {
-    cd "${srcdir}/${pkgname}"
-    PYTHON=/usr/bin/python2 ./autogen.sh \
+    cd "${srcdir}/${_pkgname}-${pkgver}"
+    PYTHON=/usr/bin/python2 ./configure \
         --prefix=/usr \
         --disable-static
     make
 }
 
 package() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${_pkgname}-${pkgver}"
     make DESTDIR="${pkgdir}" install
 }
