@@ -12,12 +12,12 @@ makedepends=('mate-common' 'perl-xml-parser')
 options=('!emptydirs')
 groups=('mate')
 provides=('notification-daemon')
-source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")
+source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
 sha1sums=('9db55c4b1ce53a461f74ab77bffe023484354d8b')
 install=${pkgname}.install
 
 build() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     ./autogen.sh \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
@@ -27,6 +27,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     make DESTDIR="${pkgdir}" install
 }

@@ -13,15 +13,15 @@ makedepends=('mate-common' 'mate-doc-utils' 'mate-panel'
              'mate-settings-daemon-gstreamer' 'perl-xml-parser' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
-source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
+source=("http://pub.mate-desktop.org/releases/1.7/${pkgbase}-${pkgver}.tar.xz")
 sha1sums=('48e9b601c2170e9712a2407b900ed5cca9b37325')
 
 build() {
     cd "${srcdir}"
-    cp -a ${pkgbase}{,-gstreamer}
+    cp -a ${pkgbase}-${pkgver}{,-gstreamer}
 
     # build for pulseaudio
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}"
     ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
@@ -35,7 +35,7 @@ build() {
     make
 
     # build for gstreamer
-    cd "${srcdir}/${pkgname}-${pkgver}-gstreamer"
+    cd "${srcdir}/${pkgbase}-${pkgver}-gstreamer"
     ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
@@ -57,7 +57,7 @@ package_mate-media-pulseaudio() {
     conflicts=("${pkgbase}-gstreamer" 'mate-settings-daemon-gstreamer')
     provides=("${pkgbase}")
     replaces=("${pkgbase}")
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}" install
 }
 
@@ -69,6 +69,6 @@ package_mate-media-gstreamer() {
     conflicts=("${pkgbase}-pulseaudio" 'mate-settings-daemon-pulseaudio')
     provides=("${pkgbase}")    
     install=${pkgbase}-gstreamer.install
-    cd "${srcdir}/${pkgname}-${pkgver}-gstreamer"
+    cd "${srcdir}/${pkgbase}-${pkgver}-gstreamer"
     make DESTDIR="${pkgdir}" install
 }
