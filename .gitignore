@@ -1,6 +1,4 @@
-*prepare.log*
-*build.log*
-*package.log*
+*.log
 *.tar.bz2
 *.tar.gz
 *.tar.xz
