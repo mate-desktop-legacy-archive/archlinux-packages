@@ -9,7 +9,7 @@ arch=('any')
 license=('GPL')
 makedepends=('mate-common' 'perl-xml-parser')
 options=('!emptydirs')
-groups=('mate')
+groups=('mate-unstable')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
 sha1sums=('c548746b9f99ae2d5350c6e94c6474e7f1f6ba49')
 

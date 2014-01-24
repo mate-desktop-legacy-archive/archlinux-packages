@@ -14,7 +14,7 @@ makedepends=('git' 'gobject-introspection' 'mate-common' 'caja-extensions'
 optdepends=('mate-user-share: Enable sharing via bluetooth and other protocols.'
             'yelp: for reading MATE help documents')
 options=('!emptydirs')
-groups=('mate-extra')
+groups=('mate-unstable-extra')
 source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')
 install=${pkgname}.install

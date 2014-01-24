@@ -12,7 +12,7 @@ makedepends=('git' 'mate-common' 'mate-panel' 'perl-xml-parser' 'rarian' 'yelp-t
 optdepends=('mate-panel: Look up words in dictionaries from the panel'
             'yelp: for reading MATE help documents')
 options=('!emptydirs')
-groups=('mate-extra')
+groups=('mate-unstable-extra')
 source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')
 install=${pkgname}.install

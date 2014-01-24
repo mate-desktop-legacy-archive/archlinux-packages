@@ -16,7 +16,7 @@ replaces=('mate-image-viewer')
 provides=('mate-image-viewer')
 conflicts=('mate-image-viewer')
 options=('!emptydirs')
-groups=('mate-extra')
+groups=('mate-unstable-extra')
 source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git"
         '01-fix.diff')
 sha1sums=('SKIP'

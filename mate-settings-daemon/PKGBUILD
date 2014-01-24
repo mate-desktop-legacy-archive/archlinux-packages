@@ -49,7 +49,7 @@ build() {
 }
 
 package_mate-settings-daemon-pulseaudio() {
-    groups=('mate')
+    groups=('mate-unstable')
     pkgdesc="The MATE Settings daemon (pulseaudio)"
     depends=('dbus-glib' 'dconf' 'fontconfig' 'gtk2' 'libcanberra-pulse'
             'libmatekbd' 'libnotify' 'libxt' 'mate-desktop' 'nss' 'polkit'

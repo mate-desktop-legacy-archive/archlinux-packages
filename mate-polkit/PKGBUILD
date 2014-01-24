@@ -10,7 +10,7 @@ license=('LGPL')
 depends=('gtk2' 'polkit')
 makedepends=('gobject-introspection' 'mate-common' 'perl-xml-parser')
 options=('!emptydirs')
-groups=('mate')
+groups=('mate-unstable')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
 sha1sums=('130b11454b87fd94fecb15f7a0540bd6ba423da5')
 

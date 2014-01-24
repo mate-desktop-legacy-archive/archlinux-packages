@@ -18,7 +18,7 @@ replaces=('mate-file-archiver')
 provides=('mate-file-archiver')
 conflicts=('mate-file-archiver')
 options=( '!emptydirs')
-groups=('mate-extra')
+groups=('mate-unstable-extra')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz"
         fr-rpm-bsdtar.patch)
 sha1sums=('b00fbb212c14103ace663da45a6566481ea4699f'

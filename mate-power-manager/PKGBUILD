@@ -13,7 +13,7 @@ makedepends=('docbook2x' 'docbook-xml' 'mate-common' 'perl-xml-parser'
              'xmlto' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
-groups=('mate-extra')
+groups=('mate-unstable-extra')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
 sha1sums=('570afc23e921ca084d3a1f6c2e2abeb4c4403d41')
 install=${pkgname}.install

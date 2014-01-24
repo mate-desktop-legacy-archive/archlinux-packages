@@ -11,7 +11,7 @@ depends=('dbus-glib' 'gtk2' 'libsm' 'libxtst' 'mate-desktop' 'mate-polkit'
          'mate-settings-daemon' 'upower')
 makedepends=('mate-common' 'perl-xml-parser' 'xmlto')
 options=('!emptydirs')
-groups=('mate')
+groups=('mate-unstable')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
 sha1sums=('9642cfc2d3fb6db1ae5f58842b9566fe5b7eb713')
 install=${pkgname}.install

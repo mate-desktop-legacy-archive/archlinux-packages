@@ -51,7 +51,7 @@ build() {
 }
 
 package_mate-media-pulseaudio() {
-    groups=('mate-extra')
+    groups=('mate-unstable-extra')
     pkgdesc="MATE Media Tools (pulseaudio)"
     depends=('libcanberra-pulse' 'libunique' 'marco' 'mate-desktop' 'pulseaudio')
     conflicts=("${pkgbase}-gstreamer" 'mate-settings-daemon-gstreamer')

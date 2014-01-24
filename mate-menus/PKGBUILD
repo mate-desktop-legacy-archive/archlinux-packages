@@ -10,7 +10,7 @@ license=('GPL')
 depends=('glib2' 'python2')
 makedepends=('gobject-introspection' 'mate-common' 'perl-xml-parser')
 options=('!emptydirs')
-groups=('mate')
+groups=('mate-unstable')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
 sha1sums=('16dd9af404f0e6ee4f2b7200c29d306f8eb7722c')
 
