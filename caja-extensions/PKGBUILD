@@ -1,8 +1,8 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=caja-extensions
-pkgver=1.7.0
-pkgrel=6
+pkgver=1.7.1
+pkgrel=1
 pkgdesc="Caja extensions."
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
@@ -17,7 +17,7 @@ replaces=('mate-file-manager-gksu' 'mate-file-manager-image-converter' 'mate-fil
 options=('!emptydirs')
 groups=('mate-extra')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('8a6fee2f2b5253f0069cc9567e5e12691c7178ae')
+sha1sums=('ffce502158bdacfda08c18e9448465cb48f340f3')
 install=${pkgname}.install
 
 build() {
