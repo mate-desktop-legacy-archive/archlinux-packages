@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=atril
-pkgver=1.7.0
+pkgver=1.6.9.99.e5a6eba
 pkgrel=1
 pkgdesc="Simply a document viewer"
 url="http://mate-desktop.org"
@@ -9,7 +9,7 @@ arch=('i686' 'x86_64')
 license=('GPL')
 depends=('dconf' 'dbus' 'desktop-file-utils' 'gtk2' 'libsm' 'libspectre'
          'mate-icon-theme' 'poppler-glib' 'zlib')
-makedepends=('caja' 'djvulibre' 'gobject-introspection' 'libgxps' 'mate-common'
+makedepends=('caja' 'djvulibre' 'git' 'gobject-introspection' 'libgxps' 'mate-common'
              'perl-xml-parser' 'texlive-bin' 'yelp-tools')
 optdepends=('caja: Document Properties extension'
             'djvulibre: DjVu support'
@@ -23,23 +23,18 @@ provides=('mate-document-viewer')
 conflicts=('mate-document-viewer')
 options=('!emptydirs')
 groups=('mate-extra')
-source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz"
-        "https://github.com/mate-desktop/atril/commit/a91f08748537eab497b0b2350a66e5d65fcb9a36.diff"
-        "https://github.com/mate-desktop/atril/commit/b6c5615c2ac8124dadd5cc968cb0669028c18222.diff")
-sha1sums=('603b64c2f10ca5ecff24132acae8daf9a8178de8'
-          '60fe0e4cf6b1e321ca0b4e72a45151d40d154be4'
-          'b57bddd9440afd823e922f279c25c7595d2cc418')
+source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")
+sha1sums=('SKIP')
 install=${pkgname}.install
 
-prepare() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
-    patch -Np1 -i "${srcdir}/a91f08748537eab497b0b2350a66e5d65fcb9a36.diff"
-    patch -Np1 -i "${srcdir}/b6c5615c2ac8124dadd5cc968cb0669028c18222.diff"
+pkgver() {
+    cd "${srcdir}/${pkgname}"
+    echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
 }
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
-    ./configure \
+    cd "${srcdir}/${pkgname}"
+    ./autogen.sh \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
         --with-gtk=2.0 \
@@ -55,6 +50,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}"
     make DESTDIR="${pkgdir}" install
 }
