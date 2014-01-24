@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=atril
-pkgver=1.6.9.122.8fff1e9-1
+pkgver=1.7.1
 pkgrel=1
 pkgdesc="Simply a document viewer"
 url="http://mate-desktop.org"
@@ -9,7 +9,7 @@ arch=('i686' 'x86_64')
 license=('GPL')
 depends=('dconf' 'dbus' 'desktop-file-utils' 'gtk2' 'libsm' 'libspectre'
          'mate-icon-theme' 'poppler-glib' 'zlib')
-makedepends=('caja' 'djvulibre' 'git' 'gobject-introspection' 'libgxps' 'mate-common'
+makedepends=('caja' 'djvulibre' 'gobject-introspection' 'libgxps' 'mate-common'
              'perl-xml-parser' 'texlive-bin' 'yelp-tools')
 optdepends=('caja: Document Properties extension'
             'djvulibre: DjVu support'
@@ -23,17 +23,12 @@ provides=('mate-document-viewer')
 conflicts=('mate-document-viewer')
 options=('!emptydirs')
 groups=('mate-unstable-extra')
-source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")
-sha1sums=('SKIP')
+source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
+sha1sums=('21425f174157dd5cb7f3e803fd047069f5dc5639')
 install=${pkgname}.install
 
-pkgver() {
-    cd "${srcdir}/${pkgname}"
-    echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
-}
-
 build() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     ./autogen.sh \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
@@ -50,6 +45,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     make DESTDIR="${pkgdir}" install
 }
