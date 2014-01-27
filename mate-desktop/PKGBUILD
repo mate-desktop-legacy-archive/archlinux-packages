@@ -2,13 +2,13 @@
 
 pkgname=mate-desktop
 pkgver=1.7.3
-pkgrel=1
+pkgrel=2
 pkgdesc="Library with common API for various MATE modules"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=(GPL LGPL)
 depends=('dconf' 'gtk2' 'hicolor-icon-theme' 'libunique' 'python2'
-         'startup-notification')
+         'startup-notification' 'ttf-dejavu')
 makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
 optdepends=('lightdm-gtk2-greeter: A lightweight display manager'
             'yelp: for reading MATE help documents')
