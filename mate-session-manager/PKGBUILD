@@ -10,6 +10,7 @@ license=('GPL' 'LGPL')
 depends=('dbus-glib' 'gtk2' 'libsm' 'libxtst' 'mate-desktop' 'mate-polkit'
          'mate-settings-daemon' 'upower' 'xdg-user-dirs')
 makedepends=('mate-common' 'perl-xml-parser' 'xmlto')
+optdepends=('xdg-user-dirs-gtk: Add autostart that prompts to rename user directories when switching locales')
 options=('!emptydirs')
 groups=('mate-unstable')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
