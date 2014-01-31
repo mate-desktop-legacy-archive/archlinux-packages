@@ -2,13 +2,13 @@
 
 pkgname=mate-session-manager
 pkgver=1.7.1
-pkgrel=1
+pkgrel=2
 pkgdesc="The MATE Session Handler"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL' 'LGPL')
 depends=('dbus-glib' 'gtk2' 'libsm' 'libxtst' 'mate-desktop' 'mate-polkit'
-         'mate-settings-daemon' 'upower')
+         'mate-settings-daemon' 'upower' 'xdg-user-dirs')
 makedepends=('mate-common' 'perl-xml-parser' 'xmlto')
 options=('!emptydirs')
 groups=('mate-unstable')
