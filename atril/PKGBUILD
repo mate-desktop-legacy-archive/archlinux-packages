@@ -2,13 +2,13 @@
 
 pkgname=atril
 pkgver=1.7.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Simply a document viewer"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
 depends=('dconf' 'dbus' 'desktop-file-utils' 'gtk2' 'libsm' 'libspectre'
-         'mate-icon-theme' 'poppler-glib' 'zlib')
+         'mate-desktop' 'mate-icon-theme' 'poppler-glib' 'zlib')
 makedepends=('caja' 'djvulibre' 'gobject-introspection' 'libgxps' 'mate-common'
              'perl-xml-parser' 'texlive-bin' 'yelp-tools')
 optdepends=('caja: Document Properties extension'
