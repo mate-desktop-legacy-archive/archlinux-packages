@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-terminal
-pkgver=1.7.1
+pkgver=1.7.2
 pkgrel=1
 pkgdesc="The MATE Terminal Emulator"
 url="http://mate-desktop.org"
@@ -13,7 +13,7 @@ optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
 groups=('mate-unstable-extra')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('ccd9c83c9a88b10207bcb0beda251ab3c77f32c4')
+sha1sums=('51cc6dff0a8e6411eb5e72a68d646f4f053e0d9a')
 install=${pkgname}.install
 
 build() {

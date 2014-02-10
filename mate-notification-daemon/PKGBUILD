@@ -2,7 +2,7 @@
 
 pkgname=mate-notification-daemon
 pkgver=1.7.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Notification daemon for MATE"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
@@ -18,7 +18,7 @@ install=${pkgname}.install
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-    ./autogen.sh \
+    ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
         --with-gtk=2.0 \

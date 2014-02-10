@@ -1,28 +1,23 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-netbook
-pkgver=1.6.9.41.73b9047
+pkgver=1.7.0
 pkgrel=1
 pkgdesc="A simple window management tool."
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
 depends=('gtk2' 'libfakekey' 'libwnck' 'libunique' 'mate-panel')
-makedepends=('git' 'mate-common' 'perl-xml-parser' 'yelp-tools')
+makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
-source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")
-sha1sums=('SKIP')
+source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
+sha1sums=('1fa3773a3d2e56b15b2cc33a4896123848cc822e')
 install=${pkgname}.install
 
-pkgver() {
-    cd "${srcdir}/${pkgname}"
-    echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
-}
-
 build() {
-    cd "${srcdir}/${pkgname}"
-    ./autogen.sh \
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    ./configure \
         --prefix=/usr \
         --libexec=/usr/lib/${pkgname} \
         --sysconfdir=/etc \
@@ -32,6 +27,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     make DESTDIR="${pkgdir}" install
 }

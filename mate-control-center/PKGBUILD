@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-control-center
-pkgver=1.6.9.160.568a850
+pkgver=1.7.0
 pkgrel=1
 pkgdesc="The Control Center for MATE"
 url="http://mate-desktop.org"
@@ -11,22 +11,17 @@ depends=('caja' 'dbus-glib' 'dconf' 'desktop-file-utils' 'gsettings-desktop-sche
          'gtk2' 'mate-desktop' 'mate-icon-theme' 'mate-menus' 'mate-settings-daemon'
          'marco' 'libgtop' 'libmatekbd' 'libunique' 'librsvg' 'libxss'
          'libxt' 'startup-notification')
-makedepends=('docbook2x' 'git' 'mate-common' 'perl-xml-parser' 'yelp-tools')
+makedepends=('docbook2x' 'mate-common' 'perl-xml-parser' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
 groups=('mate-unstable')
-source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")
-sha1sums=('SKIP')
+source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
+sha1sums=('ab71676933a436b18394c18524843b1fff53ba7a')
 install=${pkgname}.install
 
-pkgver() {
-    cd "${srcdir}/${pkgname}"
-    echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
-}
-
 build() {
-    cd "${srcdir}/${pkgname}"
-    ./autogen.sh \
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    ./configure \
         --prefix=/usr \
         --sysconfdir=/etc \
         --sbindir=/usr/bin \
@@ -38,7 +33,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     make DESTDIR="${pkgdir}" install
     rm -f "${pkgdir}/usr/share/applications/mimeinfo.cache"
 }

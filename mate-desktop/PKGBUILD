@@ -1,8 +1,8 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-desktop
-pkgver=1.7.3
-pkgrel=2
+pkgver=1.7.5
+pkgrel=1
 pkgdesc="Library with common API for various MATE modules"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
@@ -15,7 +15,7 @@ optdepends=('lightdm-gtk2-greeter: A lightweight display manager'
 options=('!emptydirs')
 groups=('mate-unstable')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('d2dda9c532992821a71b5c0537dec08836f55452')
+sha1sums=('550661673902d0e5bdd01b326d3891e865d8eb87')
 install=${pkgname}.install
 
 build() {

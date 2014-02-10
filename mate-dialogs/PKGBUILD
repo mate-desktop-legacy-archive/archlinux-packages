@@ -1,8 +1,8 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-dialogs
-pkgver=1.7.2
-pkgrel=4
+pkgver=1.7.3
+pkgrel=1
 pkgdesc="Display graphical dialog boxes from shell scripts"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
@@ -13,7 +13,7 @@ optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
 groups=('mate-unstable')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('adfa6c43b624c76f59125f6748a53b6fe433207a')
+sha1sums=('aed515adb9369f337bcf6a83ec849666ccff7b0c')
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"

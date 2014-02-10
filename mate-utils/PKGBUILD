@@ -1,30 +1,25 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-utils
-pkgver=1.6.9.101.a3b9d05
+pkgver=1.7.0
 pkgrel=1
 pkgdesc="Common MATE utilities for viewing disk usage, logs and fonts, taking screenshots, managing dictionaries and searching files"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
 depends=('desktop-file-utils' 'gtk2' 'libcanberra' 'libgtop' 'libsm' 'zlib')
-makedepends=('git' 'mate-common' 'mate-panel' 'perl-xml-parser' 'rarian' 'yelp-tools')
+makedepends=('mate-common' 'mate-panel' 'perl-xml-parser' 'rarian' 'yelp-tools')
 optdepends=('mate-panel: Look up words in dictionaries from the panel'
             'yelp: for reading MATE help documents')
 options=('!emptydirs')
 groups=('mate-unstable-extra')
-source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")
-sha1sums=('SKIP')
+source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
+sha1sums=('edc72135ee41e6638677df38adfc1ee430b853d8')
 install=${pkgname}.install
 
-pkgver() {
-    cd "${srcdir}/${pkgname}"
-    echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
-}
-
 build() {
-    cd "${srcdir}/${pkgname}"
-    ./autogen.sh \
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
         --with-gtk=2.0 \
@@ -34,6 +29,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     make DESTDIR="${pkgdir}" install
 }

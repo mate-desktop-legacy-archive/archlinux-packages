@@ -1,7 +1,7 @@
 #Contributor: Martin Wimpress <code@flexion.org>
 
 pkgname=mate-user-share
-pkgver=1.6.9.67.7a03054
+pkgver=1.7.0
 pkgrel=1
 pkgdesc="User level public file sharing via WebDAV or ObexFTP."
 url="http://mate-desktop.org"
@@ -9,22 +9,16 @@ arch=('i686' 'x86_64')
 license=('GPL')
 depends=('apache' 'caja' 'dbus-glib' 'dconf' 'libunique' 'mod_dnssd')
          #'mate-bluetooth' 'obex-data-server')
-makedepends=('git' 'libcanberra' 'libnotify' 'mate-common' 'perl-xml-parser' 'yelp-tools')
+makedepends=('libcanberra' 'libnotify' 'mate-common' 'perl-xml-parser' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
-groups=('mate-unstable-extra')
-source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")
-sha1sums=('SKIP')
+source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
+sha1sums=('a8424c7cdcd35a0007241fb1c8a3e1b25baea1dc')
 install=${pkgname}.install
 
-pkgver() {
-    cd "${srcdir}/${pkgname}"
-    echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
-}
-
 build() {
-    cd "${srcdir}/${pkgname}"
-    PYTHON=/usr/bin/python2 ./autogen.sh \
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    PYTHON=/usr/bin/python2 ./configure \
         --prefix=/usr \
         --libexec=/usr/lib/${pkgname} \
         --sysconfdir=/etc \
@@ -35,7 +29,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     make  DESTDIR="${pkgdir}" install
     rm -f "${pkgdir}/usr/share/mate-user-share/dav_user_2.0.conf"
 }

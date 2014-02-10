@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-applets
-pkgver=1.7.0
+pkgver=1.7.1
 pkgrel=1
 pkgdesc="Applets for MATE panel"
 arch=('i686' 'x86_64')
@@ -13,7 +13,7 @@ optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
 groups=('mate-unstable-extra')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('312756155852b2fe693ab3ea5a130f55689f7a24')
+sha1sums=('1de604d2a27782df6b425b037fdb1b66dc33dda5')
 install=${pkgname}.install
 
 prepare() {

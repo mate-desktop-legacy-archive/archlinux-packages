@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=atril
-pkgver=1.7.1
+pkgver=1.7.2
 pkgrel=2
 pkgdesc="Simply a document viewer"
 url="http://mate-desktop.org"
@@ -24,12 +24,17 @@ conflicts=('mate-document-viewer')
 options=('!emptydirs')
 groups=('mate-unstable-extra')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('21425f174157dd5cb7f3e803fd047069f5dc5639')
+sha1sums=('f56ceac21ac9e3f661ac5468e6edc41908dcabf8')
 install=${pkgname}.install
+
+prepare() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    NOCONFIGURE=1 ./autogen.sh
+}
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-    ./autogen.sh \
+    ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
         --with-gtk=2.0 \

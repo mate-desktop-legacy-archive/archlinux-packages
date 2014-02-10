@@ -1,8 +1,8 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-polkit
-pkgver=1.7.1
-pkgrel=3
+pkgver=1.7.2
+pkgrel=1
 pkgdesc="PolicyKit integration for the MATE desktop"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
@@ -12,7 +12,7 @@ makedepends=('gobject-introspection' 'mate-common' 'perl-xml-parser')
 options=('!emptydirs')
 groups=('mate-unstable')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('130b11454b87fd94fecb15f7a0540bd6ba423da5')
+sha1sums=('3f609f3fcfe03c2e5e4670e094ee72b52cd055b0')
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"

@@ -2,8 +2,8 @@
 
 pkgbase=mate-media
 pkgname=("${pkgbase}-pulseaudio" "${pkgbase}-gstreamer")
-pkgver=1.7.0
-pkgrel=1
+pkgver=1.7.1
+pkgrel=2
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
@@ -14,7 +14,7 @@ makedepends=('mate-common' 'mate-doc-utils' 'mate-panel'
 optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgbase}-${pkgver}.tar.xz")
-sha1sums=('48e9b601c2170e9712a2407b900ed5cca9b37325')
+sha1sums=('39c61389e496011036d7ce6e2a8125e5722ee025')
 
 build() {
     cd "${srcdir}"
@@ -22,7 +22,7 @@ build() {
 
     # build for pulseaudio
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    ./autogen.sh \
+    ./configure \
         --prefix=/usr \
         --sysconfdir=/etc \
         --libexecdir=/usr/lib/${pkgbase} \
@@ -36,7 +36,7 @@ build() {
 
     # build for gstreamer
     cd "${srcdir}/${pkgbase}-${pkgver}-gstreamer"
-    ./autogen.sh \
+    ./configure \
         --prefix=/usr \
         --sysconfdir=/etc \
         --libexecdir=/usr/lib/${pkgbase} \

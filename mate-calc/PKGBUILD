@@ -1,8 +1,8 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-calc
-pkgver=1.7.0
-pkgrel=4
+pkgver=1.7.1
+pkgrel=2
 pkgdesc="Calculator for the Mate desktop environment"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
@@ -12,12 +12,12 @@ makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
 options=('!emptydirs')
 groups=('mate-unstable-extra')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('36944008b3e662b8f32602a6fdfe9f0d371053e3')
+sha1sums=('d4d010831011fe9a1be120d9569727e052991f62')
 install=${pkgname}.install
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-    ./autogen.sh \
+    ./configure \
         --prefix=/usr \
         --with-gtk=2.0
     make
