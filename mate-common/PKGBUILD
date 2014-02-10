@@ -2,7 +2,7 @@
 
 pkgname=mate-common
 pkgver=1.7.3
-pkgrel=1
+pkgrel=2
 pkgdesc="Common development macros for MATE"
 arch=('any')
 license=('GPL')
@@ -20,7 +20,7 @@ prepare() {
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-    ./autogen.sh \
+    ./configure \
         --prefix=/usr
     make
 }
