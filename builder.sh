@@ -227,6 +227,19 @@ function tree_sync() {
     rsync -av --delete --progress ${REPODIR}/ "${RSYNC_UPSTREAM}/"
 }
 
+# `rsync` repo upstream.
+function tree_clean() {
+    echo "Action : clean"
+    rm -fv /var/cache/pacman/pkg/atril*
+    rm -fv /var/cache/pacman/pkg/*caja*
+    rm -fv /var/cache/pacman/pkg/engrampa*
+    rm -fv /var/cache/pacman/pkg/eom*
+    rm -fv /var/cache/pacman/pkg/marco*
+    rm -fv /var/cache/pacman/pkg/*mate*
+    rm -fv /var/cache/pacman/pkg/mozo*
+    rm -fv /var/cache/pacman/pkg/pluma*
+}
+
 function tree_run() {
     local ACTION=${1}
     echo "Action : ${ACTION}"
@@ -258,7 +271,8 @@ shift "$(( $OPTIND - 1 ))"
 if [ "${TASK}" == "build" ] ||
    [ "${TASK}" == "check" ]; then
     tree_run ${TASK}
-elif [ "${TASK}" == "sync" ]; then
+elif [ "${TASK}" == "clean" ] ||
+     [ "${TASK}" == "sync" ]; then
     tree_${TASK}
 else
     usage
