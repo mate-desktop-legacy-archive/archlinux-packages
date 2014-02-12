@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-sensors-applet
-pkgver=1.6.9.62.82a079a
+pkgver=1.7.0
 pkgrel=1
 pkgdesc="A MATE Panel applet to display readings from hardware sensors, including CPU temperature, fan speeds and voltage readings."
 url="http://mate-desktop.org"
@@ -9,22 +9,17 @@ arch=('i686' 'x86_64')
 license=('GPL')
 depends=('dbus' 'gtk2' 'libatasmart' 'libnotify' 'libxnvctrl' 'lm_sensors'
          'mate-panel' 'yelp')
-makedepends=('docbook-xml' 'git' 'mate-common' 'perl-xml-parser' 'rarian' 'yelp-tools')
+makedepends=('docbook-xml' 'mate-common' 'perl-xml-parser' 'rarian' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
 groups=('mate-unstable-extra')
-source=("${pkgname}::git+https://github.com/mate-desktop/${pkgname}.git")
-sha1sums=('SKIP')
+source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
+sha1sums=('cd14c3acad2e891dccd8b03bcfb75e9f767d9c3c')
 install=${pkgname}.install
 
-pkgver() {
-    cd "${srcdir}/${pkgname}"
-    echo 1.6.9.$(git rev-list --count master).$(git rev-parse --short master)
-}
-
 build() {
-    cd "${srcdir}/${pkgname}"
-    ./autogen.sh \
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
         --with-gtk=2.0 \
@@ -33,6 +28,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     make DESTDIR="${pkgdir}" install
 }
