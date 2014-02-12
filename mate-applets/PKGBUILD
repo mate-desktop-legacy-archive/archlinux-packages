@@ -2,7 +2,7 @@
 
 pkgname=mate-applets
 pkgver=1.7.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Applets for MATE panel"
 arch=('i686' 'x86_64')
 url="http://mate-desktop.org"
@@ -38,5 +38,4 @@ build() {
 package() {
     cd "${srcdir}/${pkgname}-${pkgver}"
     make DESTDIR="${pkgdir}" install
-    sed -i 's/env python/env python2/' "${pkgdir}/usr/lib/${pkgname}/invest-applet"
 }
