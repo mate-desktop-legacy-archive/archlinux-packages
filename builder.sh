@@ -17,6 +17,8 @@ if [ $(id -u) != "0" ]; then
     exit 1
 fi
 
+MACHINE=$(uname -m)
+
 # http://wiki.mate-desktop.org/status:1.8
 BUILD_ORDER=(
     mate-common
@@ -77,6 +79,7 @@ function usage() {
     echo "-t  Provide a task to run which can be one of:"
     echo "      build       Build MATE packages."
     echo "      check       Check upstream for new source tarballs."
+    echo "      clean       Remove MATE packages from /var/cache/pacan/pkg."
     echo "      repo        Create a package repository in '${HOME}/mate/'"
     echo "      sync        'rsync' a repo to ${RSYNC_UPSTREAM}."
     echo
@@ -85,8 +88,16 @@ function usage() {
 }
 
 function config_builder() {
-    ln -s /usr/bin/archbuild /usr/local/bin/mate-unstable-i686-build 2>/dev/null
-    ln -s /usr/bin/archbuild /usr/local/bin/mate-unstable-x86_64-build 2>/dev/null
+    if [ "${MACHINE}" == "x86_64" ]; then
+        ln -s /usr/bin/archbuild /usr/local/bin/mate-unstable-i686-build 2>/dev/null
+        ln -s /usr/bin/archbuild /usr/local/bin/mate-unstable-x86_64-build 2>/dev/null
+    elif  [ "${MACHINE}" == "i686" ]; then
+        ln -s /usr/bin/archbuild /usr/local/bin/mate-unstable-i686-build 2>/dev/null
+    elif  [ "${MACHINE}" == "armv6l" ]; then
+        ln -s /usr/bin/archbuild /usr/local/bin/mate-unstable-armv6h-build 2>/dev/null
+    elif  [ "${MACHINE}" == "armv7l" ]; then
+        ln -s /usr/bin/archbuild /usr/local/bin/mate-unstable-armv7h-build 2>/dev/null
+    fi
     rm /usr/local/bin/mate-unstablepkg 2>/dev/null
 
     # Augment /usr/share/devtools/pacman-extra.conf
@@ -101,7 +112,7 @@ function config_builder() {
 function repo_init() {
     # Remove any existing repositories and create empty ones.
     rm -rf /var/local/mate-unstable/*
-    for INIT_ARCH in i686 x86_64
+    for INIT_ARCH in i686 x86_64 armv6h armv7h
     do
         mkdir -p ${REPODIR}/${INIT_ARCH}
         touch ${REPODIR}/${INIT_ARCH}/mate-unstable.db
@@ -144,9 +155,21 @@ function tree_build() {
     local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}    
     local TEST_ANY=$(grep "^arch=" PKGBUILD | grep any)
     if [ -n "${TEST_ANY}" ]; then
-        local CHROOT_ARCHS=(i686)
+        if [ "${MACHINE}" == "i686" ] || [ "${MACHINE}" == "x86_64" ]; then    
+            local CHROOT_ARCHS=(i686)
+        elif [ "${MACHINE}" == "armv6l" ]; then
+            local CHROOT_ARCHS=(armv6h)
+        elif [ "${MACHINE}" == "armv7l" ]; then
+            local CHROOT_ARCHS=(armv7h)
+        fi
     else
-        local CHROOT_ARCHS=(i686 x86_64)
+        if [ "${MACHINE}" == "i686" ] || [ "${MACHINE}" == "x86_64" ]; then
+            local CHROOT_ARCHS=(i686 x86_64)
+        elif [ "${MACHINE}" == "armv6l" ]; then
+            local CHROOT_ARCHS=(armv6h)
+        elif [ "${MACHINE}" == "armv7l" ]; then
+            local CHROOT_ARCHS=(armv7h)
+        fi
     fi
 
     for CHROOT_ARCH in ${CHROOT_ARCHS[@]};
@@ -171,15 +194,22 @@ function tree_build() {
             echo " - ${PKG} is current"
         fi
         
+        echo " - Rebuilding [mate-unstable] with ${PKG}."
         if [ -n "${TEST_ANY}" ]; then
-            cp -a ${PKG}*-any.pkg.tar.xz ${REPODIR}/i686/ 2>/dev/null
-            cp -a ${PKG}*-any.pkg.tar.xz ${REPODIR}/x86_64/ 2>/dev/null
-            echo " - Rebuilding [mate-unstable] for i686 and x86_64 with ${PKG}."
-            repo_update i686
-            repo_update x86_64
+            if [ "${MACHINE}" == "i686" ] || [ "${MACHINE}" == "x86_64" ]; then
+                cp -a ${PKG}*-any.pkg.tar.xz ${REPODIR}/i686/ 2>/dev/null
+                cp -a ${PKG}*-any.pkg.tar.xz ${REPODIR}/x86_64/ 2>/dev/null
+                repo_update i686
+                repo_update x86_64
+            elif [ "${MACHINE}" == "armv6l" ]; then
+                cp -a ${PKG}*-any.pkg.tar.xz ${REPODIR}/armv6h/ 2>/dev/null
+                repo_update armv6h
+            elif [ "${MACHINE}" == "armv7l" ]; then
+                cp -a ${PKG}*-any.pkg.tar.xz ${REPODIR}/armv7h/ 2>/dev/null
+                repo_update armv7h
+            fi
         else
             cp -a ${PKG}*-${CHROOT_ARCH}.pkg.tar.xz ${REPODIR}/${CHROOT_ARCH}/ 2>/dev/null
-            echo " - Rebuilding [mate-unstable] for ${CHROOT_ARCH} with ${PKG}."
             repo_update ${CHROOT_ARCH}
         fi
     done
