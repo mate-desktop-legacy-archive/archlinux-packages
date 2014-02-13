@@ -2,7 +2,7 @@
 
 pkgname=mate-desktop
 pkgver=1.7.5
-pkgrel=1
+pkgrel=2
 pkgdesc="Library with common API for various MATE modules"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
@@ -28,8 +28,7 @@ build() {
         --disable-static \
         --disable-schemas-compile \
         --disable-desktop-docs \
-        --enable-gtk-doc \
-        --with-omf-dir=/usr/share/omf/${pkgname}
+        --enable-gtk-doc
     make
 }
 

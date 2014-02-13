@@ -2,7 +2,7 @@
 
 pkgname=mozo
 pkgver=1.7.0
-pkgrel=1
+pkgrel=2
 pkgdesc="MATE menu editing tool"
 url="http://mate-desktop.org"
 arch=('any')
@@ -22,8 +22,7 @@ install=${pkgname}.install
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
     PYTHON=/usr/bin/python2 ./configure \
-        --prefix=/usr \
-        --with-gtk=2.0
+        --prefix=/usr
     make
 }
 

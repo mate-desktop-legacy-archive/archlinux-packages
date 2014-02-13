@@ -2,7 +2,7 @@
 
 pkgname=engrampa
 pkgver=1.7.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Archive manipulator for MATE"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
@@ -38,7 +38,6 @@ build() {
         --libexecdir=/usr/lib/${pkgname} \
         --with-gtk=2.0 \
         --disable-static \
-        --disable-scrollkeeper \
         --disable-packagekit
     make
 }

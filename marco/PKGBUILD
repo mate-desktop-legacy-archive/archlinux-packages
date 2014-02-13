@@ -2,7 +2,7 @@
 
 pkgname=marco
 pkgver=1.7.0
-pkgrel=1
+pkgrel=2
 pkgdesc="A window manager for MATE"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
@@ -28,8 +28,7 @@ build() {
         --localstatedir=/var \
         --with-gtk=2.0 \
         --enable-startup-notification \
-        --disable-static \
-        --disable-scrollkeeper
+        --disable-static
     make
 }
 
