@@ -1,8 +1,8 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-desktop
-pkgver=1.7.5
-pkgrel=2
+pkgver=1.7.90
+pkgrel=1
 pkgdesc="Library with common API for various MATE modules"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
@@ -11,11 +11,12 @@ depends=('dconf' 'gtk2' 'hicolor-icon-theme' 'libunique' 'python2'
          'startup-notification' 'ttf-dejavu')
 makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
 optdepends=('lightdm-gtk2-greeter: A lightweight display manager'
+            'orca: Screen reader for blind or visually impaired individuals'
             'yelp: for reading MATE help documents')
 options=('!emptydirs')
 groups=('mate-unstable')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('550661673902d0e5bdd01b326d3891e865d8eb87')
+sha1sums=('29b184deb8651f63a336f33a96926f4f38a34a67')
 install=${pkgname}.install
 
 build() {

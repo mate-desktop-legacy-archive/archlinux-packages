@@ -1,8 +1,8 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-applets
-pkgver=1.7.1
-pkgrel=3
+pkgver=1.7.90
+pkgrel=1
 pkgdesc="Applets for MATE panel"
 arch=('i686' 'x86_64')
 url="http://mate-desktop.org"
@@ -15,12 +15,11 @@ optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
 groups=('mate-unstable-extra')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('1de604d2a27782df6b425b037fdb1b66dc33dda5')
+sha1sums=('8e014fdebaee07ecd1ab479a900a4819647ab74a')
 install=${pkgname}.install
 
 prepare() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-    # Use python2
     sed -i 's/env python/env python2/' invest-applet/invest/{chart.py,invest-applet.py,mate-invest-chart}
 }
 

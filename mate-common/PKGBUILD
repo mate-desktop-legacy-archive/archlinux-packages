@@ -1,8 +1,8 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-common
-pkgver=1.7.3
-pkgrel=2
+pkgver=1.7.90
+pkgrel=1
 pkgdesc="Common development macros for MATE"
 arch=('any')
 license=('GPL')
@@ -10,13 +10,7 @@ depends=('autoconf' 'automake' 'gettext' 'gtk-doc' 'intltool' 'libtool' 'pkg-con
 options=('!emptydirs')
 url="http://mate-desktop.org"
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('fca69f0d5c948c483fa3a7c74d8bb77c9a899ac7')
-
-prepare() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
-    # Bump automake version, when required.
-    #sed -i "s/automake-1.14/automake-1.15 automake-1.14/g" ./macros/mate-autogen
-}
+sha1sums=('416d01af41e6205385c9ba7921d4d2e601d3f99c')
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"

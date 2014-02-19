@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-session-manager
-pkgver=1.7.2
+pkgver=1.7.90
 pkgrel=1
 pkgdesc="The MATE Session Handler"
 url="http://mate-desktop.org"
@@ -14,7 +14,7 @@ optdepends=('xdg-user-dirs-gtk: Add autostart that prompts to rename user direct
 options=('!emptydirs')
 groups=('mate-unstable')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('d5c28b9428a3f0c2b659693bb24eeaf059669e4e')
+sha1sums=('72109c95ff91f5adcadc2e997cdfb8483b9a6739')
 install=${pkgname}.install
 
 build() {

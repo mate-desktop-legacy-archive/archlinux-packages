@@ -1,8 +1,8 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-themes
-pkgver=1.7.2
-pkgrel=3
+pkgver=1.7.90
+pkgrel=1
 pkgdesc="Default themes for the MATE desktop"
 url="http://mate-desktop.org"
 arch=('any')
@@ -13,7 +13,7 @@ optdepends=('gtk-engine-unico: Support for some GTK3 themes.')
 options=('!emptydirs')
 groups=('mate-unstable')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('ccc76ede050c49e87bbe77bebf05d009d7587ecd')
+sha1sums=('aaa082ffbdd7d73d291d7552004ef40a334dfeb5')
 install=${pkgname}.install
 
 build() {

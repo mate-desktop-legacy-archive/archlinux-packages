@@ -1,8 +1,8 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-backgrounds
-pkgver=1.7.2
-pkgrel=2
+pkgver=1.7.90
+pkgrel=1
 pkgdesc="Background images and data for MATE"
 url="http://mate-desktop.org"
 arch=('any')
@@ -11,7 +11,7 @@ makedepends=('mate-common' 'perl-xml-parser')
 options=('!emptydirs')
 groups=('mate-unstable')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('9737eba701c077094de145491199a0f0ec65bd14')
+sha1sums=('4b622d14c6ab04a91a063faaf96d535ee02956b9')
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"

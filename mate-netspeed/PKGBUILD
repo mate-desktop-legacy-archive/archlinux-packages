@@ -1,8 +1,8 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-netspeed
-pkgver=1.7.0
-pkgrel=2
+pkgver=1.7.90
+pkgrel=1
 pkgdesc="A MATE applet that shows how much traffic occurs on a specified network device."
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
@@ -12,7 +12,7 @@ makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 groups=('mate-unstable-extra')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('3e818d9cbcda3d1472fe4c94ecc9ce64225ed56e')
+sha1sums=('7709506b2c49e44ff3df4be3083a198e765f9793')
 install=${pkgname}.install
 
 build() {

@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-panel
-pkgver=1.7.2
+pkgver=1.7.90
 pkgrel=1
 pkgdesc="The MATE Panel"
 url="http://mate-desktop.org"
@@ -16,7 +16,7 @@ optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
 groups=('mate-unstable')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('5ccb64ccea2b89e7ad499ae98d44cb04fe08e667')
+sha1sums=('36bd5f78e5842bca56661e7eae98dc7af98cf490')
 install=${pkgname}.install
 
 build() {

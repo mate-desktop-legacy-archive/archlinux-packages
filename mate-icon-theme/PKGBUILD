@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-icon-theme
-pkgver=1.7.1
+pkgver=1.7.90
 pkgrel=1
 pkgdesc="MATE icon theme"
 url="http://mate-desktop.org"
@@ -12,7 +12,7 @@ makedepends=('icon-naming-utils' 'mate-common' 'perl-xml-parser')
 options=(!emptydirs !strip)
 groups=('mate-unstable')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('eabc0340fb679f4c70f49be9edd3e2ce9b187133')
+sha1sums=('e6b00cbf8e47bcab50d8cd3b12fb90528578e73c')
 install=${pkgname}.install
 
 build() {
