@@ -1,8 +1,8 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-system-tools
-pkgver=1.7.0
-pkgrel=2
+pkgver=1.7.90
+pkgrel=1
 pkgdesc="Suite of tools for MATE to simplify configuring workstations."
 url="http://mate-desktop.org/"
 arch=('i686' 'x86_64')
@@ -13,7 +13,7 @@ optdepends=('ntp: Automatic time synchronisation.'
             'caja: provides Caja Shares extension'
             'yelp: for reading MATE help documents')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('fe812716ac67625d069a7a1f1e727e682c95f452')
+sha1sums=('a3879bb2eb71afe30b665245c0c7095f6381fb0d')
 install=${pkgname}.install
 
 build() {

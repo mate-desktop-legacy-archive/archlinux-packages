@@ -1,8 +1,8 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=engrampa
-pkgver=1.7.1
-pkgrel=2
+pkgver=1.7.90
+pkgrel=1
 pkgdesc="Archive manipulator for MATE"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
@@ -21,7 +21,7 @@ options=( '!emptydirs')
 groups=('mate-unstable-extra')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz"
         fr-rpm-bsdtar.patch)
-sha1sums=('e5708566f587538273bfa30398f51e1279b2aed6'
+sha1sums=('dc8b0e6c4d83cf9aebcb5e2287c5eb524fd35ed1'
           '219b05a979bf6f249aaae27964f02345fd81168d')
 install=${pkgname}.install
 

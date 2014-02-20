@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-icon-theme-faenza
-pkgver=1.7.0
+pkgver=1.7.90
 pkgrel=1
 pkgdesc="Faenza icon theme for MATE"
 url="http://mate-desktop.org"
@@ -12,7 +12,7 @@ makedepends=('icon-naming-utils' 'mate-common')
 options=(!strip)
 groups=('mate-unstable-extra')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('7ea7b2d0319a483e7311c705d835925ed9251159')
+sha1sums=('c0ca8f100a325e804172a1db53a4eaaae038ccd5')
 install=${pkgname}.install
 
 build() {

@@ -1,8 +1,8 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-sensors-applet
-pkgver=1.7.0
-pkgrel=2
+pkgver=1.7.90
+pkgrel=1
 pkgdesc="A MATE Panel applet to display readings from hardware sensors, including CPU temperature, fan speeds and voltage readings."
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
@@ -14,7 +14,7 @@ optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
 groups=('mate-unstable-extra')
 source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('cd14c3acad2e891dccd8b03bcfb75e9f767d9c3c')
+sha1sums=('a4e846bfce7a97357d924118123788e00aebd167')
 install=${pkgname}.install
 
 build() {
