@@ -2,7 +2,7 @@
 
 pkgname=mate-terminal
 pkgver=1.8.0
-pkgrel=1
+pkgrel=2
 pkgdesc="The MATE Terminal Emulator"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
@@ -15,6 +15,11 @@ groups=('mate-extra')
 source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz")
 sha1sums=('14b380c71aaf73499f5ae292ee14d2eb27920074')
 install=${pkgname}.install
+
+prepare() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    sed -i 's/env python/env python2/' mate-terminal.wrapper
+}
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
