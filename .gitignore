@@ -3,5 +3,4 @@
 *.tar.gz
 *.tar.xz
 *.sig
-**/pkg/*
-**/src/*
+*.lock
