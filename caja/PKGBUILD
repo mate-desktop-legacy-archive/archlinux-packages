@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=caja
-pkgver=1.7.90
+pkgver=1.8.0
 pkgrel=1
 pkgdesc="The MATE shell and file manager"
 url="http://mate-desktop.org"
@@ -16,9 +16,9 @@ replaces=('mate-file-manager')
 provides=('mate-file-manager')
 conflicts=('mate-file-manager')
 options=('!emptydirs')
-groups=('mate-unstable')
-source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('7259ad41e2a6f4643e33f59326a07abe0e9ab230')
+groups=('mate')
+source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz")
+sha1sums=('3bfb52dceae4fa7b39eb26099b07326fa4197f3f')
 install=${pkgname}.install
 
 build() {

@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-terminal
-pkgver=1.7.90
+pkgver=1.8.0
 pkgrel=1
 pkgdesc="The MATE Terminal Emulator"
 url="http://mate-desktop.org"
@@ -11,9 +11,9 @@ depends=('dbus' 'dconf' 'gtk2' 'libsm' 'mate-desktop' 'vte')
 makedepends=('docbook2x' 'mate-common' 'perl-xml-parser' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
-groups=('mate-unstable-extra')
-source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('b56ec3f3382b8d9f8e749ff602b5ab4dcb54a7af')
+groups=('mate-extra')
+source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz")
+sha1sums=('14b380c71aaf73499f5ae292ee14d2eb27920074')
 install=${pkgname}.install
 
 build() {

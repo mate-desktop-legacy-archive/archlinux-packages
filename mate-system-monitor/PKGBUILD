@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-system-monitor
-pkgver=1.7.90
+pkgver=1.8.0
 pkgrel=1
 pkgdesc="A system monitor for MATE"
 url="http://mate-desktop.org"
@@ -12,9 +12,9 @@ depends=('dconf' 'dbus-glib' 'glibmm' 'gtk2' 'gtkmm' 'libgtop' 'libwnck' 'librsv
 makedepends=('docbook2x' 'mate-common' 'perl-xml-parser' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
-groups=('mate-unstable-extra')
-source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('2c09e980504d5b03b059b614b0c01ab79f72cb96')
+groups=('mate-extra')
+source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz")
+sha1sums=('a8f652340613154fac994cdc060bae95460c1d6f')
 install=${pkgname}.install
 
 build() {

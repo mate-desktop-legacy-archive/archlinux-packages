@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=marco
-pkgver=1.7.90
+pkgver=1.8.0
 pkgrel=1
 pkgdesc="A window manager for MATE"
 url="http://mate-desktop.org"
@@ -15,9 +15,9 @@ replaces=('mate-window-manager')
 provides=('mate-window-manager')
 conflicts=('mate-window-manager')
 options=('!emptydirs')
-groups=('mate-unstable')
-source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('8538cab2aec8f27990e21cb4b79c825794c9f559')
+groups=('mate')
+source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz")
+sha1sums=('7083d090aa2966ec590020aaf21ead77417bccba')
 install=${pkgname}.install
 
 build() {

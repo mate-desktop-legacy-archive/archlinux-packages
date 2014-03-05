@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mozo
-pkgver=1.7.90
+pkgver=1.8.0
 pkgrel=1
 pkgdesc="MATE menu editing tool"
 url="http://mate-desktop.org"
@@ -14,9 +14,9 @@ replaces=('mate-menu-editor')
 provides=('mate-menu-editor')
 conflicts=('mate-menu-editor')
 options=('!emptydirs')
-groups=('mate-unstable-extra')
-source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('51b7a57450c16319ff67ae4aaf5ce904e9192479')
+groups=('mate-extra')
+source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz")
+sha1sums=('0b0779088181c74837dda85134e2c451e3399b2a')
 install=${pkgname}.install
 
 build() {

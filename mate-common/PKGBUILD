@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-common
-pkgver=1.7.90
+pkgver=1.8.0
 pkgrel=1
 pkgdesc="Common development macros for MATE"
 arch=('any')
@@ -9,8 +9,8 @@ license=('GPL')
 depends=('autoconf' 'automake' 'gettext' 'gtk-doc' 'intltool' 'libtool' 'pkg-config')
 options=('!emptydirs')
 url="http://mate-desktop.org"
-source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('416d01af41e6205385c9ba7921d4d2e601d3f99c')
+source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz")
+sha1sums=('41156798ed4cc55d39bb85eaeffa244b224fa3f6')
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"

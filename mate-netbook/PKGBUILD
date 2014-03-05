@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-netbook
-pkgver=1.7.90
+pkgver=1.8.0
 pkgrel=1
 pkgdesc="A simple window management tool."
 url="http://mate-desktop.org"
@@ -11,8 +11,8 @@ depends=('gtk2' 'libfakekey' 'libwnck' 'libunique' 'mate-panel')
 makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
-source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('3360a632edb77f9e8b425cb409e41c1fc87156cb')
+source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz")
+sha1sums=('64723fcf6a3a42e7faacfb54fb0c85103af5b1ba')
 install=${pkgname}.install
 
 build() {

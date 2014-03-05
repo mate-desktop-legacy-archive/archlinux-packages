@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-icon-theme
-pkgver=1.7.90
+pkgver=1.8.0
 pkgrel=1
 pkgdesc="MATE icon theme"
 url="http://mate-desktop.org"
@@ -10,9 +10,9 @@ license=('GPL')
 depends=('hicolor-icon-theme' 'gtk-update-icon-cache')
 makedepends=('icon-naming-utils' 'mate-common' 'perl-xml-parser')
 options=(!emptydirs !strip)
-groups=('mate-unstable')
-source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('e6b00cbf8e47bcab50d8cd3b12fb90528578e73c')
+groups=('mate')
+source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz")
+sha1sums=('6bc8ec63fed8e85390364626cd06d6fb130f0071')
 install=${pkgname}.install
 
 build() {

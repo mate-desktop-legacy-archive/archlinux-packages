@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-power-manager
-pkgver=1.7.90
+pkgver=1.8.0
 pkgrel=1
 pkgdesc="Session daemon that makes it easy to manage your laptop or desktop system for Mate Desktop"
 url="http://mate-desktop.org"
@@ -13,9 +13,9 @@ makedepends=('docbook2x' 'docbook-xml' 'mate-common' 'perl-xml-parser'
              'xmlto' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
-groups=('mate-unstable-extra')
-source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('a211f4f6c736b7c14c161a74b88ef1a8d84f169a')
+groups=('mate-extra')
+source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz")
+sha1sums=('5cde22f2d6498294a76e3bf9005b4f73bbdd0db8')
 install=${pkgname}.install
 
 prepare() {

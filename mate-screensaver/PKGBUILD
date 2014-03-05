@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-screensaver
-pkgver=1.7.90
+pkgver=1.8.0
 pkgrel=1
 pkgdesc='Screensaver for MATE'
 url="http://mate-desktop.org"
@@ -11,11 +11,13 @@ depends=('dbus-glib' 'libmatekbd' 'libnotify' 'libxss' 'mate-desktop'
          'mate-menus' 'mate-session-manager')
 makedepends=('mate-common' 'perl-xml-parser' 'xmlto' 'yelp-tools')
 optdepends=('mate-power-manager: Add power management support.'
+            'mate-screensaver-hacks: Additional screensavers.'
+            'rss-glx: Really slick screensavers.'
             'yelp: for reading MATE help documents')
 options=('!emptydirs')
-groups=('mate-unstable-extra')
-source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('01efa5936c751a2061e8296edd942e6350f81655')
+groups=('mate-extra')
+source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz")
+sha1sums=('b7ab88c3ee5b513630ff99a64c18626ed8ef49fa')
 install=${pkgname}.install
 
 build() {

@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=pluma
-pkgver=1.7.90
+pkgver=1.8.0
 pkgrel=1
 pkgdesc="A powerful text editor for MATE"
 url="http://mate-desktop.org"
@@ -16,9 +16,9 @@ replaces=('mate-text-editor')
 provides=('mate-text-editor')
 conflicts=('mate-text-editor')
 options=('!emptydirs')
-groups=('mate-unstable-extra')
-source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('53e5e680b6c7081d474edc3353a758edb8cd8b23')
+groups=('mate-extra')
+source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz")
+sha1sums=('858e3edaee698b3f99189d3285061ab56b21828c')
 install=${pkgname}.install
 
 build() {

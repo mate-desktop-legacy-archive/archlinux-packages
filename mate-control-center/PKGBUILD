@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-control-center
-pkgver=1.7.90
+pkgver=1.8.0
 pkgrel=1
 pkgdesc="The Control Center for MATE"
 url="http://mate-desktop.org"
@@ -14,9 +14,9 @@ depends=('caja' 'dbus-glib' 'dconf' 'desktop-file-utils' 'gsettings-desktop-sche
 makedepends=('docbook2x' 'mate-common' 'perl-xml-parser' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
-groups=('mate-unstable')
-source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('f70ab56573dde0d2b25f48a5b228e1963d55677e')
+groups=('mate')
+source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz")
+sha1sums=('d65088d1d7e9cf20aac466c98622f579979dc396')
 install=${pkgname}.install
 
 build() {

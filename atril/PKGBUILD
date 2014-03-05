@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=atril
-pkgver=1.7.90
+pkgver=1.8.0
 pkgrel=1
 pkgdesc="Simply a document viewer"
 url="http://mate-desktop.org"
@@ -22,9 +22,9 @@ replaces=('mate-document-viewer')
 provides=('mate-document-viewer')
 conflicts=('mate-document-viewer')
 options=('!emptydirs')
-groups=('mate-unstable-extra')
-source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('74b1514dcde796eba090b21601d244b19b6af173')
+groups=('mate-extra')
+source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz")
+sha1sums=('8327437ba12df61326b83342cea746d1764727d0')
 install=${pkgname}.install
 
 prepare() {
@@ -44,6 +44,7 @@ build() {
         --enable-t1lib \
         --enable-pixbuf \
         --enable-comics \
+        --enable-xps \
         --enable-introspection \
         --disable-static
     make

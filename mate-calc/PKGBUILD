@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-calc
-pkgver=1.7.90
+pkgver=1.8.0
 pkgrel=1
 pkgdesc="Calculator for the Mate desktop environment"
 url="http://mate-desktop.org"
@@ -10,9 +10,9 @@ license=('LGPL' 'GPL')
 depends=('dconf' 'gtk2' 'yelp')
 makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
 options=('!emptydirs')
-groups=('mate-unstable-extra')
-source=("http://pub.mate-desktop.org/releases/1.7/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('28f3a8edadf3055b7f57be9172062bdaf87b91e1')
+groups=('mate-extra')
+source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz")
+sha1sums=('d63156db75d8110f0cabf82a12c74c5b9836f327')
 install=${pkgname}.install
 
 build() {
