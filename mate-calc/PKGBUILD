@@ -2,13 +2,14 @@
 
 pkgname=mate-calc
 pkgver=1.8.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Calculator for the Mate desktop environment"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('LGPL' 'GPL')
-depends=('dconf' 'gtk2' 'yelp')
+depends=('dconf' 'gtk2')
 makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
+optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
 groups=('mate-extra')
 source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz")

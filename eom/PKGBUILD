@@ -2,12 +2,12 @@
 
 pkgname=eom
 pkgver=1.8.0
-pkgrel=1
+pkgrel=2
 pkgdesc="An image viewing and cataloging program for MATE"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('dbus-glib' 'desktop-file-utils' 'gtk2' 'exempi' 'lcms' 'libexif'
+depends=('dbus-glib' 'desktop-file-utils' 'gtk2' 'exempi' 'lcms2' 'libexif'
          'libjpeg-turbo' 'mate-desktop' 'mate-icon-theme' 'pygtk' 'python2'
          'python2-gobject2' 'startup-notification' 'zlib')
 makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
