@@ -1,8 +1,13 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-pkgname=mate-panel
-pkgver=1.8.0
+_pkgname=mate-panel
+_ver=1.9.80
+pkgname=${_pkgname}-git
+pkgver=0
 pkgrel=1
+conflicts=("${_pkgname}")
+provides=("${_pkgname}")
+
 pkgdesc="The MATE Panel"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
@@ -10,17 +15,27 @@ license=('GPL')
 depends=('caja' 'dbus-glib' 'dconf' 'gtk2' 'libwnck' 'libcanberra' 'libice'
          'libmateweather' 'librsvg' 'libsm' 'libsoup' 'libxau' 'marco'
          'mate-menus' 'mate-desktop' 'mate-session-manager')
-makedepends=('gobject-introspection' 'mate-common' 'networkmanager'
+makedepends=('git' 'gobject-introspection' 'mate-common' 'networkmanager'
              'perl-xml-parser' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
-groups=('mate')
-source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('289bca55fb26465f2c155d087932d6973edf07d9')
-install=${pkgname}.install
+groups=('mate-unstable')
+source=("$pkgname"::"git+https://github.com/mate-desktop/${_pkgname}.git")
+sha1sums=('SKIP')
+install=${_pkgname}.install
+
+pkgver() {
+    cd "${srcdir}/${pkgname}"
+    echo ${_ver}.$(git rev-list --count master).$(git rev-parse --short master)
+}
+
+prepare() {
+    cd "${srcdir}/${pkgname}"
+    NOCONFIGURE=1 ./autogen.sh
+}
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}"
     ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
@@ -33,6 +48,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}"
     make DESTDIR="${pkgdir}" install
 }

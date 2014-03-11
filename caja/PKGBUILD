@@ -1,28 +1,40 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-pkgname=caja
-pkgver=1.8.0
+_pkgname=caja
+_ver=1.9.80
+pkgname=${_pkgname}-git
+pkgver=0
 pkgrel=1
+conflicts=("${_pkgname}")
+provides=("${_pkgname}")
+
 pkgdesc="The MATE shell and file manager"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
 depends=('dbus' 'desktop-file-utils' 'exempi' 'gtk2' 'gvfs' 'libexif' 'libunique'
          'libxt' 'mate-desktop' 'mate-icon-theme' 'startup-notification')
-makedepends=('gobject-introspection' 'mate-common' 'pangox-compat')
+makedepends=('git' 'gobject-introspection' 'mate-common' 'pangox-compat')
 optdepends=('gstreamer0.10-good-plugins: automatic media playback when mouseover'
             'gvfs-smb: To connect to Samba/Windows shares')
-replaces=('mate-file-manager')
-provides=('mate-file-manager')
-conflicts=('mate-file-manager')
 options=('!emptydirs')
-groups=('mate')
-source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('3bfb52dceae4fa7b39eb26099b07326fa4197f3f')
-install=${pkgname}.install
+groups=('mate-unstable')
+source=("$pkgname"::"git+https://github.com/mate-desktop/${_pkgname}.git")
+sha1sums=('SKIP')
+install=${_pkgname}.install
+
+pkgver() {
+    cd "${srcdir}/${pkgname}"
+    echo ${_ver}.$(git rev-list --count master).$(git rev-parse --short master)
+}
+
+prepare() {
+    cd "${srcdir}/${pkgname}"
+    NOCONFIGURE=1 ./autogen.sh
+}
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}"
     ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
@@ -35,6 +47,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}"
     make DESTDIR="${pkgdir}" install
 }

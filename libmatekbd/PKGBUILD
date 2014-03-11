@@ -1,21 +1,36 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-pkgname=libmatekbd
-pkgver=1.8.0
+_pkgname=libmatekbd
+_ver=1.9.80
+pkgname=${_pkgname}-git
+pkgver=0
 pkgrel=1
+conflicts=("${_pkgname}")
+provides=("${_pkgname}")
+
 pkgdesc="MATE keyboard library"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('LGPL')
 depends=('dconf' 'gtk2' 'iso-codes' 'libxklavier')
-makedepends=('mate-common' 'perl-xml-parser')
+makedepends=('git' 'mate-common' 'perl-xml-parser')
 options=('!emptydirs')
-source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('8034737a40d5a2f1e4857a21110b4f1eacf0db30')
-install=${pkgname}.install
+source=("$pkgname"::"git+https://github.com/mate-desktop/${_pkgname}.git")
+sha1sums=('SKIP')
+install=${_pkgname}.install
+
+pkgver() {
+    cd "${srcdir}/${pkgname}"
+    echo ${_ver}.$(git rev-list --count master).$(git rev-parse --short master)
+}
+
+prepare() {
+    cd "${srcdir}/${pkgname}"
+    NOCONFIGURE=1 ./autogen.sh
+}
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}"
     ./configure \
         --prefix=/usr \
         --with-gtk=2.0 \
@@ -24,6 +39,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}"
     make DESTDIR="${pkgdir}" install
 }

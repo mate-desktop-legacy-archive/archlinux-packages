@@ -49,7 +49,6 @@ BUILD_ORDER=(
     mate-calc
     eom
     mate-icon-theme-faenza
-    #mate-indicator-applet              # For the AUR
     mozo
     mate-netbook
     mate-netspeed
@@ -62,9 +61,9 @@ BUILD_ORDER=(
     python2-caja
 )
 
-MATE_VER=1.8
+MATE_VER=1.9
 BASEDIR=$(dirname $(readlink -f ${0}))
-REPODIR="/var/local/mate/${MATE_VER}"
+REPODIR="/var/local/mate-unstable/${MATE_VER}"
 
 
 # Show usage information.
@@ -88,33 +87,29 @@ function usage() {
 
 function config_builder() {
     if [ "${MACHINE}" == "x86_64" ]; then
-        ln -s /usr/bin/archbuild /usr/local/bin/mate-i686-build 2>/dev/null
-        ln -s /usr/bin/archbuild /usr/local/bin/mate-x86_64-build 2>/dev/null
+        ln -s /usr/bin/archbuild /usr/local/bin/mate-unstable-i686-build 2>/dev/null
+        ln -s /usr/bin/archbuild /usr/local/bin/mate-unstable-x86_64-build 2>/dev/null
     elif  [ "${MACHINE}" == "i686" ]; then
-        ln -s /usr/bin/archbuild /usr/local/bin/mate-i686-build 2>/dev/null
-    elif  [ "${MACHINE}" == "armv6l" ]; then
-        ln -s /usr/bin/archbuild /usr/local/bin/mate-armv6h-build 2>/dev/null
-    elif  [ "${MACHINE}" == "armv7l" ]; then
-        ln -s /usr/bin/archbuild /usr/local/bin/mate-armv7h-build 2>/dev/null
+        ln -s /usr/bin/archbuild /usr/local/bin/mate-unstable-i686-build 2>/dev/null
     fi
-    rm /usr/local/bin/matepkg 2>/dev/null
+    rm /usr/local/bin/mate-unstablepkg 2>/dev/null
 
     # Augment /usr/share/devtools/pacman-extra.conf
-    cp /usr/share/devtools/pacman-extra.conf /usr/share/devtools/pacman-mate.conf
-    sed -i s'/#\[testing\]/\[mate\]/' /usr/share/devtools/pacman-mate.conf
-    sed -i '0,/#Include = \/etc\/pacman\.d\/mirrorlist/s///' /usr/share/devtools/pacman-mate.conf
-    echo "SigLevel = Optional TrustAll"   >  /tmp/mate.conf
-    echo 'Server = http://localhost:8088/'${MATE_VER}'/$arch' >> /tmp/mate.conf
-    sed -i '/\[mate\]/r /tmp/mate.conf' /usr/share/devtools/pacman-mate.conf
+    cp /usr/share/devtools/pacman-extra.conf /usr/share/devtools/pacman-mate-unstable.conf
+    sed -i s'/#\[testing\]/\[mate-unstable\]/' /usr/share/devtools/pacman-mate-unstable.conf
+    sed -i '0,/#Include = \/etc\/pacman\.d\/mirrorlist/s///' /usr/share/devtools/pacman-mate-unstable.conf
+    echo "SigLevel = Optional TrustAll"   >  /tmp/pacman-mate-unstable.conf
+    echo 'Server = http://localhost:8089/'${MATE_VER}'/$arch' >> /tmp/pacman-mate-unstable.conf
+    sed -i '/\[mate-unstable\]/r /tmp/mate-unstable.conf' /usr/share/devtools/pacman-mate-unstable.conf
 }
 
 function repo_init() {
     # Remove any existing repositories and create empty ones.
-    rm -rf /var/local/mate/*
-    for INIT_ARCH in i686 x86_64 armv6h armv7h
+    rm -rf /var/local/mate-unstable/*
+    for INIT_ARCH in i686 x86_64
     do
         mkdir -p ${REPODIR}/${INIT_ARCH}
-        touch ${REPODIR}/${INIT_ARCH}/mate.db
+        touch ${REPODIR}/${INIT_ARCH}/mate-unstable.db
     done
 }
 
@@ -123,51 +118,55 @@ function repo_update() {
     if [ ! -d ${REPODIR}/${CHROOT_PLAT} ]; then
         mkdir -p ${REPODIR}/${CHROOT_PLAT}
     fi
-    repo-add -q --nocolor --new ${REPODIR}/${CHROOT_PLAT}/mate.db.tar.gz ${REPODIR}/${CHROOT_PLAT}/*.pkg.tar.xz 2>/dev/null
+    repo-add -q --nocolor --new ${REPODIR}/${CHROOT_PLAT}/mate-unstable.db.tar.gz ${REPODIR}/${CHROOT_PLAT}/*.pkg.tar.xz 2>/dev/null
 }
 
 function httpd_stop() {
-    if [ -f /tmp/mate-darkhttpd.pid ]; then
-        local DARK_PID=`cat /tmp/mate-darkhttpd.pid`
+    if [ -f /tmp/mate-unstable-darkhttpd.pid ]; then
+        local DARK_PID=`cat /tmp/mate-unstable-darkhttpd.pid`
         kill -9 ${DARK_PID}
-        rm /tmp/mate-darkhttpd.pid
+        rm /tmp/mate-unstable-darkhttpd.pid
     else
         killall darkhttpd
     fi
 }
 
 function httpd_start() {
-    if [ -f /tmp/mate-darkhttpd.pid ]; then
+    if [ -f /tmp/mate-unstable-darkhttpd.pid ]; then
         httpd_stop
     fi
-    rm /tmp/mate-http.log 2>/dev/null
-    darkhttpd /var/local/mate/ --port 8088 --daemon --log /tmp/mate-darkhttpd.log --pidfile /tmp/mate-darkhttpd.pid
+    rm /tmp/mate-unstable-http.log 2>/dev/null
+    darkhttpd /var/local/mate-unstable/ --port 8089 --daemon --log /tmp/mate-unstable-darkhttpd.log --pidfile /tmp/mate-unstable-darkhttpd.pid
 }
 
 # Build packages that are not at the current version.
 function tree_build() {
-    local PKG=${1}
+    local PKG=${1}    
     cd ${PKG}
-    local INSTALLED=$(pacman -Q `basename ${PKG}` 2>/dev/null | cut -f2 -d' ')
-    local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=' | head -n1)
+    
+    # If there is a git clone,  and check the revision.
+    if [ -f ${PKG}-git/FETCH_HEAD ]; then
+        local _ver=$(grep -E ^_ver PKGBUILD | cut -f2 -d'=')
+        # git version
+        cd ${PKG}-git
+        git fetch
+        local PKGBUILD_VER=${_ver}.$(git rev-list --count master).$(git rev-parse --short master)
+        cd ..
+    else
+        # pacakge version
+        local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=' | head -n1)
+    fi
+
     local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
-    local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}    
+    local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
     local TEST_ANY=$(grep "^arch=" PKGBUILD | grep any)
     if [ -n "${TEST_ANY}" ]; then
         if [ "${MACHINE}" == "i686" ] || [ "${MACHINE}" == "x86_64" ]; then
             local CHROOT_ARCHS=(i686)
-        elif [ "${MACHINE}" == "armv6l" ]; then
-            local CHROOT_ARCHS=(armv6h)
-        elif [ "${MACHINE}" == "armv7l" ]; then
-            local CHROOT_ARCHS=(armv7h)
         fi
     else
         if [ "${MACHINE}" == "i686" ] || [ "${MACHINE}" == "x86_64" ]; then
             local CHROOT_ARCHS=(i686 x86_64)
-        elif [ "${MACHINE}" == "armv6l" ]; then
-            local CHROOT_ARCHS=(armv6h)
-        elif [ "${MACHINE}" == "armv7l" ]; then
-            local CHROOT_ARCHS=(armv7h)
         fi
     fi
 
@@ -183,7 +182,7 @@ function tree_build() {
         
         if [ ${RET} -ne 0 ]; then
             echo " - Building ${PKG}"
-            mate-${CHROOT_ARCH}-build
+            mate-unstable-${CHROOT_ARCH}-build
             if [ $? -ne 0 ]; then
                 echo " - Failed to build ${PKG} for ${CHROOT_ARCH}. Stopping here."
                 httpd_stop
@@ -193,19 +192,13 @@ function tree_build() {
             echo " - ${PKG} is current"
         fi
         
-        echo " - Rebuilding [mate] with ${PKG}."
+        echo " - Rebuilding [mate-unstable] with ${PKG}."
         if [ -n "${TEST_ANY}" ]; then
             if [ "${MACHINE}" == "i686" ] || [ "${MACHINE}" == "x86_64" ]; then
                 cp -a ${PKG}*-any.pkg.tar.xz ${REPODIR}/i686/ 2>/dev/null
                 cp -a ${PKG}*-any.pkg.tar.xz ${REPODIR}/x86_64/ 2>/dev/null
                 repo_update i686
                 repo_update x86_64
-            elif [ "${MACHINE}" == "armv6l" ]; then
-                cp -a ${PKG}*-any.pkg.tar.xz ${REPODIR}/armv6h/ 2>/dev/null
-                repo_update armv6h
-            elif [ "${MACHINE}" == "armv7l" ]; then
-                cp -a ${PKG}*-any.pkg.tar.xz ${REPODIR}/armv7h/ 2>/dev/null
-                repo_update armv7h
             fi
         else
             cp -a ${PKG}*-${CHROOT_ARCH}.pkg.tar.xz ${REPODIR}/${CHROOT_ARCH}/ 2>/dev/null

@@ -1,27 +1,38 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgbase=mate-settings-daemon
-pkgname=("${pkgbase}-pulseaudio" "${pkgbase}-gstreamer")
-pkgver=1.8.0
+_ver=1.9.80
+pkgname=("${pkgbase}-pulseaudio-git" "${pkgbase}-gstreamer-git")
+pkgver=0
 pkgrel=1
-pkgdesc="The MATE Settings daemon"
+
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
 depends=('dbus-glib' 'dconf' 'fontconfig' 'gstreamer0.10-base' 'gtk2'
          'libcanberra-pulse' 'libmatekbd' 'libnotify' 'libxt' 'mate-desktop'
          'nss' 'polkit' 'pulseaudio-alsa')
-makedepends=('mate-common' 'perl-xml-parser')
-source=("http://pub.mate-desktop.org/releases/1.8/${pkgbase}-${pkgver}.tar.xz")
-sha1sums=('f36819914e03c0f3ceda209fba17a2063990078b')
+makedepends=('git' 'mate-common' 'perl-xml-parser')
+source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
+sha1sums=('SKIP')
 install=${pkgbase}.install
+
+pkgver() {
+    cd "${srcdir}/${pkgbase}"
+    echo ${_ver}.$(git rev-list --count master).$(git rev-parse --short master)
+}
+
+prepare() {
+    cd "${srcdir}/${pkgbase}"
+    NOCONFIGURE=1 ./autogen.sh
+}
 
 build() {
     cd "${srcdir}"
-    cp -a ${pkgbase}-${pkgver}{,-gstreamer}
+    cp -a ${pkgbase}{-pulseaudio-git,-gstreamer-git}
     
     # build for pulseaudio 
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-pulseaudio-git"
     ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgbase} \
@@ -34,7 +45,7 @@ build() {
     make
     
     # build for gstreamer
-    cd "${srcdir}/${pkgbase}-${pkgver}-gstreamer"
+    cd "${srcdir}/${pkgbase}-gstreamer-git"
     ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgbase} \
@@ -47,25 +58,25 @@ build() {
     make
 }
 
-package_mate-settings-daemon-pulseaudio() {
-    groups=('mate')
+package_mate-settings-daemon-pulseaudio-git() {
+    groups=('mate-unstable')
     pkgdesc="The MATE Settings daemon (pulseaudio)"
     depends=('dbus-glib' 'dconf' 'fontconfig' 'gtk2' 'libcanberra-pulse'
             'libmatekbd' 'libnotify' 'libxt' 'mate-desktop' 'nss' 'polkit'
             'pulseaudio-alsa')
-    conflicts=("${pkgbase}-gstreamer" 'mate-media-gstreamer')
+    conflicts=("${pkgbase}-gstreamer-git" 'mate-media-gstreamer-git')
     provides=("${pkgbase}")
     replaces=("${pkgbase}")
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-pulseaudio-git"
     make DESTDIR="${pkgdir}" install
 }
 
-package_mate-settings-daemon-gstreamer() {
+package_mate-settings-daemon-gstreamer-git() {
     pkgdesc="The MATE Settings daemon (GStreamer)"
     depends=('dbus-glib' 'dconf' 'fontconfig' 'gstreamer0.10-base' 'gtk2'
              'libmatekbd' 'libnotify' 'libxt' 'mate-desktop' 'nss' 'polkit')
-    conflicts=("${pkgbase}-pulseaudio" 'mate-media-pulseaudio')
+    conflicts=("${pkgbase}-pulseaudio-git" 'mate-media-pulseaudio-git')
     provides=("${pkgbase}")
-    cd "${srcdir}/${pkgbase}-${pkgver}-gstreamer"
+    cd "${srcdir}/${pkgbase}-gstreamer-git"
     make DESTDIR="${pkgdir}" install
 }

@@ -1,28 +1,43 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-pkgname=mate-desktop
-pkgver=1.8.0
+_pkgname=mate-desktop
+_ver=1.9.80
+pkgname=${_pkgname}-git
+pkgver=0
 pkgrel=1
+conflicts=("${_pkgname}")
+provides=("${_pkgname}")
+
 pkgdesc="Library with common API for various MATE modules"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=(GPL LGPL)
 depends=('dconf' 'gtk2' 'hicolor-icon-theme' 'libunique' 'python2'
          'startup-notification' 'ttf-dejavu')
-makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
+makedepends=('git' 'mate-common' 'perl-xml-parser' 'yelp-tools')
 optdepends=('lightdm-gtk2-greeter: A lightweight display manager'
             'orca: Screen reader for blind or visually impaired individuals'
             'yelp: for reading MATE help documents')
 options=('!emptydirs')
-groups=('mate')
-source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('1e722d18a198751b209fcf255ad5d3653cb8f6e6')
-install=${pkgname}.install
+groups=('mate-unstable')
+source=("$pkgname"::"git+https://github.com/mate-desktop/${_pkgname}.git")
+sha1sums=('SKIP')
+install=${_pkgname}.install
+
+pkgver() {
+    cd "${srcdir}/${pkgname}"
+    echo ${_ver}.$(git rev-list --count master).$(git rev-parse --short master)
+}
+
+prepare() {
+    cd "${srcdir}/${pkgname}"
+    NOCONFIGURE=1 ./autogen.sh
+}
 
 build() {
     # See the following for '--disable-desktop-docs' justification
     #  - https://github.com/mate-desktop/mate-desktop/issues/68
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}"
     PYTHON=/usr/bin/python2 ./configure \
         --prefix=/usr \
         --with-gtk=2.0 \
@@ -34,6 +49,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}"
     make DESTDIR="${pkgdir}" install
 }

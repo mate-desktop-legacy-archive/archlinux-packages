@@ -1,29 +1,44 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-pkgname=mate-icon-theme
-pkgver=1.8.0
+_pkgname=mate-icon-theme
+_ver=1.9.80
+pkgname=${_pkgname}-git
+pkgver=0
 pkgrel=1
+conflicts=("${_pkgname}")
+provides=("${_pkgname}")
+
 pkgdesc="MATE icon theme"
 url="http://mate-desktop.org"
 arch=('any')
 license=('GPL')
 depends=('hicolor-icon-theme' 'gtk-update-icon-cache')
-makedepends=('icon-naming-utils' 'mate-common' 'perl-xml-parser')
+makedepends=('git' 'icon-naming-utils' 'mate-common' 'perl-xml-parser')
 options=(!emptydirs !strip)
-groups=('mate')
-source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('6bc8ec63fed8e85390364626cd06d6fb130f0071')
-install=${pkgname}.install
+groups=('mate-unstable')
+source=("$pkgname"::"git+https://github.com/mate-desktop/${_pkgname}.git")
+sha1sums=('SKIP')
+install=${_pkgname}.install
+
+pkgver() {
+    cd "${srcdir}/${pkgname}"
+    echo ${_ver}.$(git rev-list --count master).$(git rev-parse --short master)
+}
+
+prepare() {
+    cd "${srcdir}/${pkgname}"
+    NOCONFIGURE=1 ./autogen.sh
+}
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}"
     ./configure \
         --prefix=/usr
     make
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}"
     make DESTDIR="${pkgdir}" install
     rm -f "${pkgdir}/usr/share/icons/mate/icon-theme.cache"
 }

@@ -1,22 +1,37 @@
 #Maintainer: Martin Wimpress <code@flexion.org>
 
-pkgname=mate-user-share
-pkgver=1.8.0
+_pkgname=mate-user-share
+_ver=1.9.80
+pkgname=${_pkgname}-git
+pkgver=0
 pkgrel=1
+conflicts=("${_pkgname}")
+provides=("${_pkgname}")
+
 pkgdesc="User level public file sharing via WebDAV for MATE."
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
 depends=('caja' 'dbus-glib' 'dconf' 'libunique' 'mod_dnssd')
-makedepends=('libcanberra' 'libnotify' 'mate-common' 'perl-xml-parser' 'yelp-tools')
+makedepends=('git' 'libcanberra' 'libnotify' 'mate-common' 'perl-xml-parser' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
-source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('dbeab8c06b098b2787b68541810e268c70764b14')
-install=${pkgname}.install
+source=("$pkgname"::"git+https://github.com/mate-desktop/${_pkgname}.git")
+sha1sums=('SKIP')
+install=${_pkgname}.install
+
+pkgver() {
+    cd "${srcdir}/${pkgname}"
+    echo ${_ver}.$(git rev-list --count master).$(git rev-parse --short master)
+}
+
+prepare() {
+    cd "${srcdir}/${pkgname}"
+    NOCONFIGURE=1 ./autogen.sh
+}
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}"
     PYTHON=/usr/bin/python2 ./configure \
         --prefix=/usr \
         --libexec=/usr/lib/${pkgname} \
@@ -28,7 +43,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}"
     make  DESTDIR="${pkgdir}" install
     rm -f "${pkgdir}/usr/share/mate-user-share/dav_user_2.0.conf"
 }

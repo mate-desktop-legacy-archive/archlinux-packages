@@ -1,28 +1,39 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-pkgname=mate-terminal
-pkgver=1.8.0
-pkgrel=2
+_pkgname=mate-terminal
+_ver=1.9.80
+pkgname=${_pkgname}-git
+pkgver=0
+pkgrel=1
+conflicts=("${_pkgname}")
+provides=("${_pkgname}")
+
 pkgdesc="The MATE Terminal Emulator"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
 depends=('dbus' 'dconf' 'gtk2' 'libsm' 'mate-desktop' 'vte')
-makedepends=('docbook2x' 'mate-common' 'perl-xml-parser' 'yelp-tools')
+makedepends=('git' 'docbook2x' 'mate-common' 'perl-xml-parser' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
-groups=('mate-extra')
-source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('14b380c71aaf73499f5ae292ee14d2eb27920074')
-install=${pkgname}.install
+groups=('mate-unstable-extra')
+source=("$pkgname"::"git+https://github.com/mate-desktop/${_pkgname}.git")
+sha1sums=('SKIP')
+install=${_pkgname}.install
+
+pkgver() {
+    cd "${srcdir}/${pkgname}"
+    echo ${_ver}.$(git rev-list --count master).$(git rev-parse --short master)
+}
 
 prepare() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}"
+    NOCONFIGURE=1 ./autogen.sh
     sed -i 's/env python/env python2/' mate-terminal.wrapper
 }
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}"
     ./configure \
         --prefix=/usr \
         --with-gtk=2.0 \
@@ -31,6 +42,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}"
     make DESTDIR="${pkgdir}" install
 }

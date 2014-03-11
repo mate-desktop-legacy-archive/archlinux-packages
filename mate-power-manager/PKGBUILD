@@ -1,31 +1,42 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-pkgname=mate-power-manager
-pkgver=1.8.0
+_pkgname=mate-power-manager
+_ver=1.9.80
+pkgname=${_pkgname}-git
+pkgver=0
 pkgrel=1
+conflicts=("${_pkgname}")
+provides=("${_pkgname}")
+
 pkgdesc="Session daemon that makes it easy to manage your laptop or desktop system for Mate Desktop"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
 depends=('dbus-glib' 'dconf' 'libcanberra' 'libgnome-keyring' 'libnotify' 
          'libunique' 'mate-panel' 'upower')
-makedepends=('docbook2x' 'docbook-xml' 'mate-common' 'perl-xml-parser'
+makedepends=('git' 'docbook2x' 'docbook-xml' 'mate-common' 'perl-xml-parser'
              'xmlto' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
-groups=('mate-extra')
-source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('5cde22f2d6498294a76e3bf9005b4f73bbdd0db8')
-install=${pkgname}.install
+groups=('mate-unstable-extra')
+source=("$pkgname"::"git+https://github.com/mate-desktop/${_pkgname}.git")
+sha1sums=('SKIP')
+install=${_pkgname}.install
+
+pkgver() {
+    cd "${srcdir}/${pkgname}"
+    echo ${_ver}.$(git rev-list --count master).$(git rev-parse --short master)
+}
 
 prepare() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}"
+    NOCONFIGURE=1 ./autogen.sh
     #Work around a problem where the .sgml fail to parse.
     sed -e 's:@HAVE_DOCBOOK2MAN_TRUE@.*::' -i man/Makefile.in
 }
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}"
     ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
@@ -38,6 +49,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}"
     make DESTDIR="${pkgdir}" install
 }
