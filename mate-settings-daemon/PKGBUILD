@@ -29,10 +29,10 @@ prepare() {
 
 build() {
     cd "${srcdir}"
-    cp -a ${pkgbase}{-pulseaudio-git,-gstreamer-git}
+    cp -a ${pkgbase}{,-gstreamer}
     
     # build for pulseaudio 
-    cd "${srcdir}/${pkgbase}-pulseaudio-git"
+    cd "${srcdir}/${pkgbase}"
     ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgbase} \
@@ -45,7 +45,7 @@ build() {
     make
     
     # build for gstreamer
-    cd "${srcdir}/${pkgbase}-gstreamer-git"
+    cd "${srcdir}/${pkgbase}-gstreamer"
     ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgbase} \
@@ -67,7 +67,7 @@ package_mate-settings-daemon-pulseaudio-git() {
     conflicts=("${pkgbase}-gstreamer-git" 'mate-media-gstreamer-git')
     provides=("${pkgbase}")
     replaces=("${pkgbase}")
-    cd "${srcdir}/${pkgbase}-pulseaudio-git"
+    cd "${srcdir}/${pkgbase}"
     make DESTDIR="${pkgdir}" install
 }
 
@@ -77,6 +77,6 @@ package_mate-settings-daemon-gstreamer-git() {
              'libmatekbd' 'libnotify' 'libxt' 'mate-desktop' 'nss' 'polkit')
     conflicts=("${pkgbase}-pulseaudio-git" 'mate-media-pulseaudio-git')
     provides=("${pkgbase}")
-    cd "${srcdir}/${pkgbase}-gstreamer-git"
+    cd "${srcdir}/${pkgbase}-gstreamer"
     make DESTDIR="${pkgdir}" install
 }

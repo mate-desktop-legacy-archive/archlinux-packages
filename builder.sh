@@ -145,10 +145,18 @@ function tree_build() {
     cd ${PKG}
     
     # If there is a git clone,  and check the revision.
-    if [ -f ${PKG}-git/FETCH_HEAD ]; then
+    if [ -d ${PKG}-git ]; then
+        local GIT_DIR=${PKG}-git
+    elif [ -d mate-settings-daemon ]; then
+        local GIT_DIR="mate-settings-daemon"
+    elif [ -d mate-media ]; then
+        local GIT_DIR="mate-media"
+    fi
+    
+    if [ -f ${GIT_DIR}/FETCH_HEAD ]; then
         local _ver=$(grep -E ^_ver PKGBUILD | cut -f2 -d'=')
         # git version
-        cd ${PKG}-git
+        cd ${GIT_DIR}
         git fetch
         local PKGBUILD_VER=${_ver}.$(git rev-list --count master).$(git rev-parse --short master)
         cd ..
@@ -189,7 +197,11 @@ function tree_build() {
                 exit 1
             fi
         else
-            echo " - ${PKG} is current"
+            if [ -n "${TEST_ANY}" ]; then
+                echo " - ${PKG}-${PKGBUILD}-any is current"
+            else
+                echo " - ${PKG}-${PKGBUILD}-${CHROOT_ARCH} is current"
+            fi
         fi
         
         echo " - Rebuilding [mate-unstable] with ${PKG}."
