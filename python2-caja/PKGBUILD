@@ -7,6 +7,7 @@ pkgver=0
 pkgrel=1
 conflicts=("${_pkgname}")
 provides=("${_pkgname}")
+replaces=("${_pkgname}")
 
 pkgdesc="Python binding for Caja, to allow Caja property page and menu item extensions to be written in Python."
 url="http://mate-desktop.org"

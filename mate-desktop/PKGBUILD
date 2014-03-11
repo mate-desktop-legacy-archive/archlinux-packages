@@ -7,6 +7,7 @@ pkgver=0
 pkgrel=1
 conflicts=("${_pkgname}")
 provides=("${_pkgname}")
+replaces=("${_pkgname}")
 
 pkgdesc="Library with common API for various MATE modules"
 url="http://mate-desktop.org"
@@ -41,6 +42,7 @@ build() {
     PYTHON=/usr/bin/python2 ./configure \
         --prefix=/usr \
         --with-gtk=2.0 \
+        --enable-mpaste \
         --disable-static \
         --disable-schemas-compile \
         --disable-desktop-docs \

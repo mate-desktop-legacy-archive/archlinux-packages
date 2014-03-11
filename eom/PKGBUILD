@@ -7,6 +7,7 @@ pkgver=0
 pkgrel=1
 conflicts=("${_pkgname}")
 provides=("${_pkgname}")
+replaces=("${_pkgname}")
 
 pkgdesc="An image viewing and cataloging program for MATE"
 url="http://mate-desktop.org"

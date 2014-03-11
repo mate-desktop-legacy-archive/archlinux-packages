@@ -7,6 +7,7 @@ pkgver=0
 pkgrel=1
 conflicts=("${_pkgname}")
 provides=("${_pkgname}")
+replaces=("${_pkgname}")
 
 pkgdesc="Provides access to weather information from the Internet."
 url="http://mate-desktop.org"

@@ -7,6 +7,7 @@ pkgver=0
 pkgrel=1
 conflicts=("${_pkgname}")
 provides=("${_pkgname}")
+replaces=("${_pkgname}")
 
 pkgdesc="The MATE shell and file manager"
 url="http://mate-desktop.org"

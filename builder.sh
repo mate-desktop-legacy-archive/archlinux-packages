@@ -272,6 +272,7 @@ function tree_clean() {
     rm -fv /var/cache/pacman/pkg/*mate*
     rm -fv /var/cache/pacman/pkg/mozo*
     rm -fv /var/cache/pacman/pkg/pluma*
+    rm -v */*.pkg.tar.xz
 }
 
 function tree_run() {
