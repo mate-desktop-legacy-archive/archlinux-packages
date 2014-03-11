@@ -39,6 +39,7 @@ BUILD_ORDER=(
     mate-themes
     mate-notification-daemon
     mate-control-center
+    gnome-main-menu
     mate-screensaver
     engrampa
     mate-power-manager
