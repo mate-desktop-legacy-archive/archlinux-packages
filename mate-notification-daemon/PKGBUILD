@@ -1,14 +1,10 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-_pkgname=mate-notification-daemon
-_ver=1.9.80
-pkgname=${_pkgname}-git
+_ver=1.8.99
+pkgname=mate-notification-daemon
 pkgver=0
 pkgrel=1
-conflicts=("${_pkgname}")
-provides=("${_pkgname}" 'notification-daemon')
-replaces=("${_pkgname}")
-
+provides=('notification-daemon')
 pkgdesc="Notification daemon for MATE"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
@@ -17,9 +13,9 @@ depends=('dconf' 'dbus-glib' 'gtk2' 'libcanberra' 'libwnck' 'libnotify')
 makedepends=('git' 'mate-common' 'perl-xml-parser')
 options=('!emptydirs')
 groups=('mate-unstable')
-source=("$pkgname"::"git+https://github.com/mate-desktop/${_pkgname}.git")
+source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')
-install=${_pkgname}.install
+install=${pkgname}.install
 
 pkgver() {
     cd "${srcdir}/${pkgname}"

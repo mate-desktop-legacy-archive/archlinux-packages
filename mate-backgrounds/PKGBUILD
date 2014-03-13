@@ -1,14 +1,9 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-_pkgname=mate-backgrounds
-_ver=1.9.80
-pkgname=${_pkgname}-git
+_ver=1.8.99
+pkgname=mate-backgrounds
 pkgver=0
 pkgrel=1
-conflicts=("${_pkgname}")
-provides=("${_pkgname}")
-replaces=("${_pkgname}")
-
 pkgdesc="Background images and data for MATE"
 url="http://mate-desktop.org"
 arch=('any')
@@ -16,7 +11,7 @@ license=('GPL')
 makedepends=('git' 'mate-common' 'perl-xml-parser')
 options=('!emptydirs')
 groups=('mate-unstable')
-source=("$pkgname"::"git+https://github.com/mate-desktop/${_pkgname}.git")
+source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')
 
 pkgver() {

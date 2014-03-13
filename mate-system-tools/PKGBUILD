@@ -1,14 +1,9 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-_pkgname=mate-system-tools
-_ver=1.9.80
-pkgname=${_pkgname}-git
+_ver=1.8.99
+pkgname=mate-system-tools
 pkgver=0
 pkgrel=1
-conflicts=("${_pkgname}")
-provides=("${_pkgname}")
-replaces=("${_pkgname}")
-
 pkgdesc="Suite of tools for MATE to simplify configuring workstations."
 url="http://mate-desktop.org/"
 arch=('i686' 'x86_64')
@@ -18,9 +13,9 @@ makedepends=('git' 'caja' 'mate-common' 'perl-xml-parser' 'yelp-tools')
 optdepends=('ntp: Automatic time synchronisation.'
             'caja: provides Caja Shares extension'
             'yelp: for reading MATE help documents')
-source=("$pkgname"::"git+https://github.com/mate-desktop/${_pkgname}.git")
+source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')
-install=${_pkgname}.install
+install=${pkgname}.install
 
 pkgver() {
     cd "${srcdir}/${pkgname}"

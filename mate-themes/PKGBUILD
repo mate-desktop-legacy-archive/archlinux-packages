@@ -1,14 +1,9 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-_pkgname=mate-themes
-_ver=1.9.80
-pkgname=${_pkgname}-git
+_ver=1.8.99
+pkgname=mate-themes
 pkgver=0
 pkgrel=1
-conflicts=("${_pkgname}")
-provides=("${_pkgname}")
-replaces=("${_pkgname}")
-
 pkgdesc="Default themes for the MATE desktop"
 url="http://mate-desktop.org"
 arch=('any')
@@ -18,9 +13,9 @@ makedepends=('git' 'mate-common' 'icon-naming-utils' 'perl-xml-parser')
 optdepends=('gtk-engine-unico: Support for some GTK3 themes.')
 options=('!emptydirs')
 groups=('mate-unstable')
-source=("$pkgname"::"git+https://github.com/mate-desktop/${_pkgname}.git")
+source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')
-install=${_pkgname}.install
+install=${pkgname}.install
 
 pkgver() {
     cd "${srcdir}/${pkgname}"

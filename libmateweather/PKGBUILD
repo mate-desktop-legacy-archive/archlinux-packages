@@ -1,14 +1,9 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-_pkgname=libmateweather
-_ver=1.9.80
-pkgname=${_pkgname}-git
+_ver=1.8.99
+pkgname=libmateweather
 pkgver=0
 pkgrel=1
-conflicts=("${_pkgname}")
-provides=("${_pkgname}")
-replaces=("${_pkgname}")
-
 pkgdesc="Provides access to weather information from the Internet."
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
@@ -16,9 +11,9 @@ license=('LGPL')
 depends=('dconf' 'gtk2' 'libsoup' 'pygtk' 'python2-gobject2')
 makedepends=('git' 'mate-common' 'perl-xml-parser')
 options=('!emptydirs')
-source=("$pkgname"::"git+https://github.com/mate-desktop/${_pkgname}.git")
+source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')
-install=${_pkgname}.install
+install=${pkgname}.install
 
 pkgver() {
     cd "${srcdir}/${pkgname}"

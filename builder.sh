@@ -39,6 +39,7 @@ BUILD_ORDER=(
     mate-themes
     mate-notification-daemon
     mate-control-center
+    gnome-main-menu
     mate-screensaver
     engrampa
     mate-power-manager
@@ -273,6 +274,7 @@ function tree_clean() {
     rm -fv /var/cache/pacman/pkg/mozo*
     rm -fv /var/cache/pacman/pkg/pluma*
     rm -v */*.pkg.tar.xz
+    rm -rfv ${REPODIR}/*
 }
 
 function tree_run() {

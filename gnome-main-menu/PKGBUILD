@@ -1,19 +1,20 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 _ver=1.8.99
-_pkgname=python-caja
-pkgname=python2-caja
+pkgname=gnome-main-menu
 pkgver=0
 pkgrel=1
-pkgdesc="Python binding for Caja, to allow Caja property page and menu item extensions to be written in Python."
+pkgdesc="A mate-panel applet similar to the traditional main-menu, but with a few additions."
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('caja' 'python2' 'python2-gobject')
-makedepends=('git' 'mate-common')
+depends=('caja' 'libunique' 'mate-control-center' 'mate-desktop' 'mate-panel')
+makedepends=('mate-common' 'yelp-tools')
+optdepends=('yelp: for reading help documents')
 options=('!emptydirs')
-source=("$pkgname"::"git+https://github.com/mate-desktop/${_pkgname}.git")
+source=("$pkgname"::"git+https://git.gnome.org/browse/${pkgname}")
 sha1sums=('SKIP')
+install=${pkgname}.install
 
 pkgver() {
     cd "${srcdir}/${pkgname}"
@@ -23,13 +24,16 @@ pkgver() {
 prepare() {
     cd "${srcdir}/${pkgname}"
     NOCONFIGURE=1 ./autogen.sh
-    sed -i 's/python-config/python2-config/' configure
 }
 
 build() {
     cd "${srcdir}/${pkgname}"
-    PYTHON=/usr/bin/python2 ./configure \
+    ./configure \
         --prefix=/usr \
+        --libexecdir=/usr/lib/${pkgname} \
+        --sysconfdir=/etc \
+        --localstatedir=/var \
+        --enable-caja-extension \
         --disable-static
     make
 }

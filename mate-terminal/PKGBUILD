@@ -1,14 +1,9 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-_pkgname=mate-terminal
-_ver=1.9.80
-pkgname=${_pkgname}-git
+_ver=1.8.99
+pkgname=mate-terminal
 pkgver=0
 pkgrel=1
-conflicts=("${_pkgname}")
-provides=("${_pkgname}")
-replaces=("${_pkgname}")
-
 pkgdesc="The MATE Terminal Emulator"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
@@ -18,9 +13,9 @@ makedepends=('git' 'docbook2x' 'mate-common' 'perl-xml-parser' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 options=('!emptydirs')
 groups=('mate-unstable-extra')
-source=("$pkgname"::"git+https://github.com/mate-desktop/${_pkgname}.git")
+source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')
-install=${_pkgname}.install
+install=${pkgname}.install
 
 pkgver() {
     cd "${srcdir}/${pkgname}"

@@ -1,14 +1,9 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-_pkgname=caja-extensions
-_ver=1.9.80
-pkgname=${_pkgname}-git
+_ver=1.8.99
+pkgname=caja-extensions
 pkgver=0
 pkgrel=1
-conflicts=("${_pkgname}")
-provides=("${_pkgname}")
-replaces=("${_pkgname}")
-
 pkgdesc="Caja extensions."
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
@@ -19,9 +14,9 @@ optdepends=('pidgin: Support for sending to instant messaging networks.'
             'gajim: Support for sending to Jabber.')
 options=('!emptydirs')
 groups=('mate-unstable-extra')
-source=("$pkgname"::"git+https://github.com/mate-desktop/${_pkgname}.git")
+source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')
-install=${_pkgname}.install
+install=${pkgname}.install
 
 pkgver() {
     cd "${srcdir}/${pkgname}"

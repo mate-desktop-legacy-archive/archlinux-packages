@@ -1,14 +1,9 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-_pkgname=caja
-_ver=1.9.80
-pkgname=${_pkgname}-git
+_ver=1.8.99
+pkgname=caja
 pkgver=0
 pkgrel=1
-conflicts=("${_pkgname}")
-provides=("${_pkgname}")
-replaces=("${_pkgname}")
-
 pkgdesc="The MATE shell and file manager"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
@@ -20,9 +15,9 @@ optdepends=('gstreamer0.10-good-plugins: automatic media playback when mouseover
             'gvfs-smb: To connect to Samba/Windows shares')
 options=('!emptydirs')
 groups=('mate-unstable')
-source=("$pkgname"::"git+https://github.com/mate-desktop/${_pkgname}.git")
+source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')
-install=${_pkgname}.install
+install=${pkgname}.install
 
 pkgver() {
     cd "${srcdir}/${pkgname}"

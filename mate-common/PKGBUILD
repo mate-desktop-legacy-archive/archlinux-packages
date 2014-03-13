@@ -1,14 +1,9 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-_pkgname=mate-common
-_ver=1.9.80
-pkgname=${_pkgname}-git
+_ver=1.8.99
+pkgname=mate-common
 pkgver=0
 pkgrel=1
-conflicts=("${_pkgname}")
-provides=("${_pkgname}")
-replaces=("${_pkgname}")
-
 pkgdesc="Common development macros for MATE"
 arch=('any')
 license=('GPL')
@@ -16,7 +11,7 @@ depends=('autoconf' 'automake' 'gettext' 'gtk-doc' 'intltool' 'libtool' 'pkg-con
 makedepends=('git')
 options=('!emptydirs')
 url="http://mate-desktop.org"
-source=("$pkgname"::"git+https://github.com/mate-desktop/${_pkgname}.git")
+source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')
 
 pkgver() {

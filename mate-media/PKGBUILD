@@ -1,11 +1,10 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
+_ver=1.8.99
 pkgbase=mate-media
-_ver=1.9.80
 pkgname=("${pkgbase}-pulseaudio-git" "${pkgbase}-gstreamer-git")
 pkgver=0
 pkgrel=1
-
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
