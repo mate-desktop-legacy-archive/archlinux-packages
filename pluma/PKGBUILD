@@ -13,7 +13,6 @@ depends=('caja' 'desktop-file-utils' 'enchant' 'gtk2' 'gtksourceview2'
          'pygtksourceview2')
 makedepends=('git' 'mate-common' 'perl-xml-parser' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
-options=('!emptydirs')
 groups=('mate-unstable-extra')
 source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')

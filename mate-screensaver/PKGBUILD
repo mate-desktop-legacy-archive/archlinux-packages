@@ -15,7 +15,6 @@ optdepends=('mate-power-manager: Add power management support.'
             'mate-screensaver-hacks: Additional screensavers.'
             'rss-glx: Really slick screensavers.'
             'yelp: for reading MATE help documents')
-options=('!emptydirs')
 groups=('mate-unstable-extra')
 source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')

@@ -12,7 +12,6 @@ depends=('dbus-glib' 'gtk2' 'libsm' 'libxtst' 'mate-desktop' 'mate-polkit'
          'mate-settings-daemon' 'upower' 'xdg-user-dirs')
 makedepends=('git' 'mate-common' 'perl-xml-parser' 'xmlto')
 optdepends=('xdg-user-dirs-gtk: Add autostart that prompts to rename user directories when switching locales')
-options=('!emptydirs')
 groups=('mate-unstable')
 source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')

@@ -9,7 +9,6 @@ arch=('any')
 license=('GPL')
 depends=('autoconf' 'automake' 'gettext' 'gtk-doc' 'intltool' 'libtool' 'pkg-config')
 makedepends=('git')
-options=('!emptydirs')
 url="http://mate-desktop.org"
 source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')

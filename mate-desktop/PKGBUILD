@@ -12,9 +12,9 @@ depends=('dconf' 'gtk2' 'hicolor-icon-theme' 'libunique' 'python2'
          'startup-notification' 'ttf-dejavu')
 makedepends=('git' 'mate-common' 'perl-xml-parser' 'yelp-tools')
 optdepends=('lightdm-gtk2-greeter: A lightweight display manager'
+            'onboard: On-screen keyboard useful for mobility impaired users'
             'orca: Screen reader for blind or visually impaired individuals'
             'yelp: for reading MATE help documents')
-options=('!emptydirs')
 groups=('mate-unstable')
 source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')
@@ -28,6 +28,7 @@ pkgver() {
 prepare() {
     cd "${srcdir}/${pkgname}"
     NOCONFIGURE=1 ./autogen.sh
+    sed -i 's|\/usr\/bin\/python|\/usr\/bin\/env python2|' tools/mpaste
 }
 
 build() {

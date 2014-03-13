@@ -13,7 +13,6 @@ depends=('dbus-glib' 'desktop-file-utils' 'gtk2' 'exempi' 'lcms2' 'libexif'
          'python2-gobject2' 'startup-notification' 'zlib')
 makedepends=('git' 'mate-common' 'perl-xml-parser' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
-options=('!emptydirs')
 groups=('mate-unstable-extra')
 source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')

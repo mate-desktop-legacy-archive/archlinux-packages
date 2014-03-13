@@ -12,7 +12,6 @@ depends=('dbus' 'gtk2' 'libatasmart' 'libnotify' 'libxnvctrl' 'lm_sensors'
          'mate-panel')
 makedepends=('git' 'docbook-xml' 'mate-common' 'perl-xml-parser' 'rarian' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
-options=('!emptydirs')
 groups=('mate-unstable-extra')
 source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')

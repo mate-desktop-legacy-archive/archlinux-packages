@@ -19,7 +19,6 @@ optdepends=('caja: Document Properties extension'
             'texlive-bin: DVI support'
             'unrar: cbr compressed comic books'
             'yelp: for reading MATE help documents')
-options=('!emptydirs')
 groups=('mate-unstable-extra')
 source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')

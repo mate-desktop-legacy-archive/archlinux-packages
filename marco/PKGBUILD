@@ -12,7 +12,6 @@ depends=('gtk2' 'libcanberra' 'libgtop' 'libice' 'libsm' 'libxt' 'mate-desktop'
          'mate-dialogs' 'startup-notification')
 makedepends=('git' 'mate-common' 'perl-xml-parser' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
-options=('!emptydirs')
 groups=('mate-unstable')
 source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')

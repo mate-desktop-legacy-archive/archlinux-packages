@@ -12,7 +12,6 @@ depends=('caja' 'dbus-glib' 'gksu' 'gtk2' 'gupnp' 'imagemagick' 'samba')
 makedepends=('git' 'mate-common' 'perl-xml-parser')
 optdepends=('pidgin: Support for sending to instant messaging networks.'
             'gajim: Support for sending to Jabber.')
-options=('!emptydirs')
 groups=('mate-unstable-extra')
 source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')

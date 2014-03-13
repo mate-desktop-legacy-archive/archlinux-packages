@@ -15,7 +15,6 @@ optdepends=('unrar: for RAR uncompression'
             'p7zip: 7zip compression utility' 'arj: for ARJ archives'
             'unace: extraction tool for the proprietary ace archive format'
             'yelp: for reading MATE help documents')
-options=( '!emptydirs')
 groups=('mate-unstable-extra')
 source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git"
         fr-rpm-bsdtar.patch)

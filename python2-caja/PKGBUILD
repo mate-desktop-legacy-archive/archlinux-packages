@@ -11,7 +11,6 @@ arch=('i686' 'x86_64')
 license=('GPL')
 depends=('caja' 'python2' 'python2-gobject')
 makedepends=('git' 'mate-common')
-options=('!emptydirs')
 source=("$pkgname"::"git+https://github.com/mate-desktop/${_pkgname}.git")
 sha1sums=('SKIP')
 

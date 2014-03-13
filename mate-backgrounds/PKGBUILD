@@ -9,7 +9,6 @@ url="http://mate-desktop.org"
 arch=('any')
 license=('GPL')
 makedepends=('git' 'mate-common' 'perl-xml-parser')
-options=('!emptydirs')
 groups=('mate-unstable')
 source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')

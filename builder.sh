@@ -142,22 +142,15 @@ function httpd_start() {
 
 # Build packages that are not at the current version.
 function tree_build() {
-    local PKG=${1}    
+    local PKG=${1}
+    echo "Building ${PKG}"
     cd ${PKG}
-    
-    # If there is a git clone,  and check the revision.
-    if [ -d ${PKG}-git ]; then
-        local GIT_DIR=${PKG}-git
-    elif [ -d mate-settings-daemon ]; then
-        local GIT_DIR="mate-settings-daemon"
-    elif [ -d mate-media ]; then
-        local GIT_DIR="mate-media"
-    fi
-    
-    if [ -f ${GIT_DIR}/FETCH_HEAD ]; then
-        local _ver=$(grep -E ^_ver PKGBUILD | cut -f2 -d'=')
+    # If there is a git clone check the revision.  
+    if [ -f ${PKG}/FETCH_HEAD ]; then
+        echo " - Fetching revision from git"
         # git version
-        cd ${GIT_DIR}
+        local _ver=$(grep -E ^_ver PKGBUILD | cut -f2 -d'=')
+        cd ${PKG}
         git fetch
         local PKGBUILD_VER=${_ver}.$(git rev-list --count master).$(git rev-parse --short master)
         cd ..
@@ -205,19 +198,20 @@ function tree_build() {
             fi
         fi
         
-        echo " - Rebuilding [mate-unstable] with ${PKG}."
+        echo " - Adding '${PKG}' to [mate-unstable]"
         if [ -n "${TEST_ANY}" ]; then
             if [ "${MACHINE}" == "i686" ] || [ "${MACHINE}" == "x86_64" ]; then
-                cp -a ${PKG}*-any.pkg.tar.xz ${REPODIR}/i686/ 2>/dev/null
-                cp -a ${PKG}*-any.pkg.tar.xz ${REPODIR}/x86_64/ 2>/dev/null
+                cp -av ${PKG}*-any.pkg.tar.xz ${REPODIR}/i686/ 2>/dev/null
+                cp -av ${PKG}*-any.pkg.tar.xz ${REPODIR}/x86_64/ 2>/dev/null
                 repo_update i686
                 repo_update x86_64
             fi
         else
-            cp -a ${PKG}*-${CHROOT_ARCH}.pkg.tar.xz ${REPODIR}/${CHROOT_ARCH}/ 2>/dev/null
+            cp -av ${PKG}*-${CHROOT_ARCH}.pkg.tar.xz ${REPODIR}/${CHROOT_ARCH}/ 2>/dev/null
             repo_update ${CHROOT_ARCH}
         fi
     done
+    echo
 }
 
 # Check for new upstream releases.
@@ -273,7 +267,8 @@ function tree_clean() {
     rm -fv /var/cache/pacman/pkg/*mate*
     rm -fv /var/cache/pacman/pkg/mozo*
     rm -fv /var/cache/pacman/pkg/pluma*
-    rm -v */*.pkg.tar.xz
+    rm -fv */*.pkg.tar.xz
+    rm -fv */*.log
     rm -rfv ${REPODIR}/*
 }
 
