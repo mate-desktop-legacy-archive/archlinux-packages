@@ -1,6 +1,6 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-_ver=1.8.99
+_ver=1.9.0
 pkgname=libmatekbd
 pkgver=0
 pkgrel=1
@@ -16,7 +16,7 @@ install=${pkgname}.install
 
 pkgver() {
     cd "${srcdir}/${pkgname}"
-    echo ${_ver}.$(git rev-list --count master).$(git rev-parse --short master)
+    echo ${_ver}.$(date +%Y%m%d).$(git rev-parse --short master)
 }
 
 prepare() {
