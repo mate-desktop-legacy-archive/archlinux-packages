@@ -26,7 +26,7 @@ BUILD_ORDER=(
     libmatekbd
     libmateweather
     mate-icon-theme
-    mate-dialogs
+    #mate-dialogs
     caja
     mate-polkit
     marco
@@ -47,7 +47,6 @@ BUILD_ORDER=(
     atril
     caja-extensions
     mate-applets
-    mate-calc
     eom
     mate-icon-theme-faenza
     mozo
@@ -60,6 +59,7 @@ BUILD_ORDER=(
     mate-user-share
     mate-utils
     python2-caja
+    galculator
 )
 
 MATE_VER=1.9
