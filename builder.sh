@@ -195,13 +195,17 @@ function tree_build() {
         echo " - Adding '${PKG}' to [mate-unstable]"
         if [ -n "${TEST_ANY}" ]; then
             if [ "${MACHINE}" == "i686" ] || [ "${MACHINE}" == "x86_64" ]; then
-                cp -av ${PKG}*-any.pkg.tar.xz ${REPODIR}/i686/ 2>/dev/null
-                cp -av ${PKG}*-any.pkg.tar.xz ${REPODIR}/x86_64/ 2>/dev/null
+                cp -av ${PKG}*-${PKGBUILD}-any.pkg.tar.xz ${REPODIR}/i686/ 2>/dev/null
+                cp -av ${PKG}*-${PKGBUILD}-any.pkg.tar.xz ${REPODIR}/x86_64/ 2>/dev/null
                 repo_update i686
                 repo_update x86_64
             fi
         else
-            cp -av ${PKG}*-${CHROOT_ARCH}.pkg.tar.xz ${REPODIR}/${CHROOT_ARCH}/ 2>/dev/null
+            if [ "${PKG}" == "caja-extensions" ]; then
+                cp -av caja*-${PKGBUILD}-${CHROOT_ARCH}.pkg.tar.xz ${REPODIR}/${CHROOT_ARCH}/ 2>/dev/null
+            else
+                cp -av ${PKG}*-${PKGBUILD}-${CHROOT_ARCH}.pkg.tar.xz ${REPODIR}/${CHROOT_ARCH}/ 2>/dev/null
+            fi
             repo_update ${CHROOT_ARCH}
         fi
     done
