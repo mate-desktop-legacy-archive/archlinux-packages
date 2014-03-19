@@ -31,12 +31,14 @@ build() {
     cd "${srcdir}/${pkgname}"
     ./configure \
         --prefix=/usr \
-        --sysconfdir=/etc
+        --sysconfdir=/etc \
+        --disable-network \
+        --disable-services \
+        --disable-time
     make
 }
 
 package() {
     cd "${srcdir}/${pkgname}"
     make DESTDIR="${pkgdir}" install
-    rm -f "${pkgdir}/usr/lib/caja/extensions-2.0/libcaja-gst-shares.a"
 }
