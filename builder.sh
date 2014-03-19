@@ -26,7 +26,6 @@ BUILD_ORDER=(
     libmatekbd
     libmateweather
     mate-icon-theme
-    #mate-dialogs
     caja
     mate-polkit
     marco
@@ -96,12 +95,7 @@ function config_builder() {
     rm /usr/local/bin/mate-unstablepkg 2>/dev/null
 
     # Augment /usr/share/devtools/pacman-extra.conf
-    cp /usr/share/devtools/pacman-extra.conf /usr/share/devtools/pacman-mate-unstable.conf
-    sed -i s'/#\[testing\]/\[mate-unstable\]/' /usr/share/devtools/pacman-mate-unstable.conf
-    sed -i '0,/#Include = \/etc\/pacman\.d\/mirrorlist/s///' /usr/share/devtools/pacman-mate-unstable.conf
-    echo "SigLevel = Optional TrustAll"   >  /tmp/pacman-mate-unstable.conf
-    echo 'Server = http://localhost:8089/'${MATE_VER}'/$arch' >> /tmp/pacman-mate-unstable.conf
-    sed -i '/\[mate-unstable\]/r /tmp/mate-unstable.conf' /usr/share/devtools/pacman-mate-unstable.conf
+    cp pacman-mate-unstable.conf /usr/share/devtools/pacman-mate-unstable.conf
 }
 
 function repo_init() {
@@ -145,14 +139,14 @@ function tree_build() {
     local PKG=${1}
     echo "Building ${PKG}"
     cd ${PKG}
-    # If there is a git clone check the revision.  
+    # If there is a git clone check the revision.
     if [ -f ${PKG}/FETCH_HEAD ]; then
         echo " - Fetching revision from git"
         # git version
         local _ver=$(grep -E ^_ver PKGBUILD | cut -f2 -d'=')
         cd ${PKG}
         git fetch
-        local PKGBUILD_VER=${_ver}.$(git rev-list --count master).$(git rev-parse --short master)
+        local PKGBUILD_VER="${_ver}.*.$(git rev-parse --short master)"
         cd ..
     else
         # pacakge version
@@ -181,7 +175,7 @@ function tree_build() {
             EXIST=$(ls -1 ${PKG}*-${PKGBUILD}-${CHROOT_ARCH}.pkg.tar.xz 2>/dev/null)
             local RET=$?
         fi
-        
+
         if [ ${RET} -ne 0 ]; then
             echo " - Building ${PKG}"
             mate-unstable-${CHROOT_ARCH}-build
@@ -197,7 +191,7 @@ function tree_build() {
                 echo " - ${PKG}-${PKGBUILD}-${CHROOT_ARCH} is current"
             fi
         fi
-        
+
         echo " - Adding '${PKG}' to [mate-unstable]"
         if [ -n "${TEST_ANY}" ]; then
             if [ "${MACHINE}" == "i686" ] || [ "${MACHINE}" == "x86_64" ]; then
@@ -279,13 +273,13 @@ function tree_run() {
     config_builder
     repo_init
     httpd_start
-    
+
     for PKG in ${BUILD_ORDER[@]};
     do
         cd ${BASEDIR}
         tree_${ACTION} ${PKG}
     done
-    
+
     httpd_stop
 }
 
