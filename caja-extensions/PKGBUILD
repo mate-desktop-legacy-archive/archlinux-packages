@@ -1,41 +1,99 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 _ver=1.9.0
-pkgname=caja-extensions
+pkgbase=caja-extensions
+pkgname=(caja-extensions-common caja-gksu caja-image-converter caja-open-terminal caja-sendto caja-share)
 pkgver=0
 pkgrel=1
-pkgdesc="Caja extensions."
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
 depends=('caja' 'dbus-glib' 'gksu' 'gtk2' 'gupnp' 'imagemagick' 'samba')
 makedepends=('git' 'mate-common' 'perl-xml-parser')
-optdepends=('pidgin: Support for sending to instant messaging networks.'
-            'gajim: Support for sending to Jabber.')
-groups=('mate-unstable-extra')
-source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
+source=("$pkgbase"::"git+https://github.com/mate-desktop/${pkgbase}.git")
 sha1sums=('SKIP')
-install=${pkgname}.install
 
 pkgver() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgbase}"
     echo ${_ver}.$(date +%Y%m%d).$(git rev-parse --short master)
 }
 
 prepare() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgbase}"
     NOCONFIGURE=1 ./autogen.sh
 }
 
 build() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgbase}"
     PYTHON=/usr/bin/python2 ./configure \
         --prefix=/usr \
         --with-gtk=2.0
     make
 }
 
-package() {
-    cd "${srcdir}/${pkgname}"
-    make DESTDIR="${pkgdir}" install
+package_caja-extensions-common() {
+    pkgdesc="Common files for Caja extensions."
+    depends=()
+    conflicts=('caja-extensions')
+    replaces=('caja-extensions')
+
+    cd "${srcdir}/${pkgbase}"
+    make -C po DESTDIR="${pkgdir}" install
+}
+
+package_caja-gksu() {
+    pkgdesc="A Caja extension for executing files with elevated privileges."
+    depends=('caja' 'caja-extensions-common' 'gksu')
+    groups=('mate-unstable-extra')
+    conflicts=('mate-file-manager-gksu')
+    replaces=('mate-file-manager-gksu')
+
+    cd "${srcdir}/${pkgbase}"
+    make -C gksu DESTDIR="${pkgdir}" install
+}
+
+package_caja-image-converter() {
+    pkgdesc="A Caja extension for simple image conversions."
+    depends=('caja' 'caja-extensions-common' 'imagemagick')
+    groups=('mate-unstable-extra')
+    conflicts=('mate-file-manager-image-converter')
+    replaces=('mate-file-manager-image-converter')
+
+    cd "${srcdir}/${pkgbase}"
+    make -C image-converter DESTDIR="${pkgdir}" install
+}
+
+package_caja-open-terminal() {
+    pkgdesc="A Caja extension for opening terminals in arbitrary local paths."
+    depends=('caja' 'caja-extensions-common')
+    groups=('mate-unstable-extra')
+    conflicts=('mate-file-manager-open-terminal')
+    replaces=('mate-file-manager-open-terminal')
+    install=caja-open-terminal.install
+
+    cd "${srcdir}/${pkgbase}"
+    make -C open-terminal DESTDIR="${pkgdir}" install
+}
+
+package_caja-sendto() {
+    pkgdesc="A Caja extension for sending files."
+    depends=('caja' 'caja-extensions-common' 'dbus-glib' 'gupnp')
+    groups=('mate-unstable-extra')
+    optdepends=('pidgin: Support for sending to instant messaging networks.'
+                'gajim: Support for sending to Jabber.')
+    conflicts=('mate-file-manager-sendto')
+    replaces=('mate-file-manager-sendto')
+    install=caja-sendto.install
+
+    cd "${srcdir}/${pkgbase}"
+    make -C sendto DESTDIR="${pkgdir}" install
+}
+
+package_caja-share() {
+    pkgdesc="A Caja extension to quickly share a folder."
+    depends=('caja' 'caja-extensions-common' 'samba')
+    groups=('mate-unstable-extra')
+
+    cd "${srcdir}/${pkgbase}"
+    make -C share DESTDIR="${pkgdir}" install
 }
