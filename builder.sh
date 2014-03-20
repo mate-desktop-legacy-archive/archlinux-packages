@@ -52,7 +52,6 @@ BUILD_ORDER=(
     mate-netbook
     mate-netspeed
     mate-sensors-applet
-    mate-system-tools
     mate-terminal
     pluma
     mate-user-share
