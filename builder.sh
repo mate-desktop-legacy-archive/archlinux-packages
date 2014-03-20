@@ -19,7 +19,7 @@ fi
 
 MACHINE=$(uname -m)
 
-# http://wiki.mate-desktop.org/status:1.8
+# http://wiki.mate-desktop.org/status:1.10
 BUILD_ORDER=(
     mate-common
     mate-desktop
