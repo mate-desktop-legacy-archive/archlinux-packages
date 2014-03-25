@@ -10,8 +10,7 @@ arch=('i686' 'x86_64')
 license=('GPL')
 depends=('dbus-glib' 'dconf' 'libcanberra' 'libgnome-keyring' 'libnotify' 
          'libunique' 'mate-panel' 'upower')
-makedepends=('git' 'docbook2x' 'docbook-xml' 'mate-common' 'perl-xml-parser'
-             'xmlto' 'yelp-tools')
+makedepends=('git' 'docbook2x' 'docbook-xml' 'mate-common' 'xmlto' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 groups=('mate-unstable-extra')
 source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
@@ -26,7 +25,7 @@ pkgver() {
 prepare() {
     cd "${srcdir}/${pkgname}"
     NOCONFIGURE=1 ./autogen.sh
-    #Work around a problem where the .sgml fail to parse.
+    #Work around a problem where the .sgml fails to parse.
     sed -e 's:@HAVE_DOCBOOK2MAN_TRUE@.*::' -i man/Makefile.in
 }
 

@@ -10,7 +10,7 @@ arch=('i686' 'x86_64')
 license=('GPL')
 depends=('desktop-file-utils' 'enchant' 'gtk2' 'iso-codes' 'libsm'
          'mate-desktop' 'pygtksourceview2' 'python2-gobject2' 'zenity')
-makedepends=('git' 'mate-common' 'perl-xml-parser' 'yelp-tools')
+makedepends=('git' 'mate-common' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 groups=('mate-unstable-extra')
 source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")

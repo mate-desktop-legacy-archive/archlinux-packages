@@ -11,7 +11,7 @@ license=('GPL')
 depends=('dbus-glib' 'dconf' 'fontconfig' 'gstreamer0.10-base' 'gtk2'
          'libcanberra-pulse' 'libmatekbd' 'libnotify' 'libxt' 'mate-desktop'
          'nss' 'polkit' 'pulseaudio-alsa')
-makedepends=('git' 'mate-common' 'perl-xml-parser')
+makedepends=('git' 'mate-common')
 source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
 sha1sums=('SKIP')
 install=${pkgbase}.install

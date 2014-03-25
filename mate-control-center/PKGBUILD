@@ -12,7 +12,7 @@ depends=('caja' 'dbus-glib' 'dconf' 'desktop-file-utils' 'gsettings-desktop-sche
          'gtk2' 'mate-desktop' 'mate-icon-theme' 'mate-menus' 'mate-settings-daemon'
          'marco' 'libgtop' 'libmatekbd' 'libunique' 'librsvg' 'libxss'
          'libxt' 'startup-notification')
-makedepends=('git' 'docbook2x' 'mate-common' 'perl-xml-parser' 'yelp-tools')
+makedepends=('git' 'docbook2x' 'mate-common' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 groups=('mate-unstable')
 source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")

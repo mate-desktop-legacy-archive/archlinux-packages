@@ -9,7 +9,7 @@ url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
 depends=('bzip2' 'caja' 'desktop-file-utils' 'gtk2' 'gzip' 'libarchive' 'tar')
-makedepends=('git' 'mate-common' 'perl-xml-parser' 'yelp-tools')
+makedepends=('git' 'mate-common' 'yelp-tools')
 optdepends=('unrar: for RAR uncompression'
             'zip: for ZIP archives' 'unzip: for ZIP archives'
             'p7zip: 7zip compression utility' 'arj: for ARJ archives'

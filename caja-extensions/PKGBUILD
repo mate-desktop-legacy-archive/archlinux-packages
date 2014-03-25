@@ -9,7 +9,7 @@ url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
 depends=('caja' 'dbus-glib' 'gksu' 'gtk2' 'gupnp' 'imagemagick' 'samba')
-makedepends=('git' 'mate-common' 'perl-xml-parser')
+makedepends=('git' 'mate-common')
 source=("$pkgbase"::"git+https://github.com/mate-desktop/${pkgbase}.git")
 sha1sums=('SKIP')
 
