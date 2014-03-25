@@ -58,6 +58,7 @@ BUILD_ORDER=(
     mate-utils
     python2-caja
     galculator
+    blueman
 )
 
 MATE_VER=1.9
