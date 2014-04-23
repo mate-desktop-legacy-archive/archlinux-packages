@@ -1,4 +1,4 @@
-geany # Maintainer: Martin Wimpress <code@flexion.org>
+# Maintainer: Martin Wimpress <code@flexion.org>
 
 _ver=1.2.3
 pkgname=blueman
@@ -14,19 +14,19 @@ depends=('bluez' 'dbus-glib' 'gconf' 'gtk3' 'mate-notification-daemon'
 optdepends=('dnsmasq: DHCP server for Network Access Point')
 makedepends=('git' 'intltool' 'libtool' 'pyrex')
 groups=('mate-unstable-extra')
-source=("${pkgname}-git"::"git+https://github.com/blueman-project/${pkgname}.git#branch=bluez5"
+source=("${pkgname}"::"git+https://github.com/blueman-project/${pkgname}.git#branch=bluez5"
         "use-python2.diff")
 sha1sums=('SKIP'
           '73bcad1a5e42474573cc565e3a250f560ca78e8d')
 install=${pkgname}.install
 
 pkgver() {
-    cd "${srcdir}/${pkgname}-git"
+    cd "${srcdir}/${pkgname}"
     echo ${_ver}.$(date +%Y%m%d).$(git rev-parse --short master)
 }
 
 prepare() {
-    cd "${srcdir}/${pkgname}-git"
+    cd "${srcdir}/${pkgname}"
     # Coerce the build system to use python2
     patch -Np1 -i "${srcdir}/use-python2.diff"
     sed -i 's|AM_CHECK_PYTHON_HEADERS|#AM_CHECK_PATH_HEADERS|' configure.ac
@@ -41,7 +41,7 @@ prepare() {
 }
 
 build() {
-    cd "${srcdir}/${pkgname}-git"
+    cd "${srcdir}/${pkgname}"
     PYTHON=/usr/bin/python2 ./autogen.sh \
         --prefix=/usr \
         --sysconfdir=/etc \
@@ -54,6 +54,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-git"
+    cd "${srcdir}/${pkgname}"
     make DESTDIR="${pkgdir}" install
 }
