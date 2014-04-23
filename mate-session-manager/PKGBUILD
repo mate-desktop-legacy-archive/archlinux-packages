@@ -9,7 +9,7 @@ url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL' 'LGPL')
 depends=('dbus-glib' 'gtk2' 'libsm' 'libxtst' 'mate-desktop' 'mate-polkit'
-         'mate-settings-daemon' 'upower' 'xdg-user-dirs')
+         'mate-settings-daemon' 'pango-xcompat' 'xdg-user-dirs')
 makedepends=('git' 'mate-common' 'xmlto')
 optdepends=('xdg-user-dirs-gtk: Add autostart that prompts to rename user directories when switching locales')
 groups=('mate-unstable')
@@ -34,7 +34,8 @@ build() {
         --libexecdir=/usr/lib/${pkgname} \
         --sysconfdir=/etc \
         --localstatedir=/var \
-        --with-gtk=2.0
+        --with-gtk=2.0 \
+        --disable-upower
     make
 }
 
