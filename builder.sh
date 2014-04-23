@@ -249,8 +249,8 @@ function tree_check() {
 function tree_sync() {
     echo "Action : sync"
     # Modify this accordingly.
-    local RSYNC_UPSTREAM="mate@mate.flexion.org::mate-${MATE_VER}"
-    chown -R 1000:100 ${REPODIR}
+    local RSYNC_UPSTREAM="mate@sync.flexion.org::mate-${MATE_VER}"
+    chown -R 65534:65534 ${REPODIR}
     rsync -av --delete --progress ${REPODIR}/ "${RSYNC_UPSTREAM}/"
 }
 
