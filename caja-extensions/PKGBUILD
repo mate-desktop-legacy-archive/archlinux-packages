@@ -32,7 +32,7 @@ build() {
 }
 
 package_caja-extensions-common() {
-    pkgdesc="Common files for Caja extensions."
+    pkgdesc="Caja extensions (common files)."
     depends=()
     conflicts=('caja-extensions')
     replaces=('caja-extensions')
@@ -42,7 +42,7 @@ package_caja-extensions-common() {
 }
 
 package_caja-gksu() {
-    pkgdesc="A Caja extension for executing files with elevated privileges."
+    pkgdesc="Privilege granting extension for Caja using gksu."
     depends=('caja' 'caja-extensions-common' 'gksu')
     groups=('mate-unstable-extra')
     conflicts=('mate-file-manager-gksu')
