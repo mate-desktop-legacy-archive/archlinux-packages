@@ -31,8 +31,6 @@ prepare() {
 }
 
 build() {
-    # See the following for '--disable-desktop-docs' justification
-    #  - https://github.com/mate-desktop/mate-desktop/issues/68
     cd "${srcdir}/${pkgname}"
     PYTHON=/usr/bin/python2 ./configure \
         --prefix=/usr \
@@ -40,7 +38,6 @@ build() {
         --enable-mpaste \
         --disable-static \
         --disable-schemas-compile \
-        --disable-desktop-docs \
         --enable-gtk-doc
     make
 }
