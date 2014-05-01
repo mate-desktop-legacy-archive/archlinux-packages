@@ -9,7 +9,7 @@ url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
 depends=('dbus-glib' 'dconf' 'libcanberra' 'libgnome-keyring' 'libnotify' 
-         'libunique' 'mate-panel' 'upower')
+         'libunique3' 'mate-panel' 'upower')
 makedepends=('git' 'docbook2x' 'docbook-xml' 'mate-common' 'xmlto' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 groups=('mate-unstable-extra')

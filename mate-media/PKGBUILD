@@ -8,7 +8,7 @@ pkgrel=1
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('gstreamer0.10-base-plugins' 'gtk3' 'libcanberra-pulse' 'libunique'
+depends=('gstreamer0.10-base-plugins' 'gtk3' 'libcanberra-pulse' 'libunique3'
          'marco' 'mate-desktop' 'pulseaudio')
 makedepends=('git' 'mate-common' 'mate-panel' 'mate-settings-daemon-gstreamer'
              'yelp-tools')
@@ -63,7 +63,7 @@ build() {
 package_mate-media-pulseaudio() {
     groups=('mate-unstable-extra')
     pkgdesc="MATE Media Tools (pulseaudio)"
-    depends=('libcanberra-pulse' 'libunique' 'marco' 'mate-desktop' 'pulseaudio')
+    depends=('libcanberra-pulse' 'libunique3' 'marco' 'mate-desktop' 'pulseaudio')
     conflicts=("${pkgbase}-gstreamer-git" 'mate-settings-daemon-gstreamer-git')
     provides=("${pkgbase}")
     replaces=("${pkgbase}")
