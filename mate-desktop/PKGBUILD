@@ -8,9 +8,9 @@ pkgdesc="Library with common API for various MATE modules"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=(GPL LGPL)
-depends=('dconf' 'gtk2' 'libunique' 'python2' 'startup-notification' 'ttf-dejavu')
+depends=('dconf' 'gtk3' 'libunique' 'python2' 'startup-notification' 'ttf-dejavu')
 makedepends=('git' 'mate-common' 'yelp-tools')
-optdepends=('lightdm-gtk2-greeter: A lightweight display manager'
+optdepends=('lightdm-gtk3-greeter: A lightweight display manager'
             'onboard: On-screen keyboard useful for mobility impaired users'
             'orca: Screen reader for blind or visually impaired individuals'
             'yelp: for reading MATE help documents')

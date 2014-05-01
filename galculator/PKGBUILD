@@ -6,14 +6,14 @@
 # Contributor: Alexander Fehr <pizzapunk gmail com>
 
 pkgbase=galculator
-pkgname=(galculator galculator-gtk2)
+pkgname=(galculator galculator-gtk3)
 pkgver=2.1.3
 pkgrel=3
 pkgdesc='GTK+ based scientific calculator'
 arch=('i686' 'x86_64')
 url='http://galculator.sourceforge.net/'
 license=('GPL')
-depends=('gtk2' 'gtk3')
+depends=('gtk3' 'gtk3')
 makedepends=('intltool')
 install=${pkgname}.install
 source=("http://downloads.sourceforge.net/${pkgbase}/${pkgbase}-${pkgver}.tar.bz2")
@@ -30,8 +30,8 @@ build() {
 
   # GTK2 version
   cd "${srcdir}/${pkgbase}-${pkgver}"
-  [ -d gtk2 ] || mkdir gtk2
-  cd gtk2
+  [ -d gtk3 ] || mkdir gtk3
+  cd gtk3
   ../configure \
     --prefix=/usr \
     --disable-gtk3
@@ -45,14 +45,14 @@ package_galculator() {
   make DESTDIR="$pkgdir" install
 }
 
-package_galculator-gtk2() {
+package_galculator-gtk3() {
   pkgdesc+=' (GTK2 version)'
-  depends=('gtk2')
+  depends=('gtk3')
   groups=('mate-unstable-extra')
   replaces=('mate-calc')
   provides=('mate-calc')
   conflicts=('galculator')
 
-  cd "${pkgbase}-${pkgver}/gtk2"
+  cd "${pkgbase}-${pkgver}/gtk3"
   make DESTDIR="$pkgdir" install
 }

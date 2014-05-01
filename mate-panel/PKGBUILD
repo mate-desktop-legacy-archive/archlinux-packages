@@ -8,7 +8,7 @@ pkgdesc="The MATE Panel"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('caja' 'dbus-glib' 'dconf' 'gtk2' 'libwnck' 'libcanberra' 'libice'
+depends=('caja' 'dbus-glib' 'dconf' 'gtk3' 'libwnck' 'libcanberra' 'libice'
          'libmateweather' 'librsvg' 'libsm' 'libsoup' 'libxau' 'marco'
          'mate-menus' 'mate-desktop' 'mate-session-manager')
 makedepends=('git' 'gobject-introspection' 'mate-common' 'networkmanager'

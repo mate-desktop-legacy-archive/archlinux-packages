@@ -8,7 +8,7 @@ pkgdesc="The MATE Session Handler"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL' 'LGPL')
-depends=('dbus-glib' 'gtk2' 'libsm' 'libxtst' 'mate-desktop' 'mate-polkit'
+depends=('dbus-glib' 'gtk3' 'libsm' 'libxtst' 'mate-desktop' 'mate-polkit'
          'mate-settings-daemon' 'pangox-compat' 'xdg-user-dirs')
 makedepends=('git' 'mate-common' 'xmlto')
 optdepends=('xdg-user-dirs-gtk: Add autostart that prompts to rename user directories when switching locales')

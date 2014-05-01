@@ -8,7 +8,7 @@ pkgdesc="File manager for the MATE desktop."
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('dbus' 'desktop-file-utils' 'exempi' 'gtk2' 'gvfs' 'libexif' 'libunique'
+depends=('dbus' 'desktop-file-utils' 'exempi' 'gtk3' 'gvfs' 'libexif' 'libunique'
          'libxt' 'mate-desktop' 'mate-icon-theme' 'startup-notification')
 makedepends=('git' 'gobject-introspection' 'mate-common')
 optdepends=('gstreamer0.10-good-plugins: automatic media playback when mouseover'

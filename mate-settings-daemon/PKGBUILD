@@ -8,7 +8,7 @@ pkgrel=1
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('dbus-glib' 'dconf' 'fontconfig' 'gstreamer0.10-base' 'gtk2'
+depends=('dbus-glib' 'dconf' 'fontconfig' 'gstreamer0.10-base' 'gtk3'
          'libcanberra-pulse' 'libmatekbd' 'libnotify' 'libxt' 'mate-desktop'
          'nss' 'polkit' 'pulseaudio-alsa')
 makedepends=('git' 'mate-common')
@@ -60,7 +60,7 @@ build() {
 package_mate-settings-daemon-pulseaudio() {
     groups=('mate-unstable')
     pkgdesc="The MATE Settings daemon (pulseaudio)"
-    depends=('dbus-glib' 'dconf' 'fontconfig' 'gtk2' 'libcanberra-pulse'
+    depends=('dbus-glib' 'dconf' 'fontconfig' 'gtk3' 'libcanberra-pulse'
             'libmatekbd' 'libnotify' 'libxt' 'mate-desktop' 'nss' 'polkit'
             'pulseaudio-alsa')
     conflicts=("${pkgbase}-gstreamer-git" 'mate-media-gstreamer-git')
@@ -72,7 +72,7 @@ package_mate-settings-daemon-pulseaudio() {
 
 package_mate-settings-daemon-gstreamer() {
     pkgdesc="The MATE Settings daemon (GStreamer)"
-    depends=('dbus-glib' 'dconf' 'fontconfig' 'gstreamer0.10-base' 'gtk2'
+    depends=('dbus-glib' 'dconf' 'fontconfig' 'gstreamer0.10-base' 'gtk3'
              'libmatekbd' 'libnotify' 'libxt' 'mate-desktop' 'nss' 'polkit')
     conflicts=("${pkgbase}-pulseaudio-git" 'mate-media-pulseaudio-git')
     provides=("${pkgbase}")

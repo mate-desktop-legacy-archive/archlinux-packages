@@ -8,7 +8,7 @@ pkgdesc="Common MATE utilities for viewing disk usage, logs and fonts, taking sc
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('desktop-file-utils' 'gtk2' 'libcanberra' 'libgtop' 'libsm' 'zlib')
+depends=('desktop-file-utils' 'gtk3' 'libcanberra' 'libgtop' 'libsm' 'zlib')
 makedepends=('git' 'mate-common' 'mate-panel'  'rarian' 'yelp-tools')
 optdepends=('mate-panel: Look up words in dictionaries from the panel'
             'yelp: for reading MATE help documents')

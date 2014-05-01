@@ -8,7 +8,7 @@ pkgdesc="MATE document viewer"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('dconf' 'dbus' 'desktop-file-utils' 'gtk2' 'libsm' 'libspectre'
+depends=('dconf' 'dbus' 'desktop-file-utils' 'gtk3' 'libsm' 'libspectre'
          'mate-desktop' 'mate-icon-theme' 'poppler-glib' 'zlib')
 makedepends=('git' 'caja' 'djvulibre' 'gobject-introspection' 'libgxps'
              'mate-common' 'texlive-bin' 'yelp-tools')
