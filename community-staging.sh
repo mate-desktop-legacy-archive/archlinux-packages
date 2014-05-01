@@ -73,7 +73,7 @@ function pkg_builder() {
     local REPO="${2}"
     local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=' | head -n1)
     local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
-    local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}    
+    local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
     local TEST_ANY=$(grep "^arch=" PKGBUILD | grep any)
     if [ -n "${TEST_ANY}" ]; then
         if [ "${MACHINE}" == "i686" ] || [ "${MACHINE}" == "x86_64" ]; then
