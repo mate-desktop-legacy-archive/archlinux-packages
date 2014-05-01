@@ -8,7 +8,7 @@ pkgdesc="Applets for MATE panel"
 arch=('i686' 'x86_64')
 url="http://mate-desktop.org"
 license=('GPL')
-depends=('gtksourceview2' 'mate-panel' 'python2-dbus' 'python2-gobject' 'upower')
+depends=('gtksourceview3' 'mate-panel' 'python2-dbus' 'python2-gobject' 'upower')
 makedepends=('git' 'docbook2x' 'docbook-xsl' 'mate-common' 'networkmanager'
              'yelp-tools')
 optdepends=('fortune-mod: for displaying fortune cookies in the Wanda the Fish applet'
