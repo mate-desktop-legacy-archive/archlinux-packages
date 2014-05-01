@@ -4,14 +4,15 @@ _ver=1.2.3
 pkgname=blueman
 pkgver=0
 pkgrel=1
-pkgdesc="A GTK+ Bluetooth Manager"
+pkgdesc="A GTK+ Bluetooth Manager."
 arch=('i686' 'x86_64')
 license=('GPL')
 url="https://github.com/blueman-project/blueman"
 depends=('bluez' 'dbus-glib' 'gconf' 'gtk3' 'mate-notification-daemon'
-         'libnotify' 'polkit' 'pulseaudio' 'python2-dbus' 'python2-gobject2'
+         'libnotify' 'polkit' 'python2-dbus' 'python2-gobject2'
          'python2-pybluez' 'startup-notification')
-optdepends=('dnsmasq: DHCP server for Network Access Point')
+optdepends=('dnsmasq: DHCP server for Network Access Point.'
+            'pulseaudio: for some audio support.')
 makedepends=('git' 'intltool' 'libtool' 'pyrex')
 groups=('mate-unstable-extra')
 source=("${pkgname}"::"git+https://github.com/blueman-project/${pkgname}.git#branch=bluez5"
