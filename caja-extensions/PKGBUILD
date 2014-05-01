@@ -27,7 +27,7 @@ build() {
     cd "${srcdir}/${pkgbase}"
     PYTHON=/usr/bin/python2 ./configure \
         --prefix=/usr \
-        --with-gtk=2.0
+        --with-gtk=3.0
     make
 }
 

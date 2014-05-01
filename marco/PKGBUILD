@@ -33,7 +33,7 @@ build() {
         --prefix=/usr \
         --sysconfdir=/etc \
         --localstatedir=/var \
-        --with-gtk=2.0 \
+        --with-gtk=3.0 \
         --enable-startup-notification \
         --disable-static
     make

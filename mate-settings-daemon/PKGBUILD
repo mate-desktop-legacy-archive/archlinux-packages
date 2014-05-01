@@ -36,7 +36,7 @@ build() {
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgbase} \
         --sysconfdir=/etc \
-        --with-gtk=2.0 \
+        --with-gtk=3.0 \
         --enable-polkit \
         --enable-pulse \
         --disable-gstreamer \
@@ -49,7 +49,7 @@ build() {
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgbase} \
         --sysconfdir=/etc \
-        --with-gtk=2.0 \
+        --with-gtk=3.0 \
         --enable-polkit \
         --enable-gstreamer \
         --disable-pulse \

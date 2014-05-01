@@ -30,7 +30,7 @@ build() {
         --prefix=/usr \
         --sysconfdir=/etc \
         --localstatedir=/var \
-        --with-gtk=2.0 \
+        --with-gtk=3.0 \
         --disable-static \
         --enable-python \
         --enable-locations-compression

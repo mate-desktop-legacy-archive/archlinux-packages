@@ -37,7 +37,7 @@ build() {
         --sysconfdir=/etc \
         --libexecdir=/usr/lib/${pkgbase} \
         --localstatedir=/var \
-        --with-gtk=2.0 \
+        --with-gtk=3.0 \
         --enable-pulseaudio \
         --disable-gstmix \
         --disable-gst-mixer-applet \
@@ -51,7 +51,7 @@ build() {
         --sysconfdir=/etc \
         --libexecdir=/usr/lib/${pkgbase} \
         --localstatedir=/var \
-        --with-gtk=2.0 \
+        --with-gtk=3.0 \
         --enable-gstmix \
         --enable-gst-mixer-applet \
         --enable-deprecated \

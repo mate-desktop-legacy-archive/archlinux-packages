@@ -36,7 +36,7 @@ build() {
         --sysconfdir=/etc \
         --sbindir=/usr/bin \
         --localstatedir=/var \
-        --with-gtk=2.0 \
+        --with-gtk=3.0 \
         --disable-static \
         --disable-update-mimedb
     make

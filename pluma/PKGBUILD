@@ -33,7 +33,7 @@ build() {
     PYTHON=/usr/bin/python2 ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
-        --with-gtk=2.0 \
+        --with-gtk=3.0 \
         --enable-gtk-doc \
         --enable-python
     make

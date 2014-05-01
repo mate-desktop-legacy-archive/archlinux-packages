@@ -34,7 +34,7 @@ build() {
         --libexecdir=/usr/lib/${pkgname} \
         --sysconfdir=/etc \
         --localstatedir=/var \
-        --with-gtk=2.0 \
+        --with-gtk=3.0 \
         --disable-upower
     make
 }

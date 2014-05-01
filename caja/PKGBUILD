@@ -33,7 +33,7 @@ build() {
     ./configure \
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
-        --with-gtk=2.0 \
+        --with-gtk=3.0 \
         --enable-unique \
         --enable-introspection \
         --disable-static \

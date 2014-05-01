@@ -33,7 +33,7 @@ build() {
         --prefix=/usr \
         --libexecdir=/usr/lib/${pkgname} \
         --localstatedir=/var \
-        --with-gtk=2.0 \
+        --with-gtk=3.0 \
         --disable-static
     make
 }
