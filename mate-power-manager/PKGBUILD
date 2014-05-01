@@ -8,7 +8,7 @@ pkgdesc="Power management tool for the MATE desktop."
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('dbus-glib' 'dconf' 'libcanberra' 'libgnome-keyring' 'libnotify' 
+depends=('dbus-glib' 'dconf' 'gtk3' 'libcanberra' 'libgnome-keyring' 'libnotify' 
          'libunique3' 'mate-panel' 'upower')
 makedepends=('git' 'docbook2x' 'docbook-xml' 'mate-common' 'xmlto' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
@@ -39,6 +39,7 @@ build() {
         --sbindir=/usr/bin \
         --enable-applets \
         --enable-unique \
+        --with-gtk=3.0 \
         --disable-strict
     make
 }
