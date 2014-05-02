@@ -7,53 +7,61 @@ if [ $? -ne 0 ]; then
 fi
 
 MACHINE=$(uname -m)
+if [ "${MACHINE}" != "x86_64" ]; then
+    echo "ERROR! This script must be run on x86_64 hardware."
+    exit 1
+fi
 
 # http://wiki.mate-desktop.org/status:1.10
 BUILD_ORDER=(
-    mate-common
-    mate-desktop
-    libmatekbd
-    libmateweather
-    mate-icon-theme
-    caja
-    mate-polkit
-    marco
-    mate-settings-daemon
-    mate-session-manager
-    mate-menus
-    mate-panel
-    mate-media
-    mate-backgrounds
-    mate-themes
-    mate-notification-daemon
-    mate-control-center
-    gnome-main-menu
-    mate-screensaver
-    engrampa
-    mate-power-manager
-    mate-system-monitor
-    atril
-    caja-extensions
-    mate-applets
-    eom
-    mate-icon-theme-faenza
-    mozo
-    mate-netbook
-    mate-netspeed
-    mate-sensors-applet
-    mate-terminal
-    pluma
-    mate-user-share
-    mate-utils
-    python2-caja
-    galculator
-    blueman
+    #mate-common
+    #mate-desktop
+    #libmatekbd
+    #libmateweather
+    #mate-icon-theme
+    #caja
+    #mate-polkit
+    #marco
+    #mate-settings-daemon
+    #mate-session-manager
+    #mate-menus
+    #mate-panel
+    #mate-media
+    #mate-backgrounds
+    #mate-themes
+    #mate-notification-daemon
+    #mate-control-center
+    #gnome-main-menu
+    #mate-screensaver
+    #engrampa
+    #mate-power-manager
+    #mate-system-monitor
+    #atril
+    #caja-extensions
+    #mate-applets
+    #eom
+    #mate-icon-theme-faenza
+    #mozo
+    #mate-netbook
+    #mate-netspeed
+    #mate-sensors-applet
+    #mate-terminal
+    #pluma
+    #mate-user-share
+    mate-utils             # Doesn't build
+    #python2-caja
+    #galculator
+    #blueman
 )
 
 MATE_VER=1.9
 BASEDIR=$(dirname $(readlink -f ${0}))
-REPODIR="${HOME}/public_html/mate-unstable/${MATE_VER}"
+STAMP=$(date +%y.%j.%H%M)
+STAMP="14.121.1234"
+REPO="mate-unstable-gtk3-${STAMP}"
+REPODIR="${HOME}/public_html/${REPO}/${MATE_VER}"
 TMPDIR="${HOME}/tmp"
+EMAIL_TO=$(tr a-zA-Z n-za-mN-ZA-M <<< znegva@syrkvba.bet)
 
 # Show usage information.
 function usage() {
@@ -66,9 +74,6 @@ function usage() {
     echo "-t  Provide a task to run which can be one of:"
     echo "      build       Build MATE packages."
     echo "      check       Check upstream for new source tarballs."
-    echo "      clean       Remove MATE packages from /var/cache/pacan/pkg."
-    echo "      repo        Create a package repository in '${HOME}/mate/'"
-    echo "      sync        'rsync' a repo to ${RSYNC_UPSTREAM}."
     echo
     echo "Each of the tasks above run automatically and operate over the entire"
     echo "package tree."
@@ -76,10 +81,10 @@ function usage() {
 
 function repo_init() {
     # Remove any existing repositories and create empty ones.
-    #rm -rf /var/local/mate-unstable/*
+    #rm -rf ${REPODIR}
     for INIT_ARCH in i686 x86_64
     do
-        mkdir -p ${REPODIR}/${INIT_ARCH}
+        mkdir -p ${REPODIR}/${INIT_ARCH}/logs
         touch ${REPODIR}/${INIT_ARCH}/mate-unstable.db
     done
 }
@@ -97,6 +102,11 @@ function tree_build() {
     local PKG=${1}
     echo "Building ${PKG}"
     cd ${PKG}
+
+    # Clean existing logs and packages
+    #rm -f *.log*
+    #rm -f *.pkg.tar.xz
+
     # If there is a git clone check the revision.
     if [ -f ${PKG}/FETCH_HEAD ]; then
         echo " - Fetching revision from git"
@@ -114,40 +124,38 @@ function tree_build() {
     local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
     local PKGBUILD=${PKGBUILD_VER}-${PKGBUILD_REL}
     local TEST_ANY=$(grep "^arch=" PKGBUILD | grep any)
-    local CHROOT_ARCHS=(i686 x86_64)
 
-    for CHROOT_ARCH in ${CHROOT_ARCHS[@]};
-    do
+    for CHROOT_ARCH in i686 x86_64; do
         echo " - Building ${PKG}"
-        # Create a new chroot when building mate-common
         if [ "${PKG}" == "mate-common" ]; then
+            # Create a new chroot when building mate-common
             sudo makechrootpkg -c -n -r /var/lib/archbuild/extra-${CHROOT_ARCH} -- --install
             local BUILD_RET=$?
         else
-            #if [ -n "${TEST_ANY}" ]; then
-            #    EXIST=$(ls -1 ${PKG}*-${PKGBUILD}-any.pkg.tar.xz 2>/dev/null)
-            #    local RET=$?
-            #else
-            #    EXIST=$(ls -1 ${PKG}*-${PKGBUILD}-${CHROOT_ARCH}.pkg.tar.xz 2>/dev/null)
-            #    local RET=$?
-            #fi
-
-            #if [ ${RET} -ne 0 ]; then
-                sudo makechrootpkg -u -n -r /var/lib/archbuild/extra-${CHROOT_ARCH} -- --install
-                local BUILD_RET=$?
-            #fi
+            # Update the existing chroot for every other package.
+            sudo makechrootpkg -u -n -r /var/lib/archbuild/extra-${CHROOT_ARCH} -- --install
+            local BUILD_RET=$?
         fi
+
+        # If "bad stuff" happened, stop here.
         if [ ${BUILD_RET} -ne 0 ]; then
             echo " - Failed to build ${PKG} for ${CHROOT_ARCH}. Stopping here."
+            cat -v *-${CHROOT_ARCH}-build.log | mail -s "Failed building ${PKG}" ${EMAIL_TO}
             exit 1
         fi
 
         echo " - Adding '${PKG}' to [mate-unstable]"
         if [ -n "${TEST_ANY}" ]; then
-            cp -av ${PKG}*-any.pkg.tar.xz ${REPODIR}/${CHROOT_ARCH}/
+            cp -av *-any.pkg.tar.xz ${REPODIR}/${CHROOT_ARCH}/
         else
-            cp -av ${PKG}*-${CHROOT_ARCH}.pkg.tar.xz ${REPODIR}/${CHROOT_ARCH}/
+            cp -av *-${CHROOT_ARCH}.pkg.tar.xz ${REPODIR}/${CHROOT_ARCH}/
         fi
+
+        # Copy the build logs for posterity.
+        # Yes 'any' and arch specific are required all the time.
+        cp -a *-any*.log ${REPODIR}/${CHROOT_ARCH}/logs 2>/dev/null
+        cp -a *-${CHROOT_ARCH}*.log ${REPODIR}/${CHROOT_ARCH}/logs 2>/dev/null
+
         repo_update ${CHROOT_ARCH}
     done
     echo
@@ -186,13 +194,6 @@ function tree_check() {
     fi
 }
 
-function tree_clean() {
-    echo "Action : clean"
-    rm -fv */*.pkg.tar.xz
-    rm -fv */*.log
-    rm -rfv ${REPODIR}/*
-}
-
 function tree_run() {
     local ACTION=${1}
     echo "Action : ${ACTION}"
@@ -216,11 +217,8 @@ while getopts ${OPTSTRING} OPT; do
 done
 shift "$(( $OPTIND - 1 ))"
 
-if [ "${TASK}" == "build" ] ||
-   [ "${TASK}" == "check" ]; then
+if [ "${TASK}" == "build" ] || [ "${TASK}" == "check" ]; then
     tree_run ${TASK}
-elif [ "${TASK}" == "clean" ]; then
-    tree_${TASK}
 else
     usage
     exit 1
