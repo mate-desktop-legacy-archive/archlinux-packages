@@ -38,6 +38,7 @@ build() {
         --enable-polkit \
         --enable-networkmanager \
         --enable-ipv6 \
+        --with-gtk=3.0 \
         --disable-static
     make
 }

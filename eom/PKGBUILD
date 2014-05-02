@@ -8,7 +8,7 @@ pkgdesc="An image viewing and cataloging program for MATE"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('dbus-glib' 'desktop-file-utils' 'gtk3' 'exempi' 'lcms2' 'libexif'
+depends=('dbus-glib' 'desktop-file-utils' 'gtk2' 'exempi' 'lcms2' 'libexif'
          'libjpeg-turbo' 'mate-desktop' 'mate-icon-theme' 'pygtk'
          'python2-gobject2' 'startup-notification' 'zlib')
 makedepends=('git' 'mate-common' 'yelp-tools')
@@ -33,7 +33,7 @@ build() {
     PYTHON=/usr/bin/python2 ./configure \
         --prefix=/usr \
         --localstatedir=/var \
-        --with-gtk=3.0
+        --with-gtk=2.0
     make
 }
 

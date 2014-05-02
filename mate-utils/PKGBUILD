@@ -34,6 +34,8 @@ build() {
         --libexecdir=/usr/lib/${pkgname} \
         --with-gtk=3.0 \
         --sysconfdir=/etc \
+        --enable-deprecated \
+        --disable-maintainer-flags \
         --disable-static
     make
 }

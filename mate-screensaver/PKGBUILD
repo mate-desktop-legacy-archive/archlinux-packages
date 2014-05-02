@@ -41,6 +41,7 @@ build() {
         --with-mit-ext \
         --with-libnotify \
         --enable-locking \
+        --with-gtk=3.0 \
         --disable-static
     make
 }
