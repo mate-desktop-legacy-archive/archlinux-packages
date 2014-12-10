@@ -1,84 +1,48 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 _ver=1.9.0
-pkgbase=mate-media
-pkgname=("${pkgbase}-pulseaudio" "${pkgbase}-gstreamer")
+pkgname=mate-media
 pkgver=0
 pkgrel=1
 url="http://mate-desktop.org"
+groups=('mate-unstable-extra')
+pkgdesc="MATE Media Tools"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('gstreamer0.10-base-plugins' 'gtk3' 'libcanberra-pulse' 'libunique3'
-         'marco' 'mate-desktop' 'pulseaudio')
-makedepends=('git' 'mate-common' 'mate-panel' 'mate-settings-daemon-gstreamer'
+depends=('gtk3' 'libcanberra-pulse' 'libmatemixer' 'libunique3' 'marco'
+         'mate-desktop')
+makedepends=('git' 'mate-common' 'mate-panel' 'mate-settings-daemon'
              'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
-source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
+conflicts=("${pkgname}-gstreamer-git" "${pkgbase}-pulseaudio-git")
+provides=("${pkgname}")
+replaces=("${pkgname}-gstreamer-git" "${pkgbase}-pulseaudio-git")
+source=("${pkgname}"::"git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')
 
 pkgver() {
-    cd "${srcdir}/${pkgbase}"
-    echo ${_ver}.$(date +%Y%m%d).$(git rev-parse --short master)
+    cd "${srcdir}/${pkgname}"
+    printf "%s.%s.%s" "${_ver}" "$(git log -1 --format=%cd --date=short | tr -d -)" "$(git rev-list --count HEAD)"
 }
 
 prepare() {
-    cd "${srcdir}/${pkgbase}"
+    cd "${srcdir}/${pkgname}"
     NOCONFIGURE=1 ./autogen.sh
 }
 
 build() {
-    cd "${srcdir}"
-    cp -a ${pkgbase}{,-gstreamer}
-
-    # build for pulseaudio
-    cd "${srcdir}/${pkgbase}"
+    cd "${srcdir}/${pkgname}"
     ./configure \
         --prefix=/usr \
         --sysconfdir=/etc \
-        --libexecdir=/usr/lib/${pkgbase} \
+        --libexecdir=/usr/lib/${pkgname} \
         --localstatedir=/var \
         --with-gtk=3.0 \
-        --enable-pulseaudio \
-        --disable-gstmix \
-        --disable-gst-mixer-applet \
-        --disable-static
-    make
-
-    # build for gstreamer
-    cd "${srcdir}/${pkgbase}-gstreamer"
-    ./configure \
-        --prefix=/usr \
-        --sysconfdir=/etc \
-        --libexecdir=/usr/lib/${pkgbase} \
-        --localstatedir=/var \
-        --with-gtk=3.0 \
-        --enable-gstmix \
-        --enable-gst-mixer-applet \
-        --enable-deprecated \
-        --disable-pulseaudio \
         --disable-static
     make
 }
 
-package_mate-media-pulseaudio() {
-    groups=('mate-unstable-extra')
-    pkgdesc="MATE Media Tools (pulseaudio)"
-    depends=('libcanberra-pulse' 'libunique3' 'marco' 'mate-desktop' 'pulseaudio')
-    conflicts=("${pkgbase}-gstreamer-git" 'mate-settings-daemon-gstreamer-git')
-    provides=("${pkgbase}")
-    replaces=("${pkgbase}")
-    cd "${srcdir}/${pkgbase}"
-    make DESTDIR="${pkgdir}" install
-}
-
-package_mate-media-gstreamer() {
-    pkgdesc="MATE Media Tools (GStreamer)"
-    depends=('gstreamer0.10-base-plugins' 'gtk3' 'libcanberra' 'marco' 
-             'mate-desktop')
-    optdepends=('mate-panel: Volume control for the panel')
-    conflicts=("${pkgbase}-pulseaudio-git" 'mate-settings-daemon-pulseaudio-git')
-    provides=("${pkgbase}")
-    install=${pkgbase}-gstreamer.install
-    cd "${srcdir}/${pkgbase}-gstreamer"
+package() {
+    cd "${srcdir}/${pkgname}"
     make DESTDIR="${pkgdir}" install
 }

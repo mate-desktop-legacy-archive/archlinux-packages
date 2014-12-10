@@ -17,7 +17,8 @@ install=${pkgname}.install
 
 pkgver() {
     cd "${srcdir}/${pkgname}"
-    echo ${_ver}.$(date +%Y%m%d).$(git rev-parse --short master)
+    #echo ${_ver}.$(date +%Y%m%d).$(git rev-parse --short master)
+    printf "%s.%s.%s" "${_ver}" "$(git rev-list --count HEAD)" "$(git log -1 --format=%cd --date=short | tr -d -)"
 }
 
 prepare() {

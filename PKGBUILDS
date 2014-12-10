@@ -1,0 +1,45 @@
+VERSION=1.9
+REPONAME="mate-unstable-gtk3"
+# http://wiki.mate-desktop.org/status:1.10
+BUILD_ORDER=(
+    mate-common
+    mate-desktop
+    libmatekbd
+    libmateweather
+    libmatemixer
+    mate-icon-theme
+    caja
+    mate-polkit
+    marco
+    mate-settings-daemon
+    mate-session-manager
+    mate-menus
+    mate-panel
+    mate-media
+    mate-backgrounds
+    mate-themes
+    mate-notification-daemon
+    mate-control-center
+    #gnome-main-menu
+    mate-screensaver
+    engrampa
+    mate-power-manager
+    mate-system-monitor
+    atril
+    caja-extensions
+    mate-applets
+    eom
+    mate-icon-theme-faenza
+    mozo
+    mate-netbook
+    mate-netspeed
+    mate-sensors-applet
+    mate-terminal
+    pluma
+    mate-user-share
+    mate-utils
+    python2-caja
+    galculator
+    "https://aur.archlinux.org/packages/ob/obex-data-server/obex-data-server.tar.gz"
+    blueman
+)
