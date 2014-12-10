@@ -1,7 +1,8 @@
+# $Id: PKGBUILD 121185 2014-10-22 01:32:53Z foutrelis $
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-applets
-pkgver=1.8.0
+pkgver=1.8.1
 pkgrel=2
 pkgdesc="Applets for MATE panel"
 arch=('i686' 'x86_64')
@@ -10,11 +11,11 @@ license=('GPL')
 depends=('gtksourceview2' 'mate-panel' 'python2-dbus' 'python2-gobject' 'upower')
 makedepends=('docbook2x' 'docbook-xsl' 'mate-common' 'networkmanager'
              'perl-xml-parser' 'yelp-tools')
-optdepends=('fortune-mod: for displaying fortune cookies in the Wanda the Fish applet' 
+optdepends=('fortune-mod: for displaying fortune cookies in the Wanda the Fish applet'
             'yelp: for reading MATE help documents')
 groups=('mate-extra')
 source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('c9e7ac6f9cc6b6ebd77720b056a3a81536b92419')
+sha1sums=('0ba4133db67d94f5b92e45b1776d91cfcce52e37')
 install=${pkgname}.install
 
 prepare() {

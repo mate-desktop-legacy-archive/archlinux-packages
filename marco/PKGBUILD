@@ -1,8 +1,9 @@
+# $Id: PKGBUILD 121863 2014-11-04 18:04:06Z flexiondotorg $
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=marco
-pkgver=1.8.0
-pkgrel=1
+pkgver=1.8.2
+pkgrel=3
 pkgdesc="A window manager for MATE"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
@@ -14,10 +15,25 @@ optdepends=('yelp: for reading MATE help documents')
 replaces=('mate-window-manager')
 provides=('mate-window-manager')
 conflicts=('mate-window-manager')
+options=('!emptydirs')
 groups=('mate')
-source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('7083d090aa2966ec590020aaf21ead77417bccba')
+source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz"
+        'do_not_add_shadows_to_ARGB_windows.diff'
+        'update_keybindings_with_new_name.diff')
+sha1sums=('0b361403ad4603d6b93f1b7b684c8c5b905ddf3c'
+          'a2af3d1d6ea6a3b19bf9aa290036b2c7181a3587'
+          'f09d9871ef920e7848458bca853589f482f340b3')
 install=${pkgname}.install
+
+prepare() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    # Adapted from the commit below to correct drop down menu rendering with GTK 3.14.
+    # - https://git.gnome.org/browse/metacity/commit/?id=a6b29b2d2f6a7787c59cfffdc2bed1b5b5b99244
+    patch -Np1 -i "${srcdir}/do_not_add_shadows_to_ARGB_windows.diff"
+    # Update keybindings files with new name 
+    # - https://github.com/mate-desktop/marco/commit/c2cbcaa90d88d3d74dc7b79cae17964f4243a51d
+    patch -Np1 -i "${srcdir}/update_keybindings_with_new_name.diff"
+}
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"

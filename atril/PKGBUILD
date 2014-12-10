@@ -1,13 +1,14 @@
+# $Id: PKGBUILD 120642 2014-10-14 14:16:49Z flexiondotorg $
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=atril
-pkgver=1.8.0
-pkgrel=1
+pkgver=1.8.1
+pkgrel=2
 pkgdesc="Simply a document viewer"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('dconf' 'dbus' 'desktop-file-utils' 'gtk2' 'libsm' 'libspectre'
+depends=('dconf' 'dbus' 'desktop-file-utils' 'gtk2' 'libsecret' 'libsm' 'libspectre'
          'mate-desktop' 'mate-icon-theme' 'poppler-glib' 'zlib')
 makedepends=('caja' 'djvulibre' 'gobject-introspection' 'libgxps' 'mate-common'
              'perl-xml-parser' 'texlive-bin' 'yelp-tools')
@@ -23,7 +24,7 @@ provides=('mate-document-viewer')
 conflicts=('mate-document-viewer')
 groups=('mate-extra')
 source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('8327437ba12df61326b83342cea746d1764727d0')
+sha1sums=('2051be961a84d118ad0a278ec22bf48ca5d3fc35')
 install=${pkgname}.install
 
 prepare() {

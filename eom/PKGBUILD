@@ -1,15 +1,16 @@
+# $Id: PKGBUILD 119834 2014-09-29 19:53:11Z flexiondotorg $
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=eom
-pkgver=1.8.0
-pkgrel=2
+pkgver=1.8.1
+pkgrel=1
 pkgdesc="An image viewing and cataloging program for MATE"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
 depends=('dbus-glib' 'desktop-file-utils' 'gtk2' 'exempi' 'lcms2' 'libexif'
-         'libjpeg-turbo' 'mate-desktop' 'mate-icon-theme' 'pygtk' 'python2'
-         'python2-gobject2' 'startup-notification' 'zlib')
+         'libjpeg-turbo' 'librsvg' 'mate-desktop' 'mate-icon-theme' 'pygtk'
+         'python2' 'python2-gobject2' 'startup-notification' 'zlib')
 makedepends=('mate-common' 'perl-xml-parser' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 replaces=('mate-image-viewer')
@@ -17,7 +18,7 @@ provides=('mate-image-viewer')
 conflicts=('mate-image-viewer')
 groups=('mate-extra')
 source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('580b3c06e16e14dd3f72d545f47f295af5d67dd1')
+sha1sums=('48ceda7c1abb6d0d789129436530cf0539df184a')
 install=${pkgname}.install
 
 build() {
@@ -25,7 +26,8 @@ build() {
     PYTHON=/usr/bin/python2 ./configure \
         --prefix=/usr \
         --localstatedir=/var \
-        --with-gtk=2.0
+        --with-gtk=2.0 \
+        --with-librsvg
     make
 }
 

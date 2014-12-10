@@ -1,7 +1,7 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=mate-panel
-pkgver=1.8.0
+pkgver=1.8.1
 pkgrel=2
 pkgdesc="The MATE Panel"
 url="http://mate-desktop.org"
@@ -15,14 +15,14 @@ makedepends=('gobject-introspection' 'mate-common' 'networkmanager'
 optdepends=('yelp: for reading MATE help documents')
 groups=('mate')
 source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz"
-        "https://github.com/City-busz/mate-panel/commit/f4d754c48a1cb141407ca28d80431cbd954a5ef5.diff")
-sha1sums=('289bca55fb26465f2c155d087932d6973edf07d9'
-          '8c67a6aacfad3ee8225410f1ff1e37c6da3d5bc8')
+        "update_wm_name.diff")
+sha1sums=('18795801763059269573015f33f16651a1fd36bc'
+          '45c1228e51dbcec7c9e17e665115e81c81b89e32')
 install=${pkgname}.install
 
 prepare() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-    patch -Np1 -i "${srcdir}/f4d754c48a1cb141407ca28d80431cbd954a5ef5.diff"
+    patch -Np1 -i "${srcdir}/update_wm_name.diff"
 }
 
 build() {

@@ -1,9 +1,9 @@
-# $Id: PKGBUILD 107784 2014-03-19 16:04:01Z flexiondotorg $
+# $Id: PKGBUILD 110489 2014-05-01 08:45:34Z flexiondotorg $
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 pkgname=pluma
-pkgver=1.8.0
-pkgrel=2
+pkgver=1.8.1
+pkgrel=1
 pkgdesc="A powerful text editor for MATE"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
@@ -17,7 +17,7 @@ provides=('mate-text-editor')
 conflicts=('mate-text-editor')
 groups=('mate-extra')
 source=("http://pub.mate-desktop.org/releases/1.8/${pkgname}-${pkgver}.tar.xz")
-sha1sums=('858e3edaee698b3f99189d3285061ab56b21828c')
+sha1sums=('3bd3f7a5197ac96db9142a7f3bb9a10009312c22')
 install=${pkgname}.install
 
 prepare() {
