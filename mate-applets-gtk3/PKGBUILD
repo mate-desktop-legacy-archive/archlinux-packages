@@ -1,0 +1,51 @@
+# Maintainer : Martin Wimpress <code@flexion.org>
+
+_ver=1.9.0
+pkgbase=mate-applets
+pkgname=(${pkgbase}-gtk3)
+pkgver=0
+pkgrel=1
+pkgdesc="Applets for MATE panel (GTK3 version [EXPERIMENTAL])"
+arch=('i686' 'x86_64')
+url="http://mate-desktop.org"
+license=('GPL')
+depends=('gtksourceview3' 'mate-panel-gtk3>=1.9.4' 'python2-dbus' 'python2-gobject' 'upower')
+makedepends=('git' 'docbook2x' 'docbook-xsl' 'mate-common' 'yelp-tools')
+optdepends=('fortune-mod: for displaying fortune cookies in the Wanda the Fish applet'
+            'yelp: for reading MATE help documents')
+groups=('mate-unstable-extra-gtk3')
+provides=("${pkgbase}")
+replaces=("${pkgbase}")
+conflicts=("${pkgbase}")
+source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
+sha1sums=('SKIP')
+install=${pkgbase}.install
+
+pkgver() {
+    cd "${srcdir}/${pkgbase}"
+    printf "%s.%s.%s" "${_ver}" "$(git log -1 --format=%cd --date=short | tr -d -)" "$(git rev-list --count HEAD)"
+}
+
+prepare() {
+    cd "${srcdir}/${pkgbase}"
+    NOCONFIGURE=1 ./autogen.sh
+    sed -i 's/env python/env python2/' invest-applet/invest/{chart.py,invest-applet.py,mate-invest-chart}
+}
+
+build() {
+    cd "${srcdir}/${pkgbase}"
+    PYTHON=/usr/bin/python2 ./configure \
+        --prefix=/usr \
+        --sysconfdir=/etc \
+        --libexecdir=/usr/lib/${pkgbase} \
+        --enable-polkit \
+        --enable-ipv6 \
+        --with-gtk=3.0 \
+        --disable-static
+    make
+}
+
+package_mate-applets-gtk3() {
+    cd "${srcdir}/${pkgbase}"
+    make DESTDIR="${pkgdir}" install
+}

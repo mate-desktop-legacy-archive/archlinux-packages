@@ -20,51 +20,82 @@ fi
 MACHINE=$(uname -m)
 
 # http://wiki.mate-desktop.org/status:1.10
-BUILD_ORDER=(
+CORE=(
     mate-common
     mate-desktop
+    mate-user-guide
     libmatekbd
+    libmatemixer
     libmateweather
     mate-icon-theme
     caja
+    caja-gtk3
     mate-polkit
     marco
+    marco-gtk3
     mate-settings-daemon
+    mate-settings-daemon-gtk3
     mate-session-manager
+    mate-session-manager-gtk3
     mate-menus
     mate-panel
-    mate-media
+    mate-panel-gtk3
     mate-backgrounds
     mate-themes
     mate-notification-daemon
     mate-control-center
-    gnome-main-menu
+    mate-control-center-gtk3
     mate-screensaver
-    engrampa
+    mate-screensaver-gtk3
+    mate-media
+    mate-media-gtk3
     mate-power-manager
+    mate-power-manager-gtk3
     mate-system-monitor
+)
+
+EXTRA=(
     atril
+    atril-gtk3
     caja-extensions
-    mate-applets
+    caja-extensions-gtk3
+    engrampa
+    engrampa-gtk3
     eom
+    eom-gtk3
+    mate-applets
+    mate-applets-gtk3
     mate-icon-theme-faenza
-    mozo
     mate-netbook
+    mate-netbook-gtk3
     mate-netspeed
+    mate-netspeed-gtk3
     mate-sensors-applet
+    mate-sensors-applet-gtk3
     mate-terminal
-    pluma
+    mate-terminal-gtk3
     mate-user-share
+    mate-user-share-gtk3
     mate-utils
+    mate-utils-gtk3
+    mozo
+    mozo-gtk3
+    pluma
+    pluma-gtk3
     python2-caja
+    python2-caja-gtk3
     galculator
+    obex-data-server
     blueman
 )
+
+DISABLED=(gnome-main-menu)
+
+BUILD_ORDER=("${CORE[@]}" "${EXTRA[@]}")
 
 MATE_VER=1.9
 BASEDIR=$(dirname $(readlink -f ${0}))
 REPODIR="/var/local/mate-unstable/${MATE_VER}"
-
 
 # Show usage information.
 function usage() {
@@ -137,16 +168,18 @@ function httpd_start() {
 # Build packages that are not at the current version.
 function tree_build() {
     local PKG=${1}
+    local PKGBASE=$(echo ${PKG} | sed 's/-gtk3//')
+
     echo "Building ${PKG}"
     cd ${PKG}
     # If there is a git clone check the revision.
-    if [ -f ${PKG}/FETCH_HEAD ]; then
+    if [ -f ${PKGBASE}/FETCH_HEAD ]; then
         echo " - Fetching revision from git"
         # git version
         local _ver=$(grep -E ^_ver PKGBUILD | cut -f2 -d'=')
-        cd ${PKG}
+        cd ${PKGBASE}
         git fetch
-        local PKGBUILD_VER="${_ver}.*.$(git rev-parse --short master)"
+        local PKGBUILD_VER=$(printf "%s.%s.%s" "${_ver}" "$(git log -1 --format=%cd --date=short | tr -d -)" "$(git rev-list --count HEAD)")
         cd ..
     else
         # pacakge version
@@ -168,15 +201,26 @@ function tree_build() {
 
     for CHROOT_ARCH in ${CHROOT_ARCHS[@]};
     do
+        if [ "${PKG}" == "caja-extensions" ]; then
+            PKG_CHECK="caja-share"
+        elif [ "${PKG}" == "caja-extensions-gtk3" ]; then
+            PKG_CHECK="caja-share-gtk3"
+        else
+            PKG_CHECK="${PKG}"
+        fi
+
         if [ -n "${TEST_ANY}" ]; then
-            EXIST=$(ls -1 ${PKG}*-${PKGBUILD}-any.pkg.tar.xz 2>/dev/null)
+            echo " - Looking for ${PKG_CHECK}-${PKGBUILD}-any.pkg.tar.xz"
+            EXIST=$(ls -1 ${PKG_CHECK}-${PKGBUILD}-any.pkg.tar.xz 2>/dev/null)
             local RET=$?
         else
-            EXIST=$(ls -1 ${PKG}*-${PKGBUILD}-${CHROOT_ARCH}.pkg.tar.xz 2>/dev/null)
+            echo " - Looking for ${PKG_CHECK}-${PKGBUILD}-${CHROOT_ARCH}.pkg.tar.xz"
+            EXIST=$(ls -1 ${PKG_CHECK}-${PKGBUILD}-${CHROOT_ARCH}.pkg.tar.xz 2>/dev/null)
             local RET=$?
         fi
 
         if [ ${RET} -ne 0 ]; then
+            echo " - Did not find built packages for ${PKG}."
             echo " - Building ${PKG}"
             mate-unstable-${CHROOT_ARCH}-build
             if [ $? -ne 0 ]; then
@@ -185,6 +229,7 @@ function tree_build() {
                 exit 1
             fi
         else
+            echo " - Found matching build for ${PKG}."
             if [ -n "${TEST_ANY}" ]; then
                 echo " - ${PKG}-${PKGBUILD}-any is current"
             else
@@ -195,16 +240,21 @@ function tree_build() {
         echo " - Adding '${PKG}' to [mate-unstable]"
         if [ -n "${TEST_ANY}" ]; then
             if [ "${MACHINE}" == "i686" ] || [ "${MACHINE}" == "x86_64" ]; then
-                cp -av ${PKG}*-${PKGBUILD}-any.pkg.tar.xz ${REPODIR}/i686/ 2>/dev/null
-                cp -av ${PKG}*-${PKGBUILD}-any.pkg.tar.xz ${REPODIR}/x86_64/ 2>/dev/null
+                if [ "${PKG}" == "caja-extensions" ] || [ "${PKG}" == "caja-extensions-gtk3" ]; then
+                    cp -a caja*-any.pkg.tar.xz ${REPODIR}/i686/ 2>/dev/null
+                    cp -a caja*-any.pkg.tar.xz ${REPODIR}/x86_64/ 2>/dev/null
+                else
+                    cp -a ${PKG}*-any.pkg.tar.xz ${REPODIR}/i686/ 2>/dev/null
+                    cp -a ${PKG}*-any.pkg.tar.xz ${REPODIR}/x86_64/ 2>/dev/null
+                fi
                 repo_update i686
                 repo_update x86_64
             fi
         else
-            if [ "${PKG}" == "caja-extensions" ]; then
-                cp -av caja*-${PKGBUILD}-${CHROOT_ARCH}.pkg.tar.xz ${REPODIR}/${CHROOT_ARCH}/ 2>/dev/null
+            if [ "${PKG}" == "caja-extensions" ] || [ "${PKG}" == "caja-extensions-gtk3" ]; then
+                cp -a caja*-${CHROOT_ARCH}.pkg.tar.xz ${REPODIR}/${CHROOT_ARCH}/ 2>/dev/null          
             else
-                cp -av ${PKG}*-${PKGBUILD}-${CHROOT_ARCH}.pkg.tar.xz ${REPODIR}/${CHROOT_ARCH}/ 2>/dev/null
+                cp -a ${PKG}*-${CHROOT_ARCH}.pkg.tar.xz ${REPODIR}/${CHROOT_ARCH}/ 2>/dev/null
             fi
             repo_update ${CHROOT_ARCH}
         fi
@@ -250,7 +300,7 @@ function tree_sync() {
     echo "Action : sync"
     # Modify this accordingly.
     local RSYNC_UPSTREAM="mate@mate.flexion.org::mate-${MATE_VER}"
-    chown -R 65534:65534 ${REPODIR}
+    chown -R 1000:100 ${REPODIR}
     rsync -av --delete --progress ${REPODIR}/ "${RSYNC_UPSTREAM}/"
 }
 

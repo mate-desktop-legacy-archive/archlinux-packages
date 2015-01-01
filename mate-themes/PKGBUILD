@@ -1,6 +1,6 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-_ver=1.9.0
+_ver=1.9.2
 pkgname=mate-themes
 pkgver=0
 pkgrel=1
@@ -11,8 +11,8 @@ license=('GPL')
 depends=('gtk3' 'gtk-engines' 'gtk-engine-murrine' 'librsvg' 'mate-icon-theme')
 makedepends=('git' 'mate-common' 'icon-naming-utils')
 optdepends=('gtk-engine-unico: Support for some GTK3 themes.')
-groups=('mate-unstable')
-source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
+groups=('mate-unstable' 'mate-unstable-gtk3')
+source=("${pkgname}"::"git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')
 install=${pkgname}.install
 

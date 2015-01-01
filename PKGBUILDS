@@ -1,45 +1,76 @@
 VERSION=1.9
-REPONAME="mate-unstable-gtk3"
+REPONAME="mate-unstable-dual"
+
 # http://wiki.mate-desktop.org/status:1.10
-BUILD_ORDER=(
+CORE=(
     mate-common
     mate-desktop
+    mate-user-guide
     libmatekbd
-    libmateweather
     libmatemixer
+    libmateweather
     mate-icon-theme
     caja
+    caja-gtk3
     mate-polkit
     marco
+    marco-gtk3
     mate-settings-daemon
+    mate-settings-daemon-gtk3
     mate-session-manager
+    mate-session-manager-gtk3
     mate-menus
     mate-panel
-    mate-media
+    mate-panel-gtk3
     mate-backgrounds
     mate-themes
     mate-notification-daemon
     mate-control-center
-    #gnome-main-menu
+    mate-control-center-gtk3
     mate-screensaver
-    engrampa
+    mate-screensaver-gtk3
+    mate-media
+    mate-media-gtk3
     mate-power-manager
+    mate-power-manager-gtk3
     mate-system-monitor
+)
+
+EXTRA=(
     atril
+    atril-gtk3
     caja-extensions
-    mate-applets
+    caja-extensions-gtk3
+    engrampa
+    engrampa-gtk3
     eom
+    eom-gtk3
+    mate-applets
+    mate-applets-gtk3
     mate-icon-theme-faenza
-    mozo
     mate-netbook
+    mate-netbook-gtk3
     mate-netspeed
+    mate-netspeed-gtk3
     mate-sensors-applet
+    mate-sensors-applet-gtk3
     mate-terminal
-    pluma
+    mate-terminal-gtk3
     mate-user-share
+    mate-user-share-gtk3
     mate-utils
+    mate-utils-gtk3
+    mozo
+    mozo-gtk3
+    pluma
+    pluma-gtk3
     python2-caja
+    python2-caja-gtk3
     galculator
-    "https://aur.archlinux.org/packages/ob/obex-data-server/obex-data-server.tar.gz"
+    obex-data-server
     blueman
 )
+
+DISABLED=(gnome-main-menu)
+
+BUILD_ORDER=("${CORE[@]}" "${EXTRA[@]}")

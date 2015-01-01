@@ -1,48 +1,51 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-_ver=1.9.0
-pkgname=mate-panel
+_ver=1.9.4
+pkgbase=mate-panel
+pkgname=(${pkgbase})
 pkgver=0
 pkgrel=1
-pkgdesc="The MATE Panel"
+pkgdesc="The MATE Panel (GTK2 version)"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('caja' 'dbus-glib' 'dconf' 'gtk3' 'libwnck3' 'libcanberra' 'libice'
-         'libmateweather' 'librsvg' 'libsm' 'libsoup' 'libxau' 'marco'
-         'mate-menus' 'mate-desktop' 'mate-session-manager')
-makedepends=('git' 'gobject-introspection' 'mate-common' 'networkmanager'
-             'yelp-tools')
+depends=('caja>=1.9.3' 'dbus-glib' 'dconf' 'gtk2' 'libwnck' 'libcanberra' 'libice'
+         'libmateweather>=1.9.1' 'librsvg' 'libsm' 'libsoup' 'libxau' 'marco>=1.9.3'
+         'mate-menus>=1.9.1' 'mate-desktop>=1.9.3' 'mate-session-manager>=1.9.3')
+makedepends=('git' 'gobject-introspection' 'mate-common' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
+source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
 groups=('mate-unstable')
-source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
+provides=("${pkgbase}")
+replaces=("${pkgbase}-gtk3")
+conflicts=("${pkgbase}-gtk3")
 sha1sums=('SKIP')
-install=${pkgname}.install
+install=${pkgbase}.install
 
 pkgver() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgbase}"
     printf "%s.%s.%s" "${_ver}" "$(git log -1 --format=%cd --date=short | tr -d -)" "$(git rev-list --count HEAD)"
 }
 
 prepare() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgbase}"
     NOCONFIGURE=1 ./autogen.sh
 }
 
 build() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgbase}"
     ./configure \
         --prefix=/usr \
-        --libexecdir=/usr/lib/${pkgname} \
+        --libexecdir=/usr/lib/${pkgbase} \
         --sysconfdir=/etc \
         --localstatedir=/var \
-        --with-gtk=3.0 \
+        --with-gtk=2.0 \
         --enable-introspection \
         --disable-static
     make
 }
 
-package() {
-    cd "${srcdir}/${pkgname}"
+package_mate-panel() {
+    cd "${srcdir}/${pkgbase}"
     make DESTDIR="${pkgdir}" install
 }

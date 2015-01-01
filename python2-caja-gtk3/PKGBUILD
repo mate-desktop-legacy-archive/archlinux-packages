@@ -1,0 +1,39 @@
+# Maintainer : Martin Wimpress <code@flexion.org>
+
+_ver=1.9.0
+_pkgname=python-caja
+pkgname=python2-caja-gtk3
+pkgver=0
+pkgrel=1
+pkgdesc="Python binding for Caja, to allow Caja property page and menu item extensions to be written in Python (GTK3 version [EXPERIMENTAL])"
+url="http://mate-desktop.org"
+arch=('i686' 'x86_64')
+license=('GPL')
+depends=('caja-gtk3>=1.9.3' 'python2-gobject')
+makedepends=('git' 'mate-common')
+source=("${pkgname}"::"git+https://github.com/mate-desktop/${_pkgname}.git")
+sha1sums=('SKIP')
+
+pkgver() {
+    cd "${srcdir}/${pkgname}"
+    printf "%s.%s.%s" "${_ver}" "$(git log -1 --format=%cd --date=short | tr -d -)" "$(git rev-list --count HEAD)"
+}
+
+prepare() {
+    cd "${srcdir}/${pkgname}"
+    NOCONFIGURE=1 ./autogen.sh
+    sed -i 's/python-config/python2-config/' configure
+}
+
+build() {
+    cd "${srcdir}/${pkgname}"
+    PYTHON=/usr/bin/python2 ./configure \
+        --prefix=/usr \
+        --disable-static
+    make
+}
+
+package() {
+    cd "${srcdir}/${pkgname}"
+    make DESTDIR="${pkgdir}" install
+}

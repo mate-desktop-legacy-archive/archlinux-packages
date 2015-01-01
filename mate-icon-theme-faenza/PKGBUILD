@@ -11,8 +11,8 @@ license=('LGPL')
 depends=('gtk-update-icon-cache')
 makedepends=('git' 'icon-naming-utils' 'mate-common')
 options=(!strip)
-groups=('mate-unstable-extra')
-source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
+groups=('mate-unstable-extra' 'mate-unstable-extra-gtk3')
+source=("${pkgname}"::"git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')
 install=${pkgname}.install
 

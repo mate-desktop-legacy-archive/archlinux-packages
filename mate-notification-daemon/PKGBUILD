@@ -1,7 +1,8 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-_ver=1.9.0
-pkgname=mate-notification-daemon
+_ver=1.9.1
+pkgbase=mate-notification-daemon
+pkgname=(${pkgbase} ${pkgbase}-gtk3)
 pkgver=0
 pkgrel=1
 provides=('notification-daemon')
@@ -9,34 +10,64 @@ pkgdesc="Notification daemon for MATE"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL' 'LGPL')
-depends=('dconf' 'dbus-glib' 'gtk3' 'libcanberra' 'libwnck3' 'libnotify')
+depends=('dconf' 'dbus-glib' 'gtk2' 'gtk3' 'libcanberra' 'libwnck' 'libwnck3' 'libnotify')
 makedepends=('git' 'mate-common')
-groups=('mate-unstable')
-source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
+source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
 sha1sums=('SKIP')
 install=${pkgname}.install
 
 pkgver() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgbase}"
     printf "%s.%s.%s" "${_ver}" "$(git log -1 --format=%cd --date=short | tr -d -)" "$(git rev-list --count HEAD)"
 }
 
 prepare() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgbase}"
     NOCONFIGURE=1 ./autogen.sh
 }
 
 build() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}"
+    mv ${pkgbase} "${pkgbase}-gtk2"
+    cp -a "${pkgbase}-gtk2" "${pkgbase}-gtk3"
+
+    cd "${srcdir}/${pkgbase}-gtk2"
     ./configure \
         --prefix=/usr \
-        --libexecdir=/usr/lib/${pkgname} \
+        --libexecdir=/usr/lib/${pkgbase} \
+        --with-gtk=2.0 \
+        --disable-static
+    make
+
+    cd "${srcdir}/${pkgbase}-gtk3"
+    ./configure \
+        --prefix=/usr \
+        --libexecdir=/usr/lib/${pkgbase} \
         --with-gtk=3.0 \
         --disable-static
     make
 }
 
-package() {
-    cd "${srcdir}/${pkgname}"
+package_mate-notification-daemon() {
+    pkgdesc+=' (GTK2 version)'
+    groups=('mate-unstable')
+    provides=("${pkgbase}")
+    replaces=("${pkgbase}-gtk3")
+    conflicts=("${pkgbase}-gtk3")
+
+    depends=('dconf' 'dbus-glib' 'gtk2' 'libcanberra' 'libwnck' 'libnotify')
+    cd "${srcdir}/${pkgbase}-gtk2"
+    make DESTDIR="${pkgdir}" install
+}
+
+package_mate-notification-daemon-gtk3() {
+    pkgdesc+=' (GTK3 version [EXPERIMENTAL])'
+    groups=('mate-unstable-gtk3')
+    provides=("${pkgbase}")
+    replaces=("${pkgbase}")
+    conflicts=("${pkgbase}")
+
+    depends=('dconf' 'dbus-glib' 'gtk3' 'libcanberra' 'libwnck3' 'libnotify')
+    cd "${srcdir}/${pkgbase}-gtk3"
     make DESTDIR="${pkgdir}" install
 }

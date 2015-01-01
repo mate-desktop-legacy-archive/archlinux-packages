@@ -4,20 +4,18 @@ _ver=1.9.0
 pkgname=gnome-main-menu
 pkgver=0
 pkgrel=1
-pkgdesc="A mate-panel applet similar to the traditional main-menu, but with a few additions."
+pkgdesc="A MATE panel applet similar to the traditional menu but with a few additions"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('caja' 'gtk2' 'libunique' 'mate-control-center' 'mate-desktop' 'mate-panel')
-makedepends=('git' 'mate-common' 'yelp-tools')
-optdepends=('yelp: for reading help documents')
-source=("$pkgname"::"git+https://git.gnome.org/browse/${pkgname}")
+depends=('caja>=1.9.3' 'gtk2' 'libunique' 'mate-control-center>=1.9.0' 'mate-desktop>=1.9.3' 'mate-panel>=1.9.4' 'networkmanager')
+makedepends=('git' 'mate-common')
+source=("${pkgname}"::"git+https://git.gnome.org/browse/${pkgname}")
 sha1sums=('SKIP')
 install=${pkgname}.install
 
 pkgver() {
     cd "${srcdir}/${pkgname}"
-    #echo ${_ver}.$(date +%Y%m%d).$(git rev-parse --short master)
     printf "%s.%s.%s" "${_ver}" "$(git rev-list --count HEAD)" "$(git log -1 --format=%cd --date=short | tr -d -)"
 }
 

@@ -1,0 +1,39 @@
+# Maintainer : Martin Wimpress <code@flexion.org>
+
+_ver=1.9.2
+pkgname=libmatemixer
+pkgver=0
+pkgrel=1
+pkgdesc="Mixer library for MATE Desktop"
+url="http://mate-desktop.org"
+arch=('i686' 'x86_64')
+license=('LGPL')
+depends=('alsa-lib' 'libpulse')
+makedepends=('git' 'mate-common')
+source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
+sha1sums=('SKIP')
+
+pkgver() {
+    cd "${srcdir}/${pkgname}"
+    printf "%s.%s.%s" "${_ver}" "$(git log -1 --format=%cd --date=short | tr -d -)" "$(git rev-list --count HEAD)"
+}
+
+prepare() {
+    cd "${srcdir}/${pkgname}"
+    NOCONFIGURE=1 ./autogen.sh
+}
+
+build() {
+    cd "${srcdir}/${pkgname}"
+    ./configure \
+        --prefix=/usr \
+        --sysconfdir=/etc \
+        --localstatedir=/var \
+        --disable-static
+    make
+}
+
+package() {
+    cd "${srcdir}/${pkgname}"
+    make DESTDIR="${pkgdir}" install
+}

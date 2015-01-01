@@ -1,38 +1,42 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 _ver=1.9.0
-pkgname=mate-utils
+pkgbase=mate-utils
+pkgname=(${pkgbase})
 pkgver=0
 pkgrel=1
-pkgdesc="Common MATE utilities for viewing disk usage, logs and fonts, taking screenshots, managing dictionaries and searching files"
+pkgdesc="Common MATE utilities for viewing disk usage, logs and fonts, taking screenshots, managing dictionaries and searching files (GTK2 version)"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('desktop-file-utils' 'gtk3' 'libcanberra' 'libgtop' 'libsm' 'zlib')
-makedepends=('git' 'mate-common' 'mate-panel'  'rarian' 'yelp-tools')
+depends=('desktop-file-utils' 'gtk2' 'libcanberra' 'libgtop' 'libsm' 'zlib')
+makedepends=('git' 'mate-common' 'mate-panel' 'rarian' 'yelp-tools')
 optdepends=('mate-panel: Look up words in dictionaries from the panel'
             'yelp: for reading MATE help documents')
 groups=('mate-unstable-extra')
-source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
+provides=("${pkgbase}")
+replaces=("${pkgbase}-gtk3")
+conflicts=("${pkgbase}-gtk3")
+source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
 sha1sums=('SKIP')
-install=${pkgname}.install
+install=${pkgbase}.install
 
 pkgver() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgbase}"
     printf "%s.%s.%s" "${_ver}" "$(git log -1 --format=%cd --date=short | tr -d -)" "$(git rev-list --count HEAD)"
 }
 
 prepare() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgbase}"
     NOCONFIGURE=1 ./autogen.sh
 }
 
 build() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgbase}"
     ./configure \
         --prefix=/usr \
-        --libexecdir=/usr/lib/${pkgname} \
-        --with-gtk=3.0 \
+        --libexecdir=/usr/lib/${pkgbase} \
+        --with-gtk=2.0 \
         --sysconfdir=/etc \
         --enable-deprecated \
         --disable-maintainer-flags \
@@ -40,7 +44,7 @@ build() {
     make
 }
 
-package() {
-    cd "${srcdir}/${pkgname}"
+package_mate-utils() {
+    cd "${srcdir}/${pkgbase}"
     make DESTDIR="${pkgdir}" install
 }

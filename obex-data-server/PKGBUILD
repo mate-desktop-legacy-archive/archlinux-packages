@@ -12,25 +12,25 @@ arch=('i686' 'x86_64')
 url="http://wiki.muiline.com/${pkgname}"
 license=('GPL')
 depends=('dbus-glib' 'openobex' 'imagemagick' 'libusb-compat')
-#source=("http://tadas.dailyda.com/software/${pkgname}-${pkgver}.tar.gz")
 source=("http://pkgs.fedoraproject.org/repo/pkgs/${pkgname}/${pkgname}-${pkgver}.tar.gz/961ca5db6fe9c97024e133cc6203cc4d/${pkgname}-${pkgver}.tar.gz"
         "${pkgname}-openobex17.patch")
 md5sums=('961ca5db6fe9c97024e133cc6203cc4d'
          '4199b3f0178d2b58eb36ee36ed1d07d5')
 
 prepare() {
-  cd ${pkgname}-${pkgver}
-  patch -p1 -i "${srcdir}/${pkgname}-openobex17.patch"
+    cd "${pkgname}-${pkgver}"
+    patch -p1 -i "${srcdir}/${pkgname}-openobex17.patch"
 }
 
 build() {
-  cd ${pkgname}-${pkgver}
-  ./configure --prefix=/usr \
-    --sysconfdir=/etc
-  make
+    cd "${pkgname}-${pkgver}"
+    ./configure \
+        --prefix=/usr \
+        --sysconfdir=/etc
+    make
 }
 
 package() {
-  cd ${pkgname}-${pkgver}
-  make DESTDIR="${pkgdir}" install
+    cd "${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
 }

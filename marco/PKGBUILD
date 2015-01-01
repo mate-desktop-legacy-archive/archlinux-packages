@@ -1,45 +1,49 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-_ver=1.9.0
-pkgname=marco
+_ver=1.9.3
+pkgbase=marco
+pkgname=(${pkgbase})
 pkgver=0
 pkgrel=1
-pkgdesc="A window manager for MATE"
+pkgdesc="A window manager for MATE (GTK2 version)"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('gtk3' 'libcanberra' 'libgtop' 'libice' 'libsm' 'libxt' 'mate-desktop'
+depends=('gtk2' 'libcanberra' 'libgtop' 'libice' 'libsm' 'libxt' 'mate-desktop>=1.9.3'
          'startup-notification' 'zenity')
 makedepends=('git' 'mate-common' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 groups=('mate-unstable')
-source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
+provides=("${pkgbase}")
+replaces=("${pkgbase}-gtk3")
+conflicts=("${pkgbase}-gtk3")
+source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
 sha1sums=('SKIP')
-install=${pkgname}.install
+install=${pkgbase}.install
 
 pkgver() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgbase}"
     printf "%s.%s.%s" "${_ver}" "$(git log -1 --format=%cd --date=short | tr -d -)" "$(git rev-list --count HEAD)"
 }
 
 prepare() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgbase}"
     NOCONFIGURE=1 ./autogen.sh
 }
 
 build() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgbase}"
     ./configure \
         --prefix=/usr \
         --sysconfdir=/etc \
         --localstatedir=/var \
-        --with-gtk=3.0 \
+        --with-gtk=2.0 \
         --enable-startup-notification \
         --disable-static
     make
 }
 
-package() {
-    cd "${srcdir}/${pkgname}"
+package_marco() {
+    cd "${srcdir}/${pkgbase}"
     make DESTDIR="${pkgdir}" install
 }

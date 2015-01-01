@@ -1,0 +1,53 @@
+# Maintainer : Martin Wimpress <code@flexion.org>
+
+_ver=1.9.3
+pkgbase=mate-session-manager
+pkgname=(${pkgbase}-gtk3)
+pkgver=0
+pkgrel=1
+pkgdesc="The MATE Session Handler (GTK3 version [EXPERIMENTAL])"
+url="http://mate-desktop.org"
+arch=('i686' 'x86_64')
+license=('GPL' 'LGPL')
+depends=('dbus-glib' 'gtk3' 'libsm' 'libxtst' 'mate-desktop-gtk3>=1.9.3' 'mate-polkit-gtk3>=1.9.0'
+         'mate-settings-daemon-gtk3>=1.9.5' 'ttf-dejavu' 'xdg-user-dirs')
+makedepends=('git' 'mate-common' 'pangox-compat' 'xmlto')
+optdepends=('lightdm-gtk3-greeter: A lightweight display manager'
+            'onboard: On-screen keyboard useful for mobility impaired users'
+            'orca: Screen reader for blind or visually impaired individuals'
+            'xdg-user-dirs-gtk: Add autostart that prompts to rename user directories when switching locales')
+source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
+pkgdesc+=''
+groups=('mate-unstable-gtk3')
+provides=("${pkgbase}")
+replaces=("${pkgbase}")
+conflicts=("${pkgbase}")
+sha1sums=('SKIP')
+install=${pkgbase}.install
+
+pkgver() {
+    cd "${srcdir}/${pkgbase}"
+    printf "%s.%s.%s" "${_ver}" "$(git log -1 --format=%cd --date=short | tr -d -)" "$(git rev-list --count HEAD)"
+}
+
+prepare() {
+    cd "${srcdir}/${pkgbase}"
+    NOCONFIGURE=1 ./autogen.sh
+}
+
+build() {
+    cd "${srcdir}/${pkgbase}"
+    ./configure \
+        --prefix=/usr \
+        --libexecdir=/usr/lib/${pkgbase} \
+        --sysconfdir=/etc \
+        --localstatedir=/var \
+        --with-gtk=3.0 \
+        --disable-upower
+    make
+}
+
+package_mate-session-manager-gtk3() {
+    cd "${srcdir}/${pkgbase}"
+    make DESTDIR="${pkgdir}" install
+}

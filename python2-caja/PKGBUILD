@@ -5,13 +5,13 @@ _pkgname=python-caja
 pkgname=python2-caja
 pkgver=0
 pkgrel=1
-pkgdesc="Python binding for Caja, to allow Caja property page and menu item extensions to be written in Python."
+pkgdesc="Python binding for Caja, to allow Caja property page and menu item extensions to be written in Python (GTK2 version)"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('caja' 'python2-gobject')
+depends=('caja>=1.9.3' 'python2-gobject')
 makedepends=('git' 'mate-common')
-source=("$pkgname"::"git+https://github.com/mate-desktop/${_pkgname}.git")
+source=("${pkgname}"::"git+https://github.com/mate-desktop/${_pkgname}.git")
 sha1sums=('SKIP')
 
 pkgver() {

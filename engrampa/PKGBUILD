@@ -1,14 +1,15 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-_ver=1.9.0
-pkgname=engrampa
+_ver=1.9.1
+pkgbase=engrampa
+pkgname=(${pkgbase})
 pkgver=0
 pkgrel=1
-pkgdesc="Archive manipulator for MATE"
+pkgdesc="Archive manipulator for MATE (GTK2 version)"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('bzip2' 'caja' 'desktop-file-utils' 'gtk3' 'gzip' 'libarchive' 'tar')
+depends=('bzip2' 'caja>=1.9.3' 'desktop-file-utils' 'gtk2' 'gzip' 'libarchive' 'tar')
 makedepends=('git' 'mate-common' 'yelp-tools')
 optdepends=('unrar: for RAR uncompression'
             'zip: for ZIP archives' 'unzip: for ZIP archives'
@@ -16,36 +17,39 @@ optdepends=('unrar: for RAR uncompression'
             'unace: extraction tool for the proprietary ace archive format'
             'yelp: for reading MATE help documents')
 groups=('mate-unstable-extra')
-source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git"
+provides=("${pkgbase}")
+replaces=("${pkgbase}-gtk3")
+conflicts=("${pkgbase}-gtk3")
+source=("${pkgname}"::"git+https://github.com/mate-desktop/${pkgbase}.git"
         fr-rpm-bsdtar.patch)
 sha1sums=('SKIP'
           '219b05a979bf6f249aaae27964f02345fd81168d')
-install=${pkgname}.install
+install=${pkgbase}.install
 
 pkgver() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgbase}"
     printf "%s.%s.%s" "${_ver}" "$(git log -1 --format=%cd --date=short | tr -d -)" "$(git rev-list --count HEAD)"
 }
 
 prepare() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgbase}"
     NOCONFIGURE=1 ./autogen.sh
     # This patch 'depends' on libarchive
     patch -Np1 -i "${srcdir}/fr-rpm-bsdtar.patch"
 }
 
 build() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgbase}"
     ./configure \
         --prefix=/usr \
-        --libexecdir=/usr/lib/${pkgname} \
-        --with-gtk=3.0 \
+        --libexecdir=/usr/lib/${pkgbase} \
+        --with-gtk=2.0 \
         --disable-static \
         --disable-packagekit
     make
 }
 
-package() {
-    cd "${srcdir}/${pkgname}"
+package_engrampa() {
+    cd "${srcdir}/${pkgbase}"
     make DESTDIR="${pkgdir}" install
 }

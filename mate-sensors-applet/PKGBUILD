@@ -1,42 +1,47 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 _ver=1.9.0
-pkgname=mate-sensors-applet
+pkgbase=mate-sensors-applet
+pkgname=(${pkgbase})
 pkgver=0
 pkgrel=1
-pkgdesc="A MATE Panel applet to display readings from hardware sensors, including CPU temperature, fan speeds and voltage readings."
+pkgdesc="A MATE Panel applet to display readings from hardware sensors, including CPU temperature, fan speeds and voltage readings. (GTK2 version)"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('dbus' 'gtk3' 'libatasmart' 'libnotify' 'libxnvctrl' 'lm_sensors'
-         'mate-panel')
+depends=('dbus' 'gtk2' 'libatasmart' 'libnotify' 'libxnvctrl' 'lm_sensors'
+         'mate-panel>=1.9.4')
 makedepends=('git' 'docbook-xml' 'mate-common' 'rarian' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 groups=('mate-unstable-extra')
-source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
+provides=("${pkgbase}")
+replaces=("${pkgbase}-gtk3")
+conflicts=("${pkgbase}-gtk3")
+source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
 sha1sums=('SKIP')
-install=${pkgname}.install
+install=${pkgbase}.install
 
 pkgver() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgbase}"
     printf "%s.%s.%s" "${_ver}" "$(git log -1 --format=%cd --date=short | tr -d -)" "$(git rev-list --count HEAD)"
 }
 
 prepare() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgbase}"
     NOCONFIGURE=1 ./autogen.sh
 }
 
 build() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgbase}"
     ./configure \
         --prefix=/usr \
-        --libexecdir=/usr/lib/${pkgname} \
+        --libexecdir=/usr/lib/${pkgbase} \
+        --with-gtk=2.0 \
         --disable-static
   make
 }
 
-package() {
-    cd "${srcdir}/${pkgname}"
+package_mate-sensors-applet() {
+    cd "${srcdir}/${pkgbase}"
     make DESTDIR="${pkgdir}" install
 }

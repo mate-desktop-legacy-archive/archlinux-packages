@@ -1,39 +1,44 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-_ver=1.9.0
-pkgname=caja
+_ver=1.9.3
+pkgbase=caja
+pkgname=(${pkgbase})
 pkgver=0
 pkgrel=1
-pkgdesc="File manager for the MATE desktop."
+pkgdesc="File manager for the MATE desktop (GTK2 version)"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('dbus' 'desktop-file-utils' 'exempi' 'gtk3' 'gvfs' 'libexif' 'libunique3'
-         'libxt' 'mate-desktop' 'mate-icon-theme' 'pangox-compat' 'startup-notification')
+depends=('dbus' 'desktop-file-utils' 'exempi' 'gtk2' 'gvfs' 'libexif' 'libunique'
+         'libxt' 'mate-desktop>=1.9.3' 'mate-icon-theme' 'pangox-compat'
+         'startup-notification')
 makedepends=('git' 'gobject-introspection' 'mate-common')
 optdepends=('gstreamer0.10-good-plugins: automatic media playback when mouseover'
             'gvfs-smb: To connect to Samba/Windows shares')
 groups=('mate-unstable')
-source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
+provides=("${pkgbase}")
+replaces=("${pkgbase}-gtk3")
+conflicts=("${pkgbase}-gtk3")
+source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
 sha1sums=('SKIP')
-install=${pkgname}.install
+install=${pkgbase}.install
 
 pkgver() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgbase}"
     printf "%s.%s.%s" "${_ver}" "$(git log -1 --format=%cd --date=short | tr -d -)" "$(git rev-list --count HEAD)"
 }
 
 prepare() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgbase}"
     NOCONFIGURE=1 ./autogen.sh
 }
 
 build() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgbase}"
     ./configure \
         --prefix=/usr \
-        --libexecdir=/usr/lib/${pkgname} \
-        --with-gtk=3.0 \
+        --libexecdir=/usr/lib/${pkgbase} \
+        --with-gtk=2.0 \
         --enable-unique \
         --enable-introspection \
         --disable-static \
@@ -41,7 +46,7 @@ build() {
     make
 }
 
-package() {
-    cd "${srcdir}/${pkgname}"
+package_caja() {
+    cd "${srcdir}/${pkgbase}"
     make DESTDIR="${pkgdir}" install
 }

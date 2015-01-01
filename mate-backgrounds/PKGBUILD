@@ -1,6 +1,6 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-_ver=1.9.0
+_ver=1.9.1
 pkgname=mate-backgrounds
 pkgver=0
 pkgrel=1
@@ -9,8 +9,8 @@ url="http://mate-desktop.org"
 arch=('any')
 license=('GPL')
 makedepends=('git' 'mate-common' )
-groups=('mate-unstable')
-source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
+groups=('mate-unstable' 'mate-unstable-gtk3')
+source=("${pkgname}"::"git+https://github.com/mate-desktop/${pkgname}.git")
 sha1sums=('SKIP')
 
 pkgver() {

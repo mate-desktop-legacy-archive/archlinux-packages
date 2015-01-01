@@ -1,0 +1,51 @@
+# Maintainer : Martin Wimpress <code@flexion.org>
+
+_ver=1.9.4
+pkgbase=mate-panel
+pkgname=(${pkgbase}-gtk3)
+pkgver=0
+pkgrel=1
+pkgdesc="The MATE Panel (GTK3 version [EXPERIMENTAL])"
+url="http://mate-desktop.org"
+arch=('i686' 'x86_64')
+license=('GPL')
+depends=('caja-gtk3>=1.9.3' 'dbus-glib' 'dconf' 'gtk3' 'libwnck3' 'libcanberra' 'libice'
+         'libmateweather-gtk3>=1.9.1' 'librsvg' 'libsm' 'libsoup' 'libxau' 'marco-gtk3>=1.9.3'
+         'mate-menus>=1.9.1' 'mate-desktop-gtk3>=1.9.3' 'mate-session-manager-gtk3>=1.9.3')
+makedepends=('git' 'gobject-introspection' 'mate-common' 'yelp-tools')
+optdepends=('yelp: for reading MATE help documents')
+source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
+groups=('mate-unstable-gtk3')
+provides=("${pkgbase}")
+replaces=("${pkgbase}")
+conflicts=("${pkgbase}")
+sha1sums=('SKIP')
+install=${pkgbase}.install
+
+pkgver() {
+    cd "${srcdir}/${pkgbase}"
+    printf "%s.%s.%s" "${_ver}" "$(git log -1 --format=%cd --date=short | tr -d -)" "$(git rev-list --count HEAD)"
+}
+
+prepare() {
+    cd "${srcdir}/${pkgbase}"
+    NOCONFIGURE=1 ./autogen.sh
+}
+
+build() {
+    cd "${srcdir}/${pkgbase}"
+    ./configure \
+        --prefix=/usr \
+        --libexecdir=/usr/lib/${pkgbase} \
+        --sysconfdir=/etc \
+        --localstatedir=/var \
+        --with-gtk=3.0 \
+        --enable-introspection \
+        --disable-static
+    make
+}
+
+package_mate-panel-gtk3() {
+    cd "${srcdir}/${pkgbase}"
+    make DESTDIR="${pkgdir}" install
+}

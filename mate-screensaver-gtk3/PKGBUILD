@@ -1,0 +1,55 @@
+# Maintainer : Martin Wimpress <code@flexion.org>
+
+_ver=1.9.1
+pkgbase=mate-screensaver
+pkgname=(${pkgbase}-gtk3)
+pkgver=0
+pkgrel=1
+pkgdesc='Screensaver for MATE (GTK3 version [EXPERIMENTAL])'
+url="http://mate-desktop.org"
+arch=('i686' 'x86_64')
+license=('GPL')
+depends=('dbus-glib' 'libmatekbd-gtk3>=1.9.1' 'libnotify' 'libxss' 'mate-desktop-gtk3>=1.9.3'
+         'mate-menus>=1.9.1' 'mate-session-manager-gtk3>=1.9.3')
+makedepends=('git' 'mate-common' 'xmlto')
+optdepends=('mate-power-manager-gtk3: Add power management support.'
+            'mate-screensaver-hacks: Additional screensavers.'
+            'rss-glx: Really slick screensavers.')
+groups=('mate-unstable-extra-gtk3')
+provides=("${pkgbase}")
+replaces=("${pkgbase}")
+conflicts=("${pkgbase}")
+source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
+sha1sums=('SKIP')
+install=${pkgbase}.install
+
+pkgver() {
+    cd "${srcdir}/${pkgbase}"
+    printf "%s.%s.%s" "${_ver}" "$(git log -1 --format=%cd --date=short | tr -d -)" "$(git rev-list --count HEAD)"
+}
+
+prepare() {
+    cd "${srcdir}/${pkgbase}"
+    NOCONFIGURE=1 ./autogen.sh
+}
+
+build() {
+    cd "${srcdir}/${pkgbase}"
+    ./configure \
+        --prefix=/usr \
+        --libexecdir=/usr/lib/${pkgbase} \
+        --sysconfdir=/etc \
+        --with-xscreensaverdir=/usr/share/xscreensaver/config \
+        --with-xscreensaverhackdir=/usr/lib/xscreensaver \
+        --with-mit-ext \
+        --with-libnotify \
+        --enable-locking \
+        --with-gtk=3.0 \
+        --disable-static
+    make
+}
+
+package_mate-screensaver-gtk3() {
+    cd "${srcdir}/${pkgbase}"
+    make DESTDIR="${pkgdir}" install
+}

@@ -1,51 +1,55 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
 _ver=1.9.0
-pkgname=mate-power-manager
+pkgbase=mate-power-manager
+pkgname=(${pkgbase})
 pkgver=0
 pkgrel=1
-pkgdesc="Power management tool for the MATE desktop."
+pkgdesc="Power management tool for the MATE desktop (GTK2 version)"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('dbus-glib' 'dconf' 'gtk3' 'libcanberra' 'libgnome-keyring' 'libnotify'
-         'libunique3' 'upower')
-makedepends=('git' 'docbook2x' 'docbook-xml' 'mate-common' 'xmlto' 'yelp-tools')
+depends=('dbus-glib' 'dconf' 'gtk2' 'libcanberra' 'libgnome-keyring'
+         'libnotify' 'libunique' 'mate-desktop>=1.9.3' 'upower')
+makedepends=('git' 'docbook2x' 'docbook-xml' 'mate-common' 'mate-panel' 'xmlto' 'yelp-tools')
 optdepends=('mate-panel: Set brightness and inhibit power management from the panel'
             'yelp: for reading MATE help documents')
+source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
 groups=('mate-unstable-extra')
-source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
+provides=("${pkgbase}")
+replaces=("${pkgbase}-gtk3")
+conflicts=("${pkgbase}-gtk3")
 sha1sums=('SKIP')
-install=${pkgname}.install
+install=${pkgbase}.install
 
 pkgver() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgbase}"
     printf "%s.%s.%s" "${_ver}" "$(git log -1 --format=%cd --date=short | tr -d -)" "$(git rev-list --count HEAD)"
 }
 
 prepare() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgbase}"
     NOCONFIGURE=1 ./autogen.sh
     #Work around a problem where the .sgml fails to parse.
     sed -e 's:@HAVE_DOCBOOK2MAN_TRUE@.*::' -i man/Makefile.in
 }
 
 build() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgbase}"
     ./configure \
         --prefix=/usr \
-        --libexecdir=/usr/lib/${pkgname} \
+        --libexecdir=/usr/lib/${pkgbase} \
         --sysconfdir=/etc \
         --localstatedir=/var \
         --sbindir=/usr/bin \
         --enable-applets \
         --enable-unique \
-        --with-gtk=3.0 \
+        --with-gtk=2.0 \
         --disable-strict
     make
 }
 
-package() {
-    cd "${srcdir}/${pkgname}"
+package_mate-power-manager() {
+    cd "${srcdir}/${pkgbase}"
     make DESTDIR="${pkgdir}" install
 }

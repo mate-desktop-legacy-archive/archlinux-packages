@@ -1,45 +1,75 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-_ver=1.9.0
-pkgname=mate-desktop
+_ver=1.9.3
+pkgbase=mate-desktop
+pkgname=(${pkgbase} ${pkgbase}-gtk3)
 pkgver=0
 pkgrel=1
 pkgdesc="Library with common API for various MATE modules"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
-license=(GPL LGPL)
-depends=('dconf' 'gtk3' 'python2' 'startup-notification')
+license=('GPL' 'LGPL')
+depends=('dconf' 'gtk2' 'gtk3' 'startup-notification')
 makedepends=('git' 'gobject-introspection' 'mate-common' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
-groups=('mate-unstable')
-source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
+source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
 sha1sums=('SKIP')
-install=${pkgname}.install
+install=${pkgbase}.install
 
 pkgver() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgbase}"
     printf "%s.%s.%s" "${_ver}" "$(git log -1 --format=%cd --date=short | tr -d -)" "$(git rev-list --count HEAD)"
 }
 
 prepare() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgbase}"
     NOCONFIGURE=1 ./autogen.sh
-    sed -i 's|\/usr\/bin\/python|\/usr\/bin\/env python2|' tools/mpaste
 }
 
 build() {
-    cd "${srcdir}/${pkgname}"
-    PYTHON=/usr/bin/python2 ./configure \
+    cd "${srcdir}"
+    mv ${pkgbase} "${pkgbase}-gtk2"
+    cp -a "${pkgbase}-gtk2" "${pkgbase}-gtk3"
+
+    cd "${srcdir}/${pkgbase}-gtk2"
+    ./configure \
+        --prefix=/usr \
+        --with-gtk=2.0 \
+        --disable-static \
+        --disable-schemas-compile \
+        --enable-gtk-doc
+    make
+
+    cd "${srcdir}/${pkgbase}-gtk3"
+    ./configure \
         --prefix=/usr \
         --with-gtk=3.0 \
-        --enable-mpaste \
         --disable-static \
         --disable-schemas-compile \
         --enable-gtk-doc
     make
 }
 
-package() {
-    cd "${srcdir}/${pkgname}"
+package_mate-desktop() {
+    pkgdesc+=' (GTK2 version)'
+    groups=('mate-unstable')
+    provides=("${pkgbase}")
+    replaces=("${pkgbase}-gtk3")
+    conflicts=("${pkgbase}-gtk3")
+
+    depends=('dconf' 'gtk2' 'startup-notification')
+    cd "${srcdir}/${pkgbase}-gtk2"
+    make DESTDIR="${pkgdir}" install
+}
+
+package_mate-desktop-gtk3() {
+    pkgdesc+=' (GTK3 version [EXPERIMENTAL])'
+    groups=('mate-unstable-gtk3')
+    provides=("${pkgbase}")
+    replaces=("${pkgbase}")
+    conflicts=("${pkgbase}")
+
+    depends=('dconf' 'gtk3' 'startup-notification')
+    cd "${srcdir}/${pkgbase}-gtk3"
     make DESTDIR="${pkgdir}" install
 }

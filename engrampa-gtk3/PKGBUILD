@@ -1,0 +1,55 @@
+# Maintainer : Martin Wimpress <code@flexion.org>
+
+_ver=1.9.1
+pkgbase=engrampa
+pkgname=(${pkgbase}-gtk3)
+pkgver=0
+pkgrel=1
+pkgdesc="Archive manipulator for MATE (GTK3 version [EXPERIMENTAL])"
+url="http://mate-desktop.org"
+arch=('i686' 'x86_64')
+license=('GPL')
+depends=('bzip2' 'caja-gtk3>=1.9.3' 'desktop-file-utils' 'gtk3' 'gzip' 'libarchive' 'tar')
+makedepends=('git' 'mate-common' 'yelp-tools')
+optdepends=('unrar: for RAR uncompression'
+            'zip: for ZIP archives' 'unzip: for ZIP archives'
+            'p7zip: 7zip compression utility' 'arj: for ARJ archives'
+            'unace: extraction tool for the proprietary ace archive format'
+            'yelp: for reading MATE help documents')
+groups=('mate-unstable-extra-gtk3')
+provides=("${pkgbase}")
+replaces=("${pkgbase}")
+conflicts=("${pkgbase}")
+source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git"
+        fr-rpm-bsdtar.patch)
+sha1sums=('SKIP'
+          '219b05a979bf6f249aaae27964f02345fd81168d')
+install=${pkgbase}.install
+
+pkgver() {
+    cd "${srcdir}/${pkgbase}"
+    printf "%s.%s.%s" "${_ver}" "$(git log -1 --format=%cd --date=short | tr -d -)" "$(git rev-list --count HEAD)"
+}
+
+prepare() {
+    cd "${srcdir}/${pkgbase}"
+    NOCONFIGURE=1 ./autogen.sh
+    # This patch 'depends' on libarchive
+    patch -Np1 -i "${srcdir}/fr-rpm-bsdtar.patch"
+}
+
+build() {
+    cd "${srcdir}/${pkgbase}"
+    ./configure \
+        --prefix=/usr \
+        --libexecdir=/usr/lib/${pkgbase} \
+        --with-gtk=3.0 \
+        --disable-static \
+        --disable-packagekit
+    make
+}
+
+package_engrampa-gtk3() {
+    cd "${srcdir}/${pkgbase}"
+    make DESTDIR="${pkgdir}" install
+}
