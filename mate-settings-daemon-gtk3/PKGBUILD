@@ -15,9 +15,7 @@ depends=('dbus-glib' 'dconf' 'fontconfig' 'gtk3' 'libcanberra-pulse'
 makedepends=('git' 'mate-common')
 source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
 groups=('mate-unstable-gtk3')
-provides=("${pkgbase}")
-replaces=("${pkgbase}")
-conflicts=("${pkgbase}")
+conflicts=("${pkgbase}" "${pkgbase}-gstreamer" "${pkgbase}-pulseaudio")
 sha1sums=('SKIP')
 install=${pkgbase}.install
 

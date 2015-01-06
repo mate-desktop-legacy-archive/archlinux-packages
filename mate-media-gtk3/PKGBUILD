@@ -14,9 +14,7 @@ depends=('gtk3' 'libcanberra-pulse' 'libmatemixer' 'libunique3' 'marco-gtk3>=1.9
 makedepends=('git' 'mate-common' 'mate-panel-gtk3>=1.9.4' 'mate-settings-daemon-gtk3>=1.9.5')
 source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
 groups=('mate-unstable-extra-gtk3')
-provides=("${pkgbase}")
-replaces=("${pkgbase}")
-conflicts=("${pkgbase}")
+conflicts=("${pkgbase}""${pkgbase}-gstreamer" "${pkgbase}-pulseaudio")
 sha1sums=('SKIP')
 
 pkgver() {

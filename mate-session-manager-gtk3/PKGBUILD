@@ -17,10 +17,7 @@ optdepends=('lightdm-gtk3-greeter: A lightweight display manager'
             'orca: Screen reader for blind or visually impaired individuals'
             'xdg-user-dirs-gtk: Add autostart that prompts to rename user directories when switching locales')
 source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
-pkgdesc+=''
 groups=('mate-unstable-gtk3')
-provides=("${pkgbase}")
-replaces=("${pkgbase}")
 conflicts=("${pkgbase}")
 sha1sums=('SKIP')
 install=${pkgbase}.install

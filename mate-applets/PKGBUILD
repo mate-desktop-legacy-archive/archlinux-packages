@@ -14,8 +14,6 @@ makedepends=('git' 'docbook2x' 'docbook-xsl' 'mate-common' 'yelp-tools')
 optdepends=('fortune-mod: for displaying fortune cookies in the Wanda the Fish applet'
             'yelp: for reading MATE help documents')
 groups=('mate-unstable-extra')
-provides=("${pkgbase}")
-replaces=("${pkgbase}-gtk3")
 conflicts=("${pkgbase}-gtk3")
 source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
 sha1sums=('SKIP')

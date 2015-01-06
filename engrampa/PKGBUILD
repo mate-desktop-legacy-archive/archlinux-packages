@@ -17,8 +17,6 @@ optdepends=('unrar: for RAR uncompression'
             'unace: extraction tool for the proprietary ace archive format'
             'yelp: for reading MATE help documents')
 groups=('mate-unstable-extra')
-provides=("${pkgbase}")
-replaces=("${pkgbase}-gtk3")
 conflicts=("${pkgbase}-gtk3")
 source=("${pkgname}"::"git+https://github.com/mate-desktop/${pkgbase}.git"
         fr-rpm-bsdtar.patch)

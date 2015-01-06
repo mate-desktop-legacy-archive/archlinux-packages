@@ -51,11 +51,9 @@ build() {
 package_mate-notification-daemon() {
     pkgdesc+=' (GTK2 version)'
     groups=('mate-unstable')
-    provides=("${pkgbase}")
-    replaces=("${pkgbase}-gtk3")
     conflicts=("${pkgbase}-gtk3")
-
     depends=('dconf' 'dbus-glib' 'gtk2' 'libcanberra' 'libwnck' 'libnotify')
+
     cd "${srcdir}/${pkgbase}-gtk2"
     make DESTDIR="${pkgdir}" install
 }
@@ -63,11 +61,9 @@ package_mate-notification-daemon() {
 package_mate-notification-daemon-gtk3() {
     pkgdesc+=' (GTK3 version [EXPERIMENTAL])'
     groups=('mate-unstable-gtk3')
-    provides=("${pkgbase}")
-    replaces=("${pkgbase}")
     conflicts=("${pkgbase}")
-
     depends=('dconf' 'dbus-glib' 'gtk3' 'libcanberra' 'libwnck3' 'libnotify')
+
     cd "${srcdir}/${pkgbase}-gtk3"
     make DESTDIR="${pkgdir}" install
 }

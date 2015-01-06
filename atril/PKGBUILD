@@ -21,8 +21,6 @@ optdepends=('caja: Document Properties extension'
             'unrar: cbr compressed comic books'
             'yelp: for reading MATE help documents')
 groups=('mate-unstable-extra')
-provides=("${pkgbase}")
-replaces=("${pkgbase}-gtk3")
 conflicts=("${pkgbase}-gtk3")
 source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
 sha1sums=('SKIP')

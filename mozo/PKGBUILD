@@ -12,6 +12,7 @@ license=('GPL')
 depends=('mate-menus>=1.9.1' 'pygtk' 'python2-gobject')
 makedepends=('git' 'mate-common')
 groups=('mate-unstable-extra')
+conflicts=("${pkgbase}-gtk3")
 source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
 sha1sums=('SKIP')
 install=${pkgbase}.install

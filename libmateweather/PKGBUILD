@@ -55,22 +55,18 @@ build() {
 
 package_libmateweather() {
     pkgdesc+=' (GTK2 version)'
-    provides=("${pkgbase}")
-    replaces=("${pkgbase}-gtk3")
     conflicts=("${pkgbase}-gtk3")
-
     depends=('dconf' 'gtk2' 'libsoup')
+    
     cd "${srcdir}/${pkgbase}-gtk2"
     make DESTDIR="${pkgdir}" install
 }
 
 package_libmateweather-gtk3() {
     pkgdesc+=' (GTK3 version [EXPERIMENTAL])'
-    replaces=("${pkgbase}")
-    provides=("${pkgbase}")
     conflicts=("${pkgbase}")
-
     depends=('dconf' 'gtk3' 'libsoup')
+    
     cd "${srcdir}/${pkgbase}-gtk3"
     make DESTDIR="${pkgdir}" install
 }

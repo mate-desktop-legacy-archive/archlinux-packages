@@ -16,8 +16,6 @@ optdepends=('mate-panel-gtk3: Set brightness and inhibit power management from t
             'yelp: for reading MATE help documents')
 source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
 groups=('mate-unstable-extra-gtk3')
-provides=("${pkgbase}")
-replaces=("${pkgbase}")
 conflicts=("${pkgbase}")
 sha1sums=('SKIP')
 install=${pkgbase}.install

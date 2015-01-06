@@ -54,8 +54,6 @@ build() {
 package_mate-system-monitor() {
     pkgdesc+=' (GTK2 version)'
     groups=('mate-unstable-extra')
-    provides=("${pkgbase}")
-    replaces=("${pkgbase}-gtk3")
     conflicts=("${pkgbase}-gtk3")
     depends=('dconf' 'dbus-glib' 'glibmm' 'gtkmm' 'libgtop' 'libwnck' 'librsvg'
              'mate-icon-theme')
@@ -67,8 +65,6 @@ package_mate-system-monitor() {
 package_mate-system-monitor-gtk3() {
     pkgdesc+=' (GTK3 version [EXPERIMENTAL])'
     groups=('mate-unstable-extra-gtk3')
-    provides=("${pkgbase}")
-    replaces=("${pkgbase}")
     conflicts=("${pkgbase}")
     depends=('dconf' 'dbus-glib' 'glibmm' 'gtkmm3' 'libgtop' 'libwnck3' 'librsvg'
              'mate-icon-theme')

@@ -44,7 +44,6 @@ package_caja-gksu() {
     depends=('caja' 'caja-extensions-common' 'gksu')
     groups=('mate-unstable-extra')
     conflicts=('caja-gksu-gtk3')
-    replaces=('caja-gksu-gtk3')
 
     cd "${srcdir}/${pkgbase}"
     make -C gksu DESTDIR="${pkgdir}" install
@@ -55,7 +54,6 @@ package_caja-image-converter() {
     depends=('caja' 'caja-extensions-common' 'imagemagick')
     groups=('mate-unstable-extra')
     conflicts=('caja-image-converter-gtk3')
-    replaces=('caja-image-converter-gtk3')
 
     cd "${srcdir}/${pkgbase}"
     make -C image-converter DESTDIR="${pkgdir}" install
@@ -66,7 +64,6 @@ package_caja-open-terminal() {
     depends=('caja' 'caja-extensions-common')
     groups=('mate-unstable-extra')
     conflicts=('caja-open-terminal-gtk3')
-    replaces=('caja-open-terminal-gtk3')
     install=caja-open-terminal.install
 
     cd "${srcdir}/${pkgbase}"
@@ -80,7 +77,6 @@ package_caja-sendto() {
     optdepends=('pidgin: Support for sending to instant messaging networks.'
                 'gajim: Support for sending to Jabber.')
     conflicts=('caja-sendto-gtk3')
-    replaces=('caja-sendto-gtk3')
     install=caja-sendto.install
 
     cd "${srcdir}/${pkgbase}"
@@ -92,7 +88,6 @@ package_caja-share() {
     depends=('caja' 'caja-extensions-common' 'samba')
     groups=('mate-unstable-extra')
     conflicts=('caja-share-gtk3')
-    replaces=('caja-share-gtk3')
     
     cd "${srcdir}/${pkgbase}"
     make -C share DESTDIR="${pkgdir}" install

@@ -18,8 +18,6 @@ optdepends=('lightdm-gtk3-greeter: A lightweight display manager'
             'xdg-user-dirs-gtk: Add autostart that prompts to rename user directories when switching locales')
 source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
 groups=('mate-unstable')
-provides=("${pkgbase}")
-replaces=("${pkgbase}-gtk3")
 conflicts=("${pkgbase}-gtk3")
 sha1sums=('SKIP')
 install=${pkgbase}.install

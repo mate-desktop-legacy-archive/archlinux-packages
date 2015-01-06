@@ -12,8 +12,6 @@ license=('GPL')
 depends=('gtk2' 'libfakekey' 'libwnck' 'libunique' 'mate-panel>=1.9.4')
 makedepends=('git' 'mate-common')
 source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
-provides=("${pkgbase}")
-replaces=("${pkgbase}-gtk3")
 conflicts=("${pkgbase}-gtk3")
 sha1sums=('SKIP')
 install=${pkgbase}.install

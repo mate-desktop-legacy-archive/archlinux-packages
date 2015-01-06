@@ -15,6 +15,7 @@ depends=('dbus-glib' 'desktop-file-utils' 'gobject-introspection' 'gtk3' 'exempi
 makedepends=('git' 'mate-common' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
 groups=('mate-unstable-extra-gtk3')
+conflicts=("${pkgbase}")
 source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
 sha1sums=('SKIP')
 install=${pkgbase}.install

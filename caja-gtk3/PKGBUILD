@@ -15,8 +15,6 @@ makedepends=('git' 'gobject-introspection' 'mate-common')
 optdepends=('gstreamer0.10-good-plugins: automatic media playback when mouseover'
             'gvfs-smb: To connect to Samba/Windows shares')
 groups=('mate-unstable-gtk3')
-provides=("${pkgbase}")
-replaces=("${pkgbase}")
 conflicts=("${pkgbase}")
 source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
 sha1sums=('SKIP')
