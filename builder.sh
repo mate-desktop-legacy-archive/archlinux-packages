@@ -90,12 +90,11 @@ EXTRA=(
 )
 
 DISABLED=(gnome-main-menu)
-
 BUILD_ORDER=("${CORE[@]}" "${EXTRA[@]}")
-
 MATE_VER=1.9
 BASEDIR=$(dirname $(readlink -f ${0}))
-REPODIR="/var/local/mate-unstable/${MATE_VER}"
+REPONAME="mate-unstable-dual"
+REPODIR="/var/local/${REPONAME}/${MATE_VER}"
 
 # Show usage information.
 function usage() {
@@ -116,6 +115,24 @@ function usage() {
     echo "package tree."
 }
 
+function create_readme() {
+    local REPO_URL="${1}"
+    local REPO_PATH="${2}"
+    local REPO_NAME="${3}"
+
+    echo "<pre>"                                                                            >  ${REPO_PATH}/README.html
+    echo "Add the following to '/etc/pacman.conf', it must be the first enabled repository" >> ${REPO_PATH}/README.html
+    echo "so put it above '[testing]'."                                                     >> ${REPO_PATH}/README.html
+    echo ""                                                                                 >> ${REPO_PATH}/README.html
+    echo "[${REPO_NAME}]"                                                                   >> ${REPO_PATH}/README.html
+    echo "SigLevel = Optional TrustAll"                                                     >> ${REPO_PATH}/README.html
+    echo "Server = ${REPO_URL}/\$arch"                                                      >> ${REPO_PATH}/README.html
+    echo                                                                                    >> ${REPO_PATH}/README.html
+    echo "Update the package indexes with 'pacman -Syy' and then install the packages you"  >> ${REPO_PATH}/README.html
+    echo "require."                                                                         >> ${REPO_PATH}/README.html
+    echo "</pre>"                                                                           >> ${REPO_PATH}/README.html
+}
+
 function config_builder() {
     if [ "${MACHINE}" == "x86_64" ]; then
         ln -s /usr/bin/archbuild /usr/local/bin/mate-unstable-i686-build 2>/dev/null
@@ -131,11 +148,11 @@ function config_builder() {
 
 function repo_init() {
     # Remove any existing repositories and create empty ones.
-    rm -rf /var/local/mate-unstable/*
+    rm -rf /var/local/${REPONAME}/*
     for INIT_ARCH in i686 x86_64
     do
         mkdir -p ${REPODIR}/${INIT_ARCH}
-        touch ${REPODIR}/${INIT_ARCH}/mate-unstable.db
+        touch ${REPODIR}/${INIT_ARCH}/${REPONAME}.db
     done
 }
 
@@ -144,25 +161,25 @@ function repo_update() {
     if [ ! -d ${REPODIR}/${CHROOT_PLAT} ]; then
         mkdir -p ${REPODIR}/${CHROOT_PLAT}
     fi
-    repo-add -q --nocolor --new ${REPODIR}/${CHROOT_PLAT}/mate-unstable.db.tar.gz ${REPODIR}/${CHROOT_PLAT}/*.pkg.tar.xz 2>/dev/null
+    repo-add -q --nocolor --new ${REPODIR}/${CHROOT_PLAT}/${REPONAME}.db.tar.gz ${REPODIR}/${CHROOT_PLAT}/*.pkg.tar.xz 2>/dev/null
 }
 
 function httpd_stop() {
-    if [ -f /tmp/mate-unstable-darkhttpd.pid ]; then
-        local DARK_PID=`cat /tmp/mate-unstable-darkhttpd.pid`
+    if [ -f /tmp/${REPONAME}-darkhttpd.pid ]; then
+        local DARK_PID=`cat /tmp/${REPONAME}-darkhttpd.pid`
         kill -9 ${DARK_PID}
-        rm /tmp/mate-unstable-darkhttpd.pid
+        rm /tmp/${REPONAME}-darkhttpd.pid
     else
         killall darkhttpd
     fi
 }
 
 function httpd_start() {
-    if [ -f /tmp/mate-unstable-darkhttpd.pid ]; then
+    if [ -f /tmp/${REPONAME}-darkhttpd.pid ]; then
         httpd_stop
     fi
-    rm /tmp/mate-unstable-http.log 2>/dev/null
-    darkhttpd /var/local/mate-unstable/ --port 8089 --daemon --log /tmp/mate-unstable-darkhttpd.log --pidfile /tmp/mate-unstable-darkhttpd.pid
+    rm /tmp/${REPONAME}-http.log 2>/dev/null
+    darkhttpd /var/local/${REPONAME}/ --port 8089 --daemon --log /tmp/${REPONAME}-darkhttpd.log --pidfile /tmp/${REPONAME}-darkhttpd.pid
 }
 
 # Build packages that are not at the current version.
@@ -237,7 +254,7 @@ function tree_build() {
             fi
         fi
 
-        echo " - Adding '${PKG}' to [mate-unstable]"
+        echo " - Adding '${PKG}' to [${REPONAME}]"
         if [ -n "${TEST_ANY}" ]; then
             if [ "${MACHINE}" == "i686" ] || [ "${MACHINE}" == "x86_64" ]; then
                 if [ "${PKG}" == "caja-extensions" ] || [ "${PKG}" == "caja-extensions-gtk3" ]; then
@@ -252,12 +269,19 @@ function tree_build() {
             fi
         else
             if [ "${PKG}" == "caja-extensions" ] || [ "${PKG}" == "caja-extensions-gtk3" ]; then
-                cp -a caja*-${CHROOT_ARCH}.pkg.tar.xz ${REPODIR}/${CHROOT_ARCH}/ 2>/dev/null          
+                cp -a caja*-${CHROOT_ARCH}.pkg.tar.xz ${REPODIR}/${CHROOT_ARCH}/ 2>/dev/null
             else
                 cp -a ${PKG}*-${CHROOT_ARCH}.pkg.tar.xz ${REPODIR}/${CHROOT_ARCH}/ 2>/dev/null
             fi
             repo_update ${CHROOT_ARCH}
         fi
+        
+        # Copy the build logs and PKGBUILD (with assets) for posterity.
+        # Yes 'any' and architecture specific packages are required all the time.
+        mkdir -p ${REPODIR}/${CHROOT_ARCH}/PKGBUILD/${PKG} 2>/dev/null
+        cp -a *-any*.log ${REPODIR}/${CHROOT_ARCH}/PKGBUILD/${PKG}/ 2>/dev/null
+        cp -a *-${CHROOT_ARCH}*.log ${REPODIR}/${CHROOT_ARCH}/PKGBUILD/${PKG}/ 2>/dev/null
+        cp -a {PKGBUILD,*.install,*.desktop,*.diff,*.patch} ${REPODIR}/${CHROOT_ARCH}/PKGBUILD/${PKG}/ 2>/dev/null
     done
     echo
 }
@@ -326,15 +350,19 @@ function tree_run() {
 
     config_builder
     repo_init
-    httpd_start
 
+    httpd_start
     for PKG in ${BUILD_ORDER[@]};
     do
         cd ${BASEDIR}
         tree_${ACTION} ${PKG}
     done
-
     httpd_stop
+
+    # We only arrive here if every package action completed successfully.
+    if [ "${ACTION}" == "build" ]; then
+        create_readme "http://pkgbuild.com/~flexiondotorg/${REPONAME}/${MATE_VER}" "${REPODIR}" "${REPONAME}"
+    fi
 }
 
 TASK=""
