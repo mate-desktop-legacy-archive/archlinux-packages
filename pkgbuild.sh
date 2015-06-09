@@ -54,7 +54,7 @@ BUILD_ORDER=(
     #blueman
 )
 
-MATE_VER=1.9
+MATE_VER=1.10
 BASEDIR=$(dirname $(readlink -f ${0}))
 STAMP=$(date +%y.%j.%H%M)
 STAMP="14.121.1234"
