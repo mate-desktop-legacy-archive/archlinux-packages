@@ -1,31 +1,21 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-_ver=1.9.1
+_ver=1.10
 pkgname=mate-menus
-pkgver=0
+pkgver=${_ver}.0
 pkgrel=1
 pkgdesc="MATE menu specifications"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
 depends=('glib2' 'python2')
-makedepends=('git' 'gobject-introspection' 'mate-common')
-groups=('mate-unstable' 'mate-unstable-gtk3')
-source=("${pkgname}"::"git+https://github.com/mate-desktop/${pkgname}.git")
-sha1sums=('SKIP')
-
-pkgver() {
-    cd "${srcdir}/${pkgname}"
-    printf "%s.%s.%s" "${_ver}" "$(git log -1 --format=%cd --date=short | tr -d -)" "$(git rev-list --count HEAD)"
-}
-
-prepare() {
-    cd "${srcdir}/${pkgname}"
-    NOCONFIGURE=1 ./autogen.sh
-}
+makedepends=('gobject-introspection' 'mate-common')
+groups=('mate' 'mate-gtk3')
+source=("http://pub.mate-desktop.org/releases/${_ver}/${pkgname}-${pkgver}.tar.xz")
+sha1sums=('04662fc22aec5c37755029b8f8d8c56390c49807')
 
 build() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     PYTHON=/usr/bin/python2 ./configure \
         --prefix=/usr \
         --sysconfdir=/etc \
@@ -36,6 +26,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     make DESTDIR="${pkgdir}" install
 }

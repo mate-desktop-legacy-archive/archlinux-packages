@@ -41,7 +41,7 @@ build() {
 package_galculator() {
     pkgdesc+=' (GTK3 version)'
     depends=('gtk3')
-    groups=('mate-unstable-extra-gtk3')
+    groups=('mate-extra-gtk3')
     replaces=('mate-calc')
     provides=('mate-calc')
     conflicts=('galculator-gtk3')
@@ -53,7 +53,7 @@ package_galculator() {
 package_galculator-gtk2() {
     pkgdesc+=' (GTK2 version)'
     depends=('gtk2')
-    groups=('mate-unstable-extra')
+    groups=('mate-extra')
     replaces=('mate-calc')
     provides=('mate-calc')
     conflicts=('galculator')

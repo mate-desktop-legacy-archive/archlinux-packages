@@ -1,9 +1,9 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-_ver=1.9.1
+_ver=1.10
 pkgbase=mate-notification-daemon
 pkgname=(${pkgbase} ${pkgbase}-gtk3)
-pkgver=0
+pkgver=${_ver}.0
 pkgrel=1
 provides=('notification-daemon')
 pkgdesc="Notification daemon for MATE"
@@ -11,26 +11,18 @@ url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL' 'LGPL')
 depends=('dconf' 'dbus-glib' 'gtk2' 'gtk3' 'libcanberra' 'libwnck' 'libwnck3' 'libnotify')
-makedepends=('git' 'mate-common')
-source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
-sha1sums=('SKIP')
+makedepends=('mate-common')
+source=("http://pub.mate-desktop.org/releases/${_ver}/${pkgbase}-${pkgver}.tar.xz")
+sha1sums=('44407390f6216fcea5e02615d8e2b57b2502f358')
 install=${pkgname}.install
 
-pkgver() {
-    cd "${srcdir}/${pkgbase}"
-    printf "%s.%s.%s" "${_ver}" "$(git log -1 --format=%cd --date=short | tr -d -)" "$(git rev-list --count HEAD)"
-}
-
 prepare() {
-    cd "${srcdir}/${pkgbase}"
-    NOCONFIGURE=1 ./autogen.sh
+    cd "${srcdir}"
+    mv "${pkgname}-${pkgver}" "${pkgbase}-gtk2"
+    cp -a "${pkgbase}-gtk2" "${pkgbase}-gtk3"
 }
 
 build() {
-    cd "${srcdir}"
-    mv ${pkgbase} "${pkgbase}-gtk2"
-    cp -a "${pkgbase}-gtk2" "${pkgbase}-gtk3"
-
     cd "${srcdir}/${pkgbase}-gtk2"
     ./configure \
         --prefix=/usr \
@@ -50,7 +42,7 @@ build() {
 
 package_mate-notification-daemon() {
     pkgdesc+=' (GTK2 version)'
-    groups=('mate-unstable')
+    groups=('mate')
     conflicts=("${pkgbase}-gtk3")
     depends=('dconf' 'dbus-glib' 'gtk2' 'libcanberra' 'libwnck' 'libnotify')
 
@@ -60,7 +52,7 @@ package_mate-notification-daemon() {
 
 package_mate-notification-daemon-gtk3() {
     pkgdesc+=' (GTK3 version [EXPERIMENTAL])'
-    groups=('mate-unstable-gtk3')
+    groups=('mate-gtk3')
     conflicts=("${pkgbase}")
     depends=('dconf' 'dbus-glib' 'gtk3' 'libcanberra' 'libwnck3' 'libnotify')
 

@@ -1,36 +1,25 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-_ver=1.9.0
-pkgbase=mate-terminal
-pkgname=(${pkgbase})
-pkgver=0
+_ver=1.10
+_pkgbase=mate-terminal
+pkgname=(${_pkgbase})
+pkgver=${_ver}.0
 pkgrel=1
 pkgdesc="The MATE Terminal Emulator (GTK2 version)"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('dbus' 'dconf' 'libsm' 'mate-desktop>=1.9.3' 'vte')
-makedepends=('git' 'docbook2x' 'mate-common' 'yelp-tools')
+depends=('dbus' 'dconf' 'libsm' 'mate-desktop>=1.10' 'vte')
+makedepends=('docbook2x' 'mate-common' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
-groups=('mate-unstable-extra')
-conflicts=("${pkgbase}-gtk3")
-source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
-sha1sums=('SKIP')
-install=${pkgbase}.install
-
-pkgver() {
-    cd "${srcdir}/${pkgbase}"
-    printf "%s.%s.%s" "${_ver}" "$(git log -1 --format=%cd --date=short | tr -d -)" "$(git rev-list --count HEAD)"
-}
-
-prepare() {
-    cd "${srcdir}/${pkgbase}"
-    NOCONFIGURE=1 ./autogen.sh
-    sed -i 's/env python/env python2/' mate-terminal.wrapper
-}
+groups=('mate-extra')
+conflicts=("${_pkgbase}-gtk3")
+source=("http://pub.mate-desktop.org/releases/${_ver}/${_pkgbase}-${pkgver}.tar.xz")
+sha1sums=('f6889ec01551083cbb58c099bd1e59fd897b96ab')
+install=${_pkgbase}.install
 
 build() {
-    cd "${srcdir}/${pkgbase}"
+    cd "${srcdir}/${_pkgbase}-${pkgver}"
     ./configure \
         --prefix=/usr \
         --with-gtk=2.0 \
@@ -38,7 +27,7 @@ build() {
     make
 }
 
-package_mate-terminal() {
-    cd "${srcdir}/${pkgbase}"
+package() {
+    cd "${srcdir}/${_pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}" install
 }
