@@ -23,7 +23,6 @@ MACHINE=$(uname -m)
 CORE=(
     mate-common
     mate-desktop
-    mate-user-guide
     libmatekbd
     libmatemixer
     libmateweather
@@ -54,6 +53,10 @@ CORE=(
     mate-system-monitor
 )
 
+CORE_REMAIN=(
+    mate-user-guide
+)
+
 EXTRA=(
     atril
     atril-gtk3
@@ -65,23 +68,31 @@ EXTRA=(
     eom-gtk3
     mate-applets
     mate-applets-gtk3
-    mate-icon-theme-faenza
-    mate-netbook
-    mate-netbook-gtk3
     mate-netspeed
     mate-netspeed-gtk3
-    mate-sensors-applet
-    mate-sensors-applet-gtk3
-    mate-terminal
-    mate-terminal-gtk3
     mate-user-share
     mate-user-share-gtk3
     mate-utils
     mate-utils-gtk3
-    mozo
-    mozo-gtk3
     pluma
     pluma-gtk3
+)
+
+AUR_EXTRA=(
+    caja-dropbox
+    mate-indicator-applet
+)
+
+EXTRA_REMAIN=(
+    mate-icon-theme-faenza
+    mate-netbook
+    mate-netbook-gtk3
+    mate-sensors-applet
+    mate-sensors-applet-gtk3
+    mate-terminal
+    mate-terminal-gtk3
+    mozo
+    mozo-gtk3
     python2-caja
     python2-caja-gtk3
     galculator
@@ -91,9 +102,9 @@ EXTRA=(
 
 DISABLED=(gnome-main-menu)
 BUILD_ORDER=("${CORE[@]}" "${EXTRA[@]}")
-MATE_VER=1.9
+MATE_VER=1.10
 BASEDIR=$(dirname $(readlink -f ${0}))
-REPONAME="mate-unstable-dual"
+REPONAME="mate-dual"
 REPODIR="/var/local/${REPONAME}/${MATE_VER}"
 
 # Show usage information.
@@ -131,6 +142,12 @@ function create_readme() {
     echo "Update the package indexes with 'pacman -Syy' and then install the packages you"  >> ${REPO_PATH}/README.html
     echo "require."                                                                         >> ${REPO_PATH}/README.html
     echo "</pre>"                                                                           >> ${REPO_PATH}/README.html
+}
+
+function touch_dir() {
+    local TOUCHDIR="${1}"
+    local FAKEDT="$(date +%Y%m%d)0000.00"
+    find "${TOUCHDIR}" -exec touch -t ${FAKEDT} {} \;
 }
 
 function config_builder() {
@@ -200,7 +217,9 @@ function tree_build() {
         cd ..
     else
         # pacakge version
-        local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=' | head -n1)
+        #local PKGBUILD_VER=$(grep -E ^pkgver PKGBUILD | cut -f2 -d'=' | head -n1)
+        local POINT_VER=$(grep -E ^pkgver PKGBUILD | cut -d'.' -f2)
+        local PKGBUILD_VER="${MATE_VER}.${POINT_VER}"
     fi
 
     local PKGBUILD_REL=$(grep -E ^pkgrel PKGBUILD | cut -f2 -d'=')
@@ -362,6 +381,7 @@ function tree_run() {
     # We only arrive here if every package action completed successfully.
     if [ "${ACTION}" == "build" ]; then
         create_readme "http://pkgbuild.com/~flexiondotorg/${REPONAME}/${MATE_VER}" "${REPODIR}" "${REPONAME}"
+        touch_dir "${REPODIR}"
     fi
 }
 
