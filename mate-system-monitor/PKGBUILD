@@ -1,9 +1,9 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-_ver=1.9.1
+_ver=1.10
 pkgbase=mate-system-monitor
 pkgname=(${pkgbase} ${pkgbase}-gtk3)
-pkgver=0
+pkgver=${_ver}.0
 pkgrel=1
 pkgdesc="A system monitor for MATE"
 url="http://mate-desktop.org"
@@ -11,27 +11,19 @@ arch=('i686' 'x86_64')
 license=('GPL')
 depends=('dconf' 'dbus-glib' 'glibmm' 'gtkmm' 'gtkmm3' 'libgtop' 'libwnck' 
          'libwnck3' 'librsvg' 'mate-icon-theme')
-makedepends=('git' 'docbook2x' 'mate-common' 'yelp-tools')
+makedepends=('docbook2x' 'mate-common' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
-source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
-sha1sums=('SKIP')
+source=("http://pub.mate-desktop.org/releases/${_ver}/${pkgbase}-${pkgver}.tar.xz")
+sha1sums=('3f351d823de375d1e766d37f6152fd9451be2dda')
 install=${pkgbase}.install
 
-pkgver() {
-    cd "${srcdir}/${pkgbase}"
-    printf "%s.%s.%s" "${_ver}" "$(git log -1 --format=%cd --date=short | tr -d -)" "$(git rev-list --count HEAD)"
-}
-
 prepare() {
-    cd "${srcdir}/${pkgbase}"
-    NOCONFIGURE=1 ./autogen.sh
+    cd "${srcdir}"
+    mv "${pkgname}-${pkgver}" "${pkgbase}-gtk2"
+    cp -a "${pkgbase}-gtk2" "${pkgbase}-gtk3"
 }
 
 build() {
-    cd "${srcdir}"
-    mv ${pkgbase} "${pkgbase}-gtk2"
-    cp -a "${pkgbase}-gtk2" "${pkgbase}-gtk3"
-    
     cd "${srcdir}/${pkgbase}-gtk2"
     ./configure \
         --prefix=/usr \
@@ -53,7 +45,7 @@ build() {
 
 package_mate-system-monitor() {
     pkgdesc+=' (GTK2 version)'
-    groups=('mate-unstable-extra')
+    groups=('mate-extra')
     conflicts=("${pkgbase}-gtk3")
     depends=('dconf' 'dbus-glib' 'glibmm' 'gtkmm' 'libgtop' 'libwnck' 'librsvg'
              'mate-icon-theme')
@@ -64,7 +56,7 @@ package_mate-system-monitor() {
 
 package_mate-system-monitor-gtk3() {
     pkgdesc+=' (GTK3 version [EXPERIMENTAL])'
-    groups=('mate-unstable-extra-gtk3')
+    groups=('mate-extra-gtk3')
     conflicts=("${pkgbase}")
     depends=('dconf' 'dbus-glib' 'glibmm' 'gtkmm3' 'libgtop' 'libwnck3' 'librsvg'
              'mate-icon-theme')

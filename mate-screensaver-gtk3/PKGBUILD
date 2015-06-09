@@ -1,41 +1,31 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-_ver=1.9.1
-pkgbase=mate-screensaver
-pkgname=(${pkgbase}-gtk3)
-pkgver=0
+_ver=1.10
+_pkgbase=mate-screensaver
+pkgname=(${_pkgbase}-gtk3)
+pkgver=${_ver}.0
 pkgrel=1
 pkgdesc='Screensaver for MATE (GTK3 version [EXPERIMENTAL])'
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('dbus-glib' 'libmatekbd-gtk3>=1.9.1' 'libnotify' 'libxss' 'mate-desktop-gtk3>=1.9.3'
-         'mate-menus>=1.9.1' 'mate-session-manager-gtk3>=1.9.3')
-makedepends=('git' 'mate-common' 'xmlto')
+depends=('dbus-glib' 'libmatekbd-gtk3>=1.10' 'libnotify' 'libxss' 'mate-desktop-gtk3>=1.10'
+         'mate-menus>=1.10' 'mate-session-manager-gtk3>=1.10')
+makedepends=('mate-common' 'xmlto')
 optdepends=('mate-power-manager-gtk3: Add power management support.'
             'mate-screensaver-hacks: Additional screensavers.'
             'rss-glx: Really slick screensavers.')
-groups=('mate-unstable-extra-gtk3')
-conflicts=("${pkgbase}")
-source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
-sha1sums=('SKIP')
-install=${pkgbase}.install
-
-pkgver() {
-    cd "${srcdir}/${pkgbase}"
-    printf "%s.%s.%s" "${_ver}" "$(git log -1 --format=%cd --date=short | tr -d -)" "$(git rev-list --count HEAD)"
-}
-
-prepare() {
-    cd "${srcdir}/${pkgbase}"
-    NOCONFIGURE=1 ./autogen.sh
-}
+groups=('mate-extra-gtk3')
+conflicts=("${_pkgbase}")
+source=("http://pub.mate-desktop.org/releases/${_ver}/${_pkgbase}-${pkgver}.tar.xz")
+sha1sums=('04d25dd0bf061961f3a4b1115c093ba76b6f1725')
+install=${_pkgbase}.install
 
 build() {
-    cd "${srcdir}/${pkgbase}"
+    cd "${srcdir}/${_pkgbase}-${pkgver}"
     ./configure \
         --prefix=/usr \
-        --libexecdir=/usr/lib/${pkgbase} \
+        --libexecdir=/usr/lib/${_pkgbase} \
         --sysconfdir=/etc \
         --with-xscreensaverdir=/usr/share/xscreensaver/config \
         --with-xscreensaverhackdir=/usr/lib/xscreensaver \
@@ -47,7 +37,7 @@ build() {
     make
 }
 
-package_mate-screensaver-gtk3() {
-    cd "${srcdir}/${pkgbase}"
+package() {
+    cd "${srcdir}/${_pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}" install
 }

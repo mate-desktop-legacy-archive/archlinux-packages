@@ -1,36 +1,26 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-_ver=1.9.0
+_ver=1.10
 pkgname=mate-common
-pkgver=0
+pkgver=${_ver}.0
 pkgrel=1
 pkgdesc="Common development macros for MATE"
 arch=('any')
 license=('GPL')
-depends=('autoconf' 'automake' 'gettext' 'gtk-doc' 'intltool' 'libtool' 'pkg-config')
-makedepends=('git')
+depends=('autoconf' 'automake' 'gettext' 'gtk-doc' 'intltool' 'libtool'
+         'pkg-config')
 url="http://mate-desktop.org"
-source=("$pkgname"::"git+https://github.com/mate-desktop/${pkgname}.git")
-sha1sums=('SKIP')
-
-pkgver() {
-    cd "${srcdir}/${pkgname}"
-    printf "%s.%s.%s" "${_ver}" "$(git log -1 --format=%cd --date=short | tr -d -)" "$(git rev-list --count HEAD)"
-}
-
-prepare() {
-    cd "${srcdir}/${pkgname}"
-    NOCONFIGURE=1 ./autogen.sh
-}
+source=("http://pub.mate-desktop.org/releases/${_ver}/${pkgname}-${pkgver}.tar.xz")
+sha1sums=('8fa8603168e839f645603f52757cab5e3b4d8595')
 
 build() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     ./configure \
         --prefix=/usr
     make
 }
 
 package() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     make DESTDIR="${pkgdir}" install
 }

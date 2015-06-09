@@ -1,36 +1,28 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-_ver=1.9.3
+_ver=1.10
 pkgbase=mate-desktop
 pkgname=(${pkgbase} ${pkgbase}-gtk3)
-pkgver=0
+pkgver=${_ver}.0
 pkgrel=1
 pkgdesc="Library with common API for various MATE modules"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL' 'LGPL')
 depends=('dconf' 'gtk2' 'gtk3' 'startup-notification')
-makedepends=('git' 'gobject-introspection' 'mate-common' 'yelp-tools')
+makedepends=('gobject-introspection' 'mate-common' 'yelp-tools')
 optdepends=('yelp: for reading MATE help documents')
-source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
-sha1sums=('SKIP')
+source=("http://pub.mate-desktop.org/releases/${_ver}/${pkgname}-${pkgver}.tar.xz")
+sha1sums=('ec52966a5f47730c16a9a9c6c1b95b73d7afee84')
 install=${pkgbase}.install
 
-pkgver() {
-    cd "${srcdir}/${pkgbase}"
-    printf "%s.%s.%s" "${_ver}" "$(git log -1 --format=%cd --date=short | tr -d -)" "$(git rev-list --count HEAD)"
-}
-
 prepare() {
-    cd "${srcdir}/${pkgbase}"
-    NOCONFIGURE=1 ./autogen.sh
+    cd "${srcdir}"
+    mv "${pkgname}-${pkgver}" "${pkgbase}-gtk2"
+    cp -a "${pkgbase}-gtk2" "${pkgbase}-gtk3"
 }
 
 build() {
-    cd "${srcdir}"
-    mv ${pkgbase} "${pkgbase}-gtk2"
-    cp -a "${pkgbase}-gtk2" "${pkgbase}-gtk3"
-
     cd "${srcdir}/${pkgbase}-gtk2"
     ./configure \
         --prefix=/usr \
@@ -52,7 +44,7 @@ build() {
 
 package_mate-desktop() {
     pkgdesc+=' (GTK2 version)'
-    groups=('mate-unstable')
+    groups=('mate')
     conflicts=("${pkgbase}-gtk3")
     depends=('dconf' 'gtk2' 'startup-notification')
     
@@ -62,7 +54,7 @@ package_mate-desktop() {
 
 package_mate-desktop-gtk3() {
     pkgdesc+=' (GTK3 version [EXPERIMENTAL])'
-    groups=('mate-unstable-gtk3')
+    groups=('mate-gtk3')
     conflicts=("${pkgbase}")
     depends=('dconf' 'gtk3' 'startup-notification')
     

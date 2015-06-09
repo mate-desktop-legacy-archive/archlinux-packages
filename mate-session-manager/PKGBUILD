@@ -1,42 +1,33 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-_ver=1.9.3
-pkgbase=mate-session-manager
-pkgname=(${pkgbase})
-pkgver=0
+_ver=1.10
+_pkgbase=mate-session-manager
+pkgname=(${_pkgbase})
+pkgver=${_ver}.0
 pkgrel=1
 pkgdesc="The MATE Session Handler (GTK2 version)"
 url="http://mate-desktop.org"
 arch=('i686' 'x86_64')
 license=('GPL' 'LGPL')
-depends=('dbus-glib' 'gtk2' 'libsm' 'libxtst' 'mate-desktop>=1.9.3' 'mate-polkit>=1.9.0'
-         'mate-settings-daemon>=1.9.5' 'ttf-dejavu' 'xdg-user-dirs')
-makedepends=('git' 'mate-common' 'pangox-compat' 'xmlto')
+depends=('dbus-glib' 'gtk2' 'libsm' 'libxtst' 'mate-desktop>=1.10'
+         'mate-polkit>=1.10' 'mate-settings-daemon>=1.10' 'ttf-dejavu'
+         'xdg-user-dirs')
+makedepends=('mate-common' 'pangox-compat' 'xmlto')
 optdepends=('lightdm-gtk3-greeter: A lightweight display manager'
             'onboard: On-screen keyboard useful for mobility impaired users'
             'orca: Screen reader for blind or visually impaired individuals'
             'xdg-user-dirs-gtk: Add autostart that prompts to rename user directories when switching locales')
-source=("${pkgbase}"::"git+https://github.com/mate-desktop/${pkgbase}.git")
-groups=('mate-unstable')
-conflicts=("${pkgbase}-gtk3")
-sha1sums=('SKIP')
-install=${pkgbase}.install
-
-pkgver() {
-    cd "${srcdir}/${pkgbase}"
-    printf "%s.%s.%s" "${_ver}" "$(git log -1 --format=%cd --date=short | tr -d -)" "$(git rev-list --count HEAD)"
-}
-
-prepare() {
-    cd "${srcdir}/${pkgbase}"
-    NOCONFIGURE=1 ./autogen.sh
-}
+groups=('mate')
+conflicts=("${_pkgbase}-gtk3")
+source=("http://pub.mate-desktop.org/releases/${_ver}/${_pkgbase}-${pkgver}.tar.xz")
+sha1sums=('c2cbd3919e9f15498b0293eb8ff9d95b0b20f542')
+install=${_pkgbase}.install
 
 build() {
-    cd "${srcdir}/${pkgbase}"
+    cd "${srcdir}/${_pkgbase}-${pkgver}"
     ./configure \
         --prefix=/usr \
-        --libexecdir=/usr/lib/${pkgbase} \
+        --libexecdir=/usr/lib/${_pkgbase} \
         --sysconfdir=/etc \
         --localstatedir=/var \
         --with-gtk=2.0 \
@@ -44,7 +35,7 @@ build() {
     make
 }
 
-package_mate-session-manager() {
-    cd "${srcdir}/${pkgbase}"
+package() {
+    cd "${srcdir}/${_pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}" install
 }

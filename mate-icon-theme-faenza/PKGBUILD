@@ -1,8 +1,8 @@
 # Maintainer : Martin Wimpress <code@flexion.org>
 
-_ver=1.9.0
+_ver=1.9
 pkgname=mate-icon-theme-faenza
-pkgver=0
+pkgver=${_ver}.90
 pkgrel=1
 pkgdesc="Faenza icon theme for MATE"
 url="http://mate-desktop.org"
@@ -11,15 +11,10 @@ license=('LGPL')
 depends=('gtk-update-icon-cache')
 makedepends=('git' 'icon-naming-utils' 'mate-common')
 options=(!strip)
-groups=('mate-unstable-extra' 'mate-unstable-extra-gtk3')
-source=("${pkgname}"::"git+https://github.com/mate-desktop/${pkgname}.git")
+groups=('mate-extra' 'mate-extra-gtk3')
+source=("${pkgname}"::"git+https://github.com/mate-desktop/${pkgname}.git"#commit=adbbe4c89eee60372d1ef3e25e374f18585d0fbd)
 sha1sums=('SKIP')
 install=${pkgname}.install
-
-pkgver() {
-    cd "${srcdir}/${pkgname}"
-    printf "%s.%s.%s" "${_ver}" "$(git log -1 --format=%cd --date=short | tr -d -)" "$(git rev-list --count HEAD)"
-}
 
 prepare() {
     cd "${srcdir}/${pkgname}"
